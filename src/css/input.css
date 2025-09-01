@@ -1,0 +1,149 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@layer components {
+
+    BODY {
+        @apply bg-neutral-100;
+        background-image:
+            radial-gradient(farthest-corner at 76% 14%, rgb(244, 244, 245) 0%, transparent 76%),
+            radial-gradient(farthest-corner at 90% 79%, rgb(252, 231, 243) 0%, transparent 11%),
+            radial-gradient(farthest-corner at 8% 10%, rgb(241, 245, 249) 0%, transparent 38%),
+            radial-gradient(farthest-corner at 57% 14%, rgb(168, 162, 158) 0%, transparent 2%),
+            radial-gradient(farthest-corner at 44% 33%, rgb(229, 231, 235) 0%, transparent 84%),
+            radial-gradient(farthest-corner at 60% 46%, rgb(203, 213, 225) 0%, transparent 59%);
+        background-repeat: no-repeat;
+        background-position: center;
+        background-attachment: fixed;
+        
+        @variant dark {
+            @apply bg-neutral-900;
+            background-image: unset;
+        }
+    }
+
+    .bg-loginpage {
+        @apply bg-[url('../img/light.jpg')] bg-cover;
+        
+        @variant dark {
+        @apply bg-[url('../img/dark.jpg')];    
+        }
+    }
+
+    h1 {
+        @apply text-2xl;
+    }
+
+    .wrapper.container {
+        @apply shadow-lg border-1 border-neutral-200;
+
+        @variant dark {
+            @apply border-neutral-700;
+        }
+    }
+
+    .bg-primary {
+        @apply bg-white;
+
+        @variant dark {
+            @apply bg-neutral-800;
+        }
+    }
+
+    .text-primary {
+        @apply text-gray-800;
+
+        @variant dark {
+            @apply text-white;
+        }
+    }
+
+    .fill-primary {
+        @apply fill-gray-800;
+
+        @variant dark {
+            @apply fill-white;
+        }
+    }
+
+    .stroke-primary {
+        @apply stroke-gray-800;
+
+        @variant dark {
+            @apply stroke-white;
+        }
+    }
+
+    .bg-actionarea-secondary {
+        @apply bg-neutral-200 hover:bg-gray-200 hover:shadow;
+
+        @variant dark {
+            @apply bg-neutral-600;
+            @apply hover:bg-neutral-500;
+        }
+    }
+    
+    .border-secondary {
+        @apply border-neutral-200;
+
+        @variant dark {
+            @apply border-neutral-600;
+        }
+    }
+
+    .bg-secondary {
+        @apply bg-gray-100;
+
+        @variant dark {
+            @apply bg-neutral-600;
+        }
+    }
+
+    .bg-subnav {
+        @apply bg-neutral-300;
+
+        @variant dark {
+            @apply bg-neutral-700;
+        }
+    }
+
+    .border-subnav {
+        @apply border-neutral-300 shadow;
+
+        @variant dark {
+            @apply border-neutral-500;
+        }
+    }
+
+    .text-secondary {
+        @apply text-gray-600;
+
+        @variant dark {
+            @apply text-neutral-300;
+            @apply hover:text-neutral-100;
+        }
+    }
+
+    .btn-primary {
+        @apply bg-gray-100 inline-flex py-2 px-3 rounded-4xl text-black items-center cursor-pointer shadow-md;
+        @apply hover:bg-gray-200 focus:outline-none;
+        @apply focus:bg-neutral-200;
+
+        @variant dark {
+            @apply bg-neutral-700 text-white;
+            @apply hover:bg-white hover:text-neutral-700;
+        }
+    }
+
+    .btn-secondary {
+        @apply bg-neutral-500 text-white text-sm py-2 px-3 rounded-4xl transition uppercase cursor-pointer font-medium shadow-md;
+        @apply hover:bg-neutral-600;
+        @apply focus:bg-neutral-800 focus:text-white;
+
+        @variant dark {
+            @apply bg-neutral-600 shadow-md text-neutral-200;
+            @apply hover:bg-white hover:text-neutral-600;
+        }
+    }
+}

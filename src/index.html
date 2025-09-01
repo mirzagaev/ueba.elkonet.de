@@ -1,0 +1,53 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="css/tailwind.css" rel="stylesheet">
+    <script src="js/custom.js"></script>
+</head>
+
+<body class="bg-loginpage">
+	<svg class="hidden">
+		<defs>
+			<symbol id="icon-next" viewBox="0 0 29.5 29.5">
+				<path d="M12.2,21.2c-0.3,0.3-0.3,0.8,0,1.1c0.3,0.3,0.8,0.3,1.1,0l7-7c0.3-0.3,0.3-0.8,0-1.1l-7-7c-0.3-0.3-0.8-0.3-1.1,0s-0.3,0.8,0,1.1l5.7,5.7H0.8C0.3,14,0,14.3,0,14.7s0.3,0.8,0.8,0.8h17.2C17.9,15.5,12.2,21.2,12.2,21.2z"/>
+                <path d="M14.8,0C9.1,0,3.9,3.3,1.4,8.4c-0.2,0.4,0,0.8,0.4,1c0.4,0.2,0.8,0,1-0.4c2.2-4.6,6.9-7.6,12-7.6C22.1,1.5,28,7.4,28,14.8S22.1,28,14.8,28c-5.1,0-9.8-3-12-7.6c-0.2-0.4-0.6-0.5-1-0.4c-0.4,0.2-0.5,0.6-0.4,1c2.4,5.1,7.7,8.4,13.3,8.4c8.1,0,14.8-6.6,14.8-14.8S22.9,0,14.8,0z"/>
+			</symbol>
+		</defs>
+	</svg>
+
+    <a class="w-fit block bg-opacity-25 bg-white/40 xl:right-5 xl:top-5 xl:fixed px-5 py-3 rounded-2xl z-50 mx-6 my-4" href="index.html">
+        <img class="h-16" src="https://ueba.elkonet.de/portimgs/logos/elkonet.png" />
+    </a>
+    
+    <div class="p-6 md:p-12 xl:p-20 text-primary relative z-30">
+        <h1 class="text-3xl xl:text-5xl font-bold xl:my-12">Willkommen zur Lernplattform für Elektroberufe</h1>
+        <h3 class="text-xl xl:text-2xl font-medium mt-2">für die überbetriebliche Ausbildung in den elektro- und informationstechnischen Ausbildungsberufen</h3>
+
+        <h4 class="text-xl mt-8 py-6 uppercase font-bold">Login</h4>
+        <div class="flex flex-col sm:flex-row gap-4">
+            <a class="btn-primary" href="index-ueba.html">
+                <svg class="size-5 fill-primary"><use xlink:href="#icon-next"></use></svg>
+                <span class="ml-2 flex items-start flex-col leading-none">
+                    <span class="title-font font-medium mr-1">Anmelden bei ÜBA</span>
+                </span>
+            </a>
+            <a class="btn-primary" href="#">
+                <svg class="size-5 fill-primary"><use xlink:href="#icon-next"></use></svg>
+                <span class="ml-2 flex items-start flex-col leading-none">
+                    <span class="title-font font-medium mr-1">Anmelden bei Lernportal</span>
+                </span>
+            </a>
+        </div>
+    </div>
+
+    <button class="fixed bottom-5 right-5 flex text-secondary items-center bg-primary p-3 rounded-full cursor-pointer" onclick="toggleDarkMode()">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M12 3v2.25m6.364.386-1.591 1.591M21 12h-2.25m-.386 6.364-1.591-1.591M12 18.75V21m-4.773-4.227-1.591 1.591M5.25 12H3m4.227-4.773L5.636 5.636M15.75 12a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0Z" />
+        </svg>
+    </button>
+</body>
+
+</html>
