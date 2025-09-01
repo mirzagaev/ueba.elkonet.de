@@ -124,91 +124,89 @@
             
             <!-- drawer component -->
             <div id="ueba-maindrawer" class="max-w-96 absolute left-0 top-0 z-40 pb-11 overflow-y-auto transition-transform -translate-x-full bg-secondary shadow-lg h-screen" tabindex="-1" aria-labelledby="drawer-label" aria-hidden="true">
-                
-                <h2 id="drawer-label" class="text-primary text-lg font-semibold leading-7 pt-5 px-6">Ausbildungsportal</h2>
-                <p class="text-secondary text-opacity-20 text-sm font-normal leading-snug px-6">ueba.elkonet.de</p>
-                
-                <button type="button" data-drawer-hide="ueba-maindrawer" aria-controls="ueba-maindrawer" data-drawer-position="left" class="text-primary bg-secondary text-sm absolute top-5 right-2 inline-flex items-center justify-center p-2">
-                    <svg fill="none" class="size-7 p-1"><use xlink:href="#icon-close"></use></svg>
-                    <span class="sr-only">Menü schließen</span>
-                </button>
-
-                <div class="flex items-center py-4 px-6 mt-4 gap-4 bg-secondary" id="avatarButton" type="button" type="button" data-dropdown-toggle="userDropdown">
-                    <div class="relative inline-flex items-center justify-center w-12 h-12 overflow-hidden bg-secondary rounded-full">
-                        <img src="https://pagedone.io/asset/uploads/1704349514.png" alt="Hailey image" class="w-12 h-12">
+                <div class="flex items-center py-4 px-8 gap-4 bg-subnav" id="avatarButton" type="button" type="button" data-dropdown-toggle="userDropdown">
+                    <div>
+                        <h2 id="drawer-label" class="text-primary text-lg font-semibold leading-7">Ausbildungsportal</h2>
+                        <p class="text-secondary text-opacity-20 text-sm font-normal leading-snug">ueba.elkonet.de</p>
                     </div>
-                    <div class="font-medium">
-                        <div class="leading-snug">Maria De Gonzales</div>
-                        <div class="text-sm font-normal truncate">m.gonzales, gonzales@etz.de</div>
-                        <div class="text-xs text-secondary font-normal leading-[18px]">Elektro Bürkle, etz Stuttgart</div>
+                    <div>
+                        <button type="button" data-drawer-hide="ueba-maindrawer" aria-controls="ueba-maindrawer" data-drawer-position="left" class="text-primary text-sm absolute top-5 right-2 inline-flex items-center justify-center px-2">
+                            <svg fill="none" class="size-7 p-1"><use xlink:href="#icon-close"></use></svg>
+                            <span class="sr-only">Menü schließen</span>
+                        </button>
                     </div>
                 </div>
 
-                <div class="p-6 py-3 shadow bg-subnav">
-                    <ul class="space-y-2 font-medium">
-                        <li>
-                            <button type="button" class="flex items-center w-full p-2 text-base text-primary transition duration-75 rounded-lg group" aria-controls="dropdown-example" data-collapse-toggle="dropdown-example">
-                                <svg class="size-8 fill-primary"><use xlink:href="#icon-folder"></use></svg>
-                                <span class="flex-1 ms-5 text-left whitespace-nowrap">ETE 4/22</span>
-                                <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
-                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4"/>
-                                </svg>
-                            </button>
-                        </li>
-                        <li>
-                            <a href="#" class="relative flex items-center p-2 text-primary rounded-lg group">
-                                <svg class="size-8 fill-primary"><use xlink:href="#icon-ausbildungsnachweis"></use></svg>
-                                <span class="flex-1 ms-5 whitespace-nowrap">Auftragsabwicklung</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#" class="relative flex items-center p-2 text-primary rounded-lg group">
-                                <svg class="size-8 fill-primary"><use xlink:href="#icon-info"></use></svg>
-                                <span class="flex-1 ms-5 whitespace-nowrap">Infopool</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#" class="relative flex items-center p-2 text-primary rounded-lg group">
-                                <svg class="size-8 fill-primary"><use xlink:href="#icon-wissenscheck"></use></svg>
-                                <span class="flex-1 ms-5 whitespace-nowrap">Wissenscheck</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#" class="relative flex items-center p-2 text-primary rounded-lg group">
-                                <svg class="size-8 fill-primary"><use xlink:href="#icon-methodik"></use></svg>
-                                <span class="flex-1 ms-5 whitespace-nowrap">Methodik</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#" class="relative flex items-center p-2 text-primary rounded-lg group">
-                                <svg class="size-8 fill-primary"><use xlink:href="#icon-ausbildungsnachweis"></use></svg>
-                                <span class="flex-1 ms-5 whitespace-nowrap">Ausbildungsnachweis</span>
-                            </a>
-                        </li>
-                    </ul>
+                <div class="flex items-center py-4 px-6.5 gap-3.5 bg-neutral-700/60" id="avatarButton" type="button" type="button" data-dropdown-toggle="userDropdown">
+                    <div class="relative inline-flex items-center justify-center w-9 h-9 overflow-hidden bg-secondary rounded-full">
+                        <img src="https://pagedone.io/asset/uploads/1704349514.png" class="w-9 h-9">
+                    </div>
+                    <div class="font-medium">
+                        <div class="leading-snug">Maria De Gonzales</div>
+                        <div class="text-sm font-normal truncate">gonzales@etz.de</div>
+                    </div>
                 </div>
 
                 <div class="p-6 py-3">
                     <ul class="space-y-2 font-medium">
                         <li>
                             <a href="#" class="relative flex items-center p-2 text-primary rounded-lg group">
-                                <svg class="size-8 stroke-primary" fill="none" stroke-width="1.5"><use xlink:href="#icon-settings"></use></svg>
+                                <svg class="size-6 fill-primary"><use xlink:href="#icon-folder"></use></svg>
+                                <span class="flex-1 ms-5 whitespace-nowrap">ETE 4/22</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="modul-Kundenauftrag.html" class="relative flex items-center p-2 text-primary rounded-lg group">
+                                <svg class="size-6 fill-primary"><use xlink:href="#icon-ausbildungsnachweis"></use></svg>
+                                <span class="flex-1 ms-5 whitespace-nowrap">Kundenauftrag</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" class="relative flex items-center p-2 text-primary rounded-lg group">
+                                <svg class="size-6 fill-primary"><use xlink:href="#icon-info"></use></svg>
+                                <span class="flex-1 ms-5 whitespace-nowrap">Infopool</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" class="relative flex items-center p-2 text-primary rounded-lg group">
+                                <svg class="size-6 fill-primary"><use xlink:href="#icon-wissenscheck"></use></svg>
+                                <span class="flex-1 ms-5 whitespace-nowrap">Wissenscheck</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" class="relative flex items-center p-2 text-primary rounded-lg group">
+                                <svg class="size-6 fill-primary"><use xlink:href="#icon-methodik"></use></svg>
+                                <span class="flex-1 ms-5 whitespace-nowrap">Methodik</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" class="relative flex items-center p-2 text-primary rounded-lg group">
+                                <svg class="size-6 fill-primary"><use xlink:href="#icon-ausbildungsnachweis"></use></svg>
+                                <span class="flex-1 ms-5 whitespace-nowrap">Ausbildungsnachweis</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" class="relative flex items-center p-2 text-primary rounded-lg group">
+                                <svg class="size-6 stroke-primary" fill="none" stroke-width="1.5"><use xlink:href="#icon-settings"></use></svg>
                                 <span class="flex-1 ms-5 whitespace-nowrap">Einstellungen</span>
                             </a>
                         </li>
-                        <!-- <li>
-                            <a href="#" class="flex items-center p-2 text-primary rounded-lg group">
-                                <svg class="size-8 stroke-primary" fill="none" viewBox="0 0 24 24" stroke-width="1.5"><use xlink:href="#icon-login"></use></svg>
-                                <span class="flex-1 ms-5 whitespace-nowrap">Einloggen</span>
-                            </a>
-                        </li> -->
                         <li>
-                            <a href="#" class="flex items-center p-2 text-primary rounded-lg group">
-                                <svg class="size-8 stroke-primary" fill="none" viewBox="0 0 24 24" stroke-width="1.5"><use xlink:href="#icon-logout"></use></svg>
+                            <a href="modul.html" class="flex items-center p-2 text-primary rounded-lg group">
+                                <svg class="size-6 stroke-primary" fill="none" viewBox="0 0 24 24" stroke-width="1.5"><use xlink:href="#icon-logout"></use></svg>
                                 <span class="flex-1 ms-5 whitespace-nowrap">Ausloggen</span>
                             </a>
                         </li>
                     </ul>
+                </div>
+
+                <div class="px-6 py-4 bz_info w-full absolute bottom-0 bg-subnav flex items-center gap-4">
+                    <div>
+                        <a class="block" href="index.html">
+                            <img class="w-20 h-auto" src="https://www.etz-stuttgart.de/skin/etz/img/etz_logo_neu.png" />
+                        </a>
+                    </div>
+                    <div class="leading-snug text-secondary text-xs font-medium">Elektroniker/in Fachrichtung Energie- und Gebäudetechnik</div>
                 </div>
             </div>
 
@@ -274,17 +272,13 @@
                 <div class="hidden md:block cursor-pointer" >
                     <div class="flex items-center gap-4" id="avatarButton" type="button" type="button" data-dropdown-toggle="userDropdown">
                         <img class="w-12 h-12 rounded-full" src="https://flowbite.com/docs/images/people/profile-picture-5.jpg" alt="" data-dropdown-placement="bottom-start">
-                        <!-- <div class="relative inline-flex items-center justify-center w-12 h-12 overflow-hidden bg-secondary rounded-full">
-                            <span class="font-medium text-primary">MD</span>
-                        </div> -->
                         <div class="font-medium">
                             <div>Maria De Gonzales</div>
                             <div class="text-sm text-secondary">etz Stuttgart</div>
                         </div>
                     </div>
 
-                    <!-- Dropdown menu -->
-                    <div id="userDropdown" class="z-10 hidden bg-primary divide-y divide-gray-200 rounded-lg  shadow-sm w-44">
+                    <div id="userDropdown" class="z-10 hidden bg-primary divide-y divide-neutral-300 dark:divide-neutral-700 rounded-lg shadow-lg w-44">
                         <div class="px-4 py-3 text-sm text-secondary">
                             <div>m.gonzales</div>
                             <div class="font-medium truncate">gonzales@etz.de</div>
@@ -307,30 +301,29 @@
                 </div>
             </div>
         
-            <!-- SECONDNAV -->
             <div class="hidden md:block bg-subnav w-full overflow-hidden">
-                <ul class="grid h-full w-fit grid-cols-5 mx-auto font-medium text-sm md:text-base xl:text-xl">
-                    <li class="inline-flex flex-col items-center justify-center px-5 dark:hover:bg-neutral-600 hover:bg-neutral-200 group cursor-pointer py-5 pt-3">
+                <div class="grid h-full w-fit grid-cols-5 mx-auto font-medium text-sm md:text-base xl:text-xl">
+                    <a class="inline-flex flex-col items-center justify-center px-5 dark:hover:bg-neutral-600 hover:bg-neutral-200 group cursor-pointer py-5 pt-3">
                         <svg class="fill-primary size-14 xl:size-18 p-4"><use xlink:href="#icon-folder"></use></svg>
                         <span>ETE 4/22</span>
-                    </li>
-                    <li class="inline-flex flex-col items-center justify-center px-5 dark:hover:bg-neutral-600 hover:bg-neutral-200 group cursor-pointer py-5 pt-3">
+                    </a>
+                    <a href="modul-Kundenauftrag.html" class="inline-flex flex-col items-center justify-center px-5 dark:hover:bg-neutral-600 hover:bg-neutral-200 group cursor-pointer py-5 pt-3">
                         <svg class="fill-primary size-14 xl:size-18 p-4"><use xlink:href="#icon-ausbildungsnachweis"></use></svg>
-                        <span>Auftragsabwicklung</span>
-                    </li>
-                    <li class="inline-flex flex-col items-center justify-center px-5 dark:hover:bg-neutral-600 hover:bg-neutral-200 group cursor-pointer py-5 pt-3">
+                        <span>Kundenauftrag</span>
+                    </a>
+                    <a class="inline-flex flex-col items-center justify-center px-5 dark:hover:bg-neutral-600 hover:bg-neutral-200 group cursor-pointer py-5 pt-3">
                         <svg class="fill-primary size-14 xl:size-18 p-4"><use xlink:href="#icon-info"></use></svg>
                         <span>Infopool</span>
-                    </li>
-                    <li class="inline-flex flex-col items-center justify-center px-5 dark:hover:bg-neutral-600 hover:bg-neutral-200 group cursor-pointer py-5 pt-3">
+                    </a>
+                    <a class="inline-flex flex-col items-center justify-center px-5 dark:hover:bg-neutral-600 hover:bg-neutral-200 group cursor-pointer py-5 pt-3">
                         <svg class="fill-primary size-14 xl:size-18 p-4"><use xlink:href="#icon-wissenscheck"></use></svg>
                         <span>Wissenscheck</span>
-                    </li>
-                    <li class="inline-flex flex-col items-center justify-center px-5 dark:hover:bg-neutral-600 hover:bg-neutral-200 group cursor-pointer py-5 pt-3">
+                    </a>
+                    <a class="inline-flex flex-col items-center justify-center px-5 dark:hover:bg-neutral-600 hover:bg-neutral-200 group cursor-pointer py-5 pt-3">
                         <svg class="fill-primary size-14 xl:size-18 p-4"><use xlink:href="#icon-methodik"></use></svg>
                         <span>Methodik</span>
-                    </li>
-                </ul>
+                    </a>
+                </div>
             </div>
         </header>
 
@@ -361,11 +354,11 @@
             </nav>
 
             <div class="page_headline mt-4 lg:my-12">
-                <h2 class="text-3xl font-bold flex items-center">
-                    <svg class="fill-primary size-10 mr-5"><use xlink:href="#icon-folder"></use></svg>
+                <h2 class="text-2xl xl:text-3xl font-bold flex items-center">
+                    <svg class="fill-primary size-8 xl:size-10 mr-5"><use xlink:href="#icon-folder"></use></svg>
                     ETE 4/22
                 </h2>
-                <h3 class="text-xl mt-3">Gebäudeautomationssysteme planen, installieren, parametrieren und in Betrieb nehmen</h3>
+                <h3 class="text-lg xl:text-xl mt-3">Gebäudeautomationssysteme planen, installieren, parametrieren und in Betrieb nehmen</h3>
             </div>
 
             <section class="flex md:flex-row flex-col mb-12">
@@ -450,7 +443,7 @@
 
     <!-- CHATBOT -->
     <button id="dropdownNavbarLink" data-dropdown-toggle="openChatbot" class="fixed bottom-4 inline-flex right-4 text-primary items-center justify-center bg-actionarea-secondary p-2 rounded-full cursor-pointer" type="button" aria-haspopup="dialog" aria-expanded="false" data-state="closed">
-        <svg stroke-width="1.5" class="size-8 fill-primary"><use xlink:href="#icon-aisymbol"></use></svg>
+        <svg stroke-width="1.5" class="size-6 fill-primary"><use xlink:href="#icon-aisymbol"></use></svg>
         <span class="hidden font-semibold ml-2 mr-2 text-sm uppercase lg:block">Frag mich was</span>
     </button>
     <div id="openChatbot" class="hidden fixed bottom-[calc(4rem+1.5rem)] right-0 mr-4 bg-primary shadow-sm p-6 rounded-lg w-[440px] h-[634px]">
