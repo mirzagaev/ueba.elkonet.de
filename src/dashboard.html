@@ -103,6 +103,10 @@
 			<symbol id="icon-burger" class="" viewBox="0 0 24 24">
                 <path d="M2 5.99519C2 5.44556 2.44556 5 2.99519 5H11.0048C11.5544 5 12 5.44556 12 5.99519C12 6.54482 11.5544 6.99039 11.0048 6.99039H2.99519C2.44556 6.99039 2 6.54482 2 5.99519Z" fill="currentColor"/><path d="M2 11.9998C2 11.4501 2.44556 11.0046 2.99519 11.0046H21.0048C21.5544 11.0046 22 11.4501 22 11.9998C22 12.5494 21.5544 12.9949 21.0048 12.9949H2.99519C2.44556 12.9949 2 12.5494 2 11.9998Z" fill="currentColor"/><path d="M2.99519 17.0096C2.44556 17.0096 2 17.4552 2 18.0048C2 18.5544 2.44556 19 2.99519 19H15.0048C15.5544 19 16 18.5544 16 18.0048C16 17.4552 15.5544 17.0096 15.0048 17.0096H2.99519Z" fill="currentColor"/>
 			</symbol>
+			<symbol id="icon-next" viewBox="0 0 29.5 29.5">
+				<path d="M12.2,21.2c-0.3,0.3-0.3,0.8,0,1.1c0.3,0.3,0.8,0.3,1.1,0l7-7c0.3-0.3,0.3-0.8,0-1.1l-7-7c-0.3-0.3-0.8-0.3-1.1,0s-0.3,0.8,0,1.1l5.7,5.7H0.8C0.3,14,0,14.3,0,14.7s0.3,0.8,0.8,0.8h17.2C17.9,15.5,12.2,21.2,12.2,21.2z"/>
+                <path d="M14.8,0C9.1,0,3.9,3.3,1.4,8.4c-0.2,0.4,0,0.8,0.4,1c0.4,0.2,0.8,0,1-0.4c2.2-4.6,6.9-7.6,12-7.6C22.1,1.5,28,7.4,28,14.8S22.1,28,14.8,28c-5.1,0-9.8-3-12-7.6c-0.2-0.4-0.6-0.5-1-0.4c-0.4,0.2-0.5,0.6-0.4,1c2.4,5.1,7.7,8.4,13.3,8.4c8.1,0,14.8-6.6,14.8-14.8S22.9,0,14.8,0z"/>
+			</symbol>
 		</defs>
 	</svg>
 
@@ -230,37 +234,72 @@
         </header>
 
         <main class="px-6 xl:px-20 2xl:px-32 py-3 mb-auto">
-            <!-- BREADCRUMB -->
-            <nav class="hidden md:block mx-auto w-fit text-xs py-3 px-20" aria-label="Breadcrumb">
-                <ol class="inline-flex items-center space-x-1 md:space-x-2 rtl:space-x-reverse">
-                    <li class="inline-flex items-center">
-                        <a href="index.html" class="inline-flex items-center text-xs font-medium text-primary">Anmeldung</a>
-                    </li>
-                    <!-- <li>
-                        <div class="flex items-center">
-                            <svg class="rtl:rotate-180 w-3 h-3 text-gray-400 mx-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
-                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 9 4-4-4-4"/>
-                            </svg>
-                            <a href="#" class="ms-1 text-sm font-medium text-gray-700 hover:text-blue-600 md:ms-2">Projects</a>
+            <section class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 mt-5 mb-10 xl:my-20 gap-5 xl:gap-10 2xl:mx-40">
+                <div class="w-full h-full relative">
+                    <img class="w-full object-cover object-center block relative rounded-xl shadow-md" alt="hero" src="https://ueba.elkonet.de/portimgs/start/eeg_start.jpg">
+                    <div class="absolute z-10 top-0 w-full h-full bg-black/40 rounded-xl">
+                        <div class="relative w-full h-full">
+                            <div class="absolute bottom-6 left-6">
+                                <h2 class="text-lg lg:text-xl 2xl:text-2xl text-white font-semibold title-font mb-2">Elektroniker/in Fachrichtung<br/>Energie- und Gebäudetechnik</h2>
+                            </div>
                         </div>
-                    </li> -->
-                    <li aria-current="page">
-                        <div class="flex items-center">
-                            <svg class="w-4 h-4 text-primary" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M7.5 15L11.0858 11.4142C11.7525 10.7475 12.0858 10.4142 12.0858 10C12.0858 9.58579 11.7525 9.25245 11.0858 8.58579L7.5 5" stroke="#777777" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" />
-                            </svg>
-                            <span class="ms-1 text-xs font-medium text-secondary md:ms-2">Elektroniker/in Fachrichtung Energie- und Gebäudetechnik</span>
+                    </div>
+                </div>
+                <div class="w-full h-full relative">
+                    <img class="w-full object-cover object-center block relative rounded-xl shadow-md" alt="hero" src="https://ueba.elkonet.de/portimgs/start/eta_start.jpg">
+                    <div class="absolute z-10 top-0 w-full h-full bg-black/40 rounded-xl">
+                        <div class="relative w-full h-full">
+                            <div class="absolute bottom-6 left-6">
+                                <h2 class="text-lg lg:text-xl 2xl:text-2xl text-white font-semibold title-font mb-2">Elektroniker/in Fachrichtung<br/>Automatisierungs- und Systemtechnik</h2>
+                            </div>
                         </div>
-                    </li>
-                </ol>
-            </nav>
-
-            <div class="page_headline my-12">
-            </div>
-
-            <section class="flex sm:flex-row flex-col mb-12">
-                <div class="w-full h-full sm:w-1/3 xl:w-1/4 mb-10 sm:mb-0 relative">
-                    <img class="w-full object-cover object-center block relative rounded-xl shadow-xl" alt="hero" src="https://ueba.elkonet.de/portimgs/start/eeg_start.jpg">
+                    </div>
+                </div>
+                <div class="w-full h-full relative">
+                    <img class="w-full object-cover object-center block relative rounded-xl shadow-md" alt="hero" src="https://ueba.elkonet.de/portimgs/start/infe_start.jpg">
+                    <div class="absolute z-10 top-0 w-full h-full bg-black/40 rounded-xl">
+                        <div class="relative w-full h-full">
+                            <div class="absolute bottom-6 left-6">
+                                <h2 class="text-lg lg:text-xl 2xl:text-2xl text-white font-semibold title-font mb-2">Informationselektroniker/in</h2>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="w-full h-full relative">
+                    <img class="w-full object-cover object-center block relative rounded-xl shadow-md" alt="hero" src="https://ueba.elkonet.de/portimgs/start/gsi_start.png">
+                    <div class="absolute z-10 top-0 w-full h-full bg-black/40 rounded-xl">
+                        <div class="relative w-full h-full">
+                            <div class="absolute bottom-6 left-6">
+                                <h2 class="text-lg lg:text-xl 2xl:text-2xl text-white font-semibold title-font mb-2">Elektroniker/in für Gebäudesystemintegration</h2>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="w-full h-full relative">
+                    <img class="w-full object-cover object-center block relative rounded-xl shadow-md" alt="hero" src="https://ueba.elkonet.de/portimgs/start/ema_start.jpg">
+                    <div class="absolute z-10 top-0 w-full h-full bg-black/40 rounded-xl">
+                        <div class="relative w-full h-full">
+                            <div class="absolute bottom-6 left-6">
+                                <h2 class="text-lg lg:text-xl 2xl:text-2xl text-white font-semibold title-font mb-2">Elektroniker/in für Maschinen und Antriebstechnik</h2>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="w-full h-full relative">
+                    <img class="w-full object-cover object-center block relative rounded-xl shadow-md" alt="hero" src="https://ueba.elkonet.de/portimgs/start/mecha_start.jpg">
+                    <div class="absolute z-10 top-0 w-full h-full bg-black/40 rounded-xl">
+                        <div class="relative w-full h-full">
+                            <div class="absolute bottom-6 left-6">
+                                <h2 class="text-lg lg:text-xl 2xl:text-2xl text-white font-semibold title-font mb-2">Mechatroniker/in</h2>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <section class="hidden sm:flex-row flex-col gap-10 2xl:mx-60">
+                <div class="w-full h-full sm:w-1/4 xl:w-1/4 mb-10 sm:mb-0 relative">
+                    <img class="w-full object-cover object-center block relative rounded-xl shadow-md" alt="hero" src="https://ueba.elkonet.de/portimgs/start/eeg_start.jpg">
                     <div class="absolute z-10 top-0 w-full h-full bg-black/40 rounded-xl">
                         <div class="relative w-full h-full">
                             <div class="absolute bottom-6 left-6">
@@ -271,7 +310,7 @@
                 </div>
                 <div class="w-full sm:w-2/3 xl:w-3/4 sm:pl-6">
                     <div class="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-4">
-                        <div class="bg-primary rounded-xl flex p-4 h-full hover:shadow cursor-pointer text-secondary">
+                        <div class="bg-primary rounded-xl flex p-4 h-full hover:shadow-md shadow-sm cursor-pointer text-secondary">
                             <div class="w-8 h-8 object-cover object-center flex-shrink-0">
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-full">
                                     <path stroke-linecap="round" stroke-linejoin="round" d="m12.75 15 3-3m0 0-3-3m3 3h-7.5M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
@@ -282,7 +321,7 @@
                                 <p class="text-sm">Komponenten der Elektroinstallation bearbeiten und installieren</p>
                             </div>
                         </div>
-                        <div class="bg-primary rounded-xl flex p-4 h-full hover:shadow cursor-pointer text-secondary">
+                        <div class="bg-primary rounded-xl flex p-4 h-full hover:shadow-md shadow-sm cursor-pointer text-secondary">
                             <div class="w-8 h-8 object-cover object-center flex-shrink-0">
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-full">
                                     <path stroke-linecap="round" stroke-linejoin="round" d="m12.75 15 3-3m0 0-3-3m3 3h-7.5M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
@@ -293,7 +332,7 @@
                                 <p class="text-sm">Elektrische Anlage installieren und messen</p>
                             </div>
                         </div>
-                        <div class="bg-primary rounded-xl flex p-4 h-full hover:shadow cursor-pointer text-secondary">
+                        <div class="bg-primary rounded-xl flex p-4 h-full hover:shadow-md shadow-sm cursor-pointer text-secondary">
                             <div class="w-8 h-8 object-cover object-center flex-shrink-0">
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-full">
                                     <path stroke-linecap="round" stroke-linejoin="round" d="m12.75 15 3-3m0 0-3-3m3 3h-7.5M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
@@ -304,7 +343,7 @@
                                 <p class="text-sm">Dienstneutrale Verkabelungen mit passiven Netzwerkkomponenten planen, installieren und prüfen</p>
                             </div>
                         </div>
-                        <div class="bg-primary rounded-xl flex p-4 h-full hover:shadow cursor-pointer text-secondary">
+                        <div class="bg-primary rounded-xl flex p-4 h-full hover:shadow-md shadow-sm cursor-pointer text-secondary">
                             <div class="w-8 h-8 object-cover object-center flex-shrink-0">
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-full">
                                     <path stroke-linecap="round" stroke-linejoin="round" d="m12.75 15 3-3m0 0-3-3m3 3h-7.5M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
@@ -316,8 +355,30 @@
                             </div>
                         </div>
                     </div>
+
+                    
+                    <!-- <a class="bg-primary flex w-fit mt-10 rounded-xl p-4" href="dashboard.html">
+                        <svg class="size-5 fill-primary"><use xlink:href="#icon-next"></use></svg>
+                        <span class="ml-4 flex items-start flex-col leading-none">
+                            <span class="title-font font-medium">Zum Ausbildungsnachweis</span>
+                        </span>
+                    </a> -->
+                    
+                    <a class="flex w-fit mt-20" href="dashboard.html">
+                        <svg class="size-5 fill-primary"><use xlink:href="#icon-next"></use></svg>
+                        <span class="ml-4 flex items-start flex-col leading-none">
+                            <span class="title-font font-medium">Zum Ausbildungsnachweis</span>
+                        </span>
+                    </a>
                 </div>
             </section>
+            
+            <div class="items-center text-center my-10">
+                <a class="bg-primary flex items-center w-fit mx-auto rounded-4xl p-3" href="dashboard.html">
+                    <svg class="size-5 fill-primary"><use xlink:href="#icon-next"></use></svg>
+                    <span class="ml-2 flex items-start flex-col leading-none title-font font-medium text-md">Zum Ausbildungsnachweis</span>
+                </a>
+            </div>
         </main>
 
         <footer class="flex text-center mx-auto text-xs py-3">
