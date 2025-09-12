@@ -5,14 +5,14 @@
 @layer components {
 
     BODY {
-        @apply bg-neutral-100;
+        /* @apply bg-neutral-100;
         background-image:
             radial-gradient(farthest-corner at 76% 14%, rgb(244, 244, 245) 0%, transparent 76%),
             radial-gradient(farthest-corner at 90% 79%, rgb(252, 231, 243) 0%, transparent 11%),
             radial-gradient(farthest-corner at 8% 10%, rgb(241, 245, 249) 0%, transparent 38%),
             radial-gradient(farthest-corner at 57% 14%, rgb(168, 162, 158) 0%, transparent 2%),
             radial-gradient(farthest-corner at 44% 33%, rgb(229, 231, 235) 0%, transparent 84%),
-            radial-gradient(farthest-corner at 60% 46%, rgb(203, 213, 225) 0%, transparent 59%);
+            radial-gradient(farthest-corner at 60% 46%, rgb(203, 213, 225) 0%, transparent 59%); */
         background-repeat: no-repeat;
         background-position: center;
         background-attachment: fixed;
@@ -24,10 +24,10 @@
     }
 
     .bg-loginpage {
-        @apply bg-[url('../img/light.jpg')] bg-cover;
+        @apply bg-[url('../img/bg/light.jpg')] bg-cover;
         
         @variant dark {
-        @apply bg-[url('../img/dark.jpg')];    
+        @apply bg-[url('../img/bg/dark.jpg')];    
         }
     }
 
@@ -44,7 +44,8 @@
     }
 
     .bg-primary {
-        @apply bg-white;
+        /* @apply bg-white; */
+        @apply bg-neutral-100;
 
         @variant dark {
             @apply bg-neutral-800;
@@ -75,6 +76,15 @@
         }
     }
 
+    .stroke-secondary {
+        @apply stroke-neutral-700;
+
+        @variant dark {
+            @apply stroke-neutral-400;
+            @apply hover:stroke-neutral-100;
+        }
+    }
+
     .bg-actionarea-secondary {
         @apply bg-neutral-200 hover:bg-gray-200 hover:shadow;
 
@@ -93,7 +103,7 @@
     }
 
     .bg-secondary {
-        @apply bg-gray-100;
+        @apply bg-gray-200;
 
         @variant dark {
             @apply bg-neutral-600;
