@@ -24,10 +24,10 @@
     }
 
     .bg-loginpage {
-        @apply bg-[url('../img/bg/light.jpg')] bg-cover;
+        @apply bg-[url('https://cmsred.etz-stuttgart.de/skin/ueba_v3/img/bg/light.jpg')] bg-cover;
         
         @variant dark {
-        @apply bg-[url('../img/bg/dark.jpg')];    
+        @apply bg-[url('https://cmsred.etz-stuttgart.de/skin/ueba_v3/img/bg/dark.jpg')];    
         }
     }
 

@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="css/style.css" rel="stylesheet">
+    <script src="js/jquery.min.js"></script>
     <script src="js/custom.js"></script>
 </head>
 
@@ -27,13 +28,23 @@
         <h3 class="text-xl xl:text-2xl font-medium mt-5">der überbetrieblichen Ausbildung in den elektro- und informationstechnischen Ausbildungsberufen</h3>
 
         <div class="flex flex-col sm:flex-row gap-4 mt-8 py-6">
-            <a class="btn-primary text-lg" href="index-ueba.html">
+            <form class="flex flex-col sm:flex-row gap-4" style="display: none;" id="loginUebaForm">
+                <input type="text" placeholder="Benutzername" class="btn-primary font-medium placeholder:italic px-5 h-full" />
+                <input type="text" placeholder="Passwort" class="btn-primary font-medium placeholder:italic px-5 h-full" />
+                <button type="submit" class="btn-primary text-lg h-full">
+                    <svg class="size-5 fill-primary"><use xlink:href="#icon-next"></use></svg>
+                    <span class="ml-2 flex items-start flex-col leading-none">
+                        <span class="title-font font-medium mr-1">Anmelden bei Ausbildungsportal</span>
+                    </span>
+                </button>
+            </form>
+            <a class="btn-primary text-lg" id="loginUebaBtn" href="index-ueba.html">
                 <svg class="size-5 fill-primary"><use xlink:href="#icon-next"></use></svg>
                 <span class="ml-2 flex items-start flex-col leading-none">
                     <span class="title-font font-medium mr-1">Anmelden bei Ausbildungsportal</span>
                 </span>
             </a>
-            <a class="btn-primary text-lg" href="#">
+            <a class="btn-primary text-lg" id="loginLernweltBtn" href="#">
                 <svg class="size-5 fill-primary"><use xlink:href="#icon-next"></use></svg>
                 <span class="ml-2 flex items-start flex-col leading-none">
                     <span class="title-font font-medium mr-1">Anmelden bei Lernwelt</span>
