@@ -117,6 +117,9 @@
 			<symbol id="icon-frage" viewBox="0 0 24 24">
 				<path stroke-linecap="round" stroke-linejoin="round" d="M9.879 7.519c1.171-1.025 3.071-1.025 4.242 0 1.172 1.025 1.172 2.687 0 3.712-.203.179-.43.326-.67.442-.745.361-1.45.999-1.45 1.827v.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9 5.25h.008v.008H12v-.008Z" />
 			</symbol>
+			<symbol id="icon-right" viewBox="0 0 20 20">
+				<path d="M7.5 15L11.0858 11.4142C11.7525 10.7475 12.0858 10.4142 12.0858 10C12.0858 9.58579 11.7525 9.25245 11.0858 8.58579L7.5 5" stroke="#777777" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" />
+			</symbol>
 		</defs>
 	</svg>
 
@@ -314,24 +317,20 @@
         <!-- BREADCRUMB -->
         <nav class="hidden md:block mx-auto w-fit text-xs py-5 xl:px-20" aria-label="Breadcrumb">
             <ol class="inline-flex items-center space-x-1 md:space-x-2">
-                <li class="inline-flex items-center">
-                    <a href="index.html" class="inline-flex items-center text-xs font-medium text-primary">Anmeldung</a>
+                <li>
+                    <div class="flex items-center gap-2">
+                        <a href="dashboard.html" class="text-xs font-medium text-primary">EEG</a>
+                        <svg class="stroke-primary size-4" fill="none"><use xlink:href="#icon-right"></use></svg>
+                    </div>
                 </li>
                 <li>
-                    <div class="flex items-center">
-                        <svg class="w-4 h-4 text-primary" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M7.5 15L11.0858 11.4142C11.7525 10.7475 12.0858 10.4142 12.0858 10C12.0858 9.58579 11.7525 9.25245 11.0858 8.58579L7.5 5" stroke="#777777" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" />
-                        </svg>
-                        <a href="dashboard.html" class="ms-1 text-xs font-medium text-primary md:ms-2">Elektroniker/in Fachrichtung Energie- und Gebäudetechnik</a>
+                    <div class="flex items-center gap-2">
+                        <a href="dashboard.html" class="text-xs font-medium text-primary">ETE 4/22</a>
+                        <svg class="stroke-primary size-4" fill="none"><use xlink:href="#icon-right"></use></svg>
                     </div>
                 </li>
                 <li aria-current="page">
-                    <div class="flex items-center">
-                        <svg class="w-4 h-4 text-primary" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M7.5 15L11.0858 11.4142C11.7525 10.7475 12.0858 10.4142 12.0858 10C12.0858 9.58579 11.7525 9.25245 11.0858 8.58579L7.5 5" stroke="#777777" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" />
-                        </svg>
-                        <span class="ms-1 text-xs font-medium text-secondary md:ms-2">ETE 4/22</span>
-                    </div>
+                    <span class="text-xs font-medium text-secondary">Kundenauftrag</span>
                 </li>
             </ol>
         </nav>
