@@ -167,4 +167,88 @@
             @apply hover:bg-neutral-600 focus:bg-neutral-200 focus:text-gray-800;
         }
     }
+
+    .bg_analyse_strong {
+        @apply bg-[#E3DDED]; }
+    .bg_analyse_light {
+        @apply bg-[#F6F4F9];
+        @variant dark {
+            @apply bg-[#F6F4F9]/90 text-black;
+        }
+        .fill-primary {
+            @apply fill-black;
+        }
+    }
+    .bg_planung_strong {
+        @apply bg-[#DFEBEF]; }
+    .bg_planung_light {
+        @apply bg-[#F0F5F7];
+        @variant dark {
+            @apply bg-[#F0F5F7]/90 text-black;
+        }
+        .fill-primary {
+            @apply fill-black;
+        }
+    }
+    .bg_durchfuehrung_strong {
+        @apply bg-[#E3F0DF]; }
+    .bg_durchfuehrung_light {
+        @apply bg-[#EFF6ED];
+        @variant dark {
+            @apply bg-[#EFF6ED]/90 text-black;
+        }
+        .fill-primary {
+            @apply fill-black;
+        }
+    }
+    .bg_auswertung_strong {
+        @apply bg-[#E6D5DE]; }
+    .bg_auswertung_light {
+        @apply bg-[#F6EDF2];
+        @variant dark {
+            @apply bg-[#F6EDF2]/90 text-black;
+        }
+        .fill-primary {
+            @apply fill-black;
+        }
+    }
+
+    .kachelliste_headline {
+        @apply text-center p-4 text-2xl font-bold border-b-1 border-neutral-300 shadow rounded-t-2xl w-full relative;
+        @variant dark {
+            @apply border-neutral-500;
+        }
+    }
+
+    .kachelliste_headline.inactiveAccordion {
+        @apply rounded-b-2xl shadow-none border-b-0;
+    }
+    .kachelliste_headline.activeAccordion {
+        @apply rounded-b-none;
+    }
+
+    .kachelliste {
+        @apply divide-y divide-neutral-300 font-medium rounded-b-2xl;
+        @variant dark {
+            @apply divide-neutral-700;
+        }
+    }
+    .kachelliste > div {
+        @apply py-4 px-15 shadow-xs;
+    }
+    .kachelliste > div:last-child {
+        @apply shadow-none;
+    }
+    .kachelliste_icon {
+        @apply divide-y divide-neutral-300 font-medium rounded-b-2xl;
+        @variant dark {
+            @apply divide-neutral-700;
+        }
+    }
+    .kachelliste_icon > div {
+        @apply flex items-start shadow-xs py-3 pr-5;
+    }
+    .kachelliste_icon > div:last-child {
+        @apply shadow-none;
+    }
 }
