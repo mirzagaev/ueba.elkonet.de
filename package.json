@@ -1,5 +1,6 @@
 {
   "scripts": {
+    "start": "npm run dev",
     "dev": "tailwindcss -i src/css/input.css -o src/css/style.css --watch",
     "build": "tailwindcss -i ./src/input.css -o ./dist/output.css --minify"
   },
