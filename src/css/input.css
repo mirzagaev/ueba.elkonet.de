@@ -182,7 +182,7 @@
     .kundenauftrag-form-text {
         @apply w-full bg-white inline-flex py-3 px-4 rounded text-black items-center shadow-sm transition duration-500 ease-in-out transform leading-tight font-medium;
         @apply border border-neutral-200 placeholder:font-normal;
-        @apply focus:outline-none focus:bg-white focus:border-gray-500;
+        @apply focus:outline-none focus:border-gray-600;
 
         @variant dark {
             @apply bg-neutral-700 text-white;
