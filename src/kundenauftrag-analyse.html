@@ -401,9 +401,10 @@
                 <div class="w-full bg_analyse_light rounded-2xl shadow-md h-fit">
                     <h3 class="bg_analyse_strong kachelliste_headline">Linkbox</h3>
                     <div class="kachelliste_icon">
-                        <div>
+                        <a href="#" data-drawer-target="drawer-right-module-EEG" data-drawer-show="drawer-right-module-EEG" data-drawer-placement="right" aria-controls="drawer-right-module-EEG" data-beruf="EEG" data-id="4">
                             <svg class="size-6 mx-5 fill-primary"><use xlink:href="#icon-next"></use></svg>
-                            Use this example to add a border accent on top of the alert component for</div>
+                            Use this example to add a border accent on top of the alert component for
+                        </a>
                         <div>
                             <svg class="size-6 mx-5 fill-primary"><use xlink:href="#icon-next"></use></svg>Use this example to add a border accent on top of the alert component for</div>
                         <div>
@@ -431,6 +432,171 @@
                             <svg class="size-6 mx-5 fill-primary"><use xlink:href="#icon-next"></use></svg>Use this example to add a border accent on top of the alert component fors</div>
                     </div>
                 </div>
+            </div>
+
+            <div id="drawer-right-module-EEG" class="fixed top-0 right-0 z-40 h-screen overflow-y-auto transition-transform translate-x-full bg-primary sm:w-2/3 lg:w-1/2 xl:max-w-1/3" tabindex="-1" aria-labelledby="drawer-right-label">
+                <div class="flex flex-wrap p-8 pb-2 xl:p-10 xl:pb-2 gap-2" id="avatarButton" type="button" type="button">
+                    <h2 id="drawer-label" class="text-primary text-2xl font-semibold leading-7 pr-10">Kundenkartei</h2>
+                    <button type="button" data-drawer-hide="drawer-right-module-EEG" aria-controls="drawer-right-module-EEG" class="text-primary p-2 text-sm absolute right-2 top-6 xl:top-10 inline-flex items-center justify-center">
+                        <svg fill="none" class="size-7 p-1"><use xlink:href="#icon-close"></use></svg>
+                        <span class="sr-only">Close menu</span>
+                    </button>
+                </div>
+                    <div class="w-full p-8 xl:p-10">
+                        <div class="pb-4 xl:pb-6">
+                            <span class="title-font tracking-widest uppercase text-sm pb-4 block">Daten Kund/in</span>
+                            <div class="w-full md:flex-grow grid md:grid-cols-4 gap-4">
+                                <div class="md:col-span-4">
+                                    <input placeholder="Firma" class="kundenauftrag-form-text">
+                                </div>
+                                <div class="md:col-start-1 md:col-span-2">
+                                    <select class="kundenauftrag-form-text">
+                                        <option>Anrede</option>
+                                        <option>Frau</option>
+                                        <option>Herr</option>
+                                        <option>Divers</option>
+                                    </select>
+                                </div>
+                                <div class="md:col-start-1 md:col-span-2">
+                                    <input placeholder="Name" class="kundenauftrag-form-text">
+                                </div>
+                                <div class="md:col-span-2">
+                                    <input placeholder="Vorname" class="kundenauftrag-form-text">
+                                </div>
+                                <div class="md:col-span-4">
+                                    <input placeholder="Straße" class="kundenauftrag-form-text">
+                                </div>
+                                <div class="md:col-span-1">
+                                    <input placeholder="PLZ" class="kundenauftrag-form-text">
+                                </div>
+                                <div class="md:col-span-3">
+                                    <input placeholder="Ort" class="kundenauftrag-form-text">
+                                </div>
+                                <div class="col-span-2">
+                                    <input placeholder="Anrufer/in" class="kundenauftrag-form-text">
+                                </div>
+                                <div class="col-span-2">
+                                    <input placeholder="Kunden-Nr" class="kundenauftrag-form-text">
+                                </div>
+                                <div class="col-span-2">
+                                    <input placeholder="Kontaktperson vor Ort" class="kundenauftrag-form-text">
+                                </div>
+                                <div class="col-span-2">
+                                    <input type="text" placeholder="Termin Vor-Ort" class="kundenauftrag-form-text" onfocus="(this.type='date')" onblur="if(!this.value)this.type='text'">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="h-0.5 bg-secondary mb-5"></div>
+                        <div class="pb-4 xl:pb-6">
+                            <span class="title-font tracking-widest uppercase text-sm pb-4 block">Intern</span>
+                            <div class="w-full md:flex-grow grid md:grid-cols-4 gap-4">
+                                <div class="col-span-2">
+                                    <input placeholder="Erstellt von" class="kundenauftrag-form-text">
+                                </div>
+                                <div class="col-span-2">
+                                    <input type="text" placeholder="Datum" class="kundenauftrag-form-text" onfocus="(this.type='date')" onblur="if(!this.value)this.type='text'">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="h-0.5 bg-secondary mb-5"></div>
+                        <div class="pb-4 xl:pb-6">
+                            <span class="title-font tracking-widest uppercase text-sm pb-4 block">Notizen</span>
+                            <div class="w-full md:flex-grow">
+                                <!-- <textarea class="kundenauftrag-form-text" rows="5"></textarea> -->
+                                <!-- Tiptap -->
+                                <div class="bg-white border border-subnav rounded overflow-hidden dark:bg-neutral-800">
+                                    <div id="hs-editor-tiptap">
+                                        <div class="sticky top-0 bg-white flex align-middle gap-x-0.5 border-b border-gray-200 p-2 dark:bg-neutral-900 dark:border-neutral-700">
+                                            <button class="size-8 inline-flex justify-center items-center gap-x-2 text-sm font-semibold rounded-full border border-transparent text-gray-800 hover:bg-gray-100 focus:outline-hidden focus:bg-gray-100 disabled:opacity-50 disabled:pointer-events-none dark:text-white dark:hover:bg-neutral-700 dark:focus:bg-neutral-700" type="button" data-hs-editor-bold="">
+                                                <svg class="shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                                <path d="M14 12a4 4 0 0 0 0-8H6v8"></path>
+                                                <path d="M15 20a4 4 0 0 0 0-8H6v8Z"></path>
+                                                </svg>
+                                            </button>
+                                            <button class="size-8 inline-flex justify-center items-center gap-x-2 text-sm font-semibold rounded-full border border-transparent text-gray-800 hover:bg-gray-100 focus:outline-hidden focus:bg-gray-100 disabled:opacity-50 disabled:pointer-events-none dark:text-white dark:hover:bg-neutral-700 dark:focus:bg-neutral-700" type="button" data-hs-editor-italic="">
+                                                <svg class="shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                                <line x1="19" x2="10" y1="4" y2="4"></line>
+                                                <line x1="14" x2="5" y1="20" y2="20"></line>
+                                                <line x1="15" x2="9" y1="4" y2="20"></line>
+                                                </svg>
+                                            </button>
+                                            <button class="size-8 inline-flex justify-center items-center gap-x-2 text-sm font-semibold rounded-full border border-transparent text-gray-800 hover:bg-gray-100 focus:outline-hidden focus:bg-gray-100 disabled:opacity-50 disabled:pointer-events-none dark:text-white dark:hover:bg-neutral-700 dark:focus:bg-neutral-700" type="button" data-hs-editor-underline="">
+                                                <svg class="shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                                <path d="M6 4v6a6 6 0 0 0 12 0V4"></path>
+                                                <line x1="4" x2="20" y1="20" y2="20"></line>
+                                                </svg>
+                                            </button>
+                                            <button class="size-8 inline-flex justify-center items-center gap-x-2 text-sm font-semibold rounded-full border border-transparent text-gray-800 hover:bg-gray-100 focus:outline-hidden focus:bg-gray-100 disabled:opacity-50 disabled:pointer-events-none dark:text-white dark:hover:bg-neutral-700 dark:focus:bg-neutral-700" type="button" data-hs-editor-strike="">
+                                                <svg class="shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                                <path d="M16 4H9a3 3 0 0 0-2.83 4"></path>
+                                                <path d="M14 12a4 4 0 0 1 0 8H6"></path>
+                                                <line x1="4" x2="20" y1="12" y2="12"></line>
+                                                </svg>
+                                            </button>
+                                            <button class="size-8 inline-flex justify-center items-center gap-x-2 text-sm font-semibold rounded-full border border-transparent text-gray-800 hover:bg-gray-100 focus:outline-hidden focus:bg-gray-100 disabled:opacity-50 disabled:pointer-events-none dark:text-white dark:hover:bg-neutral-700 dark:focus:bg-neutral-700" type="button" data-hs-editor-link="">
+                                                <svg class="shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                                <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path>
+                                                <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path>
+                                                </svg>
+                                            </button>
+                                            <button class="size-8 inline-flex justify-center items-center gap-x-2 text-sm font-semibold rounded-full border border-transparent text-gray-800 hover:bg-gray-100 focus:outline-hidden focus:bg-gray-100 disabled:opacity-50 disabled:pointer-events-none dark:text-white dark:hover:bg-neutral-700 dark:focus:bg-neutral-700" type="button" data-hs-editor-ol="">
+                                                <svg class="shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                                <line x1="10" x2="21" y1="6" y2="6"></line>
+                                                <line x1="10" x2="21" y1="12" y2="12"></line>
+                                                <line x1="10" x2="21" y1="18" y2="18"></line>
+                                                <path d="M4 6h1v4"></path>
+                                                <path d="M4 10h2"></path>
+                                                <path d="M6 18H4c0-1 2-2 2-3s-1-1.5-2-1"></path>
+                                                </svg>
+                                            </button>
+                                            <button class="size-8 inline-flex justify-center items-center gap-x-2 text-sm font-semibold rounded-full border border-transparent text-gray-800 hover:bg-gray-100 focus:outline-hidden focus:bg-gray-100 disabled:opacity-50 disabled:pointer-events-none dark:text-white dark:hover:bg-neutral-700 dark:focus:bg-neutral-700" type="button" data-hs-editor-ul="">
+                                                <svg class="shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                                <line x1="8" x2="21" y1="6" y2="6"></line>
+                                                <line x1="8" x2="21" y1="12" y2="12"></line>
+                                                <line x1="8" x2="21" y1="18" y2="18"></line>
+                                                <line x1="3" x2="3.01" y1="6" y2="6"></line>
+                                                <line x1="3" x2="3.01" y1="12" y2="12"></line>
+                                                <line x1="3" x2="3.01" y1="18" y2="18"></line>
+                                                </svg>
+                                            </button>
+                                            <button class="size-8 inline-flex justify-center items-center gap-x-2 text-sm font-semibold rounded-full border border-transparent text-gray-800 hover:bg-gray-100 focus:outline-hidden focus:bg-gray-100 disabled:opacity-50 disabled:pointer-events-none dark:text-white dark:hover:bg-neutral-700 dark:focus:bg-neutral-700" type="button" data-hs-editor-blockquote="">
+                                                <svg class="shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                                <path d="M17 6H3"></path>
+                                                <path d="M21 12H8"></path>
+                                                <path d="M21 18H8"></path>
+                                                <path d="M3 12v6"></path>
+                                                </svg>
+                                            </button>
+                                            <button class="size-8 inline-flex justify-center items-center gap-x-2 text-sm font-semibold rounded-full border border-transparent text-gray-800 hover:bg-gray-100 focus:outline-hidden focus:bg-gray-100 disabled:opacity-50 disabled:pointer-events-none dark:text-white dark:hover:bg-neutral-700 dark:focus:bg-neutral-700" type="button" data-hs-editor-code="">
+                                                <svg class="shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                                <path d="m18 16 4-4-4-4"></path>
+                                                <path d="m6 8-4 4 4 4"></path>
+                                                <path d="m14.5 4-5 16"></path>
+                                                </svg>
+                                            </button>
+                                        </div>
+                                        <div class="h-40 overflow-auto" data-hs-editor-field=""></div>
+                                    </div>
+                                </div>
+                                <!-- End Tiptap -->
+                            </div>
+                        </div>
+                        <div class="h-0.5 bg-secondary mb-5"></div>
+                        <div class="py-4 xl:py-6 flex flex-col lg:flex-row justify-end items-end gap-4 w-fit ml-auto">
+                            <button type="button" class="w-full md:w-fit form-btn bg-green-800 text-white">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 mr-2">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L10.582 16.07a4.5 4.5 0 0 1-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 0 1 1.13-1.897l8.932-8.931Zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0 1 15.75 21H5.25A2.25 2.25 0 0 1 3 18.75V8.25A2.25 2.25 0 0 1 5.25 6H10" />
+                                </svg> Speichern</button>
+                            <button type="button" class="w-full md:w-fit form-btn bg-neutral-500 text-white">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 mr-2">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M6.72 13.829c-.24.03-.48.062-.72.096m.72-.096a42.415 42.415 0 0 1 10.56 0m-10.56 0L6.34 18m10.94-4.171c.24.03.48.062.72.096m-.72-.096L17.66 18m0 0 .229 2.523a1.125 1.125 0 0 1-1.12 1.227H7.231c-.662 0-1.18-.568-1.12-1.227L6.34 18m11.318 0h1.091A2.25 2.25 0 0 0 21 15.75V9.456c0-1.081-.768-2.015-1.837-2.175a48.055 48.055 0 0 0-1.913-.247M6.34 18H5.25A2.25 2.25 0 0 1 3 15.75V9.456c0-1.081.768-2.015 1.837-2.175a48.041 48.041 0 0 1 1.913-.247m10.5 0a48.536 48.536 0 0 0-10.5 0m10.5 0V3.375c0-.621-.504-1.125-1.125-1.125h-8.25c-.621 0-1.125.504-1.125 1.125v3.659M18 10.5h.008v.008H18V10.5Zm-3 0h.008v.008H15V10.5Z" />
+                                </svg> Druckversion</button>
+                            <button type="button" class="w-full md:w-fit form-btn text-neutral-400">
+                                <svg fill="none" class="w-6 mr-2" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                                </svg> Formulardaten zurücksetzen</button>
+                        </div>
+                    </div>
             </div>
         </main>
 

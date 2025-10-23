@@ -1,18 +1,12 @@
 @import "tailwindcss";
+@plugin "flowbite-typography";
 
 @custom-variant dark (&:where(.dark, .dark *));
 
 @layer components {
 
     BODY {
-        /* @apply bg-neutral-100;
-        background-image:
-            radial-gradient(farthest-corner at 76% 14%, rgb(244, 244, 245) 0%, transparent 76%),
-            radial-gradient(farthest-corner at 90% 79%, rgb(252, 231, 243) 0%, transparent 11%),
-            radial-gradient(farthest-corner at 8% 10%, rgb(241, 245, 249) 0%, transparent 38%),
-            radial-gradient(farthest-corner at 57% 14%, rgb(168, 162, 158) 0%, transparent 2%),
-            radial-gradient(farthest-corner at 44% 33%, rgb(229, 231, 235) 0%, transparent 84%),
-            radial-gradient(farthest-corner at 60% 46%, rgb(203, 213, 225) 0%, transparent 59%); */
+        @apply bg-white;
         background-repeat: no-repeat;
         background-position: center;
         background-attachment: fixed;
@@ -158,7 +152,7 @@
     }
 
     .form-btn {
-        @apply bg-gray-100 py-2 px-3 flex text-black items-center cursor-pointer shadow-sm rounded;
+        @apply bg-white py-2 px-3 flex text-black items-center cursor-pointer shadow-sm rounded;
         @apply hover:bg-white hover:shadow-md focus:outline-none;
         @apply focus:bg-neutral-200;
 
@@ -268,10 +262,10 @@
             @apply divide-neutral-700;
         }
     }
-    .kachelliste_icon > div {
+    .kachelliste_icon > * {
         @apply flex items-start shadow-xs py-3 pr-5;
     }
-    .kachelliste_icon > div:last-child {
+    .kachelliste_icon > *:last-child {
         @apply shadow-none;
     }
 }
