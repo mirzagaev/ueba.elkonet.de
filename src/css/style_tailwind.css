@@ -812,6 +812,9 @@
   .me-3 {
     margin-inline-end: calc(var(--spacing) * 3);
   }
+  .-mt-6 {
+    margin-top: calc(var(--spacing) * -6);
+  }
   .mt-1\.5 {
     margin-top: calc(var(--spacing) * 1.5);
   }
@@ -997,6 +1000,9 @@
   .h-screen {
     height: 100vh;
   }
+  .max-h-full {
+    max-height: 100%;
+  }
   .min-h-40 {
     min-height: calc(var(--spacing) * 40);
   }
@@ -1053,6 +1059,9 @@
   }
   .max-w-96 {
     max-width: calc(var(--spacing) * 96);
+  }
+  .max-w-full {
+    max-width: 100%;
   }
   .max-w-sm {
     max-width: var(--container-sm);
@@ -1540,9 +1549,6 @@
   .pt-4 {
     padding-top: calc(var(--spacing) * 4);
   }
-  .pt-6 {
-    padding-top: calc(var(--spacing) * 6);
-  }
   .pr-5 {
     padding-right: calc(var(--spacing) * 5);
   }
@@ -1551,6 +1557,9 @@
   }
   .pb-2 {
     padding-bottom: calc(var(--spacing) * 2);
+  }
+  .pb-3 {
+    padding-bottom: calc(var(--spacing) * 3);
   }
   .pb-4 {
     padding-bottom: calc(var(--spacing) * 4);
@@ -2078,9 +2087,19 @@
       line-height: var(--tw-leading, var(--text-base--line-height));
     }
   }
+  .lg\:col-span-1 {
+    @media (width >= 64rem) {
+      grid-column: span 1 / span 1;
+    }
+  }
   .lg\:col-span-2 {
     @media (width >= 64rem) {
       grid-column: span 2 / span 2;
+    }
+  }
+  .lg\:col-start-1 {
+    @media (width >= 64rem) {
+      grid-column-start: 1;
     }
   }
   .lg\:my-12 {
@@ -3083,6 +3102,9 @@
   .kachelliste_icon > *:last-child {
     --tw-shadow: 0 0 #0000;
     box-shadow: var(--tw-inset-shadow), var(--tw-inset-ring-shadow), var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow);
+  }
+  .contentarea p {
+    margin-bottom: calc(var(--spacing) * 3);
   }
 }
 @property --tw-translate-x {

@@ -268,4 +268,7 @@
     .kachelliste_icon > *:last-child {
         @apply shadow-none;
     }
+    .contentarea p {
+        @apply mb-3;
+    }
 }
