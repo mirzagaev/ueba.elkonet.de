@@ -18,10 +18,10 @@
     }
 
     .bg-loginpage-beta {
-        /* @apply bg-grad from-neutral-300 via-neutral-500 to-neutral-200; */
-        
+        @apply bg-gradient-to-br from-gray-50 via-gray-100 to-red-50;
+            
         @variant dark {
-            @apply from-neutral-800 via-neutral-700 to-neutral-800;
+            @apply bg-gradient-to-br from-neutral-900 via-neutral-800 to-red-900;
             background-image: unset;
         }
     }
@@ -35,7 +35,10 @@
     }
 
     h1 {
-        @apply text-2xl;
+        @apply text-4xl font-bold tracking-tight text-neutral-900;
+        @variant dark {
+            @apply text-white;
+        }
     }
 
     .wrapper.container {
@@ -114,10 +117,10 @@
     }
 
     .border-secondary-active {
-        @apply border-neutral-800;
+        @apply border-red-600;
 
         @variant dark {
-            @apply border-white;
+            @apply border-red-500;
         }
     }
 
@@ -174,13 +177,13 @@
     }
 
     .btn-secondary {
-        @apply bg-neutral-500 text-white text-sm py-2 px-3 rounded-2xl transition uppercase cursor-pointer font-medium shadow-md;
-        @apply hover:bg-neutral-600;
-        @apply focus:bg-neutral-800 focus:text-white;
+        @apply bg-red-600 text-white text-sm py-2 px-3 rounded-2xl transition uppercase cursor-pointer font-medium shadow-md;
+        @apply hover:bg-red-700 hover:shadow-lg;
+        @apply focus:bg-red-800 focus:text-white;
 
         @variant dark {
-            @apply bg-neutral-600 shadow-md text-neutral-200;
-            @apply hover:bg-white hover:text-neutral-600;
+            @apply bg-red-700 shadow-md text-white;
+            @apply hover:bg-red-600 hover:text-white;
         }
     }
 

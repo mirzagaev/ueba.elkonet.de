@@ -39,13 +39,22 @@ $(document).ready(function() {
   /*  ENDE: Startseite: Passwort anzeigen/ausblenden */
 
 
-  $("#loginUebaBtn").click(function(event) {
+  // Slide-in login form logic for index-proposal.html
+  $('#loginUebaBtn').on('click', function(event) {
     event.preventDefault();
-    $("#loginUebaForm").show();
-    $("#loginUebaBtn").hide();
-    // $("#loginLernweltBtn").hide();
-    return false;
-  })
+    // Slide out options to the right
+    $('#loginOptions').removeClass('translate-x-0').addClass('translate-x-full');
+    // Slide in form from the left
+    $('#loginUebaForm').removeClass('-translate-x-full').addClass('translate-x-0');
+  });
+
+  $('#backToLoginOptions').on('click', function(event) {
+    event.preventDefault();
+    // Slide in options from the left
+    $('#loginOptions').removeClass('translate-x-full').addClass('translate-x-0');
+    // Slide out form to the left
+    $('#loginUebaForm').removeClass('translate-x-0').addClass('-translate-x-full');
+  });
 
   $('.toggletextcontent').on('click', function () {
     const button = $(this);
@@ -72,5 +81,4 @@ $(document).ready(function() {
   $(".quizcheck input").on("change", function () {
     $(this).closest(".quizcheck").toggleClass("active");
   });
-
 });
