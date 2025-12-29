@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="css/style.css" rel="stylesheet">
+    <script src="js/jquery.min.js"></script>
     <script src="js/custom.js"></script>
 </head>
 
@@ -124,7 +125,7 @@
 	</svg>
 
     <div class="flex flex-col h-screen justify-between">
-        <header class="flex flex-wrap flex-row items-center bg-primary">
+        <header class="flex flex-wrap flex-row items-center bg-primary text-primary z-10 shadow-md">
             <button class="flex md:hidden ml-3 text-primary items-center p-2 cursor-pointer" type="button" data-drawer-target="ueba-maindrawer" data-drawer-show="ueba-maindrawer" data-drawer-position="left" aria-controls="ueba-maindrawer">
                 <svg class="size-7 stroke-primary" stroke-width="0.5"><use xlink:href="#icon-burger"></use></svg>
             </button>
@@ -355,7 +356,7 @@
                     </div>
                 </li>
                 <li aria-current="page">
-                    <span class="text-xs font-medium text-secondary">Kundenauftrag</span>
+                    <span class="text-xs font-medium text-secondary">WissensCheck</span>
                 </li>
             </ol>
         </nav>
@@ -369,17 +370,18 @@
                 <h3 class="lg:text-lg xl:text-xl mt-3">Sie wollen Ihr Wissen checken? Dann starten Sie den WissensCheck!</h3>
             </div>
 
-            - Bilder, Videos, Stromlaufüläne integrieren
-            - Antwortmöglichkeiten mit Fotos auch testen
-            - Auswertung: wie ausgewertet im Ausbilderabend vorstellen, neues Design von Sam, Fritz / Michael Probleme mit Auswertung ansprechen, 2 Möglichkeiten: Punkte vs. Richtig/Falsch
-            - vor/zurück Btn neu ausdenken
-            - https://www.geeksforgeeks.org/quizzes/tailwind-css-quiz-1/
-            - https://tailwindquiz.tommyjepsen.com/
-            - https://www.youtube.com/watch?v=PnJwnf1Bdis
-            - https://www.codewithrandom.com/2022/12/02/quiz-app-with-timer-javascript-2/
+            <ul>
+                <li>Bilder, Videos, Stromlaufüläne integrieren</li>
+                <li>Antwortmöglichkeiten mit Fotos auch testen</li>
+                <li>Auswertung: wie ausgewertet im Ausbilderabend vorstellen, neues Design von Sam, Fritz / Michael Probleme mit Auswertung ansprechen, 2 Möglichkeiten: Punkte vs. Richtig/Falsch</li>
+                <li>vor/zurück Btn neu ausdenken</li>
+                <li>https://www.geeksforgeeks.org/quizzes/tailwind-css-quiz-1/</li>
+                <li>https://tailwindquiz.tommyjepsen.com</li>
+                <li>https://www.youtube.com/watch?v=PnJwnf1Bdis</li>
+                <li>https://www.codewithrandom.com/2022/12/02/quiz-app-with-timer-javascript-2</li>
+            </ul>
 
-
-            <div class="w-full bg-primary rounded-2xl shadow-md mt-20">
+            <div class="infobox bg-primary mt-12">
                 <h3 class="bg-secondary kachelliste_headline">Und so geht's:</h3>
                 <div class="kachelliste">
                     <div>Kreuzen Sie alle richtigen Lösungen an! Es können eine oder mehrere Antworten pro Frage richtig sein</div>
@@ -389,7 +391,7 @@
             </div>
 
             <div class="items-center text-center my-10">
-                <a class="bg-primary flex items-center w-fit mx-auto hover:shadow-md shadow-sm rounded-4xl p-4" href="dashboard.html">
+                <a class="bg-primary flex items-center w-fit mx-auto hover:shadow-md shadow-sm rounded-4xl p-4" href="modul-wc-1.html">
                     <svg class="size-5 fill-primary"><use xlink:href="#icon-next"></use></svg>
                     <span class="ml-2 flex items-start flex-col leading-none title-font font-medium text-lg">Hier geht´s los</span>
                 </a>

@@ -11,6 +11,9 @@
 <body class="text-primary">
 	<svg class="hidden">
 		<defs>
+            <symbol id="icon-email" fill="none" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 0 1-2.25 2.25h-15a2.25 2.25 0 0 1-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0 0 19.5 4.5h-15a2.25 2.25 0 0 0-2.25 2.25m19.5 0v.243a2.25 2.25 0 0 1-1.07 1.916l-7.5 4.615a2.25 2.25 0 0 1-2.36 0L3.32 8.91a2.25 2.25 0 0 1-1.07-1.916V6.75" />
+            </symbol>
 			<symbol id="icon-folder" viewBox="0 0 474.3 353.2">
 				<path d="M474.3,161.5c0-9.3-2.7-17.7-7.7-24.6c-5-7-12.3-12.1-21.1-14.8c-4.2-1.3-8.8-1.9-13.5-1.9h-8.7v-16.9
                 c0-14.2-5.8-27.1-15.2-36.5c-9.3-9.3-22.3-15.2-36.5-15.2h-131c-3.1,0-5.9-0.5-8.3-1.5s-4.7-2.6-6.9-4.8l-30.3-30.1
@@ -124,7 +127,7 @@
 	</svg>
 
     <div class="flex flex-col h-screen justify-between">
-        <header class="flex flex-wrap flex-row items-center bg-primary">
+        <header class="flex flex-wrap flex-row items-center bg-primary z-10 shadow-md">
             <button class="flex md:hidden ml-3 text-primary items-center p-2 cursor-pointer" type="button" data-drawer-target="ueba-maindrawer" data-drawer-show="ueba-maindrawer" data-drawer-position="left" aria-controls="ueba-maindrawer">
                 <svg class="size-7 stroke-primary" stroke-width="0.5"><use xlink:href="#icon-burger"></use></svg>
             </button>
@@ -369,7 +372,15 @@
                         <svg class="w-4 h-4 text-primary" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M7.5 15L11.0858 11.4142C11.7525 10.7475 12.0858 10.4142 12.0858 10C12.0858 9.58579 11.7525 9.25245 11.0858 8.58579L7.5 5" stroke="#777777" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" />
                         </svg>
-                        <span class="ms-1 text-xs font-medium text-secondary md:ms-2">Planung</span>
+                        <a href="kundenauftrag-analyse.html" class="ms-1 text-xs font-medium text-primary md:ms-2">Analyse</a>
+                    </div>
+                </li>
+                <li aria-current="page">
+                    <div class="flex items-center">
+                        <svg class="w-4 h-4 text-primary" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M7.5 15L11.0858 11.4142C11.7525 10.7475 12.0858 10.4142 12.0858 10C12.0858 9.58579 11.7525 9.25245 11.0858 8.58579L7.5 5" stroke="#777777" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" />
+                        </svg>
+                        <span class="ms-1 text-xs font-medium text-secondary md:ms-2">Anfrage per E-Mail</span>
                     </div>
                 </li>
             </ol>
@@ -378,65 +389,56 @@
         <main class="px-6 container xl:px-20 2xl:px-32 py-3 mx-auto mb-auto">
             <div class="page_headline mt-4 lg:my-12">
                 <div class="flex items-center gap-10">
-                    <img src="img/icons/2_Planung.png" class="inline w-34" />
+                    <img src="img/icons/1_Analyse.png" class="inline w-34" />
                     <div>
-                        <h2 class="text-2xl xl:text-3xl font-bold">Planung</h2>
-                        <div class="text-lg xl:text-xl mt-5">Durch den Ausbau des Dachgeschosses im Wohn- und Geschäftshaus der Eisenmann Sonderbau GmbH sollen verschiedene Räume neu installiert werden. Es soll eine Gebäudeautomation für die Beleuchtung, die Jalousiebedienung und die Heizungsregelung eingesetzt werden. Die Leitungsverlegung erfolgt im Putz, sodass Stemmarbeiten lediglich bei den UP-Dosen erforderlich sind. Im Flur befindet sich eine abgehängte Rasterdecke mit 20 cm Abstand zur Decke. Die restlichen Decken sind ebenfalls abgehängt. Die Maße der Räume mit Anordnung der Fenster und Türen sind im Grundriss zu sehen, welcher unten als Link zu finden ist. Die Stockwerkshöhe - auch notwendig bei der Ermittlung der Leitungslängen - beträgt 2,5 m.</div>
+                        <h2 class="text-2xl xl:text-3xl font-bold">Anfrage per E-Mail</h2>
                     </div>
                 </div>
             </div>
-
-            <div class="infobox bg_planung_light mt-12">
-                <h3 class="bg_planung_strong kachelliste_headline">Was ist zu tun?</h3>
-                <div class="kachelliste">
-                    <div>Use this example to add a border accent on top of the alert component for</div>
-                    <div>Use this example to add a border accent on top of the alert component for</div>
-                    <div>Use this example to add a border accent on top of the alert component for</div>
-                    <div>Use this example to add a border accent on top of the alert component for</div>
-                    <div>Use this example to add a border accent on top of the alert component fors</div>
-                </div>
-            </div>
-
-            <div class="grid md:grid-cols-2 gap-10 mt-12">
-                <div class="infobox bg_planung_light h-fit">
-                    <h3 class="bg_planung_strong kachelliste_headline">Linkbox</h3>
-                    <div class="kachelliste linksliste">
-                        <p>
-                            <a class="cursor-pointer">Use this example to add a border accent on top of the alert component for</a>
-                        </p>
-                        <p>
-                            <a class="cursor-pointer">Use this example to add a border accent on top of the alert component for</a>
-                        </p>
-                        <p>
-                            <a class="cursor-pointer">Use this example to add a border accent on top of the alert component for</a>
-                        </p>
-                        <p>
-                            <a class="cursor-pointer">Use this example to add a border accent on top of the alert component for</a>
-                        </p>
+            <div class="w-full rounded-2xl shadow-md bg_analyse_light mt-12">
+                <h3 class="bg_analyse_strong p-4 md:px-10 xl:px-15 text-2xl font-bold border-b-1 border-neutral-300 shadow rounded-t-2xl w-full flex">
+                    Eisenmann Sonderbau GmbH
+                    <span class="ml-auto text-base flex items-center">
+                        <svg stroke-width="1.5" class="stroke-black size-6 mr-2"><use xlink:href="#icon-email"></use></svg>
+                        Neue Nachricht!
+                    </span>
+                </h3>
+                <div class="divide-y divide-neutral-300 rounded-b-2xl font-medium">
+                    <div class="py-3.5 p-4 md:px-10 xl:px-15 shadow-xs flex">
+                        <span class="font-bold w-32">Von</span> <u>info@sonderbau-eisenmann.de</u>
                     </div>
-                </div>
-
-                <div class="infobox bg_planung_light h-fit">
-                    <h3 class="bg_planung_strong kachelliste_headline">Was ist zu tun?</h3>
-                    <div class="kachelliste linksliste">
-                        <p>
-                            <a class="cursor-pointer">Use this example to add a border accent on top of the alert component for</a>
-                        </p>
-                        <p>
-                            <a class="cursor-pointer">Use this example to add a border accent on top of the alert component for</a>
-                        </p>
-                        <p>
-                            <a class="cursor-pointer">Use this example to add a border accent on top of the alert component for</a>
-                        </p>
-                        <p>
-                            <a class="cursor-pointer">Use this example to add a border accent on top of the alert component for</a>
-                        </p>
+                    <div class="py-3.5 p-4 md:px-10 xl:px-15 shadow-xs flex">
+                        <span class="font-bold w-32">An</span> <u>info@hocke-gebaeudetechnik.com</u>
                     </div>
+                    <div class="py-3.5 p-4 md:px-10 xl:px-15 shadow-xs flex">
+                        <span class="font-bold w-32">Betreff</span> Anfrage über Beratung und Angebot
+                    </div>
+                    <div class="p-4 md:px-10 xl:px-15 shadow-xs relative text-sm">Sehr geehrter Herr Hocke,<br /><br />
+da Sie uns in der Vergangenheit oft Ihre Fachkompetenz und Zuverlässigkeit unter Beweis gestellt haben, würden wir bei unserem neuen Vorhaben gerne wieder mit Ihnen zusammenarbeiten.<br /><br />
+
+Dieses Mal möchten wir unser Dachgeschoss renovieren. Hier sind Kinderzimmer / Loggia / Arbeitszimmer / Bad und Flur neu zu installieren. Wir würden die Zimmer gern etwas komfortabler und energieeffizienter renovieren.<br /><br />
+
+Die Arbeiten müssen in den nächsten 6 Wochen ausgeführt werden, da unsere Tochter danach aus dem Auslandspraktikum zurückkommt. Wir wollen Sie mit der Renovierung überraschen.<br /><br />
+
+Über ein kurzfristiges Beratungsgespräch und ein entsprechendes Angebot würde ich mich sehr freuen. Bei Rückfragen und zur Terminvereinbarung stehe ich Ihnen gerne unter 0799/2345-67 zur Verfügung.<br /><br />
+
+Mit freundlichen Grüßen<br /><br />
+
+
+Petra Eisenmann<br />
+Geschäftsführerin<br /><br />
+
+Eisenmann Sonderbau GmbH<br />
+Hauptstraße 26<br />
+70999 Neufelden<br /><br />
+
+Tel.:      +49799 / 2345-67<br />
+info@sonderbau-eisenmann.de</div>
                 </div>
             </div>
         </main>
 
-        <footer class="flex text-center mx-auto text-xs py-3 mt-12">
+        <footer class="flex text-center mx-auto text-xs py-3">
             <ul class="flex flex-col sm:flex-row gap-2 lg:gap-4 text-xs">
                 <li><a href="#" class="text-secondary">Impressum</a></li>
                 <li><a href="#" class="text-secondary">Datenschutzerklärung</a></li>

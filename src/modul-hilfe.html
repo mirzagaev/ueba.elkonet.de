@@ -11,6 +11,9 @@
 <body class="text-primary">
 	<svg class="hidden">
 		<defs>
+			<symbol id="icon-search" viewBox="0 0 24 24" fill="none">
+				<path stroke-linecap="round" stroke-linejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
+			</symbol>
 			<symbol id="icon-folder" viewBox="0 0 474.3 353.2">
 				<path d="M474.3,161.5c0-9.3-2.7-17.7-7.7-24.6c-5-7-12.3-12.1-21.1-14.8c-4.2-1.3-8.8-1.9-13.5-1.9h-8.7v-16.9
                 c0-14.2-5.8-27.1-15.2-36.5c-9.3-9.3-22.3-15.2-36.5-15.2h-131c-3.1,0-5.9-0.5-8.3-1.5s-4.7-2.6-6.9-4.8l-30.3-30.1
@@ -167,27 +170,27 @@
                             </a>
                         </li>
                         <li>
-                            <a href="modul-Kundenauftrag.html" class="relative flex items-center p-2 text-primary rounded-lg group">
-                                <svg class="size-6 fill-primary"><use xlink:href="#icon-ausbildungsnachweis"></use></svg>
+                            <a href="modul-kundenauftrag.html" class="relative flex items-center p-2 text-primary rounded-lg group">
+                                <svg class="size-6 fill-primary"><use xlink:href="#icon-kundenauftrag"></use></svg>
                                 <span class="flex-1 ms-5 whitespace-nowrap">Kundenauftrag</span>
                             </a>
                         </li>
                         <li>
                             <a href="#" class="relative flex items-center p-2 text-primary rounded-lg group">
                                 <svg class="size-6 fill-primary"><use xlink:href="#icon-infopool"></use></svg>
-                                <span class="flex-1 ms-5 whitespace-nowrap">Infopool</span>
+                                <span class="flex-1 ms-5 whitespace-nowrap">InfoPool</span>
                             </a>
                         </li>
                         <li>
                             <a href="#" class="relative flex items-center p-2 text-primary rounded-lg group">
                                 <svg class="size-6 fill-primary"><use xlink:href="#icon-wissenscheck"></use></svg>
-                                <span class="flex-1 ms-5 whitespace-nowrap">Wissenscheck</span>
+                                <span class="flex-1 ms-5 whitespace-nowrap">WissensCheck</span>
                             </a>
                         </li>
                         <li>
                             <a href="#" class="relative flex items-center p-2 text-primary rounded-lg group">
                                 <svg class="size-6 fill-primary"><use xlink:href="#icon-methodik"></use></svg>
-                                <span class="flex-1 ms-5 whitespace-nowrap">Methodik</span>
+                                <span class="flex-1 ms-5 whitespace-nowrap">Methodik / Didaktik</span>
                             </a>
                         </li>
                         <li>
@@ -320,11 +323,11 @@
                     <svg class="fill-primary size-14 xl:size-18 p-3 xl:p-4"><use xlink:href="#icon-folder"></use></svg>
                     <span>ETE 4/22</span>
                 </a>
-                <a href="modul-kundenauftrag.html" class="inline-flex flex-col items-center justify-center dark:hover:bg-neutral-600 hover:bg-neutral-200 bg-neutral-200 dark:bg-neutral-600 group cursor-pointer px-1 lg:px-3 2xl:px-5 py-3 xl:py-5 pt-3">
+                <a href="modul-kundenauftrag.html" class="inline-flex flex-col items-center justify-center dark:hover:bg-neutral-600 hover:bg-neutral-200 group cursor-pointer px-1 lg:px-3 2xl:px-5 py-3 xl:py-5 pt-3">
                     <svg class="fill-primary size-14 xl:size-18 p-3 xl:p-4"><use xlink:href="#icon-kundenauftrag"></use></svg>
                     <span>Kundenauftrag</span>
                 </a>
-                <a href="modul-infopool.html" class="inline-flex flex-col items-center justify-center dark:hover:bg-neutral-600 hover:bg-neutral-200 group cursor-pointer px-1 lg:px-3 2xl:px-5 py-3 xl:py-5 pt-3">
+                <a href="modul-infopool.html" class="inline-flex flex-col items-center justify-center dark:hover:bg-neutral-600 hover:bg-neutral-200 dark:bg-neutral-600 group cursor-pointer px-1 lg:px-3 2xl:px-5 py-3 xl:py-5 pt-3">
                     <svg class="fill-primary size-14 xl:size-18 p-3 xl:p-4"><use xlink:href="#icon-infopool"></use></svg>
                     <span>InfoPool</span>
                 </a>
@@ -338,7 +341,7 @@
                 </a>
             </div>
         </nav>
-
+        
         <!-- BREADCRUMB -->
         <nav class="hidden md:block mx-auto w-fit text-xs py-5 xl:px-20" aria-label="Breadcrumb">
             <ol class="inline-flex items-center space-x-1 md:space-x-2">
@@ -348,95 +351,87 @@
                         <svg class="stroke-primary size-4" fill="none"><use xlink:href="#icon-right"></use></svg>
                     </div>
                 </li>
-                <li aria-current="page">
-                    <div class="flex items-center">
-                        <svg class="w-4 h-4 text-primary" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M7.5 15L11.0858 11.4142C11.7525 10.7475 12.0858 10.4142 12.0858 10C12.0858 9.58579 11.7525 9.25245 11.0858 8.58579L7.5 5" stroke="#777777" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" />
-                        </svg>
-                        <a href="modul-user.html" class="ms-1 text-xs font-medium text-primary md:ms-2">ETE 4/22</a>
+                <li>
+                    <div class="flex items-center gap-2">
+                        <a href="modul-user.html" class="text-xs font-medium text-primary">ETE 4/22</a>
+                        <svg class="stroke-primary size-4" fill="none"><use xlink:href="#icon-right"></use></svg>
                     </div>
                 </li>
                 <li aria-current="page">
-                    <div class="flex items-center">
-                        <svg class="w-4 h-4 text-primary" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M7.5 15L11.0858 11.4142C11.7525 10.7475 12.0858 10.4142 12.0858 10C12.0858 9.58579 11.7525 9.25245 11.0858 8.58579L7.5 5" stroke="#777777" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" />
-                        </svg>
-                        <a href="modul-kundenauftrag.html" class="ms-1 text-xs font-medium text-primary md:ms-2">Kundenauftrag</a>
-                    </div>
-                </li>
-                <li aria-current="page">
-                    <div class="flex items-center">
-                        <svg class="w-4 h-4 text-primary" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M7.5 15L11.0858 11.4142C11.7525 10.7475 12.0858 10.4142 12.0858 10C12.0858 9.58579 11.7525 9.25245 11.0858 8.58579L7.5 5" stroke="#777777" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" />
-                        </svg>
-                        <span class="ms-1 text-xs font-medium text-secondary md:ms-2">Planung</span>
-                    </div>
+                    <span class="text-xs font-medium text-secondary">Hilfe</span>
                 </li>
             </ol>
         </nav>
 
         <main class="px-6 container xl:px-20 2xl:px-32 py-3 mx-auto mb-auto">
-            <div class="page_headline mt-4 lg:my-12">
-                <div class="flex items-center gap-10">
-                    <img src="img/icons/2_Planung.png" class="inline w-34" />
-                    <div>
-                        <h2 class="text-2xl xl:text-3xl font-bold">Planung</h2>
-                        <div class="text-lg xl:text-xl mt-5">Durch den Ausbau des Dachgeschosses im Wohn- und Geschäftshaus der Eisenmann Sonderbau GmbH sollen verschiedene Räume neu installiert werden. Es soll eine Gebäudeautomation für die Beleuchtung, die Jalousiebedienung und die Heizungsregelung eingesetzt werden. Die Leitungsverlegung erfolgt im Putz, sodass Stemmarbeiten lediglich bei den UP-Dosen erforderlich sind. Im Flur befindet sich eine abgehängte Rasterdecke mit 20 cm Abstand zur Decke. Die restlichen Decken sind ebenfalls abgehängt. Die Maße der Räume mit Anordnung der Fenster und Türen sind im Grundriss zu sehen, welcher unten als Link zu finden ist. Die Stockwerkshöhe - auch notwendig bei der Ermittlung der Leitungslängen - beträgt 2,5 m.</div>
-                    </div>
-                </div>
+            <div class="page_headline mt-4 lg:my-12 text-center w-full">
+                <h2 class="text-2xl xl:text-3xl font-bold w-fit mx-auto flex items-center">Wie können wir helfen?</h2>
+
+                <form class="bg-secondary rounded-2xl shadow-md w-fit mx-auto py-2 px-10 gap-3 m-5 flex items-center">
+                    <svg class="size-6 stroke-primary"><use xlink:href="#icon-search"></use></svg>
+                    <input type="text" class="focus:outline-none focus:border-none bg-transparent border-none" placeholder="Suchen..." />
+                </form>
             </div>
 
-            <div class="infobox bg_planung_light mt-12">
-                <h3 class="bg_planung_strong kachelliste_headline">Was ist zu tun?</h3>
-                <div class="kachelliste">
-                    <div>Use this example to add a border accent on top of the alert component for</div>
-                    <div>Use this example to add a border accent on top of the alert component for</div>
-                    <div>Use this example to add a border accent on top of the alert component for</div>
-                    <div>Use this example to add a border accent on top of the alert component for</div>
-                    <div>Use this example to add a border accent on top of the alert component fors</div>
+            <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-10 my-12 text-center">
+                <div class="bg-secondary w-full rounded-2xl shadow-md">
+                    <svg class="size-12 my-6 mx-auto fill-secondary"><use xlink:href="#icon-folder"></use></svg>
+                    <h4 class="w-full mt-3 md:mt-6 text-xl font-bold">Abnahme</h4>
+                    <p class="p-6 pt-2">Um späteren Reklamationen des Kunden aus dem Weg zu gehen, empfiehlt sich...</p>
+                    <a class="flex items-center w-fit mx-auto m-4 text-secondary" href="dashboard.html">
+                        <svg class="size-5 fill-secondary"><use xlink:href="#icon-next"></use></svg>
+                        <span class="ml-2 flex items-start flex-col leading-none title-font font-medium">mehr dazu</span>
+                    </a>
                 </div>
-            </div>
-
-            <div class="grid md:grid-cols-2 gap-10 mt-12">
-                <div class="infobox bg_planung_light h-fit">
-                    <h3 class="bg_planung_strong kachelliste_headline">Linkbox</h3>
-                    <div class="kachelliste linksliste">
-                        <p>
-                            <a class="cursor-pointer">Use this example to add a border accent on top of the alert component for</a>
-                        </p>
-                        <p>
-                            <a class="cursor-pointer">Use this example to add a border accent on top of the alert component for</a>
-                        </p>
-                        <p>
-                            <a class="cursor-pointer">Use this example to add a border accent on top of the alert component for</a>
-                        </p>
-                        <p>
-                            <a class="cursor-pointer">Use this example to add a border accent on top of the alert component for</a>
-                        </p>
-                    </div>
+                <div class="bg-secondary w-full rounded-2xl shadow-md">
+                    <svg class="size-12 my-6 mx-auto fill-secondary"><use xlink:href="#icon-folder"></use></svg>
+                    <h4 class="w-full mt-3 md:mt-6 text-xl font-bold">Angebot</h4>
+                    <p class="p-6 pt-2">Um späteren Reklamationen des Kunden aus dem Weg zu gehen, empfiehlt sich...</p>
+                    <a class="flex items-center w-fit mx-auto m-4 text-secondary" href="dashboard.html">
+                        <svg class="size-5 fill-secondary"><use xlink:href="#icon-next"></use></svg>
+                        <span class="ml-2 flex items-start flex-col leading-none title-font font-medium">mehr dazu</span>
+                    </a>
                 </div>
-
-                <div class="infobox bg_planung_light h-fit">
-                    <h3 class="bg_planung_strong kachelliste_headline">Was ist zu tun?</h3>
-                    <div class="kachelliste linksliste">
-                        <p>
-                            <a class="cursor-pointer">Use this example to add a border accent on top of the alert component for</a>
-                        </p>
-                        <p>
-                            <a class="cursor-pointer">Use this example to add a border accent on top of the alert component for</a>
-                        </p>
-                        <p>
-                            <a class="cursor-pointer">Use this example to add a border accent on top of the alert component for</a>
-                        </p>
-                        <p>
-                            <a class="cursor-pointer">Use this example to add a border accent on top of the alert component for</a>
-                        </p>
-                    </div>
+                <div class="bg-secondary w-full rounded-2xl shadow-md">
+                    <svg class="size-12 my-6 mx-auto fill-secondary"><use xlink:href="#icon-folder"></use></svg>
+                    <h4 class="w-full mt-3 md:mt-6 text-xl font-bold">Arbeitsplan</h4>
+                    <p class="p-6 pt-2">Um späteren Reklamationen des Kunden aus dem Weg zu gehen, empfiehlt sich...</p>
+                    <a class="flex items-center w-fit mx-auto m-4 text-secondary" href="dashboard.html">
+                        <svg class="size-5 fill-secondary"><use xlink:href="#icon-next"></use></svg>
+                        <span class="ml-2 flex items-start flex-col leading-none title-font font-medium">mehr dazu</span>
+                    </a>
+                </div>
+                <div class="bg-secondary w-full rounded-2xl shadow-md">
+                    <svg class="size-12 my-6 mx-auto fill-secondary"><use xlink:href="#icon-folder"></use></svg>
+                    <h4 class="w-full mt-3 md:mt-6 text-xl font-bold">Arbeitsplan</h4>
+                    <p class="p-6 pt-2">Um späteren Reklamationen des Kunden aus dem Weg zu gehen, empfiehlt sich...</p>
+                    <a class="flex items-center w-fit mx-auto m-4 text-secondary" href="dashboard.html">
+                        <svg class="size-5 fill-secondary"><use xlink:href="#icon-next"></use></svg>
+                        <span class="ml-2 flex items-start flex-col leading-none title-font font-medium">mehr dazu</span>
+                    </a>
+                </div>
+                <div class="bg-secondary w-full rounded-2xl shadow-md">
+                    <svg class="size-12 my-6 mx-auto fill-secondary"><use xlink:href="#icon-folder"></use></svg>
+                    <h4 class="w-full mt-3 md:mt-6 text-xl font-bold">Arbeitsplan</h4>
+                    <p class="p-6 pt-2">Um späteren Reklamationen des Kunden aus dem Weg zu gehen, empfiehlt sich...</p>
+                    <a class="flex items-center w-fit mx-auto m-4 text-secondary" href="dashboard.html">
+                        <svg class="size-5 fill-secondary"><use xlink:href="#icon-next"></use></svg>
+                        <span class="ml-2 flex items-start flex-col leading-none title-font font-medium">mehr dazu</span>
+                    </a>
+                </div>
+                <div class="bg-secondary w-full rounded-2xl shadow-md">
+                    <svg class="size-12 my-6 mx-auto fill-secondary"><use xlink:href="#icon-folder"></use></svg>
+                    <h4 class="w-full mt-3 md:mt-6 text-xl font-bold">Arbeitsplan</h4>
+                    <p class="p-6 pt-2">Um späteren Reklamationen des Kunden aus dem Weg zu gehen, empfiehlt sich...</p>
+                    <a class="flex items-center w-fit mx-auto m-4 text-secondary" href="dashboard.html">
+                        <svg class="size-5 fill-secondary"><use xlink:href="#icon-next"></use></svg>
+                        <span class="ml-2 flex items-start flex-col leading-none title-font font-medium">mehr dazu</span>
+                    </a>
                 </div>
             </div>
         </main>
 
-        <footer class="flex text-center mx-auto text-xs py-3 mt-12">
+        <footer class="flex text-center mx-auto text-xs py-3">
             <ul class="flex flex-col sm:flex-row gap-2 lg:gap-4 text-xs">
                 <li><a href="#" class="text-secondary">Impressum</a></li>
                 <li><a href="#" class="text-secondary">Datenschutzerklärung</a></li>
@@ -444,6 +439,57 @@
                 <li><a href="#" class="text-secondary">AGB</a></li>
             </ul>
         </footer>
+    </div>
+
+    <!-- CHATBOT -->
+    <button id="dropdownNavbarLink" data-dropdown-toggle="openChatbot" class="fixed bg-primary bottom-4 inline-flex right-4 text-primary items-center justify-center rounded-full cursor-pointer" type="button" aria-haspopup="dialog" aria-expanded="false" data-state="closed">
+        <svg stroke-width="1.5" fill="none" class="size-12 stroke-secondary"><use xlink:href="#icon-frage"></use></svg>
+    </button>
+    <div id="openChatbot" class="hidden fixed bottom-[calc(4rem+1.5rem)] right-0 mr-4 bg-primary shadow-sm p-6 rounded-lg w-[440px] h-[634px]">
+        <!-- Heading -->
+        <div class="flex flex-col space-y-1.5 pb-6">
+            <h2 class="font-semibold text-lg tracking-tight">Chatbot</h2>
+            <p class="text-sm text-secondary leading-3">Powered by Mendable and Vercel</p>
+        </div>
+
+        <!-- Chat Container -->
+        <div class="bg-primary flex flex-col gap-y-5">
+            <div class="flex">
+                <div class="shrink-0 relative inline-flex items-center justify-center w-8 h-8 overflow-hidden bg-secondary rounded-full">
+                    <svg stroke-width="1.5" class="size-8 p-1 fill-primary"><use xlink:href="#icon-aisymbol"></use></svg>
+                </div>
+                <div class="w-full ps-3">
+                    <div class="text-primary text-sm mt-1.5 mb-1.5">Hi, how can I help you today?</div>
+                </div>
+            </div>
+            <div class="flex">
+                <div class="shrink-0 relative inline-flex items-center justify-center w-8 h-8 overflow-hidden bg-secondary rounded-full">
+                    <span class="text-primary text-sm">MG</span>
+                </div>
+                <div class="w-full ps-3">
+                    <div class="text-primary text-sm mt-1.5 mb-1.5 ">fewafef</div>
+                </div>
+            </div>
+            <div class="flex">
+                <div class="shrink-0 relative inline-flex items-center justify-center w-8 h-8 overflow-hidden bg-secondary rounded-full">
+                    <svg stroke-width="1.5" class="size-8 p-1 fill-primary"><use xlink:href="#icon-aisymbol"></use></svg>
+                </div>
+                <div class="w-full ps-3">
+                    <div class="text-primary text-sm mt-1.5 mb-1.5 ">Sorry, I couldn't find any information in the documentation about that. Expect answer to be less accurateI could not find the answer to this in the verified sources.</div>
+                </div>
+            </div>
+            <div class="flex">
+                <div class="shrink-0 relative inline-flex items-center justify-center w-8 h-8 overflow-hidden bg-secondary rounded-full">
+                    <span class="text-primary text-sm">MG</span>
+                </div>
+                <div class="w-full ps-3">
+                    <form class="flex items-center justify-center w-full space-x-2">
+                        <input class="flex bg-secondary h-10 w-full rounded-md px-3 py-2 text-sm focus:outline-none disabled:cursor-not-allowed  text-primary focus-visible:ring-offset-2" placeholder="Type your message" value="">
+                        <button class="inline-flex items-center justify-center rounded-md text-sm font-medium disabled:pointer-events-none disabled:opacity-50 btn-primary h-10 px-4 py-2">Send</button>
+                    </form>
+                </div>
+            </div>
+        </div>
     </div>
     
     <script src="js/flowbite.min.js"></script>

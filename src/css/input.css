@@ -1,5 +1,5 @@
 @import "tailwindcss";
-@plugin "flowbite-typography";
+@plugin "flowbite/plugin";
 
 @custom-variant dark (&:where(.dark, .dark *));
 
@@ -17,11 +17,20 @@
         }
     }
 
-    .bg-loginpage {
-        @apply bg-[url('https://cmsred.etz-stuttgart.de/skin/ueba_v3/img/bg/light.jpg')] bg-cover;
+    .bg-loginpage-beta {
+        /* @apply bg-grad from-neutral-300 via-neutral-500 to-neutral-200; */
         
         @variant dark {
-        @apply bg-[url('https://cmsred.etz-stuttgart.de/skin/ueba_v3/img/bg/dark.jpg')];    
+            @apply from-neutral-800 via-neutral-700 to-neutral-800;
+            background-image: unset;
+        }
+    }
+
+    .bg-loginpage {
+        @apply bg-[url('https://cms1.etz-stuttgart.de/skin/ueba/img/bg/light.jpg')] bg-cover;
+        
+        @variant dark {
+            @apply bg-[url('https://cms1.etz-stuttgart.de/skin/ueba/img/bg/dark.jpg')];    
         }
     }
 
@@ -88,11 +97,27 @@
         }
     }
     
+    .divide-secondary {
+        @apply divide-neutral-300;
+
+        @variant dark {
+            @apply divide-neutral-600;
+        }
+    }
+    
     .border-secondary {
         @apply border-neutral-200;
 
         @variant dark {
             @apply border-neutral-600;
+        }
+    }
+
+    .border-secondary-active {
+        @apply border-neutral-800;
+
+        @variant dark {
+            @apply border-white;
         }
     }
 
@@ -129,8 +154,16 @@
         }
     }
 
+    .fill-secondary {
+        @apply fill-gray-600;
+
+        @variant dark {
+            @apply fill-neutral-300;
+        }
+    }
+
     .btn-primary {
-        @apply bg-gray-100 inline-flex py-2 px-3 rounded-4xl text-black items-center cursor-pointer shadow-sm;
+        @apply bg-gray-100 inline-flex py-2 px-3 rounded-full text-black items-center cursor-pointer shadow-sm;
         @apply hover:bg-white hover:shadow-md focus:outline-none;
         @apply focus:bg-neutral-200;
 
@@ -141,7 +174,7 @@
     }
 
     .btn-secondary {
-        @apply bg-neutral-500 text-white text-sm py-2 px-3 rounded-4xl transition uppercase cursor-pointer font-medium shadow-md;
+        @apply bg-neutral-500 text-white text-sm py-2 px-3 rounded-2xl transition uppercase cursor-pointer font-medium shadow-md;
         @apply hover:bg-neutral-600;
         @apply focus:bg-neutral-800 focus:text-white;
 
@@ -152,8 +185,8 @@
     }
 
     .form-btn {
-        @apply bg-white py-2 px-3 flex text-black items-center cursor-pointer shadow-sm rounded;
-        @apply hover:bg-white hover:shadow-md focus:outline-none;
+        @apply py-2 px-3 flex text-neutral-600 items-center cursor-pointer;
+        @apply border-2 border-neutral-500 hover:bg-neutral-100 focus:outline-none;
         @apply focus:bg-neutral-200;
 
         @variant dark {
@@ -179,96 +212,267 @@
         @apply focus:outline-none focus:border-gray-600;
 
         @variant dark {
-            @apply bg-neutral-700 text-white;
+            @apply bg-neutral-600 text-white;
             @apply border-neutral-600;
-            @apply hover:bg-neutral-600 focus:bg-neutral-700 focus:border-neutral-300;
+            @apply hover:bg-neutral-600 focus:border-neutral-300 placeholder:text-neutral-400;
         }
     }
 
     .bg_analyse_strong {
-        @apply bg-[#E3DDED]; }
+        @apply bg-[#E3DDED];
+        @variant dark {
+            @apply text-black;
+        }
+    }
     .bg_analyse_light {
         @apply bg-[#F6F4F9];
         @variant dark {
-            @apply bg-[#F6F4F9]/90 text-black;
+            @apply bg-neutral-800;
         }
         .fill-primary {
-            @apply fill-black;
+            @apply fill-white;
         }
     }
     .bg_planung_strong {
-        @apply bg-[#DFEBEF]; }
+        @apply bg-[#DFEBEF];
+        @variant dark {
+            @apply text-black;
+        }
+    }
     .bg_planung_light {
         @apply bg-[#F0F5F7];
         @variant dark {
-            @apply bg-[#F0F5F7]/90 text-black;
+            @apply bg-neutral-800;
         }
         .fill-primary {
-            @apply fill-black;
+            @apply fill-white;
         }
     }
     .bg_durchfuehrung_strong {
-        @apply bg-[#E3F0DF]; }
+        @apply bg-[#E3F0DF];
+        @variant dark {
+            @apply text-black;
+        }
+    }
     .bg_durchfuehrung_light {
         @apply bg-[#EFF6ED];
         @variant dark {
-            @apply bg-[#EFF6ED]/90 text-black;
+            @apply bg-neutral-800;
         }
         .fill-primary {
-            @apply fill-black;
+            @apply fill-white;
         }
     }
     .bg_auswertung_strong {
-        @apply bg-[#E6D5DE]; }
+        @apply bg-[#E6D5DE];
+        @variant dark {
+            @apply text-black;
+        }
+    }
     .bg_auswertung_light {
         @apply bg-[#F6EDF2];
         @variant dark {
-            @apply bg-[#F6EDF2]/90 text-black;
+            @apply bg-neutral-800;
         }
         .fill-primary {
-            @apply fill-black;
+            @apply fill-white;
         }
     }
 
-    .kachelliste_headline {
-        @apply text-center p-4 text-2xl font-bold border-b-1 border-neutral-300 shadow rounded-t-2xl w-full relative;
-        @variant dark {
-            @apply border-neutral-500;
+    .contentarea {
+        p {
+            @apply mb-3;
+        }
+        .toggletextcontent {
+            @apply cursor-pointer mt-2 underline;
         }
     }
 
-    .kachelliste_headline.inactiveAccordion {
-        @apply rounded-b-2xl shadow-none border-b-0;
+    .infobox {
+        @apply w-full rounded-2xl shadow-md;
+
+        .kachelliste_headline {
+            @apply text-center p-4 md:px-10 xl:px-15 text-2xl font-bold border-b-1 border-neutral-300 shadow rounded-t-2xl w-full relative;
+            @variant dark {
+                @apply border-neutral-500;
+            }
+        }
+
+        .kachelliste_headline.inactiveAccordion {
+            @apply rounded-b-2xl shadow-none border-b-0;
+        }
+        .kachelliste_headline.activeAccordion {
+            @apply rounded-b-none;
+        }
+
+        .kachelliste {
+            @apply divide-y divide-neutral-300 rounded-b-2xl;
+            @variant dark {
+                @apply divide-neutral-700;
+            }
+        }
+        .kachelliste > p,
+        .kachelliste > div {
+            @apply py-3.5 px-15 shadow-xs relative;
+        }
+        .kachelliste > p:last-child,
+        .kachelliste > div:last-child {
+            @apply shadow-none;
+        }
+        .kachelliste_icon {
+            @apply divide-y divide-neutral-300 font-medium rounded-b-2xl;
+            @variant dark {
+                @apply divide-neutral-700;
+            }
+        }
+        .kachelliste_icon > * {
+            @apply flex items-start shadow-xs py-3 pr-5;
+        }
+        .kachelliste_icon > *:last-child {
+            @apply shadow-none;
+        }
+
+        .linksliste p::before {
+            @apply absolute left-5 top-4 inline size-5 bg-contain bg-no-repeat bg-[url(https://cms1.etz-stuttgart.de/skin/ueba/img/icons/next.svg)];
+            content: '';
+        }
     }
-    .kachelliste_headline.activeAccordion {
-        @apply rounded-b-none;
+    .dark .linksliste p::before {
+        @apply bg-[url(https://cms1.etz-stuttgart.de/skin/ueba/img/icons/next-light.svg)];
     }
 
-    .kachelliste {
-        @apply divide-y divide-neutral-300 font-medium rounded-b-2xl;
-        @variant dark {
-            @apply divide-neutral-700;
+    .btn_content {
+        @apply flex items-center w-fit mx-auto hover:shadow-md shadow-sm rounded-4xl p-4;
+    }
+
+    .quizwrap {
+        @apply mt-4 lg:my-12;
+    
+        .quizicon {
+            @apply w-fit mx-auto bg-neutral-600 p-5 lg:px-10 xl:py-8 xl:px-20 rounded-t-2xl;
+            @variant dark {
+                @apply bg-white;
+            }
+
+            svg {
+                @apply fill-white dark:fill-black size-10 lg:size-14 xl:size-20;
+            }
         }
-    }
-    .kachelliste > div {
-        @apply py-4 px-15 shadow-xs;
-    }
-    .kachelliste > div:last-child {
-        @apply shadow-none;
-    }
-    .kachelliste_icon {
-        @apply divide-y divide-neutral-300 font-medium rounded-b-2xl;
-        @variant dark {
-            @apply divide-neutral-700;
+        .quizbox {
+            @apply shadow bg-neutral-100 rounded-2xl border-10 border-neutral-600 dark:border-white border-l-0 border-r-0 overflow-hidden;
+
+            @variant dark {
+                @apply bg-neutral-800;
+            }
+
+            .quizheader {
+                @apply bg-gray-200 text-center text-xl font-medium shadow pt-6 pb-5 px-5 sm:px-10 lg:px-20 xl:px-32 flex;
+
+                @variant dark {
+                    @apply bg-neutral-600;
+                }
+                svg {
+                    @apply fill-neutral-600 size-6;
+
+                    @variant dark {
+                        @apply fill-white;
+                    }
+                }
+            }
+            h3 {
+                @apply text-center pt-6 lg:pt-12 px-5 sm:px-10 lg:px-20 xl:px-32 font-bold text-2xl;
+            }
+            .quizoptions {
+                @apply flex flex-wrap gap-5 py-6 lg:py-12 px-5 sm:px-10 lg:px-20 xl:px-32;
+
+                .quizradio {
+                    @apply flex items-center py-4 px-8 space-x-3 bg-white rounded-2xl shadow-sm;
+                    @apply border-2 border-neutral-200;
+
+                    @variant dark {
+                        @apply bg-neutral-700 border-neutral-600;
+                    }
+
+                    input[type=radio] {
+                        @apply mr-7 text-gray-900 translate-y-px size-8 border-4 border-neutral-400 focus:ring-2 focus:ring-offset-2 focus:ring-neutral-600 dark:ring-neutral-200  dark:accent-white dark:text-white;
+                    }
+
+                    > span {
+                        @apply relative flex flex-col text-left space-y-1.5 leading-none;
+                    }
+                }
+                .quizradio.disabled {
+                    .wrong-radio {
+                        @apply text-red-700 border-red-600 bg-red-600;
+                    }
+                }
+                .quizradio:not(.disabled) {
+                    @apply cursor-pointer hover:border-neutral-400 hover:shadow-md hover:dark:bg-neutral-800;
+                }
+                .quizradio.active {
+                    @apply border-neutral-600;
+
+                    @variant dark {
+                        @apply border-white;
+                    }
+                }
+                .quizcheck {
+                    @apply flex items-center py-4 px-8 space-x-3 bg-white dark:bg-neutral-700 rounded-2xl shadow-sm cursor-pointer relative;
+                    @apply border-2 border-neutral-200;
+                    
+                    input[type=checkbox] {
+                        @apply mr-7 text-gray-900 translate-y-px size-8 border-4 border-neutral-400 focus:ring-2 focus:ring-offset-2 focus:ring-transparent dark:bg-transparent dark:focus:ring-transparent dark:focus:ring-offset-0 dark:accent-black dark:text-black text-2xl;
+                    }
+                    > span {
+                        @apply relative flex flex-col text-left space-y-1.5 leading-none;
+                    }
+                }
+                .quizcheck:not(.disabled) {
+                    @apply cursor-pointer hover:shadow-md hover:border-neutral-700;
+                    @variant dark {
+                        @apply hover:border-neutral-200;
+                    }
+                }
+                .wrong-checkbox:checked::before {
+                    @apply text-white w-full h-full absolute bg-black text-center text-2xl/6 font-bold;
+                    content: "✕";               /* dein Kreuzsymbol */
+                    top: 50%;
+                    left: 50%;
+                    transform: translate(-50%, -50%);
+                }
+                .quizcheck.active {
+                    @apply border-neutral-800;
+
+                    @variant dark {
+                        @apply border-white;
+                    }
+                }
+            }
+            #formelements {
+                @apply flex flex-wrap gap-5 pb-6 lg:pb-12 px-5 sm:px-10 lg:px-20 xl:px-32;
+                .btn-auswerten {
+                    @apply rounded-4xl text-lg font-bold bg-neutral-600 dark:bg-neutral-300 text-white dark:text-neutral-800 px-10 py-3 cursor-pointer;
+                }
+                .btn-gesamtauswertung {
+                    @apply rounded-4xl font-semibold text-neutral-400 dark:text-neutral-400 px-10 py-3 cursor-pointer xl:ml-auto;
+                    @apply border-2 border-neutral-300 dark:border-neutral-400;
+                    @apply hover:bg-neutral-300 hover:text-neutral-600;
+                }
+            }
+            .quiz_wc_content {
+                @apply pt-6 lg:pt-12 px-5 sm:px-10 lg:px-20 xl:px-32 font-bold text-2xl;
+
+                * {
+                    @apply w-fit mx-auto;
+                }
+            }
+            .quiz_auswertung {
+                @apply pt-6 px-5 sm:px-10 lg:pt-12 lg:px-20 xl:px-32;
+
+                p {
+                    @apply font-medium text-xl my-5;
+                }
+            }
         }
-    }
-    .kachelliste_icon > * {
-        @apply flex items-start shadow-xs py-3 pr-5;
-    }
-    .kachelliste_icon > *:last-child {
-        @apply shadow-none;
-    }
-    .contentarea p {
-        @apply mb-3;
     }
 }

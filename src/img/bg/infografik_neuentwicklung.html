@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Neuentwicklung Ausbildungsportal</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 40px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+    </style>
+</head>
+<body>
+    <svg width="800" height="800" viewBox="0 0 800 800" xmlns="http://www.w3.org/2000/svg">
+        <!-- Background Circle -->
+        <circle cx="400" cy="400" r="350" fill="#ffffff" opacity="0.1"/>
+        <circle cx="400" cy="400" r="280" fill="#ffffff" opacity="0.1"/>
+        
+        <!-- Main Laptop/Screen -->
+        <g id="laptop">
+            <!-- Screen -->
+            <rect x="250" y="200" width="300" height="200" rx="8" fill="#4a5568" stroke="#2d3748" stroke-width="4"/>
+            <rect x="265" y="215" width="270" height="170" rx="4" fill="#1a202c"/>
+            
+            <!-- Screen Content - Portal Interface -->
+            <g id="portal-content">
+                <!-- Header Bar -->
+                <rect x="275" y="225" width="250" height="25" rx="3" fill="#667eea"/>
+                <circle cx="290" cy="237.5" r="4" fill="#ffffff"/>
+                <circle cx="305" cy="237.5" r="4" fill="#ffffff"/>
+                <circle cx="320" cy="237.5" r="4" fill="#ffffff"/>
+                
+                <!-- Navigation Cards -->
+                <rect x="285" y="260" width="70" height="50" rx="4" fill="#48bb78" opacity="0.8"/>
+                <rect x="365" y="260" width="70" height="50" rx="4" fill="#4299e1" opacity="0.8"/>
+                <rect x="445" y="260" width="70" height="50" rx="4" fill="#ed8936" opacity="0.8"/>
+                
+                <!-- Content Lines -->
+                <line x1="285" y1="325" x2="460" y2="325" stroke="#4a5568" stroke-width="3"/>
+                <line x1="285" y1="340" x2="515" y2="340" stroke="#4a5568" stroke-width="3"/>
+                <line x1="285" y1="355" x2="430" y2="355" stroke="#4a5568" stroke-width="3"/>
+            </g>
+            
+            <!-- Keyboard Base -->
+            <path d="M 200 400 L 600 400 L 580 440 L 220 440 Z" fill="#4a5568" stroke="#2d3748" stroke-width="3"/>
+            <rect x="220" y="440" width="360" height="8" rx="4" fill="#2d3748"/>
+        </g>
+        
+        <!-- Floating Icons - Development Elements -->
+        <!-- Code Brackets -->
+        <g id="code-left" transform="translate(150, 300)">
+            <path d="M 20 0 L 0 20 L 20 40" stroke="#48bb78" stroke-width="8" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+        </g>
+        <g id="code-right" transform="translate(630, 300)">
+            <path d="M 0 0 L 20 20 L 0 40" stroke="#48bb78" stroke-width="8" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+        </g>
+        
+        <!-- Gear Icon - Development -->
+        <g id="gear" transform="translate(150, 450)">
+            <circle cx="20" cy="20" r="25" fill="#4299e1" opacity="0.3"/>
+            <path d="M 20 5 L 22 12 L 29 10 L 25 17 L 32 20 L 25 23 L 29 30 L 22 28 L 20 35 L 18 28 L 11 30 L 15 23 L 8 20 L 15 17 L 11 10 L 18 12 Z" fill="#4299e1"/>
+            <circle cx="20" cy="20" r="7" fill="#ffffff"/>
+        </g>
+        
+        <!-- Lightning Bolt - Speed/Innovation -->
+        <g id="lightning" transform="translate(630, 450)">
+            <circle cx="20" cy="20" r="25" fill="#ed8936" opacity="0.3"/>
+            <path d="M 25 8 L 15 20 L 20 20 L 15 32 L 25 20 L 20 20 Z" fill="#ed8936"/>
+        </g>
+        
+        <!-- Electric Circuit Elements -->
+        <g id="circuit-left" transform="translate(120, 550)">
+            <circle cx="15" cy="15" r="15" fill="none" stroke="#667eea" stroke-width="3"/>
+            <line x1="0" y1="15" x2="30" y2="15" stroke="#667eea" stroke-width="3"/>
+            <circle cx="15" cy="15" r="5" fill="#667eea"/>
+        </g>
+        
+        <g id="circuit-right" transform="translate(665, 550)">
+            <circle cx="15" cy="15" r="15" fill="none" stroke="#667eea" stroke-width="3"/>
+            <line x1="0" y1="15" x2="30" y2="15" stroke="#667eea" stroke-width="3"/>
+            <circle cx="15" cy="15" r="5" fill="#667eea"/>
+        </g>
+        
+        <!-- Title Text -->
+        <text x="400" y="580" font-family="Arial, sans-serif" font-size="32" font-weight="bold" fill="#ffffff" text-anchor="middle">
+            Neuentwicklung
+        </text>
+        <text x="400" y="620" font-family="Arial, sans-serif" font-size="28" fill="#ffffff" text-anchor="middle" opacity="0.9">
+            Ausbildungsportal
+        </text>
+        
+        <!-- Subtitle -->
+        <text x="400" y="660" font-family="Arial, sans-serif" font-size="18" fill="#ffffff" text-anchor="middle" opacity="0.8">
+            Moderne Technologie für zeitgemäße Ausbildung
+        </text>
+        
+        <!-- Decorative Elements -->
+        <circle cx="100" cy="150" r="8" fill="#48bb78" opacity="0.6"/>
+        <circle cx="700" cy="150" r="12" fill="#4299e1" opacity="0.6"/>
+        <circle cx="120" cy="680" r="10" fill="#ed8936" opacity="0.6"/>
+        <circle cx="680" cy="680" r="8" fill="#48bb78" opacity="0.6"/>
+        
+        <!-- Animations -->
+        <style>
+            @keyframes float {
+                0%, 100% { transform: translateY(0px); }
+                50% { transform: translateY(-15px); }
+            }
+            @keyframes rotate {
+                from { transform: rotate(0deg); }
+                to { transform: rotate(360deg); }
+            }
+            #laptop { animation: float 3s ease-in-out infinite; }
+            #gear { animation: rotate 10s linear infinite; transform-origin: 20px 20px; }
+            #code-left, #code-right { animation: float 4s ease-in-out infinite; }
+            #lightning { animation: float 3.5s ease-in-out infinite; }
+        </style>
+    </svg>
+</body>
+</html>

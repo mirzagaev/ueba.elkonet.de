@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ausbildungsnachweis Tool</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 40px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #48bb78 0%, #38a169 100%);
+        }
+    </style>
+</head>
+<body>
+    <svg width="800" height="800" viewBox="0 0 800 800" xmlns="http://www.w3.org/2000/svg">
+        <!-- Background Elements -->
+        <circle cx="400" cy="400" r="350" fill="#ffffff" opacity="0.1"/>
+        <circle cx="400" cy="400" r="280" fill="#ffffff" opacity="0.1"/>
+        
+        <!-- Main Document/Clipboard -->
+        <g id="clipboard">
+            <!-- Clipboard Holder -->
+            <rect x="280" y="140" width="240" height="30" rx="8" fill="#4a5568"/>
+            <rect x="350" y="135" width="100" height="20" rx="4" fill="#2d3748"/>
+            <circle cx="400" cy="145" r="5" fill="#cbd5e0"/>
+            
+            <!-- Paper -->
+            <rect x="300" y="160" width="200" height="380" rx="8" fill="#ffffff" stroke="#e2e8f0" stroke-width="3"/>
+            
+            <!-- Document Header -->
+            <rect x="320" y="185" width="160" height="30" rx="4" fill="#667eea" opacity="0.9"/>
+            <text x="400" y="206" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#ffffff" text-anchor="middle">
+                Ausbildungsnachweis
+            </text>
+            
+            <!-- Form Fields -->
+            <!-- Date Field -->
+            <g id="field-1">
+                <rect x="320" y="230" width="160" height="8" rx="2" fill="#cbd5e0"/>
+                <text x="325" y="250" font-family="Arial, sans-serif" font-size="10" fill="#4a5568">Datum:</text>
+                <rect x="365" y="242" width="110" height="12" rx="2" fill="#e2e8f0"/>
+            </g>
+            
+            <!-- Activity Field -->
+            <g id="field-2">
+                <rect x="320" y="270" width="160" height="8" rx="2" fill="#cbd5e0"/>
+                <text x="325" y="290" font-family="Arial, sans-serif" font-size="10" fill="#4a5568">Tätigkeit:</text>
+                <rect x="320" y="295" width="160" height="30" rx="2" fill="#e2e8f0"/>
+                <line x1="325" y1="302" x2="460" y2="302" stroke="#cbd5e0" stroke-width="1"/>
+                <line x1="325" y1="310" x2="440" y2="310" stroke="#cbd5e0" stroke-width="1"/>
+                <line x1="325" y1="318" x2="470" y2="318" stroke="#cbd5e0" stroke-width="1"/>
+            </g>
+            
+            <!-- Hours Field -->
+            <g id="field-3">
+                <rect x="320" y="340" width="160" height="8" rx="2" fill="#cbd5e0"/>
+                <text x="325" y="360" font-family="Arial, sans-serif" font-size="10" fill="#4a5568">Stunden:</text>
+                <rect x="375" y="352" width="50" height="12" rx="2" fill="#e2e8f0"/>
+            </g>
+            
+            <!-- Department Field -->
+            <g id="field-4">
+                <rect x="320" y="380" width="160" height="8" rx="2" fill="#cbd5e0"/>
+                <text x="325" y="400" font-family="Arial, sans-serif" font-size="10" fill="#4a5568">Abteilung:</text>
+                <rect x="320" y="405" width="160" height="12" rx="2" fill="#e2e8f0"/>
+            </g>
+            
+            <!-- Checkboxes for completed tasks -->
+            <g id="checkboxes">
+                <rect x="320" y="430" width="15" height="15" rx="2" fill="#48bb78" stroke="#38a169" stroke-width="2"/>
+                <path d="M 323 437 L 327 442 L 332 433" stroke="#ffffff" stroke-width="2" fill="none" stroke-linecap="round"/>
+                <rect x="340" y="432" width="130" height="2" rx="1" fill="#cbd5e0"/>
+                
+                <rect x="320" y="455" width="15" height="15" rx="2" fill="#48bb78" stroke="#38a169" stroke-width="2"/>
+                <path d="M 323 462 L 327 467 L 332 458" stroke="#ffffff" stroke-width="2" fill="none" stroke-linecap="round"/>
+                <rect x="340" y="457" width="110" height="2" rx="1" fill="#cbd5e0"/>
+                
+                <rect x="320" y="480" width="15" height="15" rx="2" fill="#e2e8f0" stroke="#cbd5e0" stroke-width="2"/>
+                <rect x="340" y="482" width="120" height="2" rx="1" fill="#cbd5e0"/>
+            </g>
+            
+            <!-- Signature Area -->
+            <rect x="320" y="505" width="160" height="20" rx="3" fill="#f7fafc" stroke="#cbd5e0" stroke-width="1" stroke-dasharray="4,2"/>
+            <text x="400" y="519" font-family="Brush Script MT, cursive" font-size="12" fill="#718096" text-anchor="middle" opacity="0.7">
+                Unterschrift
+            </text>
+        </g>
+        
+        <!-- Floating Icons Around Document -->
+        
+        <!-- Checkmark Icon - Top Right -->
+        <g id="checkmark-1" transform="translate(540, 200)">
+            <circle cx="25" cy="25" r="30" fill="#48bb78" opacity="0.3"/>
+            <circle cx="25" cy="25" r="20" fill="#48bb78"/>
+            <path d="M 15 25 L 22 32 L 35 18" stroke="#ffffff" stroke-width="4" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+        </g>
+        
+        <!-- Calendar Icon - Left Side -->
+        <g id="calendar" transform="translate(200, 280)">
+            <circle cx="25" cy="25" r="30" fill="#4299e1" opacity="0.3"/>
+            <rect x="12" y="15" width="26" height="22" rx="2" fill="#4299e1"/>
+            <rect x="14" y="20" width="22" height="15" rx="1" fill="#ffffff"/>
+            <line x1="17" y1="13" x2="17" y2="18" stroke="#ffffff" stroke-width="2" stroke-linecap="round"/>
+            <line x1="33" y1="13" x2="33" y2="18" stroke="#ffffff" stroke-width="2" stroke-linecap="round"/>
+            <circle cx="18" cy="26" r="1.5" fill="#4299e1"/>
+            <circle cx="25" cy="26" r="1.5" fill="#4299e1"/>
+            <circle cx="32" cy="26" r="1.5" fill="#4299e1"/>
+            <circle cx="18" cy="31" r="1.5" fill="#4299e1"/>
+        </g>
+        
+        <!-- Pen/Edit Icon - Right Side -->
+        <g id="pen" transform="translate(540, 360)">
+            <circle cx="25" cy="25" r="30" fill="#667eea" opacity="0.3"/>
+            <rect x="18" y="12" width="4" height="18" rx="1" fill="#667eea" transform="rotate(45 20 21)"/>
+            <polygon points="16,28 20,24 24,28" fill="#667eea"/>
+            <circle cx="29" cy="16" r="3" fill="#667eea"/>
+        </g>
+        
+        <!-- Clock Icon - Bottom Left -->
+        <g id="clock" transform="translate(200, 450)">
+            <circle cx="25" cy="25" r="30" fill="#ed8936" opacity="0.3"/>
+            <circle cx="25" cy="25" r="18" fill="#ed8936"/>
+            <circle cx="25" cy="25" r="15" fill="none" stroke="#ffffff" stroke-width="2"/>
+            <line x1="25" y1="25" x2="25" y2="17" stroke="#ffffff" stroke-width="2" stroke-linecap="round"/>
+            <line x1="25" y1="25" x2="31" y2="25" stroke="#ffffff" stroke-width="2" stroke-linecap="round"/>
+            <circle cx="25" cy="25" r="2" fill="#ffffff"/>
+        </g>
+        
+        <!-- Cloud Upload Icon - Bottom Right -->
+        <g id="cloud-upload" transform="translate(540, 480)">
+            <circle cx="25" cy="25" r="30" fill="#9f7aea" opacity="0.3"/>
+            <!-- Cloud -->
+            <ellipse cx="25" cy="23" rx="12" ry="8" fill="#9f7aea"/>
+            <ellipse cx="18" cy="26" rx="8" ry="6" fill="#9f7aea"/>
+            <ellipse cx="32" cy="26" rx="8" ry="6" fill="#9f7aea"/>
+            <rect x="18" y="26" width="14" height="5" fill="#9f7aea"/>
+            <!-- Arrow -->
+            <path d="M 25 32 L 25 22" stroke="#ffffff" stroke-width="2" stroke-linecap="round"/>
+            <path d="M 22 25 L 25 22 L 28 25" stroke="#ffffff" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+        </g>
+        
+        <!-- Electric/Technical Symbols -->
+        <g transform="translate(150, 180)">
+            <circle cx="15" cy="15" r="12" fill="none" stroke="#fbbf24" stroke-width="2"/>
+            <line x1="10" y1="15" x2="20" y2="15" stroke="#fbbf24" stroke-width="2"/>
+            <line x1="15" y1="10" x2="15" y2="20" stroke="#fbbf24" stroke-width="2"/>
+        </g>
+        
+        <g transform="translate(650, 180)">
+            <path d="M 10 5 L 5 15 L 8 15 L 6 23 L 14 13 L 11 13 L 16 5 Z" fill="#fbbf24" opacity="0.7"/>
+        </g>
+        
+        <!-- Progress Bar -->
+        <g id="progress-bar" transform="translate(250, 580)">
+            <rect x="0" y="0" width="300" height="25" rx="12" fill="#e2e8f0"/>
+            <rect x="0" y="0" width="210" height="25" rx="12" fill="#48bb78">
+                <animate attributeName="width" from="0" to="210" dur="2s" fill="freeze"/>
+            </rect>
+            <text x="150" y="17" font-family="Arial, sans-serif" font-size="12" font-weight="bold" fill="#ffffff" text-anchor="middle">
+                70% Erfasst
+            </text>
+        </g>
+        
+        <!-- Decorative Elements -->
+        <circle cx="100" cy="600" r="8" fill="#48bb78" opacity="0.6"/>
+        <circle cx="700" cy="200" r="10" fill="#4299e1" opacity="0.6"/>
+        <circle cx="680" cy="580" r="6" fill="#667eea" opacity="0.6"/>
+        <circle cx="120" cy="350" r="12" fill="#ed8936" opacity="0.6"/>
+        
+        <!-- Title Text -->
+        <text x="400" y="660" font-family="Arial, sans-serif" font-size="32" font-weight="bold" fill="#ffffff" text-anchor="middle">
+            Ausbildungsnachweis
+        </text>
+        <text x="400" y="700" font-family="Arial, sans-serif" font-size="24" fill="#ffffff" text-anchor="middle" opacity="0.9">
+            Digital & Übersichtlich
+        </text>
+        <text x="400" y="735" font-family="Arial, sans-serif" font-size="18" fill="#ffffff" text-anchor="middle" opacity="0.8">
+            Einfache Dokumentation Ihrer Ausbildung
+        </text>
+        
+        <!-- Animations -->
+        <style>
+            @keyframes float {
+                0%, 100% { transform: translateY(0px); }
+                50% { transform: translateY(-12px); }
+            }
+            @keyframes rotate {
+                from { transform: rotate(0deg); }
+                to { transform: rotate(360deg); }
+            }
+            @keyframes pulse {
+                0%, 100% { opacity: 0.6; }
+                50% { opacity: 1; }
+            }
+            #clipboard { animation: float 3s ease-in-out infinite; }
+            #checkmark-1 { animation: float 3.5s ease-in-out infinite; }
+            #calendar { animation: float 4s ease-in-out infinite; }
+            #pen { animation: float 3.2s ease-in-out infinite; }
+            #clock { animation: rotate 60s linear infinite; transform-origin: 225px 475px; }
+            #cloud-upload { animation: float 3.8s ease-in-out infinite; }
+        </style>
+    </svg>
+</body>
+</html>

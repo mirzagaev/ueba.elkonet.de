@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Responsive Design</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 40px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #4299e1 0%, #667eea 100%);
+        }
+    </style>
+</head>
+<body>
+    <svg width="800" height="800" viewBox="0 0 800 800" xmlns="http://www.w3.org/2000/svg">
+        <!-- Background Elements -->
+        <circle cx="400" cy="400" r="350" fill="#ffffff" opacity="0.1"/>
+        <circle cx="400" cy="400" r="280" fill="#ffffff" opacity="0.1"/>
+        
+        <!-- Laptop Device -->
+        <g id="laptop" transform="translate(180, 200)">
+            <!-- Screen -->
+            <rect x="0" y="0" width="260" height="160" rx="8" fill="#4a5568" stroke="#2d3748" stroke-width="3"/>
+            <rect x="10" y="10" width="240" height="140" rx="4" fill="#1a202c"/>
+            
+            <!-- Content on Screen -->
+            <rect x="20" y="20" width="220" height="20" rx="2" fill="#667eea"/>
+            <rect x="20" y="50" width="100" height="60" rx="3" fill="#48bb78" opacity="0.7"/>
+            <rect x="130" y="50" width="110" height="60" rx="3" fill="#4299e1" opacity="0.7"/>
+            <line x1="20" y1="125" x2="180" y2="125" stroke="#4a5568" stroke-width="2"/>
+            <line x1="20" y1="135" x2="160" y2="135" stroke="#4a5568" stroke-width="2"/>
+            
+            <!-- Base -->
+            <path d="M -20 160 L 280 160 L 265 175 L -5 175 Z" fill="#4a5568" stroke="#2d3748" stroke-width="2"/>
+            <rect x="-5" y="175" width="270" height="5" rx="2" fill="#2d3748"/>
+        </g>
+        
+        <!-- Tablet Device -->
+        <g id="tablet" transform="translate(500, 240)">
+            <!-- Body -->
+            <rect x="0" y="0" width="150" height="200" rx="12" fill="#4a5568" stroke="#2d3748" stroke-width="3"/>
+            <rect x="8" y="20" width="134" height="160" rx="4" fill="#1a202c"/>
+            
+            <!-- Content on Screen -->
+            <rect x="15" y="28" width="120" height="15" rx="2" fill="#667eea"/>
+            <rect x="15" y="50" width="55" height="50" rx="3" fill="#48bb78" opacity="0.7"/>
+            <rect x="75" y="50" width="60" height="50" rx="3" fill="#4299e1" opacity="0.7"/>
+            <line x1="15" y1="115" x2="100" y2="115" stroke="#4a5568" stroke-width="2"/>
+            <line x1="15" y1="125" x2="90" y2="125" stroke="#4a5568" stroke-width="2"/>
+            <line x1="15" y1="135" x2="110" y2="135" stroke="#4a5568" stroke-width="2"/>
+            
+            <!-- Home Button -->
+            <circle cx="75" cy="190" r="6" fill="#2d3748"/>
+        </g>
+        
+        <!-- Smartphone Device -->
+        <g id="smartphone" transform="translate(320, 470)">
+            <!-- Body -->
+            <rect x="0" y="0" width="80" height="140" rx="10" fill="#4a5568" stroke="#2d3748" stroke-width="3"/>
+            <rect x="6" y="15" width="68" height="110" rx="3" fill="#1a202c"/>
+            
+            <!-- Content on Screen -->
+            <rect x="10" y="20" width="60" height="10" rx="1" fill="#667eea"/>
+            <rect x="10" y="35" width="60" height="35" rx="2" fill="#48bb78" opacity="0.7"/>
+            <rect x="10" y="75" width="60" height="35" rx="2" fill="#4299e1" opacity="0.7"/>
+            <line x1="10" y1="115" x2="55" y2="115" stroke="#4a5568" stroke-width="1.5"/>
+            
+            <!-- Camera -->
+            <circle cx="40" cy="8" r="2" fill="#2d3748"/>
+            <!-- Home Button -->
+            <circle cx="40" cy="132" r="4" fill="#2d3748"/>
+        </g>
+        
+        <!-- Connection Lines / Sync Arrows -->
+        <g id="sync-arrows">
+            <!-- Arrow from Laptop to Tablet -->
+            <path d="M 380 280 Q 440 260 480 280" stroke="#48bb78" stroke-width="4" fill="none" stroke-dasharray="8,4">
+                <animate attributeName="stroke-dashoffset" from="0" to="24" dur="1.5s" repeatCount="indefinite"/>
+            </path>
+            <polygon points="475,275 490,280 475,285" fill="#48bb78"/>
+            
+            <!-- Arrow from Tablet to Smartphone -->
+            <path d="M 560 410 Q 480 490 390 520" stroke="#4299e1" stroke-width="4" fill="none" stroke-dasharray="8,4">
+                <animate attributeName="stroke-dashoffset" from="0" to="24" dur="1.5s" repeatCount="indefinite"/>
+            </path>
+            <polygon points="395,515 385,520 390,530" fill="#4299e1"/>
+            
+            <!-- Arrow from Smartphone back to Laptop -->
+            <path d="M 330 520 Q 250 380 260 320" stroke="#ed8936" stroke-width="4" fill="none" stroke-dasharray="8,4">
+                <animate attributeName="stroke-dashoffset" from="0" to="24" dur="1.5s" repeatCount="indefinite"/>
+            </path>
+            <polygon points="255,325 260,310 265,323" fill="#ed8936"/>
+        </g>
+        
+        <!-- Cloud Sync Icon -->
+        <g id="cloud" transform="translate(140, 380)">
+            <ellipse cx="30" cy="25" rx="20" ry="15" fill="#ffffff" opacity="0.9"/>
+            <ellipse cx="15" cy="30" rx="15" ry="12" fill="#ffffff" opacity="0.9"/>
+            <ellipse cx="45" cy="30" rx="15" ry="12" fill="#ffffff" opacity="0.9"/>
+            <rect x="15" y="30" width="30" height="10" fill="#ffffff" opacity="0.9"/>
+            
+            <!-- Sync Arrows in Cloud -->
+            <path d="M 22 28 L 28 22 L 28 26 L 38 26 L 38 22 L 44 28" stroke="#667eea" stroke-width="2" fill="none"/>
+            <path d="M 44 32 L 38 38 L 38 34 L 28 34 L 28 38 L 22 32" stroke="#667eea" stroke-width="2" fill="none"/>
+        </g>
+        
+        <!-- WiFi Signal Indicators -->
+        <g id="wifi-laptop" transform="translate(320, 180)">
+            <path d="M 0 20 Q 10 10 20 20" stroke="#48bb78" stroke-width="2" fill="none"/>
+            <path d="M -5 25 Q 10 5 25 25" stroke="#48bb78" stroke-width="2" fill="none" opacity="0.7"/>
+            <path d="M -10 30 Q 10 0 30 30" stroke="#48bb78" stroke-width="2" fill="none" opacity="0.5"/>
+        </g>
+        
+        <g id="wifi-tablet" transform="translate(570, 220)">
+            <path d="M 0 20 Q 10 10 20 20" stroke="#4299e1" stroke-width="2" fill="none"/>
+            <path d="M -5 25 Q 10 5 25 25" stroke="#4299e1" stroke-width="2" fill="none" opacity="0.7"/>
+            <path d="M -10 30 Q 10 0 30 30" stroke="#4299e1" stroke-width="2" fill="none" opacity="0.5"/>
+        </g>
+        
+        <g id="wifi-phone" transform="translate(355, 450)">
+            <path d="M 0 20 Q 10 10 20 20" stroke="#ed8936" stroke-width="2" fill="none"/>
+            <path d="M -5 25 Q 10 5 25 25" stroke="#ed8936" stroke-width="2" fill="none" opacity="0.7"/>
+            <path d="M -10 30 Q 10 0 30 30" stroke="#ed8936" stroke-width="2" fill="none" opacity="0.5"/>
+        </g>
+        
+        <!-- Decorative Circuit Elements -->
+        <circle cx="80" cy="250" r="6" fill="#48bb78" opacity="0.6"/>
+        <circle cx="720" cy="350" r="8" fill="#4299e1" opacity="0.6"/>
+        <circle cx="650" cy="600" r="6" fill="#ed8936" opacity="0.6"/>
+        <circle cx="150" cy="650" r="10" fill="#667eea" opacity="0.6"/>
+        
+        <!-- Electric Symbols -->
+        <g transform="translate(670, 500)">
+            <path d="M 15 5 L 10 15 L 13 15 L 11 23 L 19 13 L 16 13 L 21 5 Z" fill="#fbbf24" opacity="0.7"/>
+        </g>
+        
+        <!-- Title Text -->
+        <text x="400" y="680" font-family="Arial, sans-serif" font-size="32" font-weight="bold" fill="#ffffff" text-anchor="middle">
+            Responsive Design
+        </text>
+        <text x="400" y="720" font-family="Arial, sans-serif" font-size="24" fill="#ffffff" text-anchor="middle" opacity="0.9">
+            Optimiert für alle Geräte
+        </text>
+        <text x="400" y="755" font-family="Arial, sans-serif" font-size="18" fill="#ffffff" text-anchor="middle" opacity="0.8">
+            Laptop · Tablet · Smartphone
+        </text>
+        
+        <!-- Animations -->
+        <style>
+            @keyframes float {
+                0%, 100% { transform: translateY(0px); }
+                50% { transform: translateY(-10px); }
+            }
+            @keyframes pulse {
+                0%, 100% { opacity: 0.6; }
+                50% { opacity: 1; }
+            }
+            #laptop { animation: float 3s ease-in-out infinite; }
+            #tablet { animation: float 3.5s ease-in-out infinite; }
+            #smartphone { animation: float 2.5s ease-in-out infinite; }
+            #cloud { animation: float 4s ease-in-out infinite; }
+            #wifi-laptop, #wifi-tablet, #wifi-phone { animation: pulse 2s ease-in-out infinite; }
+        </style>
+    </svg>
+</body>
+</html>

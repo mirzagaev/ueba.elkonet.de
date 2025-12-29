@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="css/style.css" rel="stylesheet">
+    <script src="js/jquery.min.js"></script>
     <script src="js/custom.js"></script>
 </head>
 
@@ -124,7 +125,7 @@
 	</svg>
 
     <div class="flex flex-col h-screen justify-between">
-        <header class="flex flex-wrap flex-row items-center bg-primary">
+        <header class="flex flex-wrap flex-row items-center bg-primary text-primary z-10 shadow-md">
             <button class="flex md:hidden ml-3 text-primary items-center p-2 cursor-pointer" type="button" data-drawer-target="ueba-mobilsidebar" data-drawer-show="ueba-mobilsidebar" data-drawer-position="left" aria-controls="ueba-mobilsidebar">
                 <svg class="size-7 stroke-primary" stroke-width="0.5"><use xlink:href="#icon-burger"></use></svg>
             </button>
@@ -357,7 +358,7 @@
             </ol>
         </nav>
 
-        <main class="px-6 xl:px-20 2xl:px-32 py-3 mb-auto">
+        <main class="px-6 container xl:px-20 2xl:px-32 py-3 mx-auto mb-auto">
             <div class="page_headline mt-4 lg:my-12">
                 <h2 class="text-2xl xl:text-3xl font-bold flex items-center">
                     <svg class="fill-primary size-8 xl:size-10 mr-5"><use xlink:href="#icon-folder"></use></svg>
@@ -366,15 +367,18 @@
                 <h3 class="text-lg xl:text-xl mt-3">Gebäudeautomationssysteme planen, installieren, parametrieren und in Betrieb nehmen</h3>
             </div>
 
-            <section class="flex md:flex-row flex-col mb-12">
+            <section class="flex md:flex-row flex-col mt-3 xl:mt-0 mb-12 contentarea">
                 <div class="w-full h-full md:w-1/3 mb-10 md:mb-0 relative">
                     <img alt="gallery" class="max-w-full max-h-full object-cover mx-auto object-center block" src="https://dummyimage.com/600x400">
                 </div>
                 <div class="w-full md:w-2/3 md:pl-6 text-lg text-primary">
-                    <p class="mb-3">Anhand eines Kundenauftrags wird die Planung und Projektierung der Elektroinstallation mit modernen Bussystemen für die Gebäudesystemtechnik durchgeführt. Die Installation von Bus- und Netzleitungen erfolgt in unterschiedlichen Verlegesystemen einschließlich der erforderlichen messtechnischen Prüfungen.</p>
-                    <p class="mb-3">Die Auswahl und Montage sowie der Anschluss von Sensoren und Aktoren im Gebäude bzw. in den Verteilern wird geplant und dokumentiert. Der Einsatz von modernster funkbasierter Übertragungstechnik ergänzt die Inhalte der Ausbildungswoche.</p>
-                    <p class="mb-3">Das Konfigurieren, Parametrieren und Inbetriebnehmen der Systemkomponenten, sowie die Diagnose und Fehlersuche, wird mit der erforderlichen Software durchgeführt. Die messtechnischen Prüfungen werden protokolliert und in die Dokumentation der Kundenanlage mit eingepflegt.</p>
-                    <p class="mb-3">Die grafische Visualisierung der Gebäudesystemtechnik und der Energieverbrauchsdaten erfolgt zum Abschluss der Ausbildungswoche.<br/>weniger...</p>
+                    <div class="text-collapse transition-all duration-300 overflow-hidden max-h-[6rem]">
+                        <p>Anhand eines Kundenauftrags wird die Planung und Projektierung der Elektroinstallation mit modernen Bussystemen für die Gebäudesystemtechnik durchgeführt. Die Installation von Bus- und Netzleitungen erfolgt in unterschiedlichen Verlegesystemen einschließlich der erforderlichen messtechnischen Prüfungen.</p>
+                        <p>Die Auswahl und Montage sowie der Anschluss von Sensoren und Aktoren im Gebäude bzw. in den Verteilern wird geplant und dokumentiert. Der Einsatz von modernster funkbasierter Übertragungstechnik ergänzt die Inhalte der Ausbildungswoche.</p>
+                        <p>Das Konfigurieren, Parametrieren und Inbetriebnehmen der Systemkomponenten, sowie die Diagnose und Fehlersuche, wird mit der erforderlichen Software durchgeführt. Die messtechnischen Prüfungen werden protokolliert und in die Dokumentation der Kundenanlage mit eingepflegt.</p>
+                        <p>Die grafische Visualisierung der Gebäudesystemtechnik und der Energieverbrauchsdaten erfolgt zum Abschluss der Ausbildungswoche.</p>
+                    </div>
+                    <button class="toggletextcontent">mehr anzeigen</button>
                 </div>
             </section>
 
@@ -446,55 +450,9 @@
     </div>
 
     <!-- CHATBOT -->
-    <button id="dropdownNavbarLink" data-dropdown-toggle="openChatbot" class="fixed bg-primary bottom-4 inline-flex right-4 text-primary items-center justify-center rounded-full cursor-pointer" type="button" aria-haspopup="dialog" aria-expanded="false" data-state="closed">
+    <a href="modul-hilfe.html" class="fixed bg-primary bottom-4 inline-flex right-4 text-primary items-center justify-center rounded-full cursor-pointer">
         <svg stroke-width="1.5" fill="none" class="size-12 stroke-secondary"><use xlink:href="#icon-frage"></use></svg>
-    </button>
-    <div id="openChatbot" class="hidden fixed bottom-[calc(4rem+1.5rem)] right-0 mr-4 bg-primary shadow-sm p-6 rounded-lg w-[440px] h-[634px]">
-        <!-- Heading -->
-        <div class="flex flex-col space-y-1.5 pb-6">
-            <h2 class="font-semibold text-lg tracking-tight">Chatbot</h2>
-            <p class="text-sm text-secondary leading-3">Powered by Mendable and Vercel</p>
-        </div>
-
-        <!-- Chat Container -->
-        <div class="bg-primary flex flex-col gap-y-5">
-            <div class="flex">
-                <div class="shrink-0 relative inline-flex items-center justify-center w-8 h-8 overflow-hidden bg-secondary rounded-full">
-                    <svg stroke-width="1.5" class="size-8 p-1 fill-primary"><use xlink:href="#icon-aisymbol"></use></svg>
-                </div>
-                <div class="w-full ps-3">
-                    <div class="text-primary text-sm mt-1.5 mb-1.5">Hi, how can I help you today?</div>
-                </div>
-            </div>
-            <div class="flex">
-                <div class="shrink-0 relative inline-flex items-center justify-center w-8 h-8 overflow-hidden bg-secondary rounded-full">
-                    <span class="text-primary text-sm">MG</span>
-                </div>
-                <div class="w-full ps-3">
-                    <div class="text-primary text-sm mt-1.5 mb-1.5 ">fewafef</div>
-                </div>
-            </div>
-            <div class="flex">
-                <div class="shrink-0 relative inline-flex items-center justify-center w-8 h-8 overflow-hidden bg-secondary rounded-full">
-                    <svg stroke-width="1.5" class="size-8 p-1 fill-primary"><use xlink:href="#icon-aisymbol"></use></svg>
-                </div>
-                <div class="w-full ps-3">
-                    <div class="text-primary text-sm mt-1.5 mb-1.5 ">Sorry, I couldn't find any information in the documentation about that. Expect answer to be less accurateI could not find the answer to this in the verified sources.</div>
-                </div>
-            </div>
-            <div class="flex">
-                <div class="shrink-0 relative inline-flex items-center justify-center w-8 h-8 overflow-hidden bg-secondary rounded-full">
-                    <span class="text-primary text-sm">MG</span>
-                </div>
-                <div class="w-full ps-3">
-                    <form class="flex items-center justify-center w-full space-x-2">
-                        <input class="flex bg-secondary h-10 w-full rounded-md px-3 py-2 text-sm focus:outline-none disabled:cursor-not-allowed  text-primary focus-visible:ring-offset-2" placeholder="Type your message" value="">
-                        <button class="inline-flex items-center justify-center rounded-md text-sm font-medium disabled:pointer-events-none disabled:opacity-50 btn-primary h-10 px-4 py-2">Send</button>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
+    </a>
     
     <script src="js/flowbite.min.js"></script>
 </body>
