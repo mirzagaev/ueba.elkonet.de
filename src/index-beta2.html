@@ -1,15 +1,31 @@
 <!doctype html>
-<html>
+<html class="h-full">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="css/style.css" rel="stylesheet">
     <script src="js/jquery.min.js"></script>
+    <script src="js/custom.js"></script>
+    <style>
+        /* Subtile Hintergrund-Animation für den roten Bereich */
+        @keyframes blob {
+            0% { transform: translate(0px, 0px) scale(1); }
+            33% { transform: translate(30px, -50px) scale(1.1); }
+            66% { transform: translate(-20px, 20px) scale(0.9); }
+            100% { transform: translate(0px, 0px) scale(1); }
+        }
+        .animate-blob {
+            animation: blob 7s infinite;
+        }
+        .animation-delay-2000 {
+            animation-delay: 2s;
+        }
+    </style>
 </head>
 
-<body class="bg-loginpage-beta">
-    
+<body class="h-full bg-[url(../img/bg/blurbg2.jpeg)] bg-neutral-900/30 dark:bg-neutral-900/60 lg:dark:bg-neutral-900/60 font-sans antialiased text-primary">
+
 <svg class="hidden">
     <defs>
         <symbol id="icon-next" viewBox="0 0 29.5 29.5">
@@ -41,437 +57,174 @@
         <symbol id="icon-lock" fill="currentColor" viewBox="0 0 24 24">
             <path fill-rule="evenodd" d="M12 1.5a5.25 5.25 0 0 0-5.25 5.25v3a3 3 0 0 0-3 3v6.75a3 3 0 0 0 3 3h10.5a3 3 0 0 0 3-3v-6.75a3 3 0 0 0-3-3v-3c0-2.9-2.35-5.25-5.25-5.25Zm3.75 8.25v-3a3.75 3.75 0 1 0-7.5 0v3h7.5Z" clip-rule="evenodd" />
         </symbol>
+        <symbol id="icon-loginicon" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+            <path fill-rule="evenodd" d="M3 4.25A2.25 2.25 0 015.25 2h5.5A2.25 2.25 0 0113 4.25v2a.75.75 0 01-1.5 0v-2a.75.75 0 00-.75-.75h-5.5a.75.75 0 00-.75.75v11.5c0 .414.336.75.75.75h5.5a.75.75 0 00.75-.75v-2a.75.75 0 011.5 0v2A2.25 2.25 0 0110.75 18h-5.5A2.25 2.25 0 013 15.75V4.25z" clip-rule="evenodd" />
+            <path fill-rule="evenodd" d="M19 10a.75.75 0 00-.75-.75H8.704l1.048-.943a.75.75 0 10-1.004-1.114l-2.5 2.25a.75.75 0 000 1.114l2.5 2.25a.75.75 0 101.004-1.114l-1.048-.943h9.546A.75.75 0 0019 10z" clip-rule="evenodd" />
+        </symbol>
     </defs>
 </svg>
 
-<main class="w-full xl:h-screen flex md:flex-row flex-col">
-    <div class="w-full h-full md:w-1/2 flex flex-col xl:items-center relative px-6 lg:px-12 xl:px-20">
-        <!-- LOGO -->
-        <div class="w-fit bg-white dark:bg-white/40 xl:fixed right-5 top-5 xl:right-10 xl:top-10 dark:px-6 dark:py-4 rounded-2xl px-6 py-4 mt-5">
-            <img class="h-16 xl:h-24 2xl:h-28" src="img/logos/ELKOnet_Logo_Vector.png" />
-        </div>
+<div class="h-full xl:relative z-10 xl:min-h-full">
+    <div class="w-full h-full xl:flex xl:flex-col xl:justify-center xl:py-12 sm:px-6 xl:px-8 backdrop-blur-2xl bg-neutral-400/70 dark:bg-neutral-900/50">
 
-        <!-- Willkommenstext -->
-        <div class="w-full max-w-md text-primary mt-4 mb-8 xl:my-32 items-baseline">
-            <h1 class="text-3xl xl:text-4xl 2xl:text-6xl font-bold my-6 text-left">Willkommen</h1>
-            <h3 class="text-xl font-medium">in der überbetrieblichen Ausbildung<br/>in den elektro- und informationstechnischen Ausbildungsberufen</h3>
-        </div>
+        <!-- Main Card Container: Modernes Split-Design in einer zentrierten Karte -->
+        <div class="mx-auto w-full h-full xl:h-fit max-w-7xl xl:bg-white/50 xl:dark:bg-neutral-800/50 xl:rounded-3xl xl:shadow-2xl overflow-hidden flex flex-col xl:flex-row">
 
-        <!-- Anmelde Box -->
-        <form class="w-full max-w-md bg-white dark:bg-neutral-700 p-6 lg:p-10 xl:px-14 rounded-2xl shadow-xl my-12 xl:my-0">
-            <h2 class="text-3xl xl:text-4xl text-primary font-medium">Anmeldung</h2>
-            <p class="text-lg text-secondary mt-2 xl:mt-5 mb-6 xl:mb-10">Jetzt anmelden und los legen!</p>
-
-            <button type="button" class="relative w-full btn-primary bg-gradient-to-t from-sky-900 to-sky-800 dark:from-neutral-100 dark:to-white text-white xl:text-lg dark:text-black flex justify-center font-medium px-4 py-3">Anmelden bei Ausbildungsportal</button>
-
-            <div class="my-4 xl:my-8 flex items-center gap-4">
-                <hr class="w-full border-gray-300/90" />
-                <p class="text-sm text-secondary text-center">oder</p>
-                <hr class="w-full border-gray-300/90" />
-            </div>
-
-            <button type="button" class="relative w-full btn-primary bg-gradient-to-t from-sky-900 to-sky-800 dark:from-neutral-100 dark:to-white text-white xl:text-lg dark:text-black flex justify-center font-medium px-4 py-3">Anmelden bei Lernwelt</button>
-        </form>
-    </div>
-
-    <div class="hidden xl:flex w-full flex-col xl:items-center xl:justify-center">
-        <div id="default-carousel" class="hidden xl:block relative w-full h-full px-20 my-12" data-carousel="slide">
-            <!-- Carousel wrapper -->
-            <div class="relative w-full flex items-center justify-center min-h-[900px] overflow-hidden">
-                <!-- Item 1 -->
-                <div class="hidden duration-700 ease-in-out" data-carousel-item>
-                    <svg  class="w-full mx-auto max-w-4xl h-auto" viewBox="0 0 800 800" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
-                        <!-- Background Circle -->
-                        <circle cx="400" cy="400" r="350" class="fill-neutral-400/50" />
-                        <circle cx="400" cy="400" r="280" class="fill-neutral-200 dark:fill-neutral-600" />
-                        
-                        <!-- Main Laptop/Screen -->
-                        <g id="laptop">
-                            <!-- Screen -->
-                            <rect x="250" y="200" width="300" height="200" rx="8" fill="#4a5568" stroke="#2d3748" stroke-width="3"/>
-                            <rect x="255" y="205" width="290" height="190" rx="4" fill="#1a202c"/>
-                            
-                            <!-- Screen Content - Portal Interface -->
-                            <g id="portal-content">
-                                <!-- Header Bar -->
-                                <rect x="265" y="215" width="270" height="25" rx="3" fill="#667eea"/>
-                                <circle cx="290" cy="227.5" r="4" class="fill-primary" />
-                                <circle cx="305" cy="227.5" r="4" class="fill-primary" />
-                                <circle cx="320" cy="227.5" r="4" class="fill-primary" />
-                                
-                                <!-- Navigation Cards -->
-                                <rect x="285" y="260" width="70" height="50" rx="4" fill="#48bb78" opacity="0.8"/>
-                                <rect x="365" y="260" width="70" height="50" rx="4" fill="#4299e1" opacity="0.8"/>
-                                <rect x="445" y="260" width="70" height="50" rx="4" fill="#ed8936" opacity="0.8"/>
-                                
-                                <!-- Content Lines -->
-                                <line x1="285" y1="325" x2="460" y2="325" stroke="#4a5568" stroke-width="3"/>
-                                <line x1="285" y1="340" x2="515" y2="340" stroke="#4a5568" stroke-width="3"/>
-                                <line x1="285" y1="355" x2="430" y2="355" stroke="#4a5568" stroke-width="3"/>
-                            </g>
-                        </g>
-                        
-                        <!-- Title Text -->
-                        <text x="400" y="500" font-family="Arial, sans-serif" font-size="32" font-weight="bold" class="fill-primary" text-anchor="middle">
-                            Neuentwicklung
-                        </text>
-                        <text x="400" y="540" font-family="Arial, sans-serif" font-size="28" class="fill-primary" text-anchor="middle" opacity="0.9">
-                            Ausbildungsportal
-                        </text>
-                        
-                        <!-- Subtitle -->
-                        <text x="400" y="580" font-family="Arial, sans-serif" font-size="18" class="fill-primary" text-anchor="middle" opacity="0.8">
-                            Moderne Technologie für zeitgemäße Ausbildung
-                        </text>
-                        
-                        <!-- Animations -->
-                        <style>
-                            @keyframes float {
-                                0%, 100% { transform: translateY(0px); }
-                                50% { transform: translateY(-15px); }
-                            }
-                            @keyframes rotate {
-                                from { transform: rotate(0deg); }
-                                to { transform: rotate(360deg); }
-                            }
-                            #laptop { animation: float 3s ease-in-out infinite; }
-                        </style>
-                    </svg>
-                </div>
-                <!-- Item 2 -->
-                <div class="hidden duration-700 ease-in-out" data-carousel-item>
-                    <svg class="w-full mx-auto max-w-4xl h-auto" viewBox="0 0 800 800" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
-                        <!-- Background Elements -->
-                        <circle cx="400" cy="400" r="350" class="fill-primary" opacity="0.1"/>
-                        <circle cx="400" cy="400" r="280" class="fill-primary" opacity="0.1"/>
-                        
-                        <!-- Main Document/Clipboard -->
-                        <g id="clipboard">
-                            <!-- Clipboard Holder -->
-                            <rect x="280" y="140" width="240" height="30" rx="8" fill="#4a5568"/>
-                            <rect x="350" y="135" width="100" height="20" rx="4" fill="#2d3748"/>
-                            <circle cx="400" cy="145" r="5" fill="#cbd5e0"/>
-                            
-                            <!-- Paper -->
-                            <rect x="300" y="160" width="200" height="380" rx="8" fill="#ffffff" stroke="#e2e8f0" stroke-width="3"/>
-                            
-                            <!-- Document Header -->
-                            <rect x="320" y="185" width="160" height="30" rx="4" fill="#667eea" opacity="0.9"/>
-                            <text x="400" y="206" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#ffffff" text-anchor="middle">
-                                Ausbildungsnachweis
-                            </text>
-                            
-                            <!-- Form Fields -->
-                            <!-- Date Field -->
-                            <g id="field-1">
-                                <rect x="320" y="230" width="160" height="8" rx="2" fill="#cbd5e0"/>
-                                <text x="325" y="250" font-family="Arial, sans-serif" font-size="10" fill="#4a5568">Datum:</text>
-                                <rect x="365" y="242" width="110" height="12" rx="2" fill="#e2e8f0"/>
-                            </g>
-                            
-                            <!-- Activity Field -->
-                            <g id="field-2">
-                                <rect x="320" y="270" width="160" height="8" rx="2" fill="#cbd5e0"/>
-                                <text x="325" y="290" font-family="Arial, sans-serif" font-size="10" fill="#4a5568">Tätigkeit:</text>
-                                <rect x="320" y="295" width="160" height="30" rx="2" fill="#e2e8f0"/>
-                                <line x1="325" y1="302" x2="460" y2="302" stroke="#cbd5e0" stroke-width="1"/>
-                                <line x1="325" y1="310" x2="440" y2="310" stroke="#cbd5e0" stroke-width="1"/>
-                                <line x1="325" y1="318" x2="470" y2="318" stroke="#cbd5e0" stroke-width="1"/>
-                            </g>
-                            
-                            <!-- Hours Field -->
-                            <g id="field-3">
-                                <rect x="320" y="340" width="160" height="8" rx="2" fill="#cbd5e0"/>
-                                <text x="325" y="360" font-family="Arial, sans-serif" font-size="10" fill="#4a5568">Stunden:</text>
-                                <rect x="375" y="352" width="50" height="12" rx="2" fill="#e2e8f0"/>
-                            </g>
-                            
-                            <!-- Department Field -->
-                            <g id="field-4">
-                                <rect x="320" y="380" width="160" height="8" rx="2" fill="#cbd5e0"/>
-                                <text x="325" y="400" font-family="Arial, sans-serif" font-size="10" fill="#4a5568">Abteilung:</text>
-                                <rect x="320" y="405" width="160" height="12" rx="2" fill="#e2e8f0"/>
-                            </g>
-                            
-                            <!-- Checkboxes for completed tasks -->
-                            <g id="checkboxes">
-                                <rect x="320" y="430" width="15" height="15" rx="2" fill="#48bb78" stroke="#38a169" stroke-width="2"/>
-                                <path d="M 323 437 L 327 442 L 332 433" stroke="#ffffff" stroke-width="2" fill="none" stroke-linecap="round"/>
-                                <rect x="340" y="432" width="130" height="2" rx="1" fill="#cbd5e0"/>
-                                
-                                <rect x="320" y="455" width="15" height="15" rx="2" fill="#48bb78" stroke="#38a169" stroke-width="2"/>
-                                <path d="M 323 462 L 327 467 L 332 458" stroke="#ffffff" stroke-width="2" fill="none" stroke-linecap="round"/>
-                                <rect x="340" y="457" width="110" height="2" rx="1" fill="#cbd5e0"/>
-                                
-                                <rect x="320" y="480" width="15" height="15" rx="2" fill="#e2e8f0" stroke="#cbd5e0" stroke-width="2"/>
-                                <rect x="340" y="482" width="120" height="2" rx="1" fill="#cbd5e0"/>
-                            </g>
-                            
-                            <!-- Signature Area -->
-                            <rect x="320" y="505" width="160" height="20" rx="3" fill="#f7fafc" stroke="#cbd5e0" stroke-width="1" stroke-dasharray="4,2"/>
-                            <text x="400" y="519" font-family="Brush Script MT, cursive" font-size="12" fill="#718096" text-anchor="middle" opacity="0.7">
-                                Unterschrift
-                            </text>
-                        </g>
-                        
-                        <!-- Progress Bar -->
-                        <g id="progress-bar" transform="translate(250, 580)">
-                            <rect x="0" y="0" width="300" height="25" rx="12" fill="#e2e8f0"/>
-                            <rect x="0" y="0" width="210" height="25" rx="12" fill="#48bb78">
-                                <animate attributeName="width" from="0" to="210" dur="2s" fill="freeze"/>
-                            </rect>
-                            <text x="150" y="17" font-family="Arial, sans-serif" font-size="12" font-weight="bold" class="fill-primary" text-anchor="middle">
-                                70% Erfasst
-                            </text>
-                        </g>
-                        
-                        <!-- Title Text -->
-                        <text x="400" y="660" font-family="Arial, sans-serif" font-size="32" font-weight="bold" class="fill-primary" text-anchor="middle">
-                            Ausbildungsnachweis
-                        </text>
-                        <text x="400" y="700" font-family="Arial, sans-serif" font-size="24" class="fill-primary" text-anchor="middle" opacity="0.9">
-                            Digital & Übersichtlich
-                        </text>
-                        <text x="400" y="735" font-family="Arial, sans-serif" font-size="18" class="fill-primary" text-anchor="middle" opacity="0.8">
-                            Einfache Dokumentation Ihrer Ausbildung
-                        </text>
-                        
-                        <!-- Animations -->
-                        <style>
-                            @keyframes float {
-                                0%, 100% { transform: translateY(0px); }
-                                50% { transform: translateY(-12px); }
-                            }
-                            @keyframes rotate {
-                                from { transform: rotate(0deg); }
-                                to { transform: rotate(360deg); }
-                            }
-                            @keyframes pulse {
-                                0%, 100% { opacity: 0.6; }
-                                50% { opacity: 1; }
-                            }
-                            #clipboard { animation: float 3s ease-in-out infinite; }
-                            #checkmark-1 { animation: float 3.5s ease-in-out infinite; }
-                            #calendar { animation: float 4s ease-in-out infinite; }
-                            #pen { animation: float 3.2s ease-in-out infinite; }
-                            #clock { animation: rotate 60s linear infinite; transform-origin: 225px 475px; }
-                            #cloud-upload { animation: float 3.8s ease-in-out infinite; }
-                        </style>
-                    </svg>
+            <!-- Linke Seite: Branding & Willkommen (Roter Verlauf wie gewünscht) -->
+            <div class="w-full xl:w-1/2 flex flex-col justify-between relative overflow-hidden">
+                <!-- Carousel -->
+                <div id="default-carousel" class="hidden xl:block relative w-full" data-carousel="slide">
+                    <!-- Carousel wrapper -->
+                    <div class="grid grid-cols-1 relative h-auto overflow-hidden rounded-base">
+                        <!-- Item 1 -->
+                        <div class="hidden duration-700 ease-in-out bg-secondary !relative col-start-1 row-start-1" data-carousel-item>
+                            <!-- <h2 class="text-4xl text-primary font-medium">Willkommen zurück</h2>
+                            <p class="text-sm text-secondary mt-3">Einloggen mit Benutzernamen und Passwort</p> -->
+                            <img src="img/berufe/eeg.png" class="w-full" />
+                        </div>
+                        <!-- Item 2 -->
+                        <div class="hidden duration-700 ease-in-out bg-secondary !relative col-start-1 row-start-1" data-carousel-item>
+                            <img src="img/berufe/eat.png" class="w-full" />
+                            <!-- <h2 class="text-4xl text-primary font-medium">Ausbildungsnachweis 2.0</h2>
+                            <p class="text-sm text-secondary mt-3">Einloggen mit Benutzernamen und Passwort</p> -->
+                        </div>
+                        <div class="hidden duration-700 ease-in-out bg-secondary !relative col-start-1 row-start-1" data-carousel-item>
+                            <img src="img/berufe/gsi.png" class="w-full" />
+                            <!-- <h2 class="text-4xl text-primary font-medium">Ausbildungsnachweis 2.0</h2>
+                            <p class="text-sm text-secondary mt-3">Einloggen mit Benutzernamen und Passwort</p> -->
+                        </div>
+                        <div class="hidden duration-700 ease-in-out bg-secondary !relative col-start-1 row-start-1" data-carousel-item>
+                            <img src="img/berufe/infe.png" class="w-full" />
+                            <!-- <h2 class="text-4xl text-primary font-medium">Ausbildungsnachweis 2.0</h2>
+                            <p class="text-sm text-secondary mt-3">Einloggen mit Benutzernamen und Passwort</p> -->
+                        </div>
+                    </div>
+                    <!-- Slider indicators -->
+                    <div hidden class="absolute z-30 flex -translate-x-1/2 bottom-2 left-1/2 space-x-3 rtl:space-x-reverse">
+                        <button type="button" class="w-3 h-3 rounded-full" aria-current="true" aria-label="Slide 1" data-carousel-slide-to="0"></button>
+                        <button type="button" class="w-3 h-3 rounded-full" aria-current="false" aria-label="Slide 2" data-carousel-slide-to="1"></button>
+                        <button type="button" class="w-3 h-3 rounded-full" aria-current="false" aria-label="Slide 3" data-carousel-slide-to="2"></button>
+                        <button type="button" class="w-3 h-3 rounded-full" aria-current="false" aria-label="Slide 4" data-carousel-slide-to="3"></button>
+                    </div>
+                    <!-- Slider controls -->
+                    <button hidden type="button" class="border border-neutral-800 dark:border-white rounded-full absolute bottom-0 left-20 z-30 flex items-center justify-center h-fit p-1 cursor-pointer group focus:outline-none" data-carousel-prev>
+                        <svg class="stroke-black dark:stroke-white size-5" stroke-width="2" fill="none"><use xlink:href="#icon-left"></use></svg>
+                    </button>
+                    <button hidden type="button" class="border border-neutral-800 dark:border-white rounded-full absolute bottom-0 right-20 z-30 flex items-center justify-center h-fit p-1 cursor-pointer group focus:outline-none" data-carousel-next>
+                        <svg class="stroke-black dark:stroke-white size-5" stroke-width="2" fill="none"><use xlink:href="#icon-right"></use></svg>
+                    </button>
                 </div>
             </div>
-            <!-- Slider indicators -->
-            <div class="absolute z-30 flex -translate-x-1/2 bottom-2 left-1/2 space-x-3 rtl:space-x-reverse">
-                <button type="button" class="w-3 h-3 rounded-full" aria-current="true" aria-label="Slide 1" data-carousel-slide-to="0"></button>
-                <button type="button" class="w-3 h-3 rounded-full" aria-current="false" aria-label="Slide 2" data-carousel-slide-to="1"></button>
+
+            <!-- Rechte Seite: Login Aktionen -->
+            <div class="w-full xl:w-1/2 p-10 xl:px-16 flex flex-col text-primary relative">
+                <!-- LOGO -->
+                <div class="right-10 top-10 dark:right-5 dark:top-5 xl:absolute">
+                    <div class="w-fit dark:bg-white/50 dark:rounded-2xl dark:p-4">
+                        <img class="h-20" src="img/logos/ELKOnet_Logo_Vector.png" />
+                    </div>
+                </div>
+
+                <!-- Willkommenstext -->
+                <div class="sm:mx-auto sm:w-full sm:max-w-md mb-5 mt-10">
+                    <h1 class="text-4xl 2xl:text-5xl font-bold tracking-tight mb-6 leading-tight">Willkommen</h1>
+                    <h3 class="text-lg 2xl:text-xl font-medium leading-relaxed">in der überbetrieblichen Ausbildung in den elektro- und informationstechnischen Ausbildungsberufen.</h3>
+                </div>
+
+                <!-- Anmeldeoptionen -->
+                <div class="grid grid-cols-1 w-full h-full overflow-hidden items-center xl:mt-auto mb-10">
+                    <!-- Login Options (Initial View) -->
+                    <div id="loginOptions" class="w-full col-start-1 row-start-1 transition-transform duration-500 ease-in-out transform translate-x-0">
+
+                        <div class="sm:mx-auto sm:w-full sm:max-w-md">
+                            <h2 class="text-2xl xl:text-3xl font-bold leading-9 tracking-tight text-gray-900 dark:text-white">Anmeldung</h2>
+                            <p class="mt-2 text-sm leading-6 text-gray-500 dark:text-gray-300">
+                                Bitte wählen Sie Ihren Zugangsbereich
+                            </p>
+                        </div>
+            
+                        <div class="mt-10 sm:mx-auto sm:w-full sm:max-w-md space-y-4">
+                            <!-- Button 1: Primär -->
+                            <a href="#" id="loginUebaBtn" class="group relative flex w-full items-center justify-center rounded-xl bg-neutral-600 px-4 py-4 text-sm md:text-base font-semibold shadow-lg hover:bg-red-600 text-white transition-all duration-300 dark:bg-white dark:text-neutral-900 dark:hover:bg-red-500 dark:hover:text-white">
+                                <svg class="mr-3 h-4 w-4 lg:h-5 lg:w-5 group-hover:text-white transition-colors dark:text-gray-500 dark:group-hover:text-white"><use xlink:href="#icon-loginicon"></use></svg>
+                                Anmelden bei Ausbildungsportal
+                            </a>
+
+                            <div class="my-4 xl:my-8 flex items-center gap-4">
+                                <hr class="w-full border-gray-600 dark:border-neutral-300">
+                                <p class="text-sm text-gray-600 dark:text-neutral-300 text-center">oder</p>
+                                <hr class="w-full border-gray-600 dark:border-neutral-300">
+                            </div>
+            
+                            <!-- Button 2: Sekundär -->
+                            <a href="#" id="loginUebaBtn" class="group relative flex w-full items-center justify-center rounded-xl bg-neutral-600 px-4 py-4 text-sm md:text-base font-semibold text-white shadow-lg hover:bg-red-600 transition-all duration-300 dark:bg-white dark:text-neutral-900 dark:hover:bg-red-500 dark:hover:text-white">
+                                <svg class="mr-3 h-4 w-4 lg:h-5 lg:w-5 text-white group-hover:text-white transition-colors dark:text-gray-500 dark:group-hover:text-white"><use xlink:href="#icon-loginicon"></use></svg>
+                                Anmelden bei Lernwelt
+                            </a>
+                        </div>
+                    </div>
+            
+                    <!-- Login Form (Hidden by default, slides in from the left) -->
+                    <form id="loginUebaForm" class="w-full h-fit col-start-1 row-start-1 transition-transform duration-500 ease-in-out transform -translate-x-full">
+                        <div class="sm:mx-auto sm:w-full sm:max-w-md">
+                            <a href="#" id="backToLoginOptions" class="inline-flex items-center gap-2 text-sm text-secondary mb-8">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="size-5">
+                                    <path fill-rule="evenodd" d="M17 10a.75.75 0 0 1-.75.75H5.707l2.147 2.146a.75.75 0 0 1-1.06 1.06l-3.5-3.5a.75.75 0 0 1 0-1.06l3.5-3.5a.75.75 0 1 1 1.06 1.06L5.707 9.25H16.25A.75.75 0 0 1 17 10Z" clip-rule="evenodd" />
+                                </svg>
+                                Zurück
+                            </a>
+                            <h2 class="text-2xl xl:text-3xl font-bold leading-9 tracking-tight text-gray-900 dark:text-white">Login Ausbildungsportal</h2>
+                            <p class="mt-2 text-sm leading-6 text-gray-500 dark:text-gray-300">
+                                Bitte geben Sie Ihre Zugangsdaten ein.
+                            </p>
+                        </div>
+                        <div class="xl:mt-10 sm:mx-auto sm:w-full sm:max-w-md space-y-4">
+                            <div class="flex items-center w-full bg-neutral-100 dark:bg-neutral-800 h-12 rounded-full overflow-hidden mt-8 pl-6 gap-2">
+                                <svg class="size-6 bg-transparent text-secondary"><use xlink:href="#icon-user"></use></svg>
+                                <input type="email" placeholder="Benutzername" class="bg-transparent text-primary placeholder-secondary dark:placeholder-neutral-400 border-transparent focus:border-transparent focus:outline-none focus:ring-0 text-sm w-full h-full" required />                 
+                            </div>
+                            <div class="flex items-center w-full bg-neutral-100 dark:bg-neutral-800 h-12 rounded-full overflow-hidden pl-6 gap-2 relative mt-6">
+                                <svg class="size-6 bg-transparent text-secondary"><use xlink:href="#icon-lock"></use></svg>
+                                <input type="password" id="password" name="password" placeholder="Passwort" class="bg-transparent text-primary placeholder-secondary dark:placeholder-neutral-400 border-transparent focus:border-transparent focus:outline-none focus:ring-0 text-sm w-full h-full" required />
+
+                                <button type="button" class="toggle-btn z-20 bg-primary absolute right-1 p-2 cursor-pointer text-xl">
+                                    <svg id="pwTogglerSVG" class="size-5 stroke-black"><use xlink:href="#icon-eye"></use></svg>
+                                </button>
+                            </div>
+
+                            <div class="text-sm text-right">
+                                <a href="#" class="font-semibold text-red-800 hover:underline dark:text-red-200">Passwort vergessen?</a>
+                            </div>
+                            <div>
+                                <button type="submit" class="flex w-full justify-center rounded-full cursor-pointer bg-red-600 hover:bg-red-700 px-3 py-3 text-sm md:text-base font-semibold leading-6 text-white shadow-sm focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-600 transition-colors">Anmelden</button>
+                            </div>
+
+                            <p class="text-sm mt-6 text-secondary">Sie haben noch keinen Zugang? <a href="#" class="text-red-800 dark:text-red-200 font-medium tracking-wide hover:underline">Kontaktieren Sie uns</a></p>
+                        </div>
+                    </form>
+                </div>
+
+                <!-- FOOTER NAV -->
+                <div id="loginFooterarea" class="flex text-center w-fit mx-auto text-xs mt-auto">
+                    <ul class="w-fit flex flex-row gap-2 lg:gap-4">
+                        <li><a href="#" class="text-secondary">Impressum</a></li>
+                        <li><a href="#" class="text-secondary">Datenschutz</a></li>
+                        <li><a href="#" class="text-secondary">Cookie</a></li>
+                        <li><a href="#" class="text-secondary">AGB</a></li>
+                    </ul>
+                </div>
             </div>
-            <!-- Slider controls -->
-            <button hidden type="button" class="border border-neutral-800 dark:border-white rounded-full absolute bottom-0 left-20 z-30 flex items-center justify-center h-fit p-1 cursor-pointer group focus:outline-none" data-carousel-prev>
-                <svg class="stroke-black dark:stroke-white size-5" stroke-width="2" fill="none"><use xlink:href="#icon-left"></use></svg>
-            </button>
-            <button hidden type="button" class="border border-neutral-800 dark:border-white rounded-full absolute bottom-0 right-20 z-30 flex items-center justify-center h-fit p-1 cursor-pointer group focus:outline-none" data-carousel-next>
-                <svg class="stroke-black dark:stroke-white size-5" stroke-width="2" fill="none"><use xlink:href="#icon-right"></use></svg>
-            </button>
         </div>
-
-        <svg hidden class="w-full max-w-4xl" viewBox="0 0 800 800" xmlns="http://www.w3.org/2000/svg">
-            <!-- Background Circle -->
-            <circle cx="400" cy="400" r="350" class="fill-neutral-400/50" />
-            <circle cx="400" cy="400" r="280" class="fill-neutral-200 dark:fill-neutral-600" />
-            
-            <!-- Main Laptop/Screen -->
-            <g id="laptop">
-                <!-- Screen -->
-                <rect x="250" y="200" width="300" height="200" rx="8" fill="#4a5568" stroke="#2d3748" stroke-width="3"/>
-                <rect x="255" y="205" width="290" height="190" rx="4" fill="#1a202c"/>
-                
-                <!-- Screen Content - Portal Interface -->
-                <g id="portal-content">
-                    <!-- Header Bar -->
-                    <rect x="265" y="215" width="270" height="25" rx="3" fill="#667eea"/>
-                    <circle cx="290" cy="227.5" r="4" class="fill-primary" />
-                    <circle cx="305" cy="227.5" r="4" class="fill-primary" />
-                    <circle cx="320" cy="227.5" r="4" class="fill-primary" />
-                    
-                    <!-- Navigation Cards -->
-                    <rect x="285" y="260" width="70" height="50" rx="4" fill="#48bb78" opacity="0.8"/>
-                    <rect x="365" y="260" width="70" height="50" rx="4" fill="#4299e1" opacity="0.8"/>
-                    <rect x="445" y="260" width="70" height="50" rx="4" fill="#ed8936" opacity="0.8"/>
-                    
-                    <!-- Content Lines -->
-                    <line x1="285" y1="325" x2="460" y2="325" stroke="#4a5568" stroke-width="3"/>
-                    <line x1="285" y1="340" x2="515" y2="340" stroke="#4a5568" stroke-width="3"/>
-                    <line x1="285" y1="355" x2="430" y2="355" stroke="#4a5568" stroke-width="3"/>
-                </g>
-            </g>
-            
-            <!-- Title Text -->
-            <text x="400" y="500" font-family="Arial, sans-serif" font-size="32" font-weight="bold" class="fill-primary" text-anchor="middle">
-                Neuentwicklung
-            </text>
-            <text x="400" y="540" font-family="Arial, sans-serif" font-size="28" class="fill-primary" text-anchor="middle" opacity="0.9">
-                Ausbildungsportal
-            </text>
-            
-            <!-- Subtitle -->
-            <text x="400" y="580" font-family="Arial, sans-serif" font-size="18" class="fill-primary" text-anchor="middle" opacity="0.8">
-                Moderne Technologie für zeitgemäße Ausbildung
-            </text>
-            
-            <!-- Animations -->
-            <style>
-                @keyframes float {
-                    0%, 100% { transform: translateY(0px); }
-                    50% { transform: translateY(-15px); }
-                }
-                @keyframes rotate {
-                    from { transform: rotate(0deg); }
-                    to { transform: rotate(360deg); }
-                }
-                #laptop { animation: float 3s ease-in-out infinite; }
-            </style>
-        </svg>
-        <svg hidden class="w-full max-w-4xl" viewBox="0 0 800 800" xmlns="http://www.w3.org/2000/svg">
-            <!-- Background Elements -->
-            <circle cx="400" cy="400" r="350" class="fill-primary" opacity="0.1"/>
-            <circle cx="400" cy="400" r="280" class="fill-primary" opacity="0.1"/>
-            
-            <!-- Main Document/Clipboard -->
-            <g id="clipboard">
-                <!-- Clipboard Holder -->
-                <rect x="280" y="140" width="240" height="30" rx="8" fill="#4a5568"/>
-                <rect x="350" y="135" width="100" height="20" rx="4" fill="#2d3748"/>
-                <circle cx="400" cy="145" r="5" fill="#cbd5e0"/>
-                
-                <!-- Paper -->
-                <rect x="300" y="160" width="200" height="380" rx="8" fill="#ffffff" stroke="#e2e8f0" stroke-width="3"/>
-                
-                <!-- Document Header -->
-                <rect x="320" y="185" width="160" height="30" rx="4" fill="#667eea" opacity="0.9"/>
-                <text x="400" y="206" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#ffffff" text-anchor="middle">
-                    Ausbildungsnachweis
-                </text>
-                
-                <!-- Form Fields -->
-                <!-- Date Field -->
-                <g id="field-1">
-                    <rect x="320" y="230" width="160" height="8" rx="2" fill="#cbd5e0"/>
-                    <text x="325" y="250" font-family="Arial, sans-serif" font-size="10" fill="#4a5568">Datum:</text>
-                    <rect x="365" y="242" width="110" height="12" rx="2" fill="#e2e8f0"/>
-                </g>
-                
-                <!-- Activity Field -->
-                <g id="field-2">
-                    <rect x="320" y="270" width="160" height="8" rx="2" fill="#cbd5e0"/>
-                    <text x="325" y="290" font-family="Arial, sans-serif" font-size="10" fill="#4a5568">Tätigkeit:</text>
-                    <rect x="320" y="295" width="160" height="30" rx="2" fill="#e2e8f0"/>
-                    <line x1="325" y1="302" x2="460" y2="302" stroke="#cbd5e0" stroke-width="1"/>
-                    <line x1="325" y1="310" x2="440" y2="310" stroke="#cbd5e0" stroke-width="1"/>
-                    <line x1="325" y1="318" x2="470" y2="318" stroke="#cbd5e0" stroke-width="1"/>
-                </g>
-                
-                <!-- Hours Field -->
-                <g id="field-3">
-                    <rect x="320" y="340" width="160" height="8" rx="2" fill="#cbd5e0"/>
-                    <text x="325" y="360" font-family="Arial, sans-serif" font-size="10" fill="#4a5568">Stunden:</text>
-                    <rect x="375" y="352" width="50" height="12" rx="2" fill="#e2e8f0"/>
-                </g>
-                
-                <!-- Department Field -->
-                <g id="field-4">
-                    <rect x="320" y="380" width="160" height="8" rx="2" fill="#cbd5e0"/>
-                    <text x="325" y="400" font-family="Arial, sans-serif" font-size="10" fill="#4a5568">Abteilung:</text>
-                    <rect x="320" y="405" width="160" height="12" rx="2" fill="#e2e8f0"/>
-                </g>
-                
-                <!-- Checkboxes for completed tasks -->
-                <g id="checkboxes">
-                    <rect x="320" y="430" width="15" height="15" rx="2" fill="#48bb78" stroke="#38a169" stroke-width="2"/>
-                    <path d="M 323 437 L 327 442 L 332 433" stroke="#ffffff" stroke-width="2" fill="none" stroke-linecap="round"/>
-                    <rect x="340" y="432" width="130" height="2" rx="1" fill="#cbd5e0"/>
-                    
-                    <rect x="320" y="455" width="15" height="15" rx="2" fill="#48bb78" stroke="#38a169" stroke-width="2"/>
-                    <path d="M 323 462 L 327 467 L 332 458" stroke="#ffffff" stroke-width="2" fill="none" stroke-linecap="round"/>
-                    <rect x="340" y="457" width="110" height="2" rx="1" fill="#cbd5e0"/>
-                    
-                    <rect x="320" y="480" width="15" height="15" rx="2" fill="#e2e8f0" stroke="#cbd5e0" stroke-width="2"/>
-                    <rect x="340" y="482" width="120" height="2" rx="1" fill="#cbd5e0"/>
-                </g>
-                
-                <!-- Signature Area -->
-                <rect x="320" y="505" width="160" height="20" rx="3" fill="#f7fafc" stroke="#cbd5e0" stroke-width="1" stroke-dasharray="4,2"/>
-                <text x="400" y="519" font-family="Brush Script MT, cursive" font-size="12" fill="#718096" text-anchor="middle" opacity="0.7">
-                    Unterschrift
-                </text>
-            </g>
-            
-            <!-- Progress Bar -->
-            <g id="progress-bar" transform="translate(250, 580)">
-                <rect x="0" y="0" width="300" height="25" rx="12" fill="#e2e8f0"/>
-                <rect x="0" y="0" width="210" height="25" rx="12" fill="#48bb78">
-                    <animate attributeName="width" from="0" to="210" dur="2s" fill="freeze"/>
-                </rect>
-                <text x="150" y="17" font-family="Arial, sans-serif" font-size="12" font-weight="bold" class="fill-primary" text-anchor="middle">
-                    70% Erfasst
-                </text>
-            </g>
-            
-            <!-- Title Text -->
-            <text x="400" y="660" font-family="Arial, sans-serif" font-size="32" font-weight="bold" class="fill-primary" text-anchor="middle">
-                Ausbildungsnachweis
-            </text>
-            <text x="400" y="700" font-family="Arial, sans-serif" font-size="24" class="fill-primary" text-anchor="middle" opacity="0.9">
-                Digital & Übersichtlich
-            </text>
-            <text x="400" y="735" font-family="Arial, sans-serif" font-size="18" class="fill-primary" text-anchor="middle" opacity="0.8">
-                Einfache Dokumentation Ihrer Ausbildung
-            </text>
-            
-            <!-- Animations -->
-            <style>
-                @keyframes float {
-                    0%, 100% { transform: translateY(0px); }
-                    50% { transform: translateY(-12px); }
-                }
-                @keyframes rotate {
-                    from { transform: rotate(0deg); }
-                    to { transform: rotate(360deg); }
-                }
-                @keyframes pulse {
-                    0%, 100% { opacity: 0.6; }
-                    50% { opacity: 1; }
-                }
-                #clipboard { animation: float 3s ease-in-out infinite; }
-                #checkmark-1 { animation: float 3.5s ease-in-out infinite; }
-                #calendar { animation: float 4s ease-in-out infinite; }
-                #pen { animation: float 3.2s ease-in-out infinite; }
-                #clock { animation: rotate 60s linear infinite; transform-origin: 225px 475px; }
-                #cloud-upload { animation: float 3.8s ease-in-out infinite; }
-            </style>
-        </svg>
     </div>
-</main>
-
-<!-- FOOTER NAV -->
-<div class="w-full flex items-center justify-center mx-auto text-xs py-3">
-    <ul class="w-fit flex flex-row gap-2 lg:gap-4">
-        <li><a href="#" class="text-secondary">Impressum</a></li>
-        <li><a href="#" class="text-secondary">Datenschutz</a></li>
-        <li><a href="#" class="text-secondary">Cookie</a></li>
-        <li><a href="#" class="text-secondary">AGB</a></li>
-    </ul>
 </div>
 
-<!-- DARK / LIGHT TOGGLER -->
-<button class="fixed bottom-2 right-0 xl:bottom-2 xl:right-2 flex text-secondary items-center p-3 cursor-pointer" onclick="toggleDarkMode()">
+<!-- Dark Mode Toggler (Floating) -->
+<button class="fixed bottom-4 right-4 xl:bottom-7 xl:right-7 flex items-center justify-center p-3 rounded-full bg-white text-primary shadow-lg dark:bg-neutral-900/70 transition-all cursor-pointer z-50" onclick="toggleDarkMode()">
     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
         <path stroke-linecap="round" stroke-linejoin="round" d="M12 3v2.25m6.364.386-1.591 1.591M21 12h-2.25m-.386 6.364-1.591-1.591M12 18.75V21m-4.773-4.227-1.591 1.591M5.25 12H3m4.227-4.773L5.636 5.636M15.75 12a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0Z" />
     </svg>
 </button>
 
-<script src="js/custom.js"></script>
-<script src="js/carousel.js"></script>
 <script src="js/flowbite.min.js"></script>
-
 </body>
 </html>
