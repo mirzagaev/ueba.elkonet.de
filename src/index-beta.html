@@ -7,21 +7,6 @@
     <link href="css/style.css" rel="stylesheet">
     <script src="js/jquery.min.js"></script>
     <script src="js/custom.js"></script>
-    <style>
-        /* Subtile Hintergrund-Animation für den roten Bereich */
-        @keyframes blob {
-            0% { transform: translate(0px, 0px) scale(1); }
-            33% { transform: translate(30px, -50px) scale(1.1); }
-            66% { transform: translate(-20px, 20px) scale(0.9); }
-            100% { transform: translate(0px, 0px) scale(1); }
-        }
-        .animate-blob {
-            animation: blob 7s infinite;
-        }
-        .animation-delay-2000 {
-            animation-delay: 2s;
-        }
-    </style>
 </head>
 
 <body class="bg-primary dark:bg-neutral-900/90 font-sans antialiased text-primary">
@@ -65,53 +50,65 @@
 </svg>
 
 <!-- LOGO -->
-<div class="right-10 top-10 dark:right-5 dark:top-5 absolute z-50">
+<div hidden class="right-10 top-10 dark:right-5 dark:top-5 absolute z-50">
     <div class="w-fit dark:bg-white/50 dark:rounded-2xl dark:p-4">
-        <img class="h-20 xl:h-24" src="img/logos/ELKOnet_Logo_Vector.png" />
+        <img class="h-20 2xl:h-24" src="img/logos/ELKOnet_Logo_Vector.png" />
     </div>
 </div>
 
 <!-- Main Card Container: Modernes Split-Design in einer zentrierten Karte -->
-<div class="mx-auto w-full lg:h-screen h-full flex flex-col lg:flex-row">
+<div class="mx-auto w-full xl:h-screen h-full flex flex-col sm:flex-row">
 
     <!-- Linke Seite: Branding & Willkommen (Roter Verlauf wie gewünscht) -->
-    <div class="w-full lg:w-2/5 flex flex-col justify-between relative overflow-hidden">
+    <div class="w-full sm:w-1/2 lg:w-2/5 2xl:w-1/4 flex flex-col justify-between relative overflow-hidden">
         <!-- Carousel -->
-        <div id="default-carousel" class="hidden xl:block relative w-full" data-carousel="slide" data-carousel-interval="2500">
+        <div id="default-carousel" class="relative w-full" data-carousel="slide" data-carousel-interval="3000">
             <!-- Carousel wrapper -->
-            <div class="grid grid-cols-1 relative h-full lg:h-screen overflow-hidden">
+            <div class="grid grid-cols-1 relative h-full sm:h-screen">
                 <!-- Item 1 -->
-                <div class="hidden duration-700 ease-in-out !relative col-start-1 row-start-1 lg:p-5" data-carousel-item>
+                <div class="duration-700 ease-in-out !relative col-start-1 row-start-1 sm:p-5 overflow-hidden" data-carousel-item>
                     <div class="relative w-full h-full">
-                        <img src="img/berufe/eeg.jpg" class="w-full h-full object-cover object-center rounded-b-2xl lg:rounded-2xl" />
-                        <div class="absolute inset-0 rounded-b-2xl lg:rounded-2xl shadow-[inset_0_0_300px_rgba(0,0,0,0.5)] pointer-events-none flex">
-                            <h2 class="mt-auto mb-3 text-3xl xl:text-4xl text-white font-serif px-10 pb-5 lg:p-7">Elektroniker/in Fachrichtung Energie- und Gebäudetechnik</h2>
+                        <div class="right-5 top-5 absolute z-50 w-fit bg-white/50 rounded-2xl p-4">
+                            <img class="h-20 2xl:h-24" src="img/logos/ELKOnet_Logo_Vector.png" />
+                        </div>
+                        <img src="img/berufe/eeg.jpg" class="w-full h-full object-cover object-center rounded-b-2xl sm:rounded-2xl" />
+                        <div class="absolute inset-0 rounded-b-2xl sm:rounded-2xl shadow-[inset_0_0_300px_rgba(0,0,0,0.5)] pointer-events-none flex">
+                            <h2 class="mt-auto mb-3 text-3xl xl:text-4xl text-white font-serif px-10 pb-5 sm:p-7">Elektroniker/in Fachrichtung Energie- und Gebäudetechnik</h2>
                         </div>
                     </div>
                 </div>
                 
                 <!-- Item 2 -->
-                <div class="hidden duration-700 ease-in-out !relative col-start-1 row-start-1 lg:p-5" data-carousel-item>
+                <div class="hidden duration-700 ease-in-out !relative col-start-1 row-start-1 sm:p-5 overflow-hidden" data-carousel-item>
                     <div class="relative w-full h-full">
-                        <img src="img/berufe/eat.jpg" class="w-full h-full object-cover object-center rounded-b-2xl lg:rounded-2xl" />
-                        <div class="absolute inset-0 rounded-b-2xl lg:rounded-2xl shadow-[inset_0_0_300px_rgba(0,0,0,0.5)] pointer-events-none flex">
-                            <h2 class="mt-auto mb-3 text-3xl xl:text-4xl text-white font-serif px-10 pb-5 lg:p-7">Elektroniker/in Fachrichtung Automatisierungs- und Systemtechnik</h2>
+                        <div class="right-5 top-5 absolute z-50 w-fit bg-white/50 rounded-2xl p-4">
+                            <img class="h-20 2xl:h-24" src="img/logos/ELKOnet_Logo_Vector.png" />
+                        </div>
+                        <img src="img/berufe/eat.jpg" class="w-full h-full object-cover object-center rounded-b-2xl sm:rounded-2xl" />
+                        <div class="absolute inset-0 rounded-b-2xl sm:rounded-2xl shadow-[inset_0_0_300px_rgba(0,0,0,0.5)] pointer-events-none flex">
+                            <h2 class="mt-auto mb-3 text-3xl xl:text-4xl text-white font-serif px-10 pb-5 sm:p-7">Elektroniker/in Fachrichtung Automatisierungs- und Systemtechnik</h2>
                         </div>
                     </div>
                 </div>
-                <div class="hidden duration-700 ease-in-out !relative col-start-1 row-start-1 lg:p-5" data-carousel-item>
+                <div class="hidden duration-700 ease-in-out !relative col-start-1 row-start-1 sm:p-5 overflow-hidden" data-carousel-item>
                     <div class="relative w-full h-full">
-                        <img src="img/berufe/gsi.jpg" class="w-full h-full object-cover object-center rounded-b-2xl lg:rounded-2xl" />
-                        <div class="absolute inset-0 rounded-b-2xl lg:rounded-2xl shadow-[inset_0_0_300px_rgba(0,0,0,0.5)] pointer-events-none flex">
-                            <h2 class="mt-auto mb-3 text-3xl xl:text-4xl text-white font-serif px-10 pb-5 lg:p-7">Elektroniker/in für Gebäudesystemintegration</h2>
+                        <div class="right-5 top-5 absolute z-50 w-fit bg-white/50 rounded-2xl p-4">
+                            <img class="h-20 2xl:h-24" src="img/logos/ELKOnet_Logo_Vector.png" />
+                        </div>
+                        <img src="img/berufe/gsi.jpg" class="w-full h-full object-cover object-center rounded-b-2xl sm:rounded-2xl" />
+                        <div class="absolute inset-0 rounded-b-2xl sm:rounded-2xl shadow-[inset_0_0_300px_rgba(0,0,0,0.5)] pointer-events-none flex">
+                            <h2 class="mt-auto mb-3 text-3xl xl:text-4xl text-white font-serif px-10 pb-5 sm:p-7">Elektroniker/in für Gebäudesystemintegration</h2>
                         </div>
                     </div>
                 </div>
-                <div class="hidden duration-700 ease-in-out !relative col-start-1 row-start-1 lg:p-5" data-carousel-item>
+                <div class="hidden duration-700 ease-in-out !relative col-start-1 row-start-1 sm:p-5 overflow-hidden" data-carousel-item>
                     <div class="relative w-full h-full">
-                        <img src="img/berufe/infe.jpg" class="w-full h-full object-cover object-center rounded-b-2xl lg:rounded-2xl" />
-                        <div class="absolute inset-0 rounded-b-2xl lg:rounded-2xl shadow-[inset_0_0_300px_rgba(0,0,0,0.5)] pointer-events-none flex">
-                            <h2 class="mt-auto mb-3 text-3xl xl:text-4xl text-white font-serif px-10 pb-5 lg:p-7">Informationselektroniker/in</h2>
+                        <div class="right-5 top-5 absolute z-50 w-fit bg-white/50 rounded-2xl p-4">
+                            <img class="h-20 2xl:h-24" src="img/logos/ELKOnet_Logo_Vector.png" />
+                        </div>
+                        <img src="img/berufe/infe.jpg" class="w-full h-full object-cover object-center rounded-b-2xl sm:rounded-2xl" />
+                        <div class="absolute inset-0 rounded-b-2xl sm:rounded-2xl shadow-[inset_0_0_300px_rgba(0,0,0,0.5)] pointer-events-none flex">
+                            <h2 class="mt-auto mb-3 text-3xl xl:text-4xl text-white font-serif px-10 pb-5 sm:p-7 break-all">Informationselektroniker/in</h2>
                         </div>
                     </div>
                 </div>
@@ -120,7 +117,7 @@
     </div>
 
     <!-- Rechte Seite: Login Aktionen -->
-    <div class="w-full h-full lg:w-3/5 py-5 px-10 xl:px-16 flex flex-col justify-center text-primary relative overflow-auto">
+    <div class="w-full h-full sm:w-1/2 lg:w-3/5 2xl:w-3/4 pt-10 pb-5 px-10 xl:px-16 flex flex-col justify-center text-primary relative overflow-auto">
 
         <div class="my-auto">
             <!-- Willkommenstext -->
@@ -130,7 +127,7 @@
             </div>
 
             <!-- Anmeldeoptionen -->
-            <div class="grid grid-cols-1 w-full overflow-hidden items-center mt-5 mb-10 lg:my-0">
+            <div class="grid grid-cols-1 w-full overflow-hidden items-center mt-5 mb-10">
                 <!-- Login Options (Initial View) -->
                 <div id="loginOptions" class="w-full col-start-1 row-start-1 transition-transform duration-500 ease-in-out transform translate-x-0">
                     <div class="sm:mx-auto sm:w-full sm:max-w-md">
@@ -142,7 +139,7 @@
         
                     <div class="mt-10 sm:mx-auto sm:w-full sm:max-w-md space-y-4">
                         <!-- Button 1: Primär -->
-                        <a href="#" id="loginUebaBtn" class="group relative flex w-full items-center justify-center rounded-xl bg-neutral-800 px-4 py-4 text-sm md:text-base font-semibold shadow-lg hover:bg-red-600 text-white transition-all duration-300 dark:bg-white dark:text-neutral-900 dark:hover:bg-red-500 dark:hover:text-white">
+                        <a href="#" id="loginUebaBtn" class="group relative flex w-full items-center justify-center rounded-xl bg-neutral-800 px-4 py-4 text-sm sm:text-base font-semibold shadow-lg hover:bg-red-600 text-white transition-all duration-300 dark:bg-white dark:text-neutral-900 dark:hover:bg-red-500 dark:hover:text-white">
                             <svg class="mr-3 h-4 w-4 lg:h-5 lg:w-5 group-hover:text-white transition-colors dark:text-gray-500 dark:group-hover:text-white"><use xlink:href="#icon-loginicon"></use></svg>
                             Anmelden bei Ausbildungsportal
                         </a>
@@ -154,7 +151,7 @@
                         </div>
         
                         <!-- Button 2: Sekundär -->
-                        <a href="#" id="loginUebaBtn" class="group relative flex w-full items-center justify-center rounded-xl bg-neutral-800 px-4 py-4 text-sm md:text-base font-semibold text-white shadow-lg hover:bg-red-600 transition-all duration-300 dark:bg-white dark:text-neutral-900 dark:hover:bg-red-500 dark:hover:text-white">
+                        <a href="#" id="loginUebaBtn" class="group relative flex w-full items-center justify-center rounded-xl bg-neutral-800 px-4 py-4 text-sm sm:text-base font-semibold text-white shadow-lg hover:bg-red-600 transition-all duration-300 dark:bg-white dark:text-neutral-900 dark:hover:bg-red-500 dark:hover:text-white">
                             <svg class="mr-3 h-4 w-4 lg:h-5 lg:w-5 text-white group-hover:text-white transition-colors dark:text-gray-500 dark:group-hover:text-white"><use xlink:href="#icon-loginicon"></use></svg>
                             Anmelden bei Lernwelt
                         </a>
@@ -193,7 +190,7 @@
                             <a href="#" class="font-semibold text-secondary underline dark:text-white">Passwort vergessen?</a>
                         </div>
                         <div>
-                            <button type="submit" class="flex w-full justify-center rounded-full cursor-pointer bg-red-600 hover:bg-red-700 px-3 py-3 text-sm md:text-base font-semibold leading-6 text-white shadow-sm focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-600 transition-colors">Anmelden</button>
+                            <button type="submit" class="flex w-full justify-center rounded-full cursor-pointer bg-red-600 hover:bg-red-700 px-3 py-3 text-sm sm:text-base font-semibold leading-6 text-white shadow-sm focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-600 transition-colors">Anmelden</button>
                         </div>
 
                         <p class="text-sm mt-6 text-secondary">Sie haben noch keinen Zugang? <a href="#" class="text-secondary dark:text-white font-medium tracking-wide underline">Kontaktieren Sie uns</a></p>
