@@ -394,82 +394,110 @@
                 </div>
 
                 <div class="bg-white dark:bg-neutral-700 border-1 border-subnav shadow-xl p-10 md:px-20 relative">
-                    <span class="absolute right-5 top-5 text-xl lg:text-4xl xl:text-6xl font-semibold text-neutral-200/60 dark:text-neutral-600/70 uppercase selection:bg-transparent">Druckversion</span>
+                    <span class="absolute right-5 top-3 xl:top-5 text-xl lg:text-4xl xl:text-6xl font-semibold text-neutral-200/60 dark:text-neutral-600/70 uppercase selection:bg-transparent">Druckversion</span>
                     <div class="lg:py-4 flex">
-                        <h1 class="text-3xl font-medium">Angebot - Kurs ETE 4/22</h1>
+                        <h1 class="text-3xl font-medium z-10">Angebot - Kurs ETE 4/22</h1>
                     </div>
-                    <div class="w-full divide-y divide-secondary">
-                        <div class="py-4 xl:py-6 md:flex-grow grid md:grid-cols-4 gap-2">
-                            <span class="text-xl font-light title-font tracking-widest uppercase mb-2 md:col-span-4">Kundendaten</span>
-                            <div class="col-span-1 md:col-span-2 grid grid-cols-2">
-                                <span class="font-semibold">Anrede:</span>
-                                <span>Frau</span>
+                    <div class="w-full">
+                        <div class="relative overflow-x-auto py-4 xl:py-6">
+                            <div class="py-4 xl:py-6 md:flex-grow">
+                                <span class="block text-right">03.02.2026</span>
+                                <p class="my-3">Max Mustermann<br/>Krefelder Straße 12<br/>70376 Stuttgart</p>
+                                <p class="my-3">Sehr geehrte Damen und Herren,</p>
+                                <p class="my-3">in Anlehnung an die Auflistung der benötigten Materialien und der voraussichtlich anfallenden Arbeitszeiten, machen wir Ihnen folgendes Angebot:</p>
                             </div>
-                            <div class="md:col-start-1 col-span-1 md:col-span-2 grid grid-cols-2">
-                                <span class="font-semibold">Name:</span>
-                                <span>Mustermann</span>
-                            </div>
-                            <div class="col-span-1 md:col-span-2 grid grid-cols-2">
-                                <span class="font-semibold">Vorname:</span>
-                                <span>Karen</span>
-                            </div>
-                            <div class="md:col-span-2 grid grid-cols-2">
-                                <span class="font-semibold">Straße:</span>
-                                <span>Musterstraße 12</span>
-                            </div>
-                            <div class="md:col-span-2 grid grid-cols-2">
-                                <span class="font-semibold">PLZ / Ort:</span>
-                                <span>12345 Musterstadt</span>
-                            </div>
-                            <div class="md:col-span-4 mb-1"></div>
-                            <div class="md:col-span-2 grid grid-cols-2">
-                                <span class="font-semibold">Telefon:</span>
-                                <span>+49 211 5498493</span>
-                            </div>
-                            <div class="md:col-span-2 grid grid-cols-2">
-                                <span class="font-semibold">Mobil:</span>
-                                <span>+49 178 5656833</span>
-                            </div>
-                            <div class="md:col-span-2 grid grid-cols-2">
-                                <span class="font-semibold">E-Mail:</span>
-                                <span>info@etz-stuttgart.de</span>
-                            </div>
-                            <div class="md:col-span-4 mb-1"></div>
-                            <div class="md:col-start-1 md:col-span-2 grid grid-cols-2">
-                                <span class="font-semibold">Firma:</span>
-                                <span>etz Stuttgart</span>
-                            </div>
-                            <div class="md:col-span-2 grid grid-cols-2">
-                                <span class="font-semibold">Anruf von:</span>
-                                <span>Mathias Mustermann</span>
-                            </div>
-                            <div class="md:col-span-2 grid grid-cols-2">
-                                <span class="font-semibold">Kontakt vor Ort:</span>
-                                <span>Müller</span>
-                            </div>
-                            <div class="md:col-span-2 grid grid-cols-2">
-                                <span class="font-semibold">Termin vor Ort:</span>
-                                <span>21.03.2026, 14:00 Uhr</span>
-                            </div>
+                            <span class="text-xl font-light title-font tracking-widest uppercase mb-4 block">Materialkosten</span>
+                            <table class="w-full text-sm text-left rtl:text-right text-body">
+                                <thead class="text-sm text-body border-b-1 border-subnav">
+                                    <tr>
+                                        <th scope="col" class="px-6 py-3 rounded-s-base font-medium">Menge</th>
+                                        <th scope="col" class="px-6 py-3 rounded-s-base font-medium">Einzelpreis (€)</th>
+                                        <th scope="col" class="px-6 py-3 rounded-s-base font-medium">Material</th>
+                                        <th scope="col" class="px-6 py-3 rounded-e-base font-medium text-right">Gesamtpreis (€)</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr class="bg-neutral-primary">
+                                        <td class="px-6 py-2 max-w-20">2,00</td>
+                                        <td class="px-6 py-2 max-w-20">40,00</td>
+                                        <th scope="row" class="px-6 py-2 font-normal">Stock</td>
+                                        <td class="px-6 py-2 text-right">80,00</td>
+                                    </tr>
+                                    <tr class="bg-neutral-primary">
+                                        <td class="px-6 py-2 max-w-20">1,00</td>
+                                        <td class="px-6 py-2 max-w-20">60,00</td>
+                                        <th scope="row" class="px-6 py-2 font-normal">Buch</td>
+                                        <td class="px-6 py-2 text-right">80,00</td>
+                                    </tr>
+                                </tbody>
+                                <tfoot>
+                                    <tr class="border-t-1 border-subnav font-bold">
+                                        <td class=""></td>
+                                        <td class=""></td>
+                                        <td class="text-right"></td>
+                                        <td class="px-6 py-2 text-right">Gesamtkosten Material (€): 880,00</td>
+                                    </tr>
+                                </tfoot>
+                            </table>
                         </div>
-                        <div class="py-4 xl:py-6 md:flex-grow grid md:grid-cols-4 gap-2">
-                            <span class="text-xl font-light title-font tracking-widest uppercase mb-2 md:col-span-4">Intern</span>
-                            <div class="md:col-span-2 grid grid-cols-2">
-                                <span class="font-semibold">Erstellt von:</span>
-                                <span>Herr Hocke</span>
-                            </div>
-                            <div class="md:col-start-1 md:col-span-2 grid grid-cols-2">
-                                <span class="font-semibold">Am:</span>
-                                <span>aktuelles Datum</span>
-                            </div>
-                            <div class="md:col-span-2 grid grid-cols-2">
-                                <span class="font-semibold">Monteur:</span>
-                                <span>HP</span>
-                            </div>
+                        <div class="my-6">
+                            <span class="text-xl font-light title-font tracking-widest uppercase mb-4 block">Lohnkosten</span>
+                            <table class="w-full text-sm text-left rtl:text-right text-body">
+                                <thead class="text-sm text-body border-b-1 border-subnav">
+                                    <tr>
+                                        <th scope="col" class="px-6 py-3 rounded-s-base font-medium">Tätigkeiten</th>
+                                        <th scope="col" class="px-6 py-3 rounded-e-base font-medium text-right">Arbeitszeit (Min)</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr class="bg-neutral-primary">
+                                        <th scope="row" class="px-6 py-2 font-normal">Kundenwünsche aufgenommen, Kundendatei erstellen</td>
+                                        <td class="px-6 py-2 text-right">55,00</td>
+                                    </tr>
+                                    <tr class="bg-neutral-primary border-b-1 border-subnav">
+                                        <th scope="row" class="px-6 py-2 font-normal">Auswertung Pläne, Programmierung</td>
+                                        <td class="px-6 py-2 text-right">280,00</td>
+                                    </tr>
+                                    <tr class="font-medium">
+                                        <td class=""></td>
+                                        <td class="px-6 py-2 text-right">Arbeitszeit Gesamt (Min): 335,00</td>
+                                    </tr>
+                                    <tr class="font-medium">
+                                        <td class=""></td>
+                                        <td class="px-6 py-2 text-right">Stundensatz (€): 54,00</td>
+                                    </tr>
+                                </tbody>
+                                <tfoot>
+                                    <tr class="border-t-1 border-subnav font-bold">
+                                        <td class=""></td>
+                                        <td class="px-6 py-2 text-right">Gesamtkosten Lohn (€): 1.880,00</td>
+                                    </tr>
+                                </tfoot>
+                            </table>
+                            <table class="w-full text-sm text-left rtl:text-right text-body mt-10 border-subnav border-t-1">
+                                <tbody>
+                                    <tr class="font-medium">
+                                        <td class=""></td>
+                                        <td class="px-6 py-2 text-right">Summe Material- und Lohnkosten (€): 2.480,00</td>
+                                    </tr>
+                                    <tr class="font-medium">
+                                        <td class=""></td>
+                                        <td class="px-6 py-2 text-right">MWSt (19%): 234,60</td>
+                                    </tr>
+                                </tbody>
+                                <tfoot>
+                                    <tr class="border-subnav border-t-1 font-bold text-base">
+                                        <td class=""></td>
+                                        <td class="px-6 py-2 text-right">Angebot (€): 3.480,00</td>
+                                    </tr>
+                                </tfoot>
+                            </table>
                         </div>
                         <div class="py-4 xl:py-6 md:flex-grow">
-                            <span class="text-xl font-light title-font tracking-widest uppercase mb-4 block">Notizen</span>
-                            <p>Renovierung udn Umbau des Dachgeschosses innerhlab der nächsten 6 WOchen.</p>
+                            <p class="my-3">Das Angebot ist 14 Tage ab Angebotsdatum gültig.
+Es gelten unsere allgemeinen Geschäftsbedingungen.
+Für Fragen stehen wir Ihnen gerne zur Verfügung.</p>
+                            <p class="my-3">Mit freundlichen Grüßen</p>
                         </div>
                     </div>
                 </div>

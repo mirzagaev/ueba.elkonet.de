@@ -405,7 +405,7 @@
                 
                 <div class="bg-neutral-100 dark:bg-neutral-700 border-1 border-subnav shadow-xl p-10 md:px-20">
                     <div class="lg:py-4 flex">
-                        <h1 class="text-3xl font-medium">Kundenkartei</h1>
+                        <h1 class="text-3xl font-medium">Kundenkartei - Kurs ETE 4/22</h1>
                     </div>
                     <div class="w-full divide-y divide-secondary">
                         <div class="py-4 xl:py-6 md:flex-grow grid md:grid-cols-10 gap-4">
@@ -423,6 +423,9 @@
                             </div>
                             <div class="md:col-span-5">
                                 <input placeholder="Vorname" class="kundenauftrag-form-text">
+                            </div>
+                            <div class="md:col-span-10">
+                                <input placeholder="Firma" class="kundenauftrag-form-text">
                             </div>
                             <div class="md:col-span-5">
                                 <input placeholder="Straße" class="kundenauftrag-form-text">
@@ -444,26 +447,14 @@
                                 <input placeholder="E-Mail" class="kundenauftrag-form-text">
                             </div>
                             <div class="md:col-span-10"></div>
-                            <div class="md:col-span-5">
-                                <input placeholder="Firma" class="kundenauftrag-form-text">
-                            </div>
-                            <div class="md:col-span-5">
+                            <div class="md:col-span-10">
                                 <input placeholder="Anruf von" class="kundenauftrag-form-text">
                             </div>
-                            <div class="md:col-span-5">
+                            <div class="md:col-start-1 md:col-span-5">
                                 <input placeholder="Kontakt vor Ort" class="kundenauftrag-form-text">
                             </div>
                             <div class="md:col-span-5">
                                 <input type="text" placeholder="Termin vor Ort" class="kundenauftrag-form-text" onfocus="(this.type='date')" onblur="if(!this.value)this.type='text'">
-                            </div>
-                        </div>
-                        <div class="py-4 xl:py-6 md:flex-grow grid md:grid-cols-4 gap-2">
-                            <span class="text-xl font-light title-font tracking-widest uppercase mb-2 md:col-span-4">Intern</span>
-                            <div class="md:col-span-2">
-                                <input placeholder="Erstellt von" class="kundenauftrag-form-text">
-                            </div>
-                            <div class="md:col-span-2">
-                                <input type="text" placeholder="Datum" class="kundenauftrag-form-text" onfocus="(this.type='date')" onblur="if(!this.value)this.type='text'">
                             </div>
                         </div>
                         <div class="py-4 xl:py-6 md:flex-grow">
@@ -545,6 +536,15 @@
                                 </div>
                             </div>
                             <!-- End Tiptap -->
+                        </div>
+                        <div class="py-4 xl:py-6 md:flex-grow grid md:grid-cols-4 gap-2">
+                            <span class="text-xl font-light title-font tracking-widest uppercase mb-2 md:col-span-4">Intern</span>
+                            <div class="md:col-span-2">
+                                <input placeholder="Erstellt von" class="kundenauftrag-form-text">
+                            </div>
+                            <div class="md:col-span-2">
+                                <input type="text" placeholder="Datum" class="kundenauftrag-form-text" onfocus="(this.type='date')" onblur="if(!this.value)this.type='text'">
+                            </div>
                         </div>
                     </div>
                 </div>

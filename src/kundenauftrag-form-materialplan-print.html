@@ -12,6 +12,9 @@
 <body class="text-primary">
 	<svg class="hidden">
 		<defs>
+            <symbol id="icon-writedoc" viewBox="0 0 24 24" fill="none" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L10.582 16.07a4.5 4.5 0 0 1-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 0 1 1.13-1.897l8.932-8.931Zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0 1 15.75 21H5.25A2.25 2.25 0 0 1 3 18.75V8.25A2.25 2.25 0 0 1 5.25 6H10" />
+            </symbol>
             <symbol id="icon-save" viewBox="0 0 24 24">
                 <path d="M21 7v12q0 .825-.588 1.413T19 21H5q-.825 0-1.413-.588T3 19V5q0-.825.588-1.413T5 3h12l4 4Zm-9 11q1.25 0 2.125-.875T15 15q0-1.25-.875-2.125T12 12q-1.25 0-2.125.875T9 15q0 1.25.875 2.125T12 18Zm-6-8h9V6H6v4Z"/>
             </symbol>
@@ -384,78 +387,68 @@
 
         <main class="px-6 container xl:px-20 2xl:px-32 py-3 mx-auto mb-auto">
             <section class="my-5 xl:m-12 xl:mx-32">
-                <div class="py-4 xl:py-6 flex flex-col sm:flex-row items-end gap-4 w-full mb-5">
-                    <button type="button" class="w-full md:w-fit form-btn text-green-800 border-green-800/70 font-semibold text-sm md:ml-auto">
-                        <svg class="fill-green-900 size-5 mr-2"><use xlink:href="#icon-save"></use></svg> Speichern
-                    </button>
-                    <a href="kundenauftrag-form-materialliste-print.html" class="w-full md:w-fit form-btn text-primary font-semibold text-sm">
-                        <svg class="stroke-neutral-600 size-5 mr-2"><use xlink:href="#icon-print"></use></svg> Druckversion anzeigen
+                <div class="py-4 xl:py-6 flex flex-col sm:flex-row items-center gap-4 w-full mb-5">
+                    <a href="kundenauftrag-form-materialplan.html" class="w-full md:w-fit form-btn text-primary font-semibold text-sm">
+                        <svg class="stroke-primary size-5 mr-2"><use xlink:href="#icon-writedoc"></use></svg> Zurück
                     </a>
-                </div>
-                
-                <div class="bg-neutral-100 dark:bg-neutral-700 border-1 border-subnav shadow-xl p-10 md:px-20">
-                    <div class="lg:py-4 flex">
-                        <h1 class="text-3xl font-medium">Materialliste - Kurs ETE 4/22</h1>
-                    </div>
-                    <div class="w-full divide-y divide-secondary">
-                        <div class="py-4 xl:py-6 md:flex-grow grid md:grid-cols-12 gap-4 mb-10">
-                            <div class="md:col-start-7 md:col-span-4">
-                                <span class="font-semibold">bisherige Gesamtkosten in €</span>
-                            </div>
-                            <div class="md:col-span-2">
-                                <input placeholder="" class="kundenauftrag-form-text">
-                            </div>
-                        </div>
-                        <div class="py-4 xl:py-6 md:flex-grow grid md:grid-cols-12 gap-4">
-                            <div class="md:col-span-1">
-                                <span class="font-semibold">Pos.</span>
-                            </div>
-                            <div class="md:col-span-2">
-                                <span class="font-semibold">Menge</span>
-                            </div>
-                            <div class="md:col-span-2">
-                                <span class="font-semibold">Einzelpreis</span>
-                            </div>
-                            <div class="md:col-span-5">
-                                <span class="font-semibold">Material</span>
-                            </div>
-                            <div class="md:col-span-2">
-                                <span class="font-semibold">Gesamtpreis</span>
-                            </div>
-                            
-                            <div class="md:col-span-1">
-                                <span class="font-semibold">1</span>
-                            </div>
-                            <div class="md:col-span-2">
-                                <input placeholder="" class="kundenauftrag-form-text">
-                            </div>
-                            <div class="md:col-span-2">
-                                <input placeholder="in €" class="kundenauftrag-form-text">
-                            </div>
-                            <div class="md:col-span-5">
-                                <textarea class="kundenauftrag-form-text"></textarea>
-                            </div>
-                            <div class="md:col-span-2">
-                                <input placeholder="in €" class="kundenauftrag-form-text">
-                            </div>
-                        </div>
-                        <div class="py-4 xl:py-6 flex flex-col md:flex-row items-end gap-4 w-full mt-5">
-                            <a href="#" class="w-full md:w-fit form-btn text-primary font-semibold text-sm ml-auto">Gesamtzeit berechnen</a>
-                        </div>
-                    </div>
+                    <a href="kundenauftrag-form-materialplan.html" class="w-full md:w-fit ml-auto form-btn text-primary font-semibold text-sm">
+                        <svg class="stroke-primary size-5 mr-2"><use xlink:href="#icon-print"></use></svg> Drucken
+                    </a>
                 </div>
 
-                <div class="py-4 xl:py-6 flex flex-col md:flex-row items-end gap-4 w-full mt-5">
-                    <button type="button" class="w-full md:w-fit form-btn bg-white text-green-800 border-green-800/70 font-semibold text-sm md:ml-auto">
-                        <svg class="fill-green-900 size-5 mr-2"><use xlink:href="#icon-save"></use></svg> Speichern
-                    </button>
-                    <a href="kundenauftrag-form-materialliste-print.html" class="w-full md:w-fit form-btn text-primary font-semibold text-sm">
-                        <svg class="stroke-primary size-5 mr-2"><use xlink:href="#icon-print"></use></svg> Druckversion anzeigen
+                <div class="bg-white dark:bg-neutral-700 border-1 border-subnav shadow-xl p-10 md:px-20 relative">
+                    <span class="absolute right-5 top-3 xl:top-5 text-xl lg:text-4xl xl:text-6xl font-semibold text-neutral-200/60 dark:text-neutral-600/70 uppercase selection:bg-transparent">Druckversion</span>
+                    <div class="lg:py-4 flex">
+                        <h1 class="text-3xl font-medium z-10">Materialplan</h1>
+                    </div>
+                    <div class="w-full divide-y divide-secondary">
+                        <div class="relative overflow-x-auto py-4 xl:py-6">
+                            <table class="w-full text-sm text-left rtl:text-right text-body">
+                                <thead class="text-sm text-body border-b-1 border-subnav">
+                                    <tr>
+                                        <th scope="col" class="px-6 py-3 font-medium text-center">Pos.</th>
+                                        <th scope="col" class="px-6 py-3 rounded-s-base font-medium">Menge</th>
+                                        <th scope="col" class="px-6 py-3 rounded-s-base font-medium">Einzelpreis (€)</th>
+                                        <th scope="col" class="px-6 py-3 rounded-s-base font-medium">Material</th>
+                                        <th scope="col" class="px-6 py-3 rounded-e-base font-medium text-right">Gesamtpreis (€)</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr class="bg-neutral-primary">
+                                        <td class="text-center">1</td>
+                                        <td class="px-6 py-2 max-w-20">2,00</td>
+                                        <td class="px-6 py-2 max-w-20">40,00</td>
+                                        <th scope="row" class="px-6 py-2 font-normal">Stock</td>
+                                        <td class="px-6 py-2 text-right">80,00</td>
+                                    </tr>
+                                    <tr class="bg-neutral-primary">
+                                        <td class="text-center">2</td>
+                                        <td class="px-6 py-2 max-w-20">1,00</td>
+                                        <td class="px-6 py-2 max-w-20">60,00</td>
+                                        <th scope="row" class="px-6 py-2 font-normal">Buch</td>
+                                        <td class="px-6 py-2 text-right">80,00</td>
+                                    </tr>
+                                </tbody>
+                                <tfoot>
+                                    <tr class="border-t-1 border-subnav font-bold text-base">
+                                        <td class=""></td>
+                                        <td class=""></td>
+                                        <td class=""></td>
+                                        <td class="text-right"></td>
+                                        <td class="px-6 py-2 text-right">Gesamtkosten Material (€): 880,00</td>
+                                    </tr>
+                                </tfoot>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="py-4 xl:py-6 flex flex-col sm:flex-row items-center gap-4 w-full mt-10">
+                    <a href="kundenauftrag-form-materialplan.html" class="w-full md:w-fit form-btn text-primary font-semibold text-sm">
+                        <svg class="stroke-primary size-5 mr-2"><use xlink:href="#icon-writedoc"></use></svg> Zurück
                     </a>
-                    <button type="button" class="w-full md:w-fit form-btn text-neutral-400 border-neutral-300 font-semibold text-sm">
-                        <svg fill="none" class="size-5 mr-2" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
-                        </svg> Formulardaten zurücksetzen</button>
+                    <a href="kundenauftrag-form-materialplan-print.html" class="w-full md:w-fit ml-auto form-btn text-primary font-semibold text-sm">
+                        <svg class="stroke-primary size-5 mr-2"><use xlink:href="#icon-print"></use></svg> Drucken
+                    </a>
                 </div>
             </section>
         </main>

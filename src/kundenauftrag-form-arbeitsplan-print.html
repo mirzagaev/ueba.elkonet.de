@@ -388,73 +388,85 @@
         <main class="px-6 container xl:px-20 2xl:px-32 py-3 mx-auto mb-auto">
             <section class="my-5 xl:m-12 xl:mx-32">
                 <div class="py-4 xl:py-6 flex flex-col sm:flex-row items-center gap-4 w-full mb-5">
-                    <a href="kundenauftrag-form-besuchsbericht.html" class="w-full md:w-fit form-btn text-primary font-semibold text-sm">
+                    <a href="kundenauftrag-form-arbeitsplan.html" class="w-full md:w-fit form-btn text-primary font-semibold text-sm">
                         <svg class="stroke-primary size-5 mr-2"><use xlink:href="#icon-writedoc"></use></svg> Zurück
                     </a>
-                    <a href="kundenauftrag-form-kundenkartei-print.html" class="w-full md:w-fit ml-auto form-btn text-primary font-semibold text-sm">
+                    <a href="kundenauftrag-form-arbeitsplan-print.html" class="w-full md:w-fit ml-auto form-btn text-primary font-semibold text-sm">
                         <svg class="stroke-primary size-5 mr-2"><use xlink:href="#icon-print"></use></svg> Drucken
                     </a>
                 </div>
 
                 <div class="bg-white dark:bg-neutral-700 border-1 border-subnav shadow-xl p-10 md:px-20 relative">
-                    <span class="absolute right-5 top-5 text-xl lg:text-4xl xl:text-6xl font-semibold text-neutral-200/60 dark:text-neutral-600/70 uppercase selection:bg-transparent">Druckversion</span>
+                    <span class="absolute right-5 top-3 xl:top-5 text-xl lg:text-4xl xl:text-6xl font-semibold text-neutral-200/60 dark:text-neutral-600/70 uppercase selection:bg-transparent">Druckversion</span>
                     <div class="lg:py-4 flex">
-                        <h1 class="text-3xl font-medium">Arbeitsplan - Kurs ETE 4/22</h1>
+                        <h1 class="text-3xl font-medium z-10">Arbeitsplan - Kurs ETE 4/22</h1>
                     </div>
-                    <div class="w-full divide-y divide-secondary">
-                        <div class="py-4 xl:py-6 md:flex-grow grid md:grid-cols-4 gap-2">
-                            <div class="md:col-span-2 grid grid-cols-2">
-                                <span class="font-semibold">Erstellt von:</span>
-                                <span>Hr. Hocke</span>
+                    <div class="w-full">
+                        <div class="py-4 xl:py-6 md:flex-grow grid md:grid-cols-12 gap-4 mb-10 text-right text-sm">
+                            <div class="md:col-start-7 md:col-span-4">
+                                <span class="font-semibold">angenommener Stundensatz (€)</span>
+                            </div>
+                            <div class="md:col-span-2 font-bold px-3">
+                                <span>0</span>
+                            </div>
+                            <div class="md:col-start-7 md:col-span-4">
+                                <span class="font-semibold">Arbeitszeit Gesamt (Min)</span>
+                            </div>
+                            <div class="md:col-span-2 font-bold px-3">
+                                <span>110</span>
+                            </div>
+                            <div class="md:col-start-7 md:col-span-4">
+                                <span class="font-semibold">Gesamtkosten Lohn (€)</span>
+                            </div>
+                            <div class="md:col-span-2 font-bold px-3">
+                                <span>0</span>
                             </div>
                         </div>
-                        <div class="py-4 xl:py-6 md:flex-grow grid md:grid-cols-4 gap-2">
-                            <div class="md:col-span-1">
-                                <span class="font-semibold">Kundenadresse:</span>
-                            </div>
-                            <div class="md:col-span-3">
-                                <span class="block">FA. Eisenmann Sonderbau GmbH</span>
-                                <span class="block">Musterstraße 12</span>
-                                <span class="block">12345 Musterstadt</span>
-                            </div>
-                            <div class="md:col-span-4 mb-2"></div>
-                            <div class="md:col-span-2 grid grid-cols-2">
-                                <span class="font-semibold">Datum:</span>
-                                <span>aktuelles Datum</span>
-                            </div>
-                            <div class="md:col-span-2 grid grid-cols-2">
-                                <span class="font-semibold">Anfahrszeit:</span>
-                                <span>8:30 Uhr</span>
-                            </div>
-                            <div class="md:col-span-2 grid grid-cols-2">
-                                <span class="font-semibold">Besuchsbeginn:</span>
-                                <span>9:00 Uhr</span>
-                            </div>
-                            <div class="md:col-span-2 grid grid-cols-2">
-                                <span class="font-semibold">Besuchsende:</span>
-                                <span>12:00 Uhr</span>
-                            </div>
-                            <div class="md:col-span-4 mb-2"></div>
-                            <div class="md:col-span-2 grid grid-cols-2">
-                                <span class="font-semibold">Teilnehmer:</span>
-                                <span>Frau Eisenmann, Herr Hocke</span>
-                            </div>
-                        </div>
-                        <div class="py-4 xl:py-6 md:flex-grow">
-                            <span class="text-xl font-light title-font tracking-widest uppercase mb-4 block">Gesprächsthemen</span>
-                            <p>Renovierung udn Umbau des Dachgeschosses innerhlab der nächsten 6 WOchen.</p>
-                        </div>
-                        <div class="py-4 xl:py-6 md:flex-grow">
-                            <span class="text-xl font-light title-font tracking-widest uppercase mb-4 block">Besuchsbericht</span>
-                            <p>Renovierung udn Umbau des Dachgeschosses innerhlab der nächsten 6 WOchen.</p>
+                        <div class="relative overflow-x-auto">
+                            <table class="w-full text-sm text-left rtl:text-right text-body">
+                                <thead class="text-sm text-body border-b-1 border-subnav">
+                                    <tr>
+                                        <th scope="col" class="px-6 py-3 font-medium text-center">Pos.</th>
+                                        <th scope="col" class="px-6 py-3 rounded-s-base font-medium">Tätigkeit</th>
+                                        <th scope="col" class="px-6 py-3 rounded-s-base font-medium">Hilfsmittel/Vorschriften</th>
+                                        <th scope="col" class="px-6 py-3 rounded-e-base font-medium text-right">benötigte Zeit (Min)</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr class="bg-neutral-primary">
+                                        <td class="text-center">1</td>
+                                        <th scope="row" class="px-6 py-4 font-normal">
+                                            fdsfdsfsfdsfds
+                                        </th>
+                                        <td class="px-6 py-4">
+                                            fdsfdsfsfdsfds
+                                        </td>
+                                        <td class="max-w-20 px-6 py-4 text-right">
+                                            50
+                                        </td>
+                                    </tr>
+                                    <tr class="bg-neutral-primary">
+                                        <td class="text-center">2</td>
+                                        <th scope="row" class="px-6 py-4 font-normal">
+                                            fdsfdsfsfdsfds
+                                        </th>
+                                        <td class="px-6 py-4">
+                                            fdsfdsfsfdsfds
+                                        </td>
+                                        <td class="max-w-20 px-6 py-4 text-right">
+                                            60
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
                         </div>
                     </div>
                 </div>
                 <div class="py-4 xl:py-6 flex flex-col sm:flex-row items-center gap-4 w-full mt-10">
-                    <a href="kundenauftrag-form-besuchsbericht.html" class="w-full md:w-fit form-btn text-primary font-semibold text-sm">
+                    <a href="kundenauftrag-form-arbeitsplan.html" class="w-full md:w-fit form-btn text-primary font-semibold text-sm">
                         <svg class="stroke-primary size-5 mr-2"><use xlink:href="#icon-writedoc"></use></svg> Zurück
                     </a>
-                    <a href="kundenauftrag-form-kundenkartei-print.html" class="w-full md:w-fit ml-auto form-btn text-primary font-semibold text-sm">
+                    <a href="kundenauftrag-form-arbeitsplan-print.html" class="w-full md:w-fit ml-auto form-btn text-primary font-semibold text-sm">
                         <svg class="stroke-primary size-5 mr-2"><use xlink:href="#icon-print"></use></svg> Drucken
                     </a>
                 </div>
