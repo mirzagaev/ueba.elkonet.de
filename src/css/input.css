@@ -3,6 +3,13 @@
 
 @custom-variant dark (&:where(.dark, .dark *));
 
+@theme {
+    --color-analyse: #B91735;
+    --color-planung: #EA8712;
+    --color-durchfuehrung: #3CAA36;
+    --color-auswertung: #2E86BA;
+}
+
 @layer components {
 
     BODY {
@@ -221,67 +228,39 @@
         }
     }
 
-    .bg_analyse_strong {
-        @apply bg-[#E3DDED];
-        @variant dark {
-            @apply text-black;
-        }
-    }
-    .bg_analyse_light {
-        @apply bg-[#F6F4F9];
-        @variant dark {
-            @apply bg-neutral-800;
-        }
-        .fill-primary {
-            @apply fill-white;
-        }
-    }
-    .bg_planung_strong {
-        @apply bg-[#DFEBEF];
-        @variant dark {
-            @apply text-black;
-        }
-    }
-    .bg_planung_light {
-        @apply bg-[#F0F5F7];
-        @variant dark {
-            @apply bg-neutral-800;
-        }
-        .fill-primary {
-            @apply fill-white;
-        }
-    }
-    .bg_durchfuehrung_strong {
-        @apply bg-[#E3F0DF];
-        @variant dark {
-            @apply text-black;
-        }
-    }
-    .bg_durchfuehrung_light {
-        @apply bg-[#EFF6ED];
-        @variant dark {
-            @apply bg-neutral-800;
-        }
-        .fill-primary {
-            @apply fill-white;
-        }
-    }
-    .bg_auswertung_strong {
-        @apply bg-[#E6D5DE];
-        @variant dark {
-            @apply text-black;
-        }
-    }
-    .bg_auswertung_light {
-        @apply bg-[#F6EDF2];
-        @variant dark {
-            @apply bg-neutral-800;
-        }
-        .fill-primary {
-            @apply fill-white;
-        }
+    .kundenauftrag_textarea_html > ul {
+        @apply mx-8 py-2;
     }
 
+    .kundenauftrag_table_wrap table {
+        @apply w-full text-sm text-left my-10;
+
+        thead {
+            @apply border-b-1 border-neutral-300 font-medium;
+
+            @variant dark {
+                @apply border-neutral-500;
+            }
+
+            th {
+                @apply px-6 py-3;
+            }
+        }
+
+        tbody {
+            td {
+                @apply px-6 py-3;
+            }
+        }
+
+        tfoot {
+            @apply font-bold;
+            td {
+                @apply px-6 py-3 text-right;
+            }
+        }
+    }
+    
     .contentarea {
         p {
             @apply mb-3;
@@ -295,7 +274,7 @@
         @apply w-full rounded-2xl shadow-md;
 
         .kachelliste_headline {
-            @apply text-center p-4 md:px-10 xl:px-15 text-2xl font-bold border-b-1 border-neutral-300 shadow rounded-t-2xl w-full relative;
+            @apply text-center text-2xl p-4 md:px-10 xl:px-15 font-bold border-b-1 border-neutral-300 shadow rounded-t-2xl w-full relative;
             @variant dark {
                 @apply border-neutral-500;
             }
