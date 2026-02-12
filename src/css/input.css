@@ -1,9 +1,12 @@
+@import url("https://fonts.googleapis.com/css2?family=Lexend+Deca:wght@100..900&family=Lexend+Exa:wght@100..900&display=swap");
 @import "tailwindcss";
 @plugin "flowbite/plugin";
 
 @custom-variant dark (&:where(.dark, .dark *));
 
 @theme {
+    --font-lexend-deca: "Lexend Deca", sans-serif;
+    --font-lexend-exa: "Lexend Exa", sans-serif; 
     --color-analyse: #B91735;
     --color-planung: #EA8712;
     --color-durchfuehrung: #3CAA36;
@@ -260,7 +263,7 @@
             }
         }
     }
-    
+
     .contentarea {
         p {
             @apply mb-3;
@@ -454,6 +457,33 @@
                 p {
                     @apply font-medium text-xl my-5;
                 }
+            }
+        }
+    }
+
+    .carouselwrap {
+        @apply relative w-full;
+
+        .carousel_logo {
+            @apply right-5 top-5 absolute z-50 w-fit bg-white/50 rounded-2xl p-4;
+
+            img {
+                @apply h-20 2xl:h-24;
+            }
+        }
+
+        .carousel_beruf_img {
+            @apply w-full h-full object-cover object-center rounded-b-2xl sm:rounded-2xl;
+        }
+
+        .carousel_beruf_capture {
+            @apply absolute inset-0 rounded-b-2xl sm:rounded-2xl shadow-[inset_0_0_300px_rgba(0,0,0,0.5)] pointer-events-none flex;
+
+            h2 {
+                @apply mt-auto mb-3 px-10 xl:px-14 pb-5 sm:p-7 break-all;
+                @apply text-3xl md:text-4xl  2xl:text-7xl;
+                @apply md:leading-12 lg:leading-14 2xl:leading-24;
+                @apply font-medium font-lexend-exa text-shadow-lg/20 text-white;
             }
         }
     }
