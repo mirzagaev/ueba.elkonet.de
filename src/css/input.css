@@ -197,6 +197,18 @@
         }
     }
 
+    .btn_save {
+        @apply bg-green-800 text-white border-green-800/70;
+    }
+
+    .btn_print {
+        @apply bg-green-800 text-white;
+    }
+
+    .btn_reset {
+        @apply bg-green-800 text-white;
+    }
+
     .form-btn {
         @apply py-2 px-3 flex text-neutral-600 items-center cursor-pointer;
         @apply border-2 border-neutral-500 hover:bg-neutral-100 focus:outline-none;
@@ -277,10 +289,7 @@
         @apply w-full rounded-2xl shadow-md;
 
         .kachelliste_headline {
-            @apply text-center text-2xl p-4 md:px-10 xl:px-15 font-bold border-b-1 border-neutral-300 shadow rounded-t-2xl w-full relative;
-            @variant dark {
-                @apply border-neutral-500;
-            }
+            @apply text-center text-2xl p-4 md:px-10 xl:px-15 font-bold shadow rounded-t-2xl w-full relative;
         }
 
         .kachelliste_headline.inactiveAccordion {
