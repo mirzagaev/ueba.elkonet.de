@@ -12,6 +12,9 @@
 <body class="text-primary">
 	<svg class="hidden">
 		<defs>
+			<symbol id="icon-trash" fill="none" class="size-5 mr-2" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+			</symbol>
             <symbol id="icon-save" viewBox="0 0 24 24">
                 <path d="M21 7v12q0 .825-.588 1.413T19 21H5q-.825 0-1.413-.588T3 19V5q0-.825.588-1.413T5 3h12l4 4Zm-9 11q1.25 0 2.125-.875T15 15q0-1.25-.875-2.125T12 12q-1.25 0-2.125.875T9 15q0 1.25.875 2.125T12 18Zm-6-8h9V6H6v4Z"/>
             </symbol>
@@ -385,15 +388,15 @@
         <main class="px-6 container xl:px-20 2xl:px-32 py-3 mx-auto mb-auto">
             <section class="my-5 xl:m-12 xl:mx-32">
                 <div class="py-4 xl:py-6 flex flex-col sm:flex-row items-end gap-4 w-full mb-5">
-                    <button type="button" class="w-full md:w-fit form-btn text-green-800 border-green-800/70 font-semibold text-sm md:ml-auto">
-                        <svg class="fill-green-900 size-5 mr-2"><use xlink:href="#icon-save"></use></svg> Speichern
+                    <button type="button" class="btn-success md:ml-auto">
+                        <svg class="fill-white size-5 mr-2"><use xlink:href="#icon-save"></use></svg> Speichern
                     </button>
-                    <a href="kundenauftrag-form-besuchsbericht-print.html" class="w-full md:w-fit form-btn text-primary font-semibold text-sm">
-                        <svg class="stroke-neutral-600 size-5 mr-2"><use xlink:href="#icon-print"></use></svg> Druckversion anzeigen
+                    <a href="kundenauftrag-form-besuchsbericht-print.html" class="btn-secondary">
+                        <svg class="stroke-primary size-5 mr-2"><use xlink:href="#icon-print"></use></svg> Druckversion anzeigen
                     </a>
                 </div>
                 
-                <div class="bg-neutral-100 dark:bg-neutral-700 border-1 border-subnav shadow-xl p-10 md:px-20">
+                <div class="bg-neutral-100 dark:bg-neutral-700 border-1 border-subnav shadow-lg p-10 md:px-20">
                     <div class="lg:py-4 flex">
                         <h1 class="text-3xl font-medium">Besuchsbericht - Kurs ETE 4/22</h1>
                     </div>
@@ -528,16 +531,15 @@
                 </div>
 
                 <div class="py-4 xl:py-6 flex flex-col md:flex-row items-end gap-4 w-full mt-5">
-                    <button type="button" class="w-full md:w-fit form-btn bg-white text-green-800 border-green-800/70 font-semibold text-sm md:ml-auto">
-                        <svg class="fill-green-900 size-5 mr-2"><use xlink:href="#icon-save"></use></svg> Speichern
+                    <button type="button" class="btn-success md:ml-auto">
+                        <svg class="fill-white size-5 mr-2"><use xlink:href="#icon-save"></use></svg> Speichern
                     </button>
-                    <a href="kundenauftrag-form-besuchsbericht-print.html" class="w-full md:w-fit form-btn text-primary font-semibold text-sm">
+                    <a href="kundenauftrag-form-besuchsbericht-print.html" class="btn-secondary">
                         <svg class="stroke-primary size-5 mr-2"><use xlink:href="#icon-print"></use></svg> Druckversion anzeigen
                     </a>
-                    <button type="button" class="w-full md:w-fit form-btn text-neutral-400 border-neutral-300 font-semibold text-sm">
-                        <svg fill="none" class="size-5 mr-2" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
-                        </svg> Formulardaten zurücksetzen</button>
+                    <button type="button" class="btn-secondary opacity-55 hover:opacity-100">
+                        <svg class="stroke-primary size-5 mr-2"><use xlink:href="#icon-trash"></use></svg> Formulardaten zurücksetzen
+                    </button>
                 </div>
             </section>
         </main>

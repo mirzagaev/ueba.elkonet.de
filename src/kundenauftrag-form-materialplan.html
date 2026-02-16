@@ -12,6 +12,9 @@
 <body class="text-primary">
 	<svg class="hidden">
 		<defs>
+			<symbol id="icon-trash" fill="none" class="size-5 mr-2" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+			</symbol>
             <symbol id="icon-position" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M5.25 8.25h15m-16.5 7.5h15m-1.8-13.5-3.9 19.5m-2.1-19.5-3.9 19.5" />
             </symbol>
@@ -391,15 +394,15 @@
         <main class="px-6 container xl:px-20 2xl:px-32 py-3 mx-auto mb-auto">
             <section class="my-5 xl:m-12 xl:mx-32">
                 <div class="py-4 xl:py-6 flex flex-col sm:flex-row items-end gap-4 w-full mb-5">
-                    <button type="button" class="w-full md:w-fit form-btn text-green-800 border-green-800/70 font-semibold text-sm md:ml-auto">
-                        <svg class="fill-green-900 size-5 mr-2"><use xlink:href="#icon-save"></use></svg> Speichern
+                    <button type="button" class="btn-success md:ml-auto">
+                        <svg class="fill-white size-5 mr-2"><use xlink:href="#icon-save"></use></svg> Speichern
                     </button>
-                    <a href="kundenauftrag-form-materialplan-print.html" class="w-full md:w-fit form-btn text-primary font-semibold text-sm">
-                        <svg class="stroke-neutral-600 size-5 mr-2"><use xlink:href="#icon-print"></use></svg> Druckversion anzeigen
+                    <a href="kundenauftrag-form-materialplan-print.html" class="btn-secondary">
+                        <svg class="stroke-primary size-5 mr-2"><use xlink:href="#icon-print"></use></svg> Druckversion anzeigen
                     </a>
                 </div>
                 
-                <div class="bg-neutral-100 dark:bg-neutral-700 border-1 border-subnav shadow-xl p-10 md:px-20">
+                <div class="bg-neutral-100 dark:bg-neutral-700 border-1 border-subnav shadow-lg p-10 md:px-20">
                     <div class="lg:py-4 flex">
                         <h1 class="text-3xl font-medium">Materialplan - Kurs ETE 4/22</h1>
                     </div>
@@ -414,7 +417,7 @@
                         </div>
                         <div class="relative overflow-x-auto">
                             <table class="w-full text-sm text-left">
-                                <thead class="text-sm text-body bg-white">
+                                <thead class="text-sm text-body">
                                     <tr>
                                         <th scope="col" class="p-2 font-medium text-center">Pos.</th>
                                         <th scope="col" class="p-2 rounded-s-base font-medium">Menge</th>
@@ -472,13 +475,13 @@
                                 </tbody>
                             </table>
                             <div class="py-4 xl:py-6 flex flex-col md:flex-row items-end gap-4 w-full mt-5">
-                                <a href="#" class="w-full md:w-fit form-btn text-primary font-semibold text-sm ml-auto">
-                                    <svg class="fill-green-900 size-5 mr-2"><use xlink:href="#icon-position"></use></svg> Position hinzufügen
+                                <a href="#" class="btn-secondary dark:bg-neutral-800 ml-auto">
+                                    <svg class="size-5 mr-2"><use xlink:href="#icon-position"></use></svg> Position hinzufügen
                                 </a>
                             </div>
                             <div class="flex flex-col md:flex-row items-end gap-4 w-full">
-                                <a href="#" class="w-full md:w-fit form-btn text-primary font-semibold text-sm ml-auto">
-                                    <svg class="fill-green-900 size-5 mr-2"><use xlink:href="#icon-calculator"></use></svg> Gesamtpreis berechnen
+                                <a href="#" class="btn-secondary dark:bg-neutral-800 ml-auto">
+                                    <svg class="size-5 mr-2"><use xlink:href="#icon-calculator"></use></svg> Gesamtpreis berechnen
                                 </a>
                             </div>
                         </div>
@@ -486,16 +489,15 @@
                 </div>
 
                 <div class="py-4 xl:py-6 flex flex-col md:flex-row items-end gap-4 w-full mt-5">
-                    <button type="button" class="w-full md:w-fit form-btn bg-white text-green-800 border-green-800/70 font-semibold text-sm md:ml-auto">
-                        <svg class="fill-green-900 size-5 mr-2"><use xlink:href="#icon-save"></use></svg> Speichern
+                    <button type="button" class="btn-success md:ml-auto">
+                        <svg class="fill-white size-5 mr-2"><use xlink:href="#icon-save"></use></svg> Speichern
                     </button>
-                    <a href="kundenauftrag-form-materialplan-print.html" class="w-full md:w-fit form-btn text-primary font-semibold text-sm">
+                    <a href="kundenauftrag-form-materialplan-print.html" class="btn-secondary">
                         <svg class="stroke-primary size-5 mr-2"><use xlink:href="#icon-print"></use></svg> Druckversion anzeigen
                     </a>
-                    <button type="button" class="w-full md:w-fit form-btn text-neutral-400 border-neutral-300 font-semibold text-sm">
-                        <svg fill="none" class="size-5 mr-2" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
-                        </svg> Formulardaten zurücksetzen</button>
+                    <button type="button" class="btn-secondary opacity-55 hover:opacity-100">
+                        <svg class="stroke-primary size-5 mr-2"><use xlink:href="#icon-trash"></use></svg> Formulardaten zurücksetzen
+                    </button>
                 </div>
             </section>
         </main>
