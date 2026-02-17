@@ -5,25 +5,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="css/style.css" rel="stylesheet">
-    <script src="js/jquery.min.js"></script>
     <script src="js/custom.js"></script>
 </head>
 
 <body class="text-primary">
 	<svg class="hidden">
 		<defs>
-            <symbol id="icon-back" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" d="m18.75 4.5-7.5 7.5 7.5 7.5m-6-15L5.25 12l7.5 7.5" />
-            </symbol>
-            <symbol id="icon-writedoc" viewBox="0 0 24 24" fill="none" stroke-width="2">
-                <path stroke-linecap="round" stroke-linejoin="round" d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L10.582 16.07a4.5 4.5 0 0 1-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 0 1 1.13-1.897l8.932-8.931Zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0 1 15.75 21H5.25A2.25 2.25 0 0 1 3 18.75V8.25A2.25 2.25 0 0 1 5.25 6H10" />
-            </symbol>
-            <symbol id="icon-save" viewBox="0 0 24 24">
-                <path d="M21 7v12q0 .825-.588 1.413T19 21H5q-.825 0-1.413-.588T3 19V5q0-.825.588-1.413T5 3h12l4 4Zm-9 11q1.25 0 2.125-.875T15 15q0-1.25-.875-2.125T12 12q-1.25 0-2.125.875T9 15q0 1.25.875 2.125T12 18Zm-6-8h9V6H6v4Z"/>
-            </symbol>
-            <symbol id="icon-print" viewBox="0 0 24 24" fill="none" stroke-width="2">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M6.72 13.829c-.24.03-.48.062-.72.096m.72-.096a42.415 42.415 0 0 1 10.56 0m-10.56 0L6.34 18m10.94-4.171c.24.03.48.062.72.096m-.72-.096L17.66 18m0 0 .229 2.523a1.125 1.125 0 0 1-1.12 1.227H7.231c-.662 0-1.18-.568-1.12-1.227L6.34 18m11.318 0h1.091A2.25 2.25 0 0 0 21 15.75V9.456c0-1.081-.768-2.015-1.837-2.175a48.055 48.055 0 0 0-1.913-.247M6.34 18H5.25A2.25 2.25 0 0 1 3 15.75V9.456c0-1.081.768-2.015 1.837-2.175a48.041 48.041 0 0 1 1.913-.247m10.5 0a48.536 48.536 0 0 0-10.5 0m10.5 0V3.375c0-.621-.504-1.125-1.125-1.125h-8.25c-.621 0-1.125.504-1.125 1.125v3.659M18 10.5h.008v.008H18V10.5Zm-3 0h.008v.008H15V10.5Z" />
-            </symbol>
 			<symbol id="icon-folder" viewBox="0 0 474.3 353.2">
 				<path d="M474.3,161.5c0-9.3-2.7-17.7-7.7-24.6c-5-7-12.3-12.1-21.1-14.8c-4.2-1.3-8.8-1.9-13.5-1.9h-8.7v-16.9
                 c0-14.2-5.8-27.1-15.2-36.5c-9.3-9.3-22.3-15.2-36.5-15.2h-131c-3.1,0-5.9-0.5-8.3-1.5s-4.7-2.6-6.9-4.8l-30.3-30.1
@@ -133,13 +120,45 @@
 			<symbol id="icon-right" viewBox="0 0 20 20">
 				<path d="M7.5 15L11.0858 11.4142C11.7525 10.7475 12.0858 10.4142 12.0858 10C12.0858 9.58579 11.7525 9.25245 11.0858 8.58579L7.5 5" stroke="#777777" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" />
 			</symbol>
-			<symbol id="icon-trash" fill="none" class="size-5 mr-2" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+			<symbol id="icon-analyse" viewBox="0 0 50 50">
+				<path d="M50,47.1L37,34c7.3-8.9,6-22-2.9-29.3s-22-6-29.3,2.9s-6,22,2.9,29.3c7.7,6.3,18.7,6.3,26.4,0l13,13L50,47.1z M20.9,37.5 c-9.2,0-16.6-7.5-16.6-16.6S11.7,4.2,20.9,4.2s16.6,7.5,16.6,16.6C37.5,30.1,30.1,37.5,20.9,37.5z"/>
 			</symbol>
+			<symbol id="icon-planung" viewBox="0 0 50 50">
+				<path d="M2.2,12.9l34,34c2,2,4.6,3.1,7.4,3.1h4.3c1.2,0,2.1-0.9,2.1-2.1v-4.3c0-2.8-1.1-5.4-3.1-7.4l-34-34c-3-3-7.8-3-10.7,0
+                    C-0.7,5.2-0.7,10,2.2,12.9z M13.4,18.2l4.8-4.8L44,39.2c1.2,1.2,1.8,2.8,1.8,4.4v2.2h-2.2c-1.7,0-3.3-0.7-4.4-1.8L13.4,18.2z
+                    M5.2,10L5.2,10c-1.3-1.3-1.3-3.5,0-4.8c1.3-1.3,3.5-1.3,4.8,0l5.2,5.2l-4.8,4.8L5.2,10L5.2,10z"/>
+			</symbol>
+			<symbol id="icon-durchfuehrung" viewBox="0 0 50 50">
+				<path d="M25,16.9c-4.5,0-8.1,3.6-8.1,8.1c0,4.5,3.6,8.1,8.1,8.1s8.1-3.6,8.1-8.1C33.1,20.5,29.5,16.9,25,16.9z M25,29.6
+                    c-2.5,0-4.6-2-4.6-4.6c0-2.5,2-4.6,4.6-4.6c2.5,0,4.6,2,4.6,4.6C29.6,27.5,27.5,29.6,25,29.6z"/>
+                <path d="M12.7,39l0.2,0.2c1.8,1.5,3.7,2.6,5.9,3.4l0.2,0.1V44c0,3.3,2.7,6,6,6s6-2.7,6-6v-1.3l0.2-0.1c2.2-0.8,4.2-1.9,5.9-3.4
+                    l0.2-0.2l1.1,0.7c1.4,0.8,3,1,4.6,0.6c1.5-0.4,2.8-1.4,3.6-2.8c1.6-2.8,0.7-6.4-2.1-8.1l-1.3-0.7l0-0.2c0.4-2.3,0.4-4.6,0-6.8l0-0.2
+                    l1.1-0.7c1.4-0.8,2.4-2.1,2.8-3.6c0.4-1.5,0.2-3.2-0.6-4.6c-1.7-2.9-5.3-3.9-8.2-2.2L37.3,11l-0.2-0.2c-1.7-1.5-3.7-2.6-5.9-3.4
+                    L31,7.3V6c0-3.3-2.7-6-6-6s-6,2.7-6,6v1.3l-0.2,0.1c-2.2,0.8-4.2,1.9-5.9,3.4L12.7,11l-1.1-0.7C8.7,8.6,5,9.6,3.3,12.5
+                    c-0.8,1.4-1,3-0.6,4.6c0.4,1.5,1.4,2.8,2.8,3.6l1.1,0.7l0,0.2c-0.4,2.3-0.4,4.6,0,6.8l0,0.2l-1.1,0.7c-1.4,0.8-2.4,2.1-2.8,3.6
+                    c-0.4,1.5-0.2,3.2,0.6,4.6c1.7,2.9,5.3,3.9,8.2,2.2L12.7,39z M25,46.4c-1.3,0-2.4-1.1-2.4-2.4v-2.6c0-0.8-0.5-1.5-1.3-1.7
+                    c-2.7-0.7-5.1-2.1-7-4.1c-0.6-0.6-1.5-0.7-2.2-0.3l-2.3,1.3c-1.2,0.7-2.7,0.3-3.3-0.9c-0.7-1.2-0.3-2.7,0.9-3.3l2.3-1.3
+                    c0.7-0.4,1-1.2,0.8-2c-0.7-2.6-0.7-5.4,0-8.1c0.2-0.8-0.1-1.6-0.8-2l-2.3-1.3c-1.2-0.7-1.6-2.2-0.9-3.3c0.7-1.2,2.2-1.6,3.3-0.9
+                    l2.3,1.3c0.7,0.4,1.6,0.3,2.2-0.3c1.9-2,4.3-3.4,7-4c0.8-0.2,1.3-0.9,1.3-1.7V6c0-1.3,1.1-2.4,2.4-2.4s2.4,1.1,2.4,2.4v2.6
+                    c0,0.8,0.5,1.5,1.3,1.7c2.7,0.7,5.1,2.1,7,4.1c0.6,0.6,1.5,0.7,2.2,0.3l2.3-1.3c1.2-0.7,2.7-0.3,3.3,0.9c0.3,0.6,0.4,1.2,0.3,1.9
+                    c-0.2,0.6-0.6,1.2-1.1,1.5l-2.3,1.3c-0.7,0.4-1,1.2-0.8,2l0,0c0.7,2.6,0.7,5.4,0,8.1c-0.2,0.8,0.1,1.6,0.8,2l2.3,1.3
+                    c1.2,0.7,1.6,2.2,0.9,3.3c-0.7,1.2-2.2,1.6-3.3,0.9l-2.3-1.3c-0.7-0.4-1.6-0.3-2.2,0.3c-1.9,2-4.3,3.4-7,4c-0.8,0.2-1.3,0.9-1.3,1.7
+                    V44C27.4,45.3,26.3,46.4,25,46.4z"/>
+			</symbol>
+			<symbol id="icon-auswertung" viewBox="0 0 50 50">
+				<path d="M39.6,0H10.4C4.7,0,0,4.7,0,10.4v29.2C0,45.3,4.7,50,10.4,50h29.2C45.3,50,50,45.3,50,39.6V10.4C50,4.7,45.3,0,39.6,0z M45.8,39.6c0,3.5-2.8,6.2-6.2,6.2H10.4c-3.5,0-6.3-2.8-6.3-6.2V10.4C4.2,7,7,4.2,10.4,4.2h29.2c3.5,0,6.2,2.8,6.2,6.3V39.6z"/>
+                <path d="M19.4,33.2L11.3,25c-0.8-0.8-2.1-0.8-2.9,0l0,0c-0.8,0.8-0.8,2.1,0,2.9l8.2,8.2c1.6,1.6,4.3,1.6,5.9,0c0,0,0,0,0,0 l19.3-19.3c0.8-0.8,0.8-2.1,0-2.9l0,0c-0.8-0.8-2.1-0.8-2.9,0L19.4,33.2z"/>
+			</symbol>
+            <filter id="shadowLeft" x="-20%" y="-20%" width="150%" height="150%">
+                <feGaussianBlur in="SourceAlpha" stdDeviation="3" />
+                <feOffset dx="-2" dy="0" result="offsetblur" />
+                <feComponentTransfer><feFuncA type="linear" slope="0.3" /></feComponentTransfer>
+                <feMerge><feMergeNode /><feMergeNode in="SourceGraphic" /></feMerge>
+            </filter>
 		</defs>
 	</svg>
 
-    <div class="flex flex-col min-h-screen justify-between">
+    <div class="flex flex-col h-screen justify-between">
         <header class="flex flex-wrap flex-row items-center bg-primary">
             <button class="flex md:hidden ml-3 text-primary items-center p-2 cursor-pointer" type="button" data-drawer-target="ueba-maindrawer" data-drawer-show="ueba-maindrawer" data-drawer-position="left" aria-controls="ueba-maindrawer">
                 <svg class="size-7 stroke-primary" stroke-width="0.5"><use xlink:href="#icon-burger"></use></svg>
@@ -177,49 +196,49 @@
                 <div class="p-6 py-3">
                     <ul class="space-y-2 font-medium">
                         <li>
-                            <a href="modul-user.html" class="relative flex items-center p-2 text-primary rounded group">
+                            <a href="modul-user.html" class="relative flex items-center p-2 text-primary rounded-lg group">
                                 <svg class="size-6 fill-primary"><use xlink:href="#icon-folder"></use></svg>
                                 <span class="flex-1 ms-5 whitespace-nowrap">ETE 4/22</span>
                             </a>
                         </li>
                         <li>
-                            <a href="modul-Kundenauftrag.html" class="relative flex items-center p-2 text-primary rounded group">
-                                <svg class="size-6 fill-primary"><use xlink:href="#icon-ausbildungsnachweis"></use></svg>
+                            <a href="modul-kundenauftrag.html" class="relative flex items-center p-2 text-primary rounded-lg group">
+                                <svg class="size-6 fill-primary"><use xlink:href="#icon-kundenauftrag"></use></svg>
                                 <span class="flex-1 ms-5 whitespace-nowrap">Kundenauftrag</span>
                             </a>
                         </li>
                         <li>
-                            <a href="#" class="relative flex items-center p-2 text-primary rounded group">
+                            <a href="#" class="relative flex items-center p-2 text-primary rounded-lg group">
                                 <svg class="size-6 fill-primary"><use xlink:href="#icon-infopool"></use></svg>
-                                <span class="flex-1 ms-5 whitespace-nowrap">Infopool</span>
+                                <span class="flex-1 ms-5 whitespace-nowrap">InfoPool</span>
                             </a>
                         </li>
                         <li>
-                            <a href="#" class="relative flex items-center p-2 text-primary rounded group">
+                            <a href="#" class="relative flex items-center p-2 text-primary rounded-lg group">
                                 <svg class="size-6 fill-primary"><use xlink:href="#icon-wissenscheck"></use></svg>
-                                <span class="flex-1 ms-5 whitespace-nowrap">Wissenscheck</span>
+                                <span class="flex-1 ms-5 whitespace-nowrap">WissensCheck</span>
                             </a>
                         </li>
                         <li>
-                            <a href="#" class="relative flex items-center p-2 text-primary rounded group">
+                            <a href="#" class="relative flex items-center p-2 text-primary rounded-lg group">
                                 <svg class="size-6 fill-primary"><use xlink:href="#icon-methodik"></use></svg>
-                                <span class="flex-1 ms-5 whitespace-nowrap">Methodik</span>
+                                <span class="flex-1 ms-5 whitespace-nowrap">Methodik / Didaktik</span>
                             </a>
                         </li>
                         <li>
-                            <a href="#" class="relative flex items-center p-2 text-primary rounded group">
+                            <a href="#" class="relative flex items-center p-2 text-primary rounded-lg group">
                                 <svg class="size-6 fill-primary"><use xlink:href="#icon-ausbildungsnachweis"></use></svg>
                                 <span class="flex-1 ms-5 whitespace-nowrap">Ausbildungsnachweis</span>
                             </a>
                         </li>
                         <li>
-                            <a href="#" class="relative flex items-center p-2 text-primary rounded group">
+                            <a href="#" class="relative flex items-center p-2 text-primary rounded-lg group">
                                 <svg class="size-6 stroke-primary" fill="none" stroke-width="1.5"><use xlink:href="#icon-settings"></use></svg>
                                 <span class="flex-1 ms-5 whitespace-nowrap">Einstellungen</span>
                             </a>
                         </li>
                         <li>
-                            <a href="modul.html" class="flex items-center p-2 text-primary rounded group">
+                            <a href="modul.html" class="flex items-center p-2 text-primary rounded-lg group">
                                 <svg class="size-6 stroke-primary" fill="none" viewBox="0 0 24 24" stroke-width="1.5"><use xlink:href="#icon-logout"></use></svg>
                                 <span class="flex-1 ms-5 whitespace-nowrap">Ausloggen</span>
                             </a>
@@ -252,7 +271,7 @@
                 </button>
 
                 <!-- Dropdown menu -->
-                <div id="dropdownNotification" class="z-20 hidden w-full max-w-sm bg-secondary rounded shadow-sm" aria-labelledby="dropdownNotificationButton">
+                <div id="dropdownNotification" class="z-20 hidden w-full max-w-sm bg-secondary rounded-lg shadow-sm" aria-labelledby="dropdownNotificationButton">
                     <div class="block px-4 py-2 font-medium text-center text-primary rounded-t-lg bg-secondary">
                         Benachrichtigungen
                     </div>
@@ -305,7 +324,7 @@
                         </div>
                     </div>
 
-                    <div id="userDropdown" class="z-10 hidden bg-primary divide-y divide-neutral-300 dark:divide-neutral-700 rounded shadow-lg w-44">
+                    <div id="userDropdown" class="z-10 hidden bg-primary divide-y divide-neutral-300 dark:divide-neutral-700 rounded-lg shadow-lg w-44">
                         <div class="px-4 py-3 text-sm text-secondary">
                             <div>m.gonzales</div>
                             <div class="font-medium truncate">gonzales@etz.de</div>
@@ -354,7 +373,7 @@
                 </a>
             </div>
         </nav>
-
+        
         <!-- BREADCRUMB -->
         <nav class="hidden md:block mx-auto w-fit text-xs py-5 xl:px-20" aria-label="Breadcrumb">
             <ol class="inline-flex items-center space-x-1 md:space-x-2">
@@ -364,175 +383,41 @@
                         <svg class="stroke-primary size-4" fill="none"><use xlink:href="#icon-right"></use></svg>
                     </div>
                 </li>
-                <li aria-current="page">
-                    <div class="flex items-center">
-                        <svg class="w-4 h-4 text-primary" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M7.5 15L11.0858 11.4142C11.7525 10.7475 12.0858 10.4142 12.0858 10C12.0858 9.58579 11.7525 9.25245 11.0858 8.58579L7.5 5" stroke="#777777" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" />
-                        </svg>
-                        <a href="modul-user.html" class="ms-1 text-xs font-medium text-primary md:ms-2">ETE 4/22</a>
+                <li>
+                    <div class="flex items-center gap-2">
+                        <a href="modul-user.html" class="text-xs font-medium text-primary">ETE 4/22</a>
+                        <svg class="stroke-primary size-4" fill="none"><use xlink:href="#icon-right"></use></svg>
                     </div>
                 </li>
                 <li aria-current="page">
-                    <div class="flex items-center">
-                        <svg class="w-4 h-4 text-primary" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M7.5 15L11.0858 11.4142C11.7525 10.7475 12.0858 10.4142 12.0858 10C12.0858 9.58579 11.7525 9.25245 11.0858 8.58579L7.5 5" stroke="#777777" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" />
-                        </svg>
-                        <a href="modul-kundenauftrag.html" class="ms-1 text-xs font-medium text-primary md:ms-2">Kundenauftrag</a>
-                    </div>
-                </li>
-                <li aria-current="page">
-                    <div class="flex items-center">
-                        <svg class="w-4 h-4 text-primary" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M7.5 15L11.0858 11.4142C11.7525 10.7475 12.0858 10.4142 12.0858 10C12.0858 9.58579 11.7525 9.25245 11.0858 8.58579L7.5 5" stroke="#777777" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" />
-                        </svg>
-                        <span class="ms-1 text-xs font-medium text-secondary md:ms-2">Planung</span>
-                    </div>
+                    <span class="text-xs font-medium text-secondary">Kundenauftrag</span>
                 </li>
             </ol>
         </nav>
 
-        <main class="px-6 container xl:px-20 2xl:px-32 py-3 mx-auto mb-auto">
-            <section class="my-5 xl:m-12 xl:mx-32">
-                <div class="py-4 xl:py-6 flex flex-col sm:flex-row items-center gap-4 w-full mb-5">
-                    <a href="kundenauftrag-form-kundenkartei.html" class="btn-secondary">
-                        <svg class="stroke-primary size-4 mr-2"><use xlink:href="#icon-back"></use></svg> Zurück
-                    </a>
-                    <a href="kundenauftrag-form-kundenkartei-print.html" class="ml-auto btn-secondary">
-                        <svg class="stroke-primary size-5 mr-2"><use xlink:href="#icon-print"></use></svg> Drucken
-                    </a>
+        <main class="px-6 xl:px-20 2xl:px-32 py-3 mb-auto container mx-auto">
+            <div class="page_headline mt-4 lg:my-12">
+                <h2 class="text-2xl xl:text-3xl font-bold flex items-center">Kundenauftrag</h2>
+                <h3 class="lg:text-lg xl:text-xl mt-3">Gefahrenmeldeanlagen installieren und in Betrieb nehmen</h3>
+            </div>
+
+            <section class="w-full mx-auto my-20 flex flex-wrap xl:items-end text-center lg:text-xl" id="kundenauftrag_wrap">
+                <div class="w-1/4 my-auto">
+                    <img src="img/kundenauftrag/Analyse_01.png" class="w-4/5 h-auto ml-auto" />
                 </div>
-                <div class="bg-white dark:bg-neutral-700 border-1 border-subnav shadow-xl p-10 md:px-20 relative">
-                    <span class="absolute right-5 top-3 xl:top-5 text-xl lg:text-4xl xl:text-6xl font-semibold text-neutral-200/60 dark:text-neutral-600/70 uppercase selection:bg-transparent">Druckversion</span>
-                    <div class="lg:py-4 flex">
-                        <h1 class="text-3xl font-medium z-10">Kundenkartei - Kurs ETE 4/22</h1>
-                    </div>
-                    <div class="w-full divide-y divide-secondary">
-                        <div class="py-4 xl:py-6 sm:flex-grow grid sm:grid-cols-4 gap-2">
-                            <div class="col-span-3 sm:col-span-4">
-                                <span class="text-xl font-light title-font tracking-widest uppercase">Kundendaten</span>
-                            </div>
-                            <div class="col-span-1">
-                                <span class="font-semibold">Anrede:</span>
-                            </div>
-                            <div class="col-span-2 sm:col-span-1">
-                                <span>Frau</span>
-                            </div>
-                            <div class="col-start-1 col-span-1">
-                                <span class="font-semibold">Name:</span>
-                            </div>
-                            <div class="col-span-2 sm:col-span-1">
-                                <span>Mustermann</span>
-                            </div>
-                            <div class="col-span-1">
-                                <span class="font-semibold">Vorname:</span>
-                            </div>
-                            <div class="col-span-2 sm:col-span-1">
-                                <span>Karen</span>
-                            </div>
-                            <div class="col-span-1">
-                                <span class="font-semibold">Firma:</span>
-                            </div>
-                            <div class="col-span-2 sm:col-span-3">
-                                <span>Elektro Technologie Zentrum Stuttgart</span>
-                            </div>
-                            <div class="col-start-1 col-span-1">
-                                <span class="font-semibold">Straße:</span>
-                            </div>
-                            <div class="col-span-2 sm:col-span-1">
-                                <span>Musterstraße 12</span>
-                            </div>
-                            <div class="col-span-1">
-                                <span class="font-semibold">PLZ / Ort:</span>
-                            </div>
-                            <div class="col-span-2 sm:col-span-1">
-                                <span>12345 Musterstadt</span>
-                            </div>
-                            <div class="col-span-3 sm:col-span-4 mb-2"></div>
-                            <div class="col-span-1">
-                                <span class="font-semibold">Telefon:</span>
-                            </div>
-                            <div class="col-span-2 sm:col-span-1">
-                                <span>+49 211 5498493</span>
-                            </div>
-                            <div class="col-span-1">
-                                <span class="font-semibold">Mobil:</span>
-                            </div>
-                            <div class="col-span-2 sm:col-span-1">
-                                <span>+49 178 5656833</span>
-                            </div>
-                            <div class="col-span-1">
-                                <span class="font-semibold">E-Mail:</span>
-                            </div>
-                            <div class="col-span-2 sm:col-span-1">
-                                <span>info@etz-stuttgart.de</span>
-                            </div>
-                            <div class="col-span-3 sm:col-span-4 mb-2"></div>
-                            <div class="col-span-1">
-                                <span class="font-semibold">Anruf von:</span>
-                            </div>
-                            <div class="col-span-2 sm:col-span-3">
-                                <span>Mathias Mustermann</span>
-                            </div>
-                            <div class="col-start-1 col-span-1">
-                                <span class="font-semibold">Kontakt vor Ort:</span>
-                            </div>
-                            <div class="col-span-2 sm:col-span-1">
-                                <span>Müller</span>
-                            </div>
-                            <div class="col-span-1">
-                                <span class="font-semibold">Termin vor Ort:</span>
-                            </div>
-                            <div class="col-span-2 sm:col-span-1">
-                                <span>21.03.2026, 14:00 Uhr</span>
-                            </div>
-                        </div>
-                        <div class="py-4 xl:py-6 md:flex-grow">
-                            <div class="col-span-3 sm:col-span-4">
-                                <span class="text-xl font-light title-font tracking-widest uppercase mb-2">Notizen</span>
-                            </div>
-                            <div class="pt-2 kundenauftrag_textarea_html">
-                                <p>Renovierung udn Umbau des Dachgeschosses innerhlab der nächsten 6 WOchen.</p>
-                                <ul style="list-style-type: disc;">
-                                    <li>Kinderzimmer</li>
-                                    <li>Loggia</li>
-                                    <li>Arbeitszimmer</li>
-                                    <li>Badezimmer</li>
-                                    <li>Flur</li>
-                                    <li>Abstellraum</li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="py-4 xl:py-6 sm:flex-grow grid sm:grid-cols-4 gap-2">
-                            <div class="col-span-3 sm:col-span-4">
-                                <span class="text-xl font-light title-font tracking-widest uppercase mb-2">Intern</span>
-                            </div>
-                            <div class="col-span-1">
-                                <span class="font-semibold">Erstellt von:</span>
-                            </div>
-                            <div class="col-span-2 sm:col-span-1">
-                                <span>Herr Hocke</span>
-                            </div>
-                            <div class="col-span-1">
-                                <span class="font-semibold">Am:</span>
-                            </div>
-                            <div class="col-span-2 sm:col-span-1">
-                                <span>aktuelles Datum</span>
-                            </div>
-                        </div>
-                    </div>
+                <div class="w-1/4 my-auto">
+                    <img src="img/kundenauftrag/Planung_02.png" class="w-full h-auto" />
                 </div>
-                <div class="py-4 xl:py-6 flex flex-col sm:flex-row items-center gap-4 w-full mt-10">
-                    <a href="kundenauftrag-form-kundenkartei.html" class="btn-secondary">
-                        <svg class="stroke-primary size-4 mr-2"><use xlink:href="#icon-back"></use></svg> Zurück
-                    </a>
-                    <a href="kundenauftrag-form-kundenkartei-print.html" class="ml-auto btn-secondary">
-                        <svg class="stroke-primary size-5 mr-2"><use xlink:href="#icon-print"></use></svg> Drucken
-                    </a>
+                <div class="w-1/4 my-auto">
+                    <img src="img/kundenauftrag/Durchführung_03.png" class="w-full h-auto" />
+                </div>
+                <div class="w-1/4 my-auto">
+                    <img src="img/kundenauftrag/Auswertung_04.png" class="w-4/5 h-auto" />
                 </div>
             </section>
         </main>
 
-        <footer class="flex text-center mx-auto text-xs py-3 mt-12">
+        <footer class="flex text-center mx-auto text-xs py-3">
             <ul class="flex flex-col sm:flex-row gap-2 lg:gap-4 text-xs">
                 <li><a href="#" class="text-secondary">Impressum</a></li>
                 <li><a href="#" class="text-secondary">Datenschutzerklärung</a></li>
@@ -541,8 +426,59 @@
             </ul>
         </footer>
     </div>
+
+    <!-- CHATBOT -->
+    <button id="dropdownNavbarLink" data-dropdown-toggle="openChatbot" class="fixed bg-primary bottom-4 inline-flex right-4 text-primary items-center justify-center rounded-full cursor-pointer" type="button" aria-haspopup="dialog" aria-expanded="false" data-state="closed">
+        <svg stroke-width="1.5" fill="none" class="size-12 stroke-secondary"><use xlink:href="#icon-frage"></use></svg>
+    </button>
+    <div id="openChatbot" class="hidden fixed bottom-[calc(4rem+1.5rem)] right-0 mr-4 bg-primary shadow-sm p-6 rounded-lg w-[440px] h-[634px]">
+        <!-- Heading -->
+        <div class="flex flex-col space-y-1.5 pb-6">
+            <h2 class="font-semibold text-lg tracking-tight">Chatbot</h2>
+            <p class="text-sm text-secondary leading-3">Powered by Mendable and Vercel</p>
+        </div>
+
+        <!-- Chat Container -->
+        <div class="bg-primary flex flex-col gap-y-5">
+            <div class="flex">
+                <div class="shrink-0 relative inline-flex items-center justify-center w-8 h-8 overflow-hidden bg-secondary rounded-full">
+                    <svg stroke-width="1.5" class="size-8 p-1 fill-primary"><use xlink:href="#icon-aisymbol"></use></svg>
+                </div>
+                <div class="w-full ps-3">
+                    <div class="text-primary text-sm mt-1.5 mb-1.5">Hi, how can I help you today?</div>
+                </div>
+            </div>
+            <div class="flex">
+                <div class="shrink-0 relative inline-flex items-center justify-center w-8 h-8 overflow-hidden bg-secondary rounded-full">
+                    <span class="text-primary text-sm">MG</span>
+                </div>
+                <div class="w-full ps-3">
+                    <div class="text-primary text-sm mt-1.5 mb-1.5 ">fewafef</div>
+                </div>
+            </div>
+            <div class="flex">
+                <div class="shrink-0 relative inline-flex items-center justify-center w-8 h-8 overflow-hidden bg-secondary rounded-full">
+                    <svg stroke-width="1.5" class="size-8 p-1 fill-primary"><use xlink:href="#icon-aisymbol"></use></svg>
+                </div>
+                <div class="w-full ps-3">
+                    <div class="text-primary text-sm mt-1.5 mb-1.5 ">Sorry, I couldn't find any information in the documentation about that. Expect answer to be less accurateI could not find the answer to this in the verified sources.</div>
+                </div>
+            </div>
+            <div class="flex">
+                <div class="shrink-0 relative inline-flex items-center justify-center w-8 h-8 overflow-hidden bg-secondary rounded-full">
+                    <span class="text-primary text-sm">MG</span>
+                </div>
+                <div class="w-full ps-3">
+                    <form class="flex items-center justify-center w-full space-x-2">
+                        <input class="flex bg-secondary h-10 w-full rounded-md px-3 py-2 text-sm focus:outline-none disabled:cursor-not-allowed  text-primary focus-visible:ring-offset-2" placeholder="Type your message" value="">
+                        <button class="inline-flex items-center justify-center rounded-md text-sm font-medium disabled:pointer-events-none disabled:opacity-50 btn-primary h-10 px-4 py-2">Send</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
     
-    <script type="module" src="js/rte.js"></script>
     <script src="js/flowbite.min.js"></script>
 </body>
+
 </html>
