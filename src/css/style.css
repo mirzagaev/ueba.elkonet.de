@@ -1130,6 +1130,9 @@
   .mx-5 {
     margin-inline: calc(var(--spacing) * 5);
   }
+  .mx-6 {
+    margin-inline: calc(var(--spacing) * 6);
+  }
   .mx-8 {
     margin-inline: calc(var(--spacing) * 8);
   }
@@ -1624,14 +1627,6 @@
   }
   .ml-auto {
     margin-left: auto;
-  }
-  .datatable-pagination-list {
-    .datatable-wrapper .datatable-bottom .datatable-pagination & {
-      display: flex;
-      align-items: center;
-      height: 2rem;
-      font-size: 0.875rem;
-    }
   }
   .block {
     display: block;
@@ -2188,14 +2183,6 @@
   }
   .overflow-hidden {
     overflow: hidden;
-  }
-  .datatable-container {
-    .datatable-wrapper & thead tr.search-filtering-row th {
-      padding-top: 0;
-    }
-    .datatable-wrapper & {
-      overflow-x: auto;
-    }
   }
   .overflow-x-auto {
     overflow-x: auto;
@@ -2916,11 +2903,6 @@
   .pt-10 {
     padding-top: calc(var(--spacing) * 10);
   }
-  .search-filtering-row {
-    .datatable-wrapper .datatable-container thead tr& th {
-      padding-top: 0;
-    }
-  }
   .apexcharts-legend-text {
     .apexcharts-canvas & {
       font-size: 0.75rem !important;
@@ -2967,11 +2949,6 @@
   }
   .pl-6 {
     padding-left: calc(var(--spacing) * 6);
-  }
-  .datatable-empty {
-    .datatable-wrapper .datatable-table & {
-      text-align: center;
-    }
   }
   .text-center {
     text-align: center;
@@ -3268,6 +3245,10 @@
   }
   .shadow {
     --tw-shadow: 0 1px 3px 0 var(--tw-shadow-color, rgb(0 0 0 / 0.1)), 0 1px 2px -1px var(--tw-shadow-color, rgb(0 0 0 / 0.1));
+    box-shadow: var(--tw-inset-shadow), var(--tw-inset-ring-shadow), var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow);
+  }
+  .shadow-2xl {
+    --tw-shadow: 0 25px 50px -12px var(--tw-shadow-color, rgb(0 0 0 / 0.25));
     box-shadow: var(--tw-inset-shadow), var(--tw-inset-ring-shadow), var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow);
   }
   .shadow-lg {
@@ -3874,6 +3855,11 @@
       margin-block: calc(var(--spacing) * 24);
     }
   }
+  .lg\:mr-5 {
+    @media (width >= 64rem) {
+      margin-right: calc(var(--spacing) * 5);
+    }
+  }
   .lg\:h-5 {
     @media (width >= 64rem) {
       height: calc(var(--spacing) * 5);
@@ -4371,6 +4357,11 @@
   .dark\:fill-sky-300 {
     &:where(.dark, .dark *) {
       fill: var(--color-sky-300);
+    }
+  }
+  .dark\:p-3 {
+    &:where(.dark, .dark *) {
+      padding: calc(var(--spacing) * 3);
     }
   }
   .dark\:p-4 {
@@ -5103,10 +5094,22 @@
     }
     .kachelliste > p, .kachelliste > div {
       position: relative;
-      padding-inline: calc(var(--spacing) * 15);
-      padding-block: calc(var(--spacing) * 3.5);
+      padding-inline: calc(var(--spacing) * 6);
+      padding-block: calc(var(--spacing) * 3);
       --tw-shadow: 0 1px 2px 0 var(--tw-shadow-color, rgb(0 0 0 / 0.05));
       box-shadow: var(--tw-inset-shadow), var(--tw-inset-ring-shadow), var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow);
+      @media (width >= 64rem) {
+        padding-inline: calc(var(--spacing) * 15);
+      }
+      @media (width >= 64rem) {
+        padding-block: calc(var(--spacing) * 3.5);
+      }
+    }
+    .kachelliste ul {
+      margin: calc(var(--spacing) * 3);
+      list-style-position: inside;
+      list-style-type: disc;
+      padding-inline: calc(var(--spacing) * 5);
     }
     .kachelliste > p:last-child, .kachelliste > div:last-child {
       --tw-shadow: 0 0 #0000;

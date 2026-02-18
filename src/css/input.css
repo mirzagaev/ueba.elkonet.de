@@ -322,7 +322,10 @@
         }
         .kachelliste > p,
         .kachelliste > div {
-            @apply py-3.5 px-15 shadow-xs relative;
+            @apply py-3 px-6 lg:py-3.5 lg:px-15 shadow-xs relative;
+        }
+        .kachelliste ul {
+            @apply m-3 px-5 list-disc list-inside;
         }
         .kachelliste > p:last-child,
         .kachelliste > div:last-child {
