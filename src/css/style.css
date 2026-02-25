@@ -1016,6 +1016,9 @@
   .top-0 {
     top: calc(var(--spacing) * 0);
   }
+  .top-2 {
+    top: calc(var(--spacing) * 2);
+  }
   .top-3 {
     top: calc(var(--spacing) * 3);
   }
@@ -1628,6 +1631,14 @@
   .ml-auto {
     margin-left: auto;
   }
+  .datatable-pagination-list {
+    .datatable-wrapper .datatable-bottom .datatable-pagination & {
+      display: flex;
+      align-items: center;
+      height: 2rem;
+      font-size: 0.875rem;
+    }
+  }
   .block {
     display: block;
   }
@@ -2183,6 +2194,14 @@
   }
   .overflow-hidden {
     overflow: hidden;
+  }
+  .datatable-container {
+    .datatable-wrapper & thead tr.search-filtering-row th {
+      padding-top: 0;
+    }
+    .datatable-wrapper & {
+      overflow-x: auto;
+    }
   }
   .overflow-x-auto {
     overflow-x: auto;
@@ -2903,6 +2922,11 @@
   .pt-10 {
     padding-top: calc(var(--spacing) * 10);
   }
+  .search-filtering-row {
+    .datatable-wrapper .datatable-container thead tr& th {
+      padding-top: 0;
+    }
+  }
   .apexcharts-legend-text {
     .apexcharts-canvas & {
       font-size: 0.75rem !important;
@@ -2949,6 +2973,11 @@
   }
   .pl-6 {
     padding-left: calc(var(--spacing) * 6);
+  }
+  .datatable-empty {
+    .datatable-wrapper .datatable-table & {
+      text-align: center;
+    }
   }
   .text-center {
     text-align: center;
@@ -3364,6 +3393,16 @@
     &::before {
       content: var(--tw-content);
       color: var(--color-gray-500);
+    }
+  }
+  .hover\:scale-105 {
+    &:hover {
+      @media (hover: hover) {
+        --tw-scale-x: 105%;
+        --tw-scale-y: 105%;
+        --tw-scale-z: 105%;
+        scale: var(--tw-scale-x) var(--tw-scale-y);
+      }
     }
   }
   .hover\:border-gray-300 {
@@ -6341,6 +6380,21 @@
   initial-value: "";
   inherits: false;
 }
+@property --tw-scale-x {
+  syntax: "*";
+  inherits: false;
+  initial-value: 1;
+}
+@property --tw-scale-y {
+  syntax: "*";
+  inherits: false;
+  initial-value: 1;
+}
+@property --tw-scale-z {
+  syntax: "*";
+  inherits: false;
+  initial-value: 1;
+}
 @property --tw-gradient-position {
   syntax: "*";
   inherits: false;
@@ -6451,6 +6505,9 @@
       --tw-duration: initial;
       --tw-ease: initial;
       --tw-content: "";
+      --tw-scale-x: 1;
+      --tw-scale-y: 1;
+      --tw-scale-z: 1;
       --tw-gradient-position: initial;
       --tw-gradient-from: #0000;
       --tw-gradient-via: #0000;
