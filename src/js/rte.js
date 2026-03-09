@@ -19,6 +19,7 @@ const editor = new Editor({
             class: 'relative min-h-40 p-3'
         }
     },
+    content: savedContent ? JSON.parse(savedContent) : '',
     extensions: [
         StarterKit.configure({
             history: false
@@ -45,12 +46,12 @@ const editor = new Editor({
         }),
         BulletList.configure({
             HTMLAttributes: {
-                class: 'list-disc list-inside text-gray-800 dark:text-white'
+                class: 'list-disc list-outside ms-4 text-gray-800 dark:text-white'
             }
         }),
         OrderedList.configure({
             HTMLAttributes: {
-                class: 'list-decimal list-inside text-gray-800 dark:text-white'
+                class: 'list-decimal list-outside ms-4 text-gray-800 dark:text-white'
             }
         }),
         ListItem.configure({
@@ -65,6 +66,7 @@ const editor = new Editor({
         })
     ]
 });
+window.editor = editor;
 const actions = [{
         id: '#hs-editor-tiptap [data-hs-editor-bold]',
         fn: () => editor.chain().focus().toggleBold().run()

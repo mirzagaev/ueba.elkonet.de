@@ -1,2 +1,78 @@
-<!-- LOGO für EGOCMS25 -->
-<a hidden class="w-fit py-2 dark:p-3 mx-6 my-2 bg-opacity-25 bg-white/40 flex rounded-3xl"></a>
+<!doctype html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="css/style.css" rel="stylesheet">
+    <script src="js/custom.js"></script>
+</head>
+<body>
+
+<main class="container mx-auto relative h-full">
+    <!-- LOGO für EGOCMS25 -->
+    <a hidden class="w-fit py-2 dark:p-3 mx-6 my-2 bg-opacity-25 bg-white/40 flex rounded-3xl"></a>
+
+    <div class="flex items-center p-4 mb-4 text-sm text-green-800 rounded bg-green-50 dark:bg-gray-800 dark:text-green-400" role="alert">
+        <svg class="shrink-0 inline w-4 h-4 me-3 fill-current"><use xlink:href="#icon-info"></use></svg>
+        <span class="sr-only">Info</span>
+        <div>
+            <span class="font-medium">Gespeichert!</span> Change a few things up and try submitting again.
+        </div>
+    </div>
+
+    <div id="saveModal" hidden class="fixed inset-0 z-50 flex items-center justify-center bg-neutral-800/50 backdrop-blur-sm">
+        <div class="modal-content bg-white dark:bg-neutral-800 p-6 rounded-xl shadow-2xl flex flex-col items-center gap-4 min-w-[200px]">
+            <div
+                class="inline-block h-8 w-8 animate-spin rounded-full border-4 border-solid border-current border-e-transparent align-[-0.125em] text-surface motion-reduce:animate-[spin_1.5s_linear_infinite] dark:text-white"
+                role="status">
+                <span
+                    class="!absolute !-m-px !h-px !w-px !overflow-hidden !whitespace-nowrap !border-0 !p-0 ![clip:rect(0,0,0,0)]"
+                    >Loading...</span
+                >
+                </div>
+            <div id="checkSuccess" class="text-green-500">
+                <svg class="size-10" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+            </div>
+            <div id="checkFail" style="display:none;" class="text-red-500">
+                <svg class="size-10" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="15" x2="9" y1="15" y2="9"></line><line x1="9" x2="15" y1="15" y2="9"></line></svg>
+            </div>
+            <p id="modalText" class="font-medium text-gray-800 dark:text-neutral-200">Speichern...</p>
+        </div>
+    </div>
+
+    <div id="toast-default" class="flex items-center fixed right-10 bottom-0 w-fit max-w-xs px-4 py-3 text-body bg-gray-100 rounded-base shadow-xs border-l-4 border-gray-700" role="alert">
+        <div class="ms-2.5 text-sm border-s border-default ps-3.5">Set yourself free.</div>
+        <button type="button" class="ms-auto flex items-center justify-center text-body hover:text-heading bg-transparent box-border border border-transparent hover:bg-neutral-secondary-medium focus:ring-4 focus:ring-neutral-tertiary font-medium leading-5 rounded text-sm h-8 w-8 focus:outline-none" data-dismiss-target="#toast-default" aria-label="Close">
+            <span class="sr-only">Close</span>
+            <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18 17.94 6M18 18 6.06 6"/></svg>
+        </button>
+    </div>
+
+    <div class="xl:container mx-auto w-full my-10 bg-gray-100 border-l-4 border-gray-700 text-gray-700 p-4" id="alert_website_wartung" role="alert">
+		<div class="font-bold">Wichtiger Hinweis</div>
+		<div class="mt-2">Unsere Webseite steht aufgrund von Software- und Serverupdates in der Karwoche (30.03 - 07.04.2026) nur eingeschränkt zur Verfügung. Ab dem 07.04.2026 ist der Web-Auftritt wieder wie gewohnt erreichbar. Besuchen Sie die Webseite zu einem späteren Zeitpunkt erneut.</div>
+	</div>
+
+    <div class="xl:container mx-auto w-full my-10 bg-sky-100 border-l-4 border-sky-700 text-sky-700 p-4" id="alert_website_wartung" role="alert">
+		<div class="font-bold">Wichtiger Hinweis</div>
+		<div class="mt-2">Unsere Webseite steht aufgrund von Software- und Serverupdates in der Karwoche (30.03 - 07.04.2026) nur eingeschränkt zur Verfügung. Ab dem 07.04.2026 ist der Web-Auftritt wieder wie gewohnt erreichbar. Besuchen Sie die Webseite zu einem späteren Zeitpunkt erneut.</div>
+	</div>
+
+    <div class="xl:container mx-auto w-full my-10 bg-green-100 border-l-4 border-green-700 text-green-700 p-4" id="alert_website_wartung" role="alert">
+		<div class="font-bold">Wichtiger Hinweis</div>
+		<div class="mt-2">Unsere Webseite steht aufgrund von Software- und Serverupdates in der Karwoche (30.03 - 07.04.2026) nur eingeschränkt zur Verfügung. Ab dem 07.04.2026 ist der Web-Auftritt wieder wie gewohnt erreichbar. Besuchen Sie die Webseite zu einem späteren Zeitpunkt erneut.</div>
+	</div>
+
+    <div class="xl:container mx-auto w-full my-10 bg-orange-100 border-l-4 border-orange-700 text-orange-700 p-4" id="alert_website_wartung" role="alert">
+		<div class="font-bold">Wichtiger Hinweis</div>
+		<div class="mt-2">Unsere Webseite steht aufgrund von Software- und Serverupdates in der Karwoche (30.03 - 07.04.2026) nur eingeschränkt zur Verfügung. Ab dem 07.04.2026 ist der Web-Auftritt wieder wie gewohnt erreichbar. Besuchen Sie die Webseite zu einem späteren Zeitpunkt erneut.</div>
+	</div>
+
+    <div class="xl:container mx-auto w-full my-10 bg-red-100 border-l-4 border-red-700 text-red-700 p-4" id="alert_website_wartung" role="alert">
+		<div class="font-bold">Wichtiger Hinweis</div>
+		<div class="mt-2">Unsere Webseite steht aufgrund von Software- und Serverupdates in der Karwoche (30.03 - 07.04.2026) nur eingeschränkt zur Verfügung. Ab dem 07.04.2026 ist der Web-Auftritt wieder wie gewohnt erreichbar. Besuchen Sie die Webseite zu einem späteren Zeitpunkt erneut.</div>
+	</div>
+</main>
+<script src="js/flowbite.min.js"></script>
+</body>
+</html
