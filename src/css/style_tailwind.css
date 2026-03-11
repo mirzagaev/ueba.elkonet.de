@@ -1766,6 +1766,9 @@
   .h-40 {
     height: calc(var(--spacing) * 40);
   }
+  .h-64 {
+    height: calc(var(--spacing) * 64);
+  }
   .h-\[634px\] {
     height: 634px;
   }
@@ -1795,6 +1798,9 @@
   }
   .min-h-40 {
     min-height: calc(var(--spacing) * 40);
+  }
+  .min-h-64 {
+    min-height: calc(var(--spacing) * 64);
   }
   .min-h-screen {
     min-height: 100vh;
@@ -2879,6 +2885,9 @@
   }
   .fill-emerald-600 {
     fill: var(--color-emerald-600);
+  }
+  .fill-emerald-700 {
+    fill: var(--color-emerald-700);
   }
   .fill-gray-300 {
     fill: var(--color-gray-300);
