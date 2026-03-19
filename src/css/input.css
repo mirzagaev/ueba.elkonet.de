@@ -514,4 +514,23 @@
             }
         }
     }
+    /* Sanfte Transition für Breite und Position */
+    .drawer-animate {
+        transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1), 
+                    width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .vertical-text {
+        writing-mode: vertical-rl;
+        transform: rotate(180deg);
+    }
+    /* Scrollbar-Design */
+    .custom-scrollbar::-webkit-scrollbar { width: 4px; }
+    .custom-scrollbar::-webkit-scrollbar-track { background: transparent; }
+    .custom-scrollbar::-webkit-scrollbar-thumb { background: #d4d4d4; border-radius: 10px; }
+    .custom-scrollbar::-webkit-scrollbar-thumb:hover { background: #a3a3a3; }
+    
+    /* Animation für den Wechsel zwischen Menü und Formular */
+    .fade-transition {
+        transition: opacity 0.3s ease, transform 0.3s ease;
+    }
 }
