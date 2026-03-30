@@ -1,6 +1,4 @@
-import {
-    Editor
-} from 'https://esm.sh/@tiptap/core@2.11.0';
+import { Editor } from 'https://esm.sh/@tiptap/core@2.11.0';
 import StarterKit from 'https://esm.sh/@tiptap/starter-kit@2.11.0';
 import Placeholder from 'https://esm.sh/@tiptap/extension-placeholder@2.11.0';
 import Paragraph from 'https://esm.sh/@tiptap/extension-paragraph@2.11.0';
@@ -12,15 +10,37 @@ import OrderedList from 'https://esm.sh/@tiptap/extension-ordered-list@2.11.0';
 import ListItem from 'https://esm.sh/@tiptap/extension-list-item@2.11.0';
 import Blockquote from 'https://esm.sh/@tiptap/extension-blockquote@2.11.0';
 
-if (window.savedContent) {
+window.initRTE = function initRTE(root = document) {
+    const editorRoot = root.querySelector('#hs-editor-tiptap');
+    const field = root.querySelector('#hs-editor-tiptap [data-hs-editor-field]');
+
+    if (!editorRoot || !field) {
+        return;
+    }
+
+    // Vorherigen Editor sauber zerstören
+    if (window.editor && typeof window.editor.destroy === 'function') {
+        window.editor.destroy();
+        window.editor = null;
+    }
+
+    let content = '';
+    if (window.savedContent) {
+        try {
+            content = JSON.parse(window.savedContent);
+        } catch (e) {
+            content = window.savedContent;
+        }
+    }
+
     const editor = new Editor({
-        element: document.querySelector('#hs-editor-tiptap [data-hs-editor-field]'),
+        element: field,
         editorProps: {
             attributes: {
                 class: 'relative min-h-64 p-3'
             }
         },
-        content: savedContent ? JSON.parse(savedContent) : '',
+        content,
         extensions: [
             StarterKit.configure({
                 history: false
@@ -67,75 +87,58 @@ if (window.savedContent) {
             })
         ]
     });
+
     window.editor = editor;
-    const actions = [{
-            id: '#hs-editor-tiptap [data-hs-editor-bold]',
+
+    const actions = [
+        {
+            selector: '[data-hs-editor-bold]',
             fn: () => editor.chain().focus().toggleBold().run()
         },
         {
-            id: '#hs-editor-tiptap [data-hs-editor-italic]',
+            selector: '[data-hs-editor-italic]',
             fn: () => editor.chain().focus().toggleItalic().run()
         },
         {
-            id: '#hs-editor-tiptap [data-hs-editor-underline]',
+            selector: '[data-hs-editor-underline]',
             fn: () => editor.chain().focus().toggleUnderline().run()
         },
         {
-            id: '#hs-editor-tiptap [data-hs-editor-strike]',
+            selector: '[data-hs-editor-strike]',
             fn: () => editor.chain().focus().toggleStrike().run()
         },
         {
-            id: '#hs-editor-tiptap [data-hs-editor-link]',
+            selector: '[data-hs-editor-link]',
             fn: () => {
                 const url = window.prompt('URL');
-                editor.chain().focus().extendMarkRange('link').setLink({
-                    href: url
-                }).run();
+                if (!url) return;
+                editor.chain().focus().extendMarkRange('link').setLink({ href: url }).run();
             }
         },
         {
-            id: '#hs-editor-tiptap [data-hs-editor-ol]',
+            selector: '[data-hs-editor-ol]',
             fn: () => editor.chain().focus().toggleOrderedList().run()
         },
         {
-            id: '#hs-editor-tiptap [data-hs-editor-ul]',
+            selector: '[data-hs-editor-ul]',
             fn: () => editor.chain().focus().toggleBulletList().run()
         },
         {
-            id: '#hs-editor-tiptap [data-hs-editor-blockquote]',
+            selector: '[data-hs-editor-blockquote]',
             fn: () => editor.chain().focus().toggleBlockquote().run()
         }
     ];
 
-    actions.forEach(({
-        id,
-        fn
-    }) => {
-        const action = document.querySelector(id);
-
-        if (action === null) return;
-
-        action.addEventListener('click', fn);
+    actions.forEach(({ selector, fn }) => {
+        const button = editorRoot.querySelector(selector);
+        if (!button) return;
+        button.onclick = fn;
     });
-} else {
-    try {
-        new Editor({
-            element: document.querySelector('#print-editor-field'),
-            editable: false,
-            content: JSON.parse(savedContent2),
-            extensions: [
-                StarterKit.configure({ history: false }),
-                Paragraph.configure({ HTMLAttributes: { class: 'text-inherit text-gray-800 dark:text-neutral-200' } }),
-                Bold.configure({ HTMLAttributes: { class: 'font-bold' } }),
-                Underline,
-                Link.configure({ HTMLAttributes: { class: 'inline-flex items-center gap-x-1 text-blue-600 decoration-2 hover:underline focus:outline-hidden focus:underline font-medium dark:text-white' } }),
-                BulletList.configure({ HTMLAttributes: { class: 'list-disc list-outside ms-4 text-gray-800 dark:text-white' } }),
-                OrderedList.configure({ HTMLAttributes: { class: 'list-decimal list-outside ms-4 text-gray-800 dark:text-white' } }),
-                ListItem.configure({ HTMLAttributes: { class: 'marker:text-sm' } }),
-                Blockquote.configure({ HTMLAttributes: { class: 'relative border-s-4 ps-4 sm:ps-6 dark:border-neutral-700 sm:[&>p]:text-lg' } })
-            ]
-        });
-    } catch (e) {
-        console.error("Fehler beim Rendern der Notizen:", e);
+};
+
+window.destroyRTE = function destroyRTE() {
+    if (window.editor && typeof window.editor.destroy === 'function') {
+        window.editor.destroy();
+        window.editor = null;
     }
-}
+};

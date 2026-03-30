@@ -1087,6 +1087,9 @@
   .left-0 {
     left: calc(var(--spacing) * 0);
   }
+  .left-4 {
+    left: calc(var(--spacing) * 4);
+  }
   .left-8 {
     left: calc(var(--spacing) * 8);
   }
@@ -3162,6 +3165,9 @@
       color: white !important;
     }
   }
+  .pr-8 {
+    padding-right: calc(var(--spacing) * 8);
+  }
   .pr-10 {
     padding-right: calc(var(--spacing) * 10);
   }
@@ -3194,6 +3200,12 @@
   }
   .pl-6 {
     padding-left: calc(var(--spacing) * 6);
+  }
+  .pl-16 {
+    padding-left: calc(var(--spacing) * 16);
+  }
+  .pl-20 {
+    padding-left: calc(var(--spacing) * 20);
   }
   .datatable-empty {
     .datatable-wrapper .datatable-table & {
@@ -4353,6 +4365,11 @@
   .xl\:bottom-7 {
     @media (width >= 80rem) {
       bottom: calc(var(--spacing) * 7);
+    }
+  }
+  .xl\:left-8 {
+    @media (width >= 80rem) {
+      left: calc(var(--spacing) * 8);
     }
   }
   .xl\:container {
