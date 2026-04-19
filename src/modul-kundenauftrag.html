@@ -155,7 +155,7 @@
                 <path stroke-linecap="round" stroke-linejoin="round" d="M14.857 17.082a23.848 23.848 0 0 0 5.454-1.31A8.967 8.967 0 0 1 18 9.75V9A6 6 0 0 0 6 9v.75a8.967 8.967 0 0 1-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 0 1-5.714 0m5.714 0a3 3 0 1 1-5.714 0" />
             </symbol>
             <symbol id="icon-close" viewBox="0 0 14 14">
-                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
             </symbol>
             <symbol id="icon-burger" viewBox="0 0 24 24">
                 <path d="M2 5.99519C2 5.44556 2.44556 5 2.99519 5H11.0048C11.5544 5 12 5.44556 12 5.99519C12 6.54482 11.5544 6.99039 11.0048 6.99039H2.99519C2.44556 6.99039 2 6.54482 2 5.99519Z" fill="currentColor"/><path d="M2 11.9998C2 11.4501 2.44556 11.0046 2.99519 11.0046H21.0048C21.5544 11.0046 22 11.4501 22 11.9998C22 12.5494 21.5544 12.9949 21.0048 12.9949H2.99519C2.44556 12.9949 2 12.5494 2 11.9998Z" fill="currentColor"/><path d="M2.99519 17.0096C2.44556 17.0096 2 17.4552 2 18.0048C2 18.5544 2.44556 19 2.99519 19H15.0048C15.5544 19 16 18.5544 16 18.0048C16 17.4552 15.5544 17.0096 15.0048 17.0096H2.99519Z" fill="currentColor"/>
@@ -267,7 +267,7 @@
         </defs>
     </svg>
 
-    <div class="flex flex-col h-screen justify-between">
+    <div id="main-wrapper" class="flex flex-col min-h-screen justify-between w-full drawer-animate">
         <header class="flex flex-wrap flex-row items-center bg-primary">
             <button class="flex md:hidden ml-3 text-primary items-center p-2 cursor-pointer" type="button" data-drawer-target="ueba-maindrawer" data-drawer-show="ueba-maindrawer" data-drawer-position="left" aria-controls="ueba-maindrawer">
                 <svg class="size-7 stroke-primary" stroke-width="0.5"><use xlink:href="#icon-burger"></use></svg>
@@ -560,23 +560,19 @@
         </footer>
     </div>
 
-    <!-- Overlay -->
-    <div id="drawer-overlay" class="fixed inset-0 bg-black/30 backdrop-blur-[2px] z-40 opacity-0 pointer-events-none transition-opacity duration-300"></div>
-
     <!-- Drawer Container -->
-    <!-- Desktop: md:w-1/3 | Mobile: w-full -->
-    <div id="drawer-container" class="fixed top-0 right-0 h-full w-full md:w-1/3 xl:w-1/4 bg-white text-neutral-900 shadow-2xl z-50 translate-x-full drawer-animate flex border-l border-neutral-200">
+    <div id="drawer-container" class="fixed top-0 right-0 h-full w-full md:w-1/2 xl:w-1/3 bg-white dark:bg-neutral-700 text-neutral-900 drop-shadow-2xl shadow-2xl z-50 translate-x-full drawer-animate flex border-l border-neutral-200 dark:border-neutral-600">
         
         <!-- Toggle Button (Vertikaler Tab) -->
-        <button id="drawer-toggle" class="absolute left-0 top-1/2 -translate-x-full -translate-y-1/2 bg-neutral-800  dark:bg-neutral-200 hover:bg-red-600 dark:hover:bg-neutral-100 text-white dark:text-black py-5 px-3 rounded-l-xl flex flex-col items-center gap-4 transition-all duration-200 group cursor-pointer" aria-label="Formulare öffnen/schließen">
-            <svg class="fill-white size-5 -rotate-90" fill="none"><use xlink:href="#icon-ausbildungsnachweis"></use></svg>
+        <button id="drawer-toggle" class="absolute left-0 top-1/2 -translate-x-full -translate-y-1/2 bg-neutral-800 dark:bg-neutral-300 hover:bg-red-600 dark:hover:bg-neutral-100 text-white dark:text-black py-5 px-3 rounded-l-xl flex flex-col items-center gap-4 transition-all duration-200 group cursor-pointer" aria-label="Formulare öffnen/schließen">
+            <svg class="fill-white dark:fill-black size-5 -rotate-90" fill="none"><use xlink:href="#icon-ausbildungsnachweis"></use></svg>
             <span class="vertical-text font-bold tracking-widest uppercase text-xs md:text-sm">Formulare</span>
         </button>
 
         <!-- Wrapper für Menü und Content -->
         <div class="relative w-full h-full overflow-hidden">
             <!-- SPALTE 1: Hauptmenü (Navigation) -->
-            <aside id="menu-aside" class="absolute inset-0 w-full h-full flex flex-col bg-white fade-transition opacity-100 z-10">
+            <aside id="menu-aside" class="absolute inset-0 w-full h-full flex flex-col fade-transition opacity-100 z-10">
                 <div class="border-b border-subnav flex items-center justify-between p-8 py-5 xl:p-10 xl:py-6 gap-2">
                     <h2 class="text-primary text-2xl font-semibold leading-7 pr-10">Online Formulare</h2>
                     <button onclick="toggleDrawer()" class="btn-secondary w-8 h-8 p-0" title="Schließen">
@@ -588,52 +584,52 @@
                 <nav class="flex-1 overflow-y-auto py-4 custom-scrollbar">
                     <ul class="space-y-1 px-5">
                         <li onclick="selectForm('Kundenkartei')">
-                            <div class="group flex items-center gap-4 px-4 py-3 rounded-2xl hover:bg-neutral-100 cursor-pointer transition-all border border-transparent">
-                                <svg class="size-6 fill-primary group-hover:fill-red-600" fill="none"><use xlink:href="#icon-kundenkartei"></use></svg>
-                                <span class="font-medium text-neutral-700">Kundenkartei</span>
-                                <svg class="stroke-primary size-5  ml-auto" fill="none"><use xlink:href="#icon-right"></use></svg>
+                            <div class="group flex items-center gap-4 px-4 py-3 rounded-2xl hover:bg-neutral-100 dark:hover:bg-neutral-800 cursor-pointer transition-all border border-transparent">
+                                <svg class="size-6 fill-primary" fill="none"><use xlink:href="#icon-kundenkartei"></use></svg>
+                                <span class="font-medium text-primary">Kundenkartei</span>
+                                <svg class="stroke-primary size-5 ml-auto" fill="none"><use xlink:href="#icon-right"></use></svg>
                             </div>
                         </li>
                         <li onclick="selectForm('Besuchsbericht')">
                             <div class="group flex items-center gap-4 px-4 py-3 rounded-2xl hover:bg-neutral-100 cursor-pointer transition-all border border-transparent">
-                                <svg class="size-6 fill-primary group-hover:fill-red-600" fill="none"><use xlink:href="#icon-besuchsbericht"></use></svg>
-                                <span class="font-medium text-neutral-700">Besuchsbericht</span>
-                                <svg class="stroke-primary size-5  ml-auto" fill="none"><use xlink:href="#icon-right"></use></svg>
+                                <svg class="size-6 fill-primary" fill="none"><use xlink:href="#icon-besuchsbericht"></use></svg>
+                                <span class="font-medium text-primary">Besuchsbericht</span>
+                                <svg class="stroke-primary size-5 ml-auto" fill="none"><use xlink:href="#icon-right"></use></svg>
                             </div>
                         </li>
                         <li onclick="selectForm('Arbeitsplan')">
                             <div class="group flex items-center gap-4 px-4 py-3 rounded-2xl hover:bg-neutral-100 cursor-pointer transition-all border border-transparent">
-                                <svg class="size-6 fill-primary group-hover:fill-red-600" fill="none"><use xlink:href="#icon-arbeitsplan"></use></svg>
-                                <span class="font-medium text-neutral-700">Arbeitsplan</span>
-                                <svg class="stroke-primary size-5  ml-auto" fill="none"><use xlink:href="#icon-right"></use></svg>
+                                <svg class="size-6 fill-primary" fill="none"><use xlink:href="#icon-arbeitsplan"></use></svg>
+                                <span class="font-medium text-primary">Arbeitsplan</span>
+                                <svg class="stroke-primary size-5 ml-auto" fill="none"><use xlink:href="#icon-right"></use></svg>
                             </div>
                         </li>
                         <li onclick="selectForm('Materialplan')">
                             <div class="group flex items-center gap-4 px-4 py-3 rounded-2xl hover:bg-neutral-100 cursor-pointer transition-all border border-transparent">
-                                <svg class="size-6 fill-primary group-hover:fill-red-600" fill="none"><use xlink:href="#icon-basket"></use></svg>
-                                <span class="font-medium text-neutral-700">Materialplan</span>
-                                <svg class="stroke-primary size-5  ml-auto" fill="none"><use xlink:href="#icon-right"></use></svg>
+                                <svg class="size-6 fill-primary" fill="none"><use xlink:href="#icon-basket"></use></svg>
+                                <span class="font-medium text-primary">Materialplan</span>
+                                <svg class="stroke-primary size-5 ml-auto" fill="none"><use xlink:href="#icon-right"></use></svg>
                             </div>
                         </li>
                         <li onclick="selectForm('Angebot')">
                             <div class="group flex items-center gap-4 px-4 py-3 rounded-2xl hover:bg-neutral-100 cursor-pointer transition-all border border-transparent">
-                                <svg class="size-6 fill-primary group-hover:fill-red-600" fill="none"><use xlink:href="#icon-euro"></use></svg>
-                                <span class="font-medium text-neutral-700">Angebot</span>
-                                <svg class="stroke-primary size-5  ml-auto" fill="none"><use xlink:href="#icon-right"></use></svg>
+                                <svg class="size-6 fill-primary" fill="none"><use xlink:href="#icon-euro"></use></svg>
+                                <span class="font-medium text-primary">Angebot</span>
+                                <svg class="stroke-primary size-5 ml-auto" fill="none"><use xlink:href="#icon-right"></use></svg>
                             </div>
                         </li>
                         <li onclick="selectForm('Abnahme')">
                             <div class="group flex items-center gap-4 px-4 py-3 rounded-2xl hover:bg-neutral-100 cursor-pointer transition-all border border-transparent">
-                                <svg class="size-6 fill-primary group-hover:fill-red-600" fill="none"><use xlink:href="#icon-check"></use></svg>
-                                <span class="font-medium text-neutral-700">Abnahme</span>
-                                <svg class="stroke-primary size-5  ml-auto" fill="none"><use xlink:href="#icon-right"></use></svg>
+                                <svg class="size-6 fill-primary" fill="none"><use xlink:href="#icon-check"></use></svg>
+                                <span class="font-medium text-primary">Abnahme</span>
+                                <svg class="stroke-primary size-5 ml-auto" fill="none"><use xlink:href="#icon-right"></use></svg>
                             </div>
                         </li>
                         <li onclick="selectForm('Rechnung')">
                             <div class="group flex items-center gap-4 px-4 py-3 rounded-2xl hover:bg-neutral-100 cursor-pointer transition-all border border-transparent">
-                                <svg class="size-6 fill-primary group-hover:fill-red-600" fill="none"><use xlink:href="#icon-rechnung"></use></svg>
-                                <span class="font-medium text-neutral-700">Rechnung</span>
-                                <svg class="stroke-primary size-5  ml-auto" fill="none"><use xlink:href="#icon-right"></use></svg>
+                                <svg class="size-6 fill-primary" fill="none"><use xlink:href="#icon-rechnung"></use></svg>
+                                <span class="font-medium text-primary">Rechnung</span>
+                                <svg class="stroke-primary size-5 ml-auto" fill="none"><use xlink:href="#icon-right"></use></svg>
                             </div>
                         </li>
                     </ul>
@@ -641,37 +637,25 @@
             </aside>
 
             <!-- SPALTE 2: Inhaltsbereich (Formular) -->
-            <section id="content-pane" class="absolute inset-0 w-full h-full flex flex-col bg-gray-50 fade-transition opacity-0 pointer-events-none z-20 translate-x-4">
-                <div class="p-6 pl-20 pr-8 xl:px-20 border-b border-neutral-100 flex items-center justify-between bg-white shrink-0">
+            <section id="content-pane" class="absolute inset-0 w-full h-full flex flex-col fade-transition opacity-0 pointer-events-none z-20 translate-x-4">
+                <div class="p-6 pl-20 pr-8 xl:pr-8 xl:px-20 border-b border-subnav flex items-center justify-between shrink-0">
                     <div class="flex items-center gap-3 overflow-hidden">
                         <button onclick="deselectForm()" class="cursor-pointer p-0 left-8 absolute" title="Zurück">
-                            <svg class="stroke-primary size-6 mx-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7" />
-                            </svg>
+                            <svg class="stroke-primary size-6 mx-auto" fill="none"><use xlink:href="#icon-left"></use></svg>
                             <span class="sr-only">Zurück</span>
                         </button>
                         <div class="truncate">
-                            <h3 id="detail-title" class="text-xl font-semibold text-neutral-800 truncate uppercase tracking-tight">Formular</h3>
-                            <p class="text-[10px] text-neutral-400 uppercase font-bold tracking-widest">ETE 4/22</p>
+                            <h3 id="detail-title" class="text-xl font-semibold text-primary truncate uppercase tracking-tight">Formular</h3>
+                            <p class="text-[10px] text-secondary uppercase font-bold tracking-widest">ETE 4/22</p>
                         </div>
                     </div>
-                    <div class="flex gap-3 shrink-0">
-                        <button type="button" class="btn-success md:ml-auto text-sm p-2 h-8">
-                            <svg class="fill-white size-4"><use xlink:href="#icon-save"></use></svg>
-                            <span class="hidden xl:block ml-2">Speichern</span>
-                        </button>
-                        <a href="kundenauftrag-form-kundenkartei-print.html" class="btn-secondary text-sm p-2 h-8">
-                            <svg class="stroke-primary size-4"><use xlink:href="#icon-print"></use></svg>
-                            <span class="hidden xl:block ml-2">Druckversion</span>
-                        </a>
-                        <button onclick="toggleDrawer()" class="btn-secondary opacity-55 hover:opacity-100 text-sm p-2 h-8" title="Schließen">
-                            <svg class="stroke-primary size-3"><use xlink:href="#icon-close"></use></svg>
-                            <span class="hidden xl:block ml-2">Schließen</span>
-                        </button>
-                    </div>
+                    <button onclick="toggleDrawer()" class="btn-secondary w-8 h-8 p-0" title="Schließen">
+                        <svg class="stroke-primary size-4 mx-auto"><use xlink:href="#icon-close"></use></svg>
+                        <span class="sr-only">Schließen</span>
+                    </button>
                 </div>
 
-                <div class="flex-1 overflow-y-auto p-6 xl:px-20 md:p-8 custom-scrollbar">
+                <div class="flex-1 overflow-y-auto p-6 xl:px-12 md:p-8 custom-scrollbar">
                     <div class="space-y-8 pb-10">
                         <div class="space-y-6">
                             <div class="grid grid-cols-1 gap-4">
@@ -696,22 +680,6 @@
 
                         <div class="w-full divide-y divide-secondary" id="drawer-form">
                         </div>
-
-                        <div class="py-4 xl:py-6 flex flex-col sm:flex-row items-end gap-4 w-full mt-5">
-                            <button type="button" class="btn-success md:ml-auto">
-                                <svg class="fill-white size-5 mr-2"><use xlink:href="#icon-save"></use></svg> Speichern
-                            </button>
-                            <a href="kundenauftrag-form-kundenkartei-print.html" class="btn-secondary">
-                                <svg class="stroke-primary size-5 mr-2"><use xlink:href="#icon-print"></use></svg> Druckversion anzeigen
-                            </a>
-                            <button type="button" class="btn-secondary opacity-55 hover:opacity-100">
-                                <svg class="stroke-primary size-5 mr-2"><use xlink:href="#icon-trash"></use></svg> Formulardaten zurücksetzen
-                            </button>
-                            <button onclick="toggleDrawer()" class="btn-secondary opacity-55 hover:opacity-100" title="Schließen">
-                                <svg class="stroke-primary size-4 mr-2"><use xlink:href="#icon-close"></use></svg>
-                                Schließen
-                            </button>
-                        </div>
                     </div>
                 </div>
             </section>
@@ -721,7 +689,6 @@
     <script>
         const drawerContainer = document.getElementById('drawer-container');
         const drawerToggle = document.getElementById('drawer-toggle');
-        const drawerOverlay = document.getElementById('drawer-overlay');
         const menuAside = document.getElementById('menu-aside');
         const contentPane = document.getElementById('content-pane');
         const detailTitle = document.getElementById('detail-title');
@@ -735,20 +702,17 @@
 
             if (isDrawerOpen) {
                 drawerContainer.classList.remove('translate-x-full');
-                drawerOverlay.classList.remove('opacity-0', 'pointer-events-none');
-                drawerOverlay.classList.add('opacity-100');
                 
                 if (isMobile) {
                     drawerToggle.classList.add('opacity-0', 'pointer-events-none');
                 }
             } else {
                 drawerContainer.classList.add('translate-x-full');
-                drawerOverlay.classList.remove('opacity-100');
-                drawerOverlay.classList.add('opacity-0', 'pointer-events-none');
                 drawerToggle.classList.remove('opacity-0', 'pointer-events-none');
                 
-                // Beim kompletten Schließen des Drawers auch die Formular-Ansicht zurücksetzen
-                setTimeout(deselectForm, 400);
+                // Die Formular-Ansicht soll NICHT mehr zurückgesetzt werden,
+                // damit das zuletzt geöffnete Formular beim erneuten Öffnen erhalten bleibt.
+                // setTimeout(deselectForm, 400);
             }
         }
 
@@ -765,8 +729,8 @@
             contentPane.classList.add('opacity-100', 'translate-x-0');
 
             // Container verbreitern
-            drawerContainer.classList.remove('xl:w-1/4');
-            drawerContainer.classList.add('md:w-2/3');
+            drawerContainer.classList.remove('xl:w-1/3');
+            drawerContainer.classList.add('md:w-2/5');
 
             // Falls auf Mobile: Toggle Button sicherheitshalber ausblenden
             if (window.innerWidth < 768) {
@@ -786,8 +750,8 @@
             menuAside.classList.add('opacity-100');
 
             // Container-Breite zurücksetzen
-            drawerContainer.classList.remove('md:w-2/3');
-            drawerContainer.classList.add('xl:w-1/4');
+            drawerContainer.classList.remove('md:w-2/5');
+            drawerContainer.classList.add('xl:w-1/3');
 
             // Button wieder zeigen (falls Drawer noch offen ist)
             if (isDrawerOpen && window.innerWidth >= 768) {
@@ -796,7 +760,6 @@
         }
 
         drawerToggle.addEventListener('click', toggleDrawer);
-        drawerOverlay.addEventListener('click', toggleDrawer);
 
         window.addEventListener('keydown', (e) => {
             if (e.key === 'Escape') {

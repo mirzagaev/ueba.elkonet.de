@@ -5,13 +5,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="css/style.css" rel="stylesheet">
-    <script src="js/jquery.min.js"></script>
     <script src="js/custom.js"></script>
 </head>
 
 <body class="text-primary">
 	<svg class="hidden">
 		<defs>
+            <symbol id="icon-email" fill="none" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 0 1-2.25 2.25h-15a2.25 2.25 0 0 1-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0 0 19.5 4.5h-15a2.25 2.25 0 0 0-2.25 2.25m19.5 0v.243a2.25 2.25 0 0 1-1.07 1.916l-7.5 4.615a2.25 2.25 0 0 1-2.36 0L3.32 8.91a2.25 2.25 0 0 1-1.07-1.916V6.75" />
+            </symbol>
 			<symbol id="icon-folder" viewBox="0 0 474.3 353.2">
 				<path d="M474.3,161.5c0-9.3-2.7-17.7-7.7-24.6c-5-7-12.3-12.1-21.1-14.8c-4.2-1.3-8.8-1.9-13.5-1.9h-8.7v-16.9
                 c0-14.2-5.8-27.1-15.2-36.5c-9.3-9.3-22.3-15.2-36.5-15.2h-131c-3.1,0-5.9-0.5-8.3-1.5s-4.7-2.6-6.9-4.8l-30.3-30.1
@@ -121,12 +123,47 @@
 			<symbol id="icon-right" viewBox="0 0 20 20">
 				<path d="M7.5 15L11.0858 11.4142C11.7525 10.7475 12.0858 10.4142 12.0858 10C12.0858 9.58579 11.7525 9.25245 11.0858 8.58579L7.5 5" stroke="#777777" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" />
 			</symbol>
+			<symbol id="icon-analyse" viewBox="0 0 50 50">
+				<path d="M50,47.1L37,34c7.3-8.9,6-22-2.9-29.3s-22-6-29.3,2.9s-6,22,2.9,29.3c7.7,6.3,18.7,6.3,26.4,0l13,13L50,47.1z M20.9,37.5 c-9.2,0-16.6-7.5-16.6-16.6S11.7,4.2,20.9,4.2s16.6,7.5,16.6,16.6C37.5,30.1,30.1,37.5,20.9,37.5z"/>
+			</symbol>
+			<symbol id="icon-planung" viewBox="0 0 50 50">
+				<path d="M2.2,12.9l34,34c2,2,4.6,3.1,7.4,3.1h4.3c1.2,0,2.1-0.9,2.1-2.1v-4.3c0-2.8-1.1-5.4-3.1-7.4l-34-34c-3-3-7.8-3-10.7,0
+                    C-0.7,5.2-0.7,10,2.2,12.9z M13.4,18.2l4.8-4.8L44,39.2c1.2,1.2,1.8,2.8,1.8,4.4v2.2h-2.2c-1.7,0-3.3-0.7-4.4-1.8L13.4,18.2z
+                    M5.2,10L5.2,10c-1.3-1.3-1.3-3.5,0-4.8c1.3-1.3,3.5-1.3,4.8,0l5.2,5.2l-4.8,4.8L5.2,10L5.2,10z"/>
+			</symbol>
+			<symbol id="icon-durchfuehrung" viewBox="0 0 50 50">
+				<path d="M25,16.9c-4.5,0-8.1,3.6-8.1,8.1c0,4.5,3.6,8.1,8.1,8.1s8.1-3.6,8.1-8.1C33.1,20.5,29.5,16.9,25,16.9z M25,29.6
+                    c-2.5,0-4.6-2-4.6-4.6c0-2.5,2-4.6,4.6-4.6c2.5,0,4.6,2,4.6,4.6C29.6,27.5,27.5,29.6,25,29.6z"/>
+                <path d="M12.7,39l0.2,0.2c1.8,1.5,3.7,2.6,5.9,3.4l0.2,0.1V44c0,3.3,2.7,6,6,6s6-2.7,6-6v-1.3l0.2-0.1c2.2-0.8,4.2-1.9,5.9-3.4
+                    l0.2-0.2l1.1,0.7c1.4,0.8,3,1,4.6,0.6c1.5-0.4,2.8-1.4,3.6-2.8c1.6-2.8,0.7-6.4-2.1-8.1l-1.3-0.7l0-0.2c0.4-2.3,0.4-4.6,0-6.8l0-0.2
+                    l1.1-0.7c1.4-0.8,2.4-2.1,2.8-3.6c0.4-1.5,0.2-3.2-0.6-4.6c-1.7-2.9-5.3-3.9-8.2-2.2L37.3,11l-0.2-0.2c-1.7-1.5-3.7-2.6-5.9-3.4
+                    L31,7.3V6c0-3.3-2.7-6-6-6s-6,2.7-6,6v1.3l-0.2,0.1c-2.2,0.8-4.2,1.9-5.9,3.4L12.7,11l-1.1-0.7C8.7,8.6,5,9.6,3.3,12.5
+                    c-0.8,1.4-1,3-0.6,4.6c0.4,1.5,1.4,2.8,2.8,3.6l1.1,0.7l0,0.2c-0.4,2.3-0.4,4.6,0,6.8l0,0.2l-1.1,0.7c-1.4,0.8-2.4,2.1-2.8,3.6
+                    c-0.4,1.5-0.2,3.2,0.6,4.6c1.7,2.9,5.3,3.9,8.2,2.2L12.7,39z M25,46.4c-1.3,0-2.4-1.1-2.4-2.4v-2.6c0-0.8-0.5-1.5-1.3-1.7
+                    c-2.7-0.7-5.1-2.1-7-4.1c-0.6-0.6-1.5-0.7-2.2-0.3l-2.3,1.3c-1.2,0.7-2.7,0.3-3.3-0.9c-0.7-1.2-0.3-2.7,0.9-3.3l2.3-1.3
+                    c0.7-0.4,1-1.2,0.8-2c-0.7-2.6-0.7-5.4,0-8.1c0.2-0.8-0.1-1.6-0.8-2l-2.3-1.3c-1.2-0.7-1.6-2.2-0.9-3.3c0.7-1.2,2.2-1.6,3.3-0.9
+                    l2.3,1.3c0.7,0.4,1.6,0.3,2.2-0.3c1.9-2,4.3-3.4,7-4c0.8-0.2,1.3-0.9,1.3-1.7V6c0-1.3,1.1-2.4,2.4-2.4s2.4,1.1,2.4,2.4v2.6
+                    c0,0.8,0.5,1.5,1.3,1.7c2.7,0.7,5.1,2.1,7,4.1c0.6,0.6,1.5,0.7,2.2,0.3l2.3-1.3c1.2-0.7,2.7-0.3,3.3,0.9c0.3,0.6,0.4,1.2,0.3,1.9
+                    c-0.2,0.6-0.6,1.2-1.1,1.5l-2.3,1.3c-0.7,0.4-1,1.2-0.8,2l0,0c0.7,2.6,0.7,5.4,0,8.1c-0.2,0.8,0.1,1.6,0.8,2l2.3,1.3
+                    c1.2,0.7,1.6,2.2,0.9,3.3c-0.7,1.2-2.2,1.6-3.3,0.9l-2.3-1.3c-0.7-0.4-1.6-0.3-2.2,0.3c-1.9,2-4.3,3.4-7,4c-0.8,0.2-1.3,0.9-1.3,1.7
+                    V44C27.4,45.3,26.3,46.4,25,46.4z"/>
+			</symbol>
+			<symbol id="icon-auswertung" viewBox="0 0 50 50">
+				<path d="M39.6,0H10.4C4.7,0,0,4.7,0,10.4v29.2C0,45.3,4.7,50,10.4,50h29.2C45.3,50,50,45.3,50,39.6V10.4C50,4.7,45.3,0,39.6,0z M45.8,39.6c0,3.5-2.8,6.2-6.2,6.2H10.4c-3.5,0-6.3-2.8-6.3-6.2V10.4C4.2,7,7,4.2,10.4,4.2h29.2c3.5,0,6.2,2.8,6.2,6.3V39.6z"/>
+                <path d="M19.4,33.2L11.3,25c-0.8-0.8-2.1-0.8-2.9,0l0,0c-0.8,0.8-0.8,2.1,0,2.9l8.2,8.2c1.6,1.6,4.3,1.6,5.9,0c0,0,0,0,0,0 l19.3-19.3c0.8-0.8,0.8-2.1,0-2.9l0,0c-0.8-0.8-2.1-0.8-2.9,0L19.4,33.2z"/>
+			</symbol>
+            <filter id="shadowLeft" x="-20%" y="-20%" width="150%" height="150%">
+                <feGaussianBlur in="SourceAlpha" stdDeviation="3" />
+                <feOffset dx="-2" dy="0" result="offsetblur" />
+                <feComponentTransfer><feFuncA type="linear" slope="0.3" /></feComponentTransfer>
+                <feMerge><feMergeNode /><feMergeNode in="SourceGraphic" /></feMerge>
+            </filter>
 		</defs>
 	</svg>
 
     <div class="flex flex-col h-screen justify-between">
-        <header class="flex flex-wrap flex-row items-center bg-primary text-primary z-10 shadow-md">
-            <button class="flex md:hidden ml-3 text-primary items-center p-2 cursor-pointer" type="button" data-drawer-target="ueba-mobilsidebar" data-drawer-show="ueba-mobilsidebar" data-drawer-position="left" aria-controls="ueba-mobilsidebar">
+        <header class="flex flex-wrap flex-row items-center bg-primary z-10 shadow-md">
+            <button class="flex md:hidden ml-3 text-primary items-center p-2 cursor-pointer" type="button" data-drawer-target="ueba-maindrawer" data-drawer-show="ueba-maindrawer" data-drawer-position="left" aria-controls="ueba-maindrawer">
                 <svg class="size-7 stroke-primary" stroke-width="0.5"><use xlink:href="#icon-burger"></use></svg>
             </button>
 
@@ -134,22 +171,22 @@
                 <img class="h-12" src="https://www.etz-stuttgart.de/skin/etz/img/etz_logo_neu.png" />
             </a>
             
-            <!-- MOBIL: Sidebar -->
-            <div id="ueba-mobilsidebar" class="max-w-96 absolute left-0 top-0 z-40 pb-11 overflow-y-auto transition-transform -translate-x-full bg-secondary shadow-lg h-screen" tabindex="-1" aria-labelledby="drawer-label" aria-hidden="true">
+            <!-- drawer component -->
+            <div id="ueba-maindrawer" class="max-w-96 absolute left-0 top-0 z-40 pb-11 overflow-y-auto transition-transform -translate-x-full bg-secondary shadow-lg h-screen" tabindex="-1" aria-labelledby="drawer-label" aria-hidden="true">
                 <div class="flex items-center py-4 px-8 gap-4 bg-subnav" id="avatarButton" type="button" type="button" data-dropdown-toggle="userDropdown">
                     <div>
                         <h2 id="drawer-label" class="text-primary text-lg font-semibold leading-7">Ausbildungsportal</h2>
                         <p class="text-secondary text-opacity-20 text-sm font-normal leading-snug">ueba.elkonet.de</p>
                     </div>
                     <div>
-                        <button type="button" data-drawer-hide="ueba-mobilsidebar" aria-controls="ueba-mobilsidebar" data-drawer-position="left" class="text-primary text-sm absolute top-5 right-2 inline-flex items-center justify-center px-2">
+                        <button type="button" data-drawer-hide="ueba-maindrawer" aria-controls="ueba-maindrawer" data-drawer-position="left" class="text-primary text-sm absolute top-5 right-2 inline-flex items-center justify-center px-2">
                             <svg fill="none" class="size-7 p-1"><use xlink:href="#icon-close"></use></svg>
                             <span class="sr-only">Menü schließen</span>
                         </button>
                     </div>
                 </div>
 
-                <div class="flex items-center py-4 px-6.5 gap-3.5 bg-primary" id="avatarButton" type="button" type="button" data-dropdown-toggle="userDropdown">
+                <div class="flex items-center py-4 px-6.5 gap-3.5 bg-neutral-700/60" id="avatarButton" type="button" type="button" data-dropdown-toggle="userDropdown">
                     <div class="relative inline-flex items-center justify-center w-9 h-9 overflow-hidden bg-secondary rounded-full">
                         <img src="https://pagedone.io/asset/uploads/1704349514.png" class="w-9 h-9">
                     </div>
@@ -162,33 +199,33 @@
                 <div class="p-6 py-3">
                     <ul class="space-y-2 font-medium">
                         <li>
-                            <a href="#" class="relative flex items-center p-2 text-primary rounded-lg group">
+                            <a href="modul-user.html" class="relative flex items-center p-2 text-primary rounded-lg group">
                                 <svg class="size-6 fill-primary"><use xlink:href="#icon-folder"></use></svg>
                                 <span class="flex-1 ms-5 whitespace-nowrap">ETE 4/22</span>
                             </a>
                         </li>
                         <li>
-                            <a href="modul-kundenauftrag.html" class="relative flex items-center p-2 text-primary rounded-lg group">
-                                <svg class="size-6 fill-primary"><use xlink:href="#icon-kundenauftrag"></use></svg>
+                            <a href="modul-Kundenauftrag.html" class="relative flex items-center p-2 text-primary rounded-lg group">
+                                <svg class="size-6 fill-primary"><use xlink:href="#icon-ausbildungsnachweis"></use></svg>
                                 <span class="flex-1 ms-5 whitespace-nowrap">Kundenauftrag</span>
                             </a>
                         </li>
                         <li>
                             <a href="#" class="relative flex items-center p-2 text-primary rounded-lg group">
                                 <svg class="size-6 fill-primary"><use xlink:href="#icon-infopool"></use></svg>
-                                <span class="flex-1 ms-5 whitespace-nowrap">InfoPool</span>
+                                <span class="flex-1 ms-5 whitespace-nowrap">Infopool</span>
                             </a>
                         </li>
                         <li>
                             <a href="#" class="relative flex items-center p-2 text-primary rounded-lg group">
                                 <svg class="size-6 fill-primary"><use xlink:href="#icon-wissenscheck"></use></svg>
-                                <span class="flex-1 ms-5 whitespace-nowrap">WissensCheck</span>
+                                <span class="flex-1 ms-5 whitespace-nowrap">Wissenscheck</span>
                             </a>
                         </li>
                         <li>
                             <a href="#" class="relative flex items-center p-2 text-primary rounded-lg group">
                                 <svg class="size-6 fill-primary"><use xlink:href="#icon-methodik"></use></svg>
-                                <span class="flex-1 ms-5 whitespace-nowrap">Methodik / Didaktik</span>
+                                <span class="flex-1 ms-5 whitespace-nowrap">Methodik</span>
                             </a>
                         </li>
                         <li>
@@ -212,7 +249,7 @@
                     </ul>
                 </div>
 
-                <div class="p-4 bz_info w-full absolute bottom-0 bg-subnav flex items-center gap-4">
+                <div class="px-6 py-4 bz_info w-full absolute bottom-0 bg-subnav flex items-center gap-4">
                     <div>
                         <a class="block" href="index.html">
                             <img class="w-20 h-auto" src="https://www.etz-stuttgart.de/skin/etz/img/etz_logo_neu.png" />
@@ -300,9 +337,6 @@
                                 <a href="#" class="block px-4 py-2 text-secondary">Dashboard</a>
                             </li>
                             <li>
-                                <a href="#" class="block px-4 py-2 text-secondary">Ausbildungsnachweis</a>
-                            </li>
-                            <li>
                                 <a href="#" class="block px-4 py-2 text-secondary">Kursmodule</a>
                             </li>
                             <li>
@@ -319,12 +353,12 @@
 
         <!-- MODUL NAVIGATION -->
         <nav class="hidden md:block bg-subnav w-full h-auto">
-            <div class="grid h-full w-fit grid-cols-4 mx-auto font-medium text-sm md:text-base xl:text-xl">
-                <a href="modul-user.html" class="inline-flex flex-col items-center justify-center dark:hover:bg-neutral-600 hover:bg-neutral-200 bg-neutral-200 dark:bg-neutral-600 group cursor-pointer px-1 lg:px-3 2xl:px-5 py-3 xl:py-5 pt-3">
+            <div class="grid h-full w-fit grid-cols-5 mx-auto font-medium text-sm md:text-base xl:text-xl">
+                <a href="modul-user.html" class="inline-flex flex-col items-center justify-center dark:hover:bg-neutral-600 hover:bg-neutral-200 group cursor-pointer px-1 lg:px-3 2xl:px-5 py-3 xl:py-5 pt-3">
                     <svg class="fill-primary size-14 xl:size-18 p-3 xl:p-4"><use xlink:href="#icon-folder"></use></svg>
                     <span>ETE 4/22</span>
                 </a>
-                <a href="modul-kundenauftrag.html" class="inline-flex flex-col items-center justify-center dark:hover:bg-neutral-600 hover:bg-neutral-200 group cursor-pointer px-1 lg:px-3 2xl:px-5 py-3 xl:py-5 pt-3">
+                <a href="modul-kundenauftrag.html" class="inline-flex flex-col items-center justify-center dark:hover:bg-neutral-600 hover:bg-neutral-200 bg-neutral-200 dark:bg-neutral-600 group cursor-pointer px-1 lg:px-3 2xl:px-5 py-3 xl:py-5 pt-3">
                     <svg class="fill-primary size-14 xl:size-18 p-3 xl:p-4"><use xlink:href="#icon-kundenauftrag"></use></svg>
                     <span>Kundenauftrag</span>
                 </a>
@@ -336,15 +370,20 @@
                     <svg class="fill-primary size-14 xl:size-18 p-3 xl:p-4"><use xlink:href="#icon-wissenscheck"></use></svg>
                     <span>WissensCheck</span>
                 </a>
+                <a href="modul-methodik.html" class="inline-flex flex-col items-center justify-center dark:hover:bg-neutral-600 hover:bg-neutral-200 group cursor-pointer px-1 lg:px-3 2xl:px-5 py-3 xl:py-5 pt-3">
+                    <svg class="fill-primary size-14 xl:size-18 p-3 xl:p-4"><use xlink:href="#icon-methodik"></use></svg>
+                    <span>Methodik / Didaktik</span>
+                </a>
             </div>
         </nav>
-        
+
         <!-- BREADCRUMB -->
         <nav class="hidden md:block mx-auto w-fit text-xs py-5 xl:px-20" aria-label="Breadcrumb">
             <ol class="inline-flex items-center space-x-1 md:space-x-2">
                 <li>
-                    <div class="flex items-center">
-                        <a href="dashboard-user.html" class="ms-1 text-xs font-medium text-primary md:ms-2">EEG</a>
+                    <div class="flex items-center gap-2">
+                        <a href="dashboard.html" class="text-xs font-medium text-primary">EEG</a>
+                        <svg class="stroke-primary size-4" fill="none"><use xlink:href="#icon-right"></use></svg>
                     </div>
                 </li>
                 <li aria-current="page">
@@ -352,7 +391,31 @@
                         <svg class="w-4 h-4 text-primary" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M7.5 15L11.0858 11.4142C11.7525 10.7475 12.0858 10.4142 12.0858 10C12.0858 9.58579 11.7525 9.25245 11.0858 8.58579L7.5 5" stroke="#777777" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" />
                         </svg>
-                        <span class="ms-1 text-xs font-medium text-secondary md:ms-2">ETE 4/22</span>
+                        <a href="modul-user.html" class="ms-1 text-xs font-medium text-primary md:ms-2">ETE 4/22</a>
+                    </div>
+                </li>
+                <li aria-current="page">
+                    <div class="flex items-center">
+                        <svg class="w-4 h-4 text-primary" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M7.5 15L11.0858 11.4142C11.7525 10.7475 12.0858 10.4142 12.0858 10C12.0858 9.58579 11.7525 9.25245 11.0858 8.58579L7.5 5" stroke="#777777" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" />
+                        </svg>
+                        <a href="modul-kundenauftrag.html" class="ms-1 text-xs font-medium text-primary md:ms-2">Kundenauftrag</a>
+                    </div>
+                </li>
+                <li aria-current="page">
+                    <div class="flex items-center">
+                        <svg class="w-4 h-4 text-primary" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M7.5 15L11.0858 11.4142C11.7525 10.7475 12.0858 10.4142 12.0858 10C12.0858 9.58579 11.7525 9.25245 11.0858 8.58579L7.5 5" stroke="#777777" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" />
+                        </svg>
+                        <a href="kundenauftrag-analyse.html" class="ms-1 text-xs font-medium text-primary md:ms-2">Analyse</a>
+                    </div>
+                </li>
+                <li aria-current="page">
+                    <div class="flex items-center">
+                        <svg class="w-4 h-4 text-primary" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M7.5 15L11.0858 11.4142C11.7525 10.7475 12.0858 10.4142 12.0858 10C12.0858 9.58579 11.7525 9.25245 11.0858 8.58579L7.5 5" stroke="#777777" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" />
+                        </svg>
+                        <span class="ms-1 text-xs font-medium text-secondary md:ms-2">Anfrage per E-Mail</span>
                     </div>
                 </li>
             </ol>
@@ -360,83 +423,57 @@
 
         <main class="px-6 container xl:px-20 2xl:px-32 py-3 mx-auto mb-auto">
             <div class="page_headline mt-4 lg:my-12">
-                <h2 class="text-2xl xl:text-3xl font-bold flex items-center">
-                    <svg class="fill-primary size-8 xl:size-10 mr-5"><use xlink:href="#icon-folder"></use></svg>
-                    ETE 4/22
-                </h2>
-                <h3 class="text-lg xl:text-xl mt-3">Gebäudeautomationssysteme planen, installieren, parametrieren und in Betrieb nehmen</h3>
+                <div class="flex gap-10">
+                    <div>
+                        <svg fill="none" class="size-20 fill-analyse"><use xlink:href="#icon-analyse"></use></svg>
+                    </div>
+                    <div>
+                        <h2 class="text-2xl xl:text-3xl font-bold">Analyse</h2>
+                        <div class="text-lg xl:text-xl mt-5">Anfrage per E-Mail</div>
+                    </div>
+                </div>
             </div>
+            <div class="w-full rounded-2xl shadow-md bg-secondary mt-12">
+                <h3 class="bg-analyse text-white p-4 md:px-10 xl:px-15 text-2xl font-bold border-b-1 border-neutral-300 shadow rounded-t-2xl w-full flex">
+                    Eisenmann Sonderbau GmbH
+                    <span class="ml-auto text-base flex items-center">
+                        <svg stroke-width="1.5" class="stroke-white size-6 mr-2"><use xlink:href="#icon-email"></use></svg>
+                        Neue Nachricht!
+                    </span>
+                </h3>
+                <div class="divide-y divide-neutral-300 rounded-b-2xl font-medium">
+                    <div class="py-3.5 p-4 md:px-10 xl:px-15 shadow-xs flex">
+                        <span class="font-bold w-32">Von</span> <u>info@sonderbau-eisenmann.de</u>
+                    </div>
+                    <div class="py-3.5 p-4 md:px-10 xl:px-15 shadow-xs flex">
+                        <span class="font-bold w-32">An</span> <u>info@hocke-gebaeudetechnik.com</u>
+                    </div>
+                    <div class="py-3.5 p-4 md:px-10 xl:px-15 shadow-xs flex">
+                        <span class="font-bold w-32">Betreff</span> Anfrage über Beratung und Angebot
+                    </div>
+                    <div class="p-4 md:px-10 xl:px-15 shadow-xs relative">Sehr geehrter Herr Hocke,<br /><br />
+da Sie uns in der Vergangenheit oft Ihre Fachkompetenz und Zuverlässigkeit unter Beweis gestellt haben, würden wir bei unserem neuen Vorhaben gerne wieder mit Ihnen zusammenarbeiten.<br /><br />
 
-            <section class="flex md:flex-row flex-col mt-3 xl:mt-0 mb-12 contentarea">
-                <div class="w-full h-full md:w-1/3 mb-10 md:mb-0 relative">
-                    <img alt="gallery" class="max-w-full max-h-full object-cover mx-auto object-center block" src="https://dummyimage.com/600x400">
-                </div>
-                <div class="w-full md:w-2/3 md:pl-6 text-lg text-primary">
-                    <div class="text-collapse transition-all duration-300 overflow-hidden max-h-[13rem]">
-                        <p>Anhand eines Kundenauftrags wird die Planung und Projektierung der Elektroinstallation mit modernen Bussystemen für die Gebäudesystemtechnik durchgeführt. Die Installation von Bus- und Netzleitungen erfolgt in unterschiedlichen Verlegesystemen einschließlich der erforderlichen messtechnischen Prüfungen.</p>
-                        <p>Die Auswahl und Montage sowie der Anschluss von Sensoren und Aktoren im Gebäude bzw. in den Verteilern wird geplant und dokumentiert. Der Einsatz von modernster funkbasierter Übertragungstechnik ergänzt die Inhalte der Ausbildungswoche.</p>
-                        <p>Das Konfigurieren, Parametrieren und Inbetriebnehmen der Systemkomponenten, sowie die Diagnose und Fehlersuche, wird mit der erforderlichen Software durchgeführt. Die messtechnischen Prüfungen werden protokolliert und in die Dokumentation der Kundenanlage mit eingepflegt.</p>
-                        <p>Die grafische Visualisierung der Gebäudesystemtechnik und der Energieverbrauchsdaten erfolgt zum Abschluss der Ausbildungswoche.</p>
-                    </div>
-                    <button class="toggletextcontent">mehr anzeigen</button>
-                </div>
-            </section>
+Dieses Mal möchten wir unser Dachgeschoss renovieren. Hier sind Kinderzimmer / Loggia / Arbeitszimmer / Bad und Flur neu zu installieren. Wir würden die Zimmer gern etwas komfortabler und energieeffizienter renovieren.<br /><br />
 
-            <section class="w-full">
-                <div class="w-fit mx-auto my-5 text-center border-t-1 border-gray-400 px-20 py-4 hidden">
-                    <div class="flex items-center">
-                        <svg class="w-4 h-4 fill-yellow-300"><use xlink:href="#icon-star"></use></svg>
-                        <svg class="w-4 h-4 ms-1 fill-yellow-300"><use xlink:href="#icon-star"></use></svg>
-                        <svg class="w-4 h-4 ms-1 fill-yellow-300"><use xlink:href="#icon-star"></use></svg>
-                        <svg class="w-4 h-4 ms-1 fill-yellow-300"><use xlink:href="#icon-star"></use></svg>
-                        <svg class="w-4 h-4 ms-1 fill-gray-300"><use xlink:href="#icon-star"></use></svg>
-                        <p class="ms-1 text-sm font-medium text-gray-500 dark:text-gray-400">4.95</p>
-                        <p class="ms-1 text-sm font-medium text-gray-500 dark:text-gray-400">out of</p>
-                        <p class="ms-1 text-sm font-medium text-gray-500 dark:text-gray-400">5</p>
-                    </div>
-                    <a href="#" class="text-sm font-medium text-primary underline hover:no-underline dark:text-white">73 Bewertungen insgesamt</a>
-                </div>
+Die Arbeiten müssen in den nächsten 6 Wochen ausgeführt werden, da unsere Tochter danach aus dem Auslandspraktikum zurückkommt. Wir wollen Sie mit der Renovierung überraschen.<br /><br />
 
-                <h3 class="text-lg font-bold w-fit mx-auto border-t-1 border-gray-400 xl:px-20 pt-4 pb-2">Deine Meinung zählt!</h3>
-                <h3 class="text-lg w-fit mx-auto uppercase">Jetzt Modul bewerten</h3>
-                <div class="grid h-full w-fit sm:grid-cols-2 mx-auto font-medium my-5 gap-2 xl:gap-4">
-                    <div class="h-fit justify-center px-4 py-3 pt-3 bg-primary rounded">
-                        <div class="flex gap-4">
-                            <div class="relative inline-flex items-center justify-center w-10 h-10 overflow-hidden bg-secondary rounded-full">
-                                <span class="font-medium text-primary">MM</span>
-                            </div>
-                            <div class="font-medium text-sm">
-                                <div>Max M.</div>
-                                <div class="flex items-center">
-                                    <svg class="w-4 h-4 fill-yellow-300"><use xlink:href="#icon-star"></use></svg>
-                                    <svg class="w-4 h-4 ms-1 fill-yellow-300"><use xlink:href="#icon-star"></use></svg>
-                                    <svg class="w-4 h-4 ms-1 fill-yellow-300"><use xlink:href="#icon-star"></use></svg>
-                                    <svg class="w-4 h-4 ms-1 fill-yellow-300"><use xlink:href="#icon-star"></use></svg>
-                                    <svg class="w-4 h-4 ms-1 fill-gray-300"><use xlink:href="#icon-star"></use></svg>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="h-fit justify-center px-4 py-3 pt-3 bg-primary rounded">
-                        <div class="flex gap-4">
-                            <div class="relative inline-flex items-center justify-center w-10 h-10 overflow-hidden bg-secondary rounded-full">
-                                <span class="font-medium text-primary">MM</span>
-                            </div>
-                            <div class="font-medium">
-                                <div>Anton M.</div>
-                                <div class="flex items-center">
-                                    <svg class="w-4 h-4 fill-yellow-300"><use xlink:href="#icon-star"></use></svg>
-                                    <svg class="w-4 h-4 ms-1 fill-yellow-300"><use xlink:href="#icon-star"></use></svg>
-                                    <svg class="w-4 h-4 ms-1 fill-yellow-300"><use xlink:href="#icon-star"></use></svg>
-                                    <svg class="w-4 h-4 ms-1 fill-gray-300"><use xlink:href="#icon-star"></use></svg>
-                                    <svg class="w-4 h-4 ms-1 fill-gray-300"><use xlink:href="#icon-star"></use></svg>
-                                </div>
-                            </div>
-                        </div>
-                        <p class="text-sm font-semibold text-secondary mt-2">Verständlch erklärt, guter Dozent.</p>
-                    </div>
+Über ein kurzfristiges Beratungsgespräch und ein entsprechendes Angebot würde ich mich sehr freuen. Bei Rückfragen und zur Terminvereinbarung stehe ich Ihnen gerne unter 0799/2345-67 zur Verfügung.<br /><br />
+
+Mit freundlichen Grüßen<br /><br />
+
+
+Petra Eisenmann<br />
+Geschäftsführerin<br /><br />
+
+Eisenmann Sonderbau GmbH<br />
+Hauptstraße 26<br />
+70999 Neufelden<br /><br />
+
+Tel.:      +49799 / 2345-67<br />
+info@sonderbau-eisenmann.de</div>
                 </div>
-            </section>
+            </div>
         </main>
 
         <footer class="flex text-center mx-auto text-xs py-3">
@@ -448,11 +485,6 @@
             </ul>
         </footer>
     </div>
-
-    <!-- CHATBOT -->
-    <a href="modul-hilfe.html" class="fixed bg-primary bottom-4 inline-flex right-4 text-primary items-center justify-center rounded-full cursor-pointer">
-        <svg stroke-width="1.5" fill="none" class="size-12 stroke-secondary"><use xlink:href="#icon-frage"></use></svg>
-    </a>
     
     <script src="js/flowbite.min.js"></script>
 </body>

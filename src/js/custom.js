@@ -64,11 +64,11 @@ $(document).ready(function() {
 
     if (expanded) {
       // einklappen
-      textContainer.removeClass('max-h-[1000px] expanded').addClass('max-h-[6rem]');
+      textContainer.removeClass('max-h-[1000px] expanded').addClass('max-h-[13rem]');
       button.text('mehr anzeigen');
     } else {
       // ausklappen
-      textContainer.removeClass('max-h-[6rem]').addClass('max-h-[1000px] expanded');
+      textContainer.removeClass('max-h-[13rem]').addClass('max-h-[1000px] expanded');
       button.text('weniger anzeigen');
     }
   });
