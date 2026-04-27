@@ -20,6 +20,20 @@
         </div>
     </div>
 
+    <div class="w-full flex items-center py-3 px-8 mb-2 text-green-700 rounded-2xl bg-white dark:bg-neutral-900 dark:text-green-500" role="alert">
+        <svg class="shrink-0 inline size-8 mr-6 fill-green-600 dark:fill-green-500"><use xlink:href="#icon-check"></use></svg>
+        <div>
+            <span class="font-medium">Super!</span> Sie beherrschen das Thema richtig gut.
+        </div>
+    </div>
+
+    <div class="w-full flex items-center py-3 px-8 mb-2 text-red-600 dark:text-red-500 rounded-2xl bg-white dark:bg-neutral-900 failed" role="alert">
+        <svg class="shrink-0 inline size-8 mr-6 fill-red-600 dark:fill-red-500"><use xlink:href="#icon-error"></use></svg>
+        <div>
+            <span class="font-medium">Schade!</span> Sie haben weniger als 75 % der Fragen richtig beantworten können. Versuchen Sie es erneut.
+        </div>
+    </div>
+
     <div id="saveModal" hidden class="fixed inset-0 z-50 flex items-center justify-center bg-neutral-800/50 backdrop-blur-sm">
         <div class="modal-content bg-white dark:bg-neutral-800 p-6 rounded-xl shadow-2xl flex flex-col items-center gap-4 min-w-[200px]">
             <div
