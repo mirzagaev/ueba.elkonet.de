@@ -12,6 +12,15 @@
 <body class="text-primary">
 	<svg class="hidden">
 		<defs>
+            <symbol id="icon-audio-pause" fill="none" viewBox="0 0 24 24" stroke-width="3">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 5.25v13.5m-7.5-13.5v13.5" />
+            </symbol>
+            <symbol id="icon-audio-play" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M5.25 5.653c0-.856.917-1.398 1.667-.986l11.54 6.347a1.125 1.125 0 0 1 0 1.972l-11.54 6.347a1.125 1.125 0 0 1-1.667-.986V5.653Z" />
+            </symbol>
+            <symbol id="icon-audio-stop" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M5.25 7.5A2.25 2.25 0 0 1 7.5 5.25h9a2.25 2.25 0 0 1 2.25 2.25v9a2.25 2.25 0 0 1-2.25 2.25h-9a2.25 2.25 0 0 1-2.25-2.25v-9Z" />
+            </symbol>
             <symbol id="icon-email" fill="none" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 0 1-2.25 2.25h-15a2.25 2.25 0 0 1-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0 0 19.5 4.5h-15a2.25 2.25 0 0 0-2.25 2.25m19.5 0v.243a2.25 2.25 0 0 1-1.07 1.916l-7.5 4.615a2.25 2.25 0 0 1-2.36 0L3.32 8.91a2.25 2.25 0 0 1-1.07-1.916V6.75" />
             </symbol>
@@ -434,38 +443,60 @@
                     </div>
                 </div>
             </div>
-            <div class="inhaltsblock bg-secondary">
-                <div class="bg-analyse p-4 md:py-5 rounded-t-2xl w-full"></div>
-                <div class="kachelliste">
-                    <div class="flex gap-10">
-                        <div class="w-1/2"><img src="img/FrauEisenmann.png" class="rounded-2xl" /></div>
-                        <div class="text-lg text2speech">
-                            <p><strong>Herr Hocke</strong><br/> Guten Tag, Frau Eisenmann. Aus Ihrer Mail kann ich erkennen, dass Sie Ihr Wohn- und Geschäftsgebäude umbauen und erweitern wollen. Können Sie mir nähere Informationen zum Umfang der Baumaßnahme und der gewünschten Ausstattung geben?</p>
-                            <p>&nbsp;</p>
-                            <p><strong>Frau Eisenmann</strong><br/>Guten Tag Herr Hocke, Ja, gerne gebe ich Ihnen nähere Informationen hierzu. Wir wollen im Dachgeschoss ein Kinderzimmer einbauen, welches Zugang zu einer Loggia haben wird. Außerdem soll ein Arbeitszimmer und ein Badezimmer neu eingerichtet werden. Natürlich sind der Flur und das Treppenhaus von den Umbaumaßnahmen auch betroffen. Ein weiterer Raum soll zunächst als Abstellraum dienen.</p>
-                        </div>
-                        <div class="w-1/2 ml-auto"><img src="img/HerrHocke.png" class="rounded-2xl" /></div>
+            <div class="dialog inhaltsblock bg-secondary">
+                <div class="bg-analyse borderRandTop"></div>
+                <div class="dialogContentArea">
+                    <div class="bilderKiBlock">
+                        <img src="img/Eisenmann1.png" />
+                        <img src="img/Eisenmann2.png" />
+                        <img src="img/Eisenmann3.png" />
                     </div>
-                    <div class="flex gap-10">
-                        <div class="w-1/2"><img src="img/FrauEisenmann.png" class="rounded-2xl" /></div>
-                        <div class="text-lg text2speech">
-                            <p><strong>Herr Hocke</strong><br/> Guten Tag, Frau Eisenmann. Aus Ihrer Mail kann ich erkennen, dass Sie Ihr Wohn- und Geschäftsgebäude umbauen und erweitern wollen. Können Sie mir nähere Informationen zum Umfang der Baumaßnahme und der gewünschten Ausstattung geben?</p>
-                            <p>&nbsp;</p>
-                            <p><strong>Frau Eisenmann</strong><br/>Guten Tag Herr Hocke, Ja, gerne gebe ich Ihnen nähere Informationen hierzu. Wir wollen im Dachgeschoss ein Kinderzimmer einbauen, welches Zugang zu einer Loggia haben wird. Außerdem soll ein Arbeitszimmer und ein Badezimmer neu eingerichtet werden. Natürlich sind der Flur und das Treppenhaus von den Umbaumaßnahmen auch betroffen. Ein weiterer Raum soll zunächst als Abstellraum dienen.</p>
+                    <!-- Chat / Telefonat -->
+                    <div id="dialog-container">
+                        <!-- Preload Status -->
+                        <div id="status-bar">
+                            <div id="loader-icon" class="border-analyse"></div>
+                            <span id="status-text">Prüfe lokale Sprachdateien...</span>
                         </div>
-                        <div class="w-1/2 ml-auto"><img src="img/HerrHocke.png" class="rounded-2xl" /></div>
-                    </div>
-                    <div class="flex gap-10">
-                        <div class="w-1/2"><img src="img/FrauEisenmann.png" class="rounded-2xl" /></div>
-                        <div class="text-lg text2speech">
-                            <p><strong>Herr Hocke</strong><br/> Guten Tag, Frau Eisenmann. Aus Ihrer Mail kann ich erkennen, dass Sie Ihr Wohn- und Geschäftsgebäude umbauen und erweitern wollen. Können Sie mir nähere Informationen zum Umfang der Baumaßnahme und der gewünschten Ausstattung geben?</p>
-                            <p>&nbsp;</p>
-                            <p><strong>Frau Eisenmann</strong><br/>Guten Tag Herr Hocke, Ja, gerne gebe ich Ihnen nähere Informationen hierzu. Wir wollen im Dachgeschoss ein Kinderzimmer einbauen, welches Zugang zu einer Loggia haben wird. Außerdem soll ein Arbeitszimmer und ein Badezimmer neu eingerichtet werden. Natürlich sind der Flur und das Treppenhaus von den Umbaumaßnahmen auch betroffen. Ein weiterer Raum soll zunächst als Abstellraum dienen.</p>
+
+                        <div class="text2speech" data-id="tel_01" data-speaker="Herr Hocke" data-gender="male" data-cdate="2025-01-01T10:00:00Z">
+                            <div class="sprecherDiv">
+                                <span>Herr Hocke</span>
+                                <button class="audio-btns" onclick="togglePlayback(this)"><svg class="size-4 fill-white"><use xlink:href="#icon-audio-play"></use></svg></button>
+                            </div>
+                            <div class="contentChatDiv"><p class="text-content">Guten Tag, <span>Frau Eisenmann</span>. Aus Ihrer Mail kann ich erkennen, dass Sie Ihr Wohn- und Geschäftsgebäude umbauen und erweitern wollen. Können Sie mir nähere Informationen zum Umfang der Baumaßnahme und der gewünschten Ausstattung geben?</p></div>
                         </div>
-                        <div class="w-1/2 ml-auto"><img src="img/HerrHocke.png" class="rounded-2xl" /></div>
+                        <div class="text2speech" data-id="tel_02" data-speaker="Frau Eisenmann" data-gender="female" data-cdate="2025-01-01T10:05:00Z">
+                            <div class="sprecherDiv ml-auto">
+                                <span>Frau Eisenmann</span>
+                                <button class="audio-btns" onclick="togglePlayback(this)"><svg class="size-4 fill-white"><use xlink:href="#icon-audio-play"></use></svg></button>
+                            </div>
+                            <div class="contentChatDiv"><p class="text-content">Guten Tag <span>Herr Hocke</span>, Ja, gerne gebe ich Ihnen nähere Informationen hierzu. Wir wollen im Dachgeschoss ein Kinderzimmer einbauen, welches Zugang zu einer Loggia haben wird. Außerdem soll ein Arbeitszimmer und ein Badezimmer neu eingerichtet werden. Natürlich sind der Flur und das Treppenhaus von den Umbaumaßnahmen auch betroffen. Ein weiterer Raum soll zunächst als Abstellraum dienen.</p></div>
+                        </div>
+                        <div class="text2speech" data-id="tel_03" data-speaker="Herr Hocke" data-gender="male" data-cdate="2025-01-01T10:10:00Z">
+                            <div class="sprecherDiv">
+                                <span>Herr Hocke</span>
+                                <button class="audio-btns" onclick="togglePlayback(this)"><svg class="size-4 fill-white"><use xlink:href="#icon-audio-play"></use></svg></button>
+                            </div>
+                            <div class="contentChatDiv"><p class="text-content">Sind denn von den Räumlichkeiten schon Pläne vorhanden, aus denen der Umfang der Baumaßnahme erkennbar ist?</p></div>
+                        </div>
+                        <div class="text2speech" data-id="tel_04" data-speaker="Frau Eisenmann" data-gender="female" data-cdate="2025-01-01T10:15:00Z">
+                            <div class="sprecherDiv ml-auto">
+                                <span>Frau Eisenmann</span>
+                                <button class="audio-btns" onclick="togglePlayback(this)"><svg class="size-4 fill-white"><use xlink:href="#icon-audio-play"></use></svg></button>
+                            </div>
+                            <div class="contentChatDiv"><p class="text-content">Es gibt einen Grundrissplan, den ich Ihnen gerne zuschicken kann.</p></div>
+                        </div>
+                        <div class="text2speech" data-id="tel_05" data-speaker="Herr Hocke" data-gender="male" data-cdate="2025-01-01T10:20:00Z">
+                            <div class="sprecherDiv">
+                                <span>Herr Hocke</span>
+                                <button class="audio-btns" onclick="togglePlayback(this)"><svg class="size-4 fill-white"><use xlink:href="#icon-audio-play"></use></svg></button>
+                            </div>
+                            <div class="contentChatDiv"><p class="text-content">Prima, dann können wir schon ungefähr abschätzen, welchen Umfang die Installationsarbeiten haben werden. Haben Sie sich auch schon Gedanken über die Raumheizung und eine eventuell mögliche Einzelraumregelung gemacht?</p></div>
+                        </div>
                     </div>
                 </div>
-                <div class="bg-analyse p-4 md:py-5 rounded-b-2xl w-full"></div>
+                <div class="bg-analyse borderRandBottom"></div>
             </div>
         </main>
 
@@ -480,110 +511,6 @@
     </div>
     
     <script src="js/flowbite.min.js"></script>
-    <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            const synth = window.speechSynthesis;
-            let voices = [];
-
-            // Stimmen laden (asynchron in einigen Browsern)
-            function loadVoices() {
-                voices = synth.getVoices().filter(v => v.lang.startsWith('de'));
-            }
-            loadVoices();
-            if (speechSynthesis.onvoiceschanged !== undefined) {
-                speechSynthesis.onvoiceschanged = loadVoices;
-            }
-
-            // Hilfsfunktion zur Auswahl einer passenden (KI-)Stimme nach Geschlecht
-            function getVoice(gender) {
-                let femaleNames = ['katja', 'hedda', 'anna', 'petra', 'marlene', 'vicki', 'female'];
-                let maleNames = ['stefan', 'conrad', 'markus', 'yannick', 'hans', 'male'];
-                
-                let voice = voices.find(v => {
-                    let n = v.name.toLowerCase();
-                    if (gender === 'female') {
-                        return femaleNames.some(name => n.includes(name)) || (n.includes('google deutsch') && !n.includes('male'));
-                    } else {
-                        return maleNames.some(name => n.includes(name));
-                    }
-                });
-
-                // Fallback, falls die spezifischen Namen nicht im OS/Browser gefunden werden
-                if (!voice) {
-                    voice = gender === 'female' ? voices[0] : (voices.length > 1 ? voices[1] : voices[0]);
-                }
-                return voice;
-            }
-
-            const speechContainers = document.querySelectorAll('.text2speech');
-            const playIcon = `<svg class="w-4 h-4 fill-current" viewBox="0 0 20 20"><path d="M4 4l12 6-12 6z"/></svg> Vorlesen`;
-            const stopIcon = `<svg class="w-4 h-4 fill-current" viewBox="0 0 20 20"><path d="M5 5h10v10H5z"/></svg> Stoppen`;
-
-            speechContainers.forEach((container) => {
-                // Play/Stop Button für jeden Dialog einfügen
-                const btn = document.createElement('button');
-                btn.className = 'bg-neutral-200 dark:bg-neutral-600 text-primary font-semibold py-1.5 px-4 rounded shadow hover:shadow-md transition-all flex items-center gap-2 mb-4 w-fit border border-neutral-300 dark:border-neutral-500 cursor-pointer';
-                btn.innerHTML = playIcon;
-                let isPlaying = false;
-
-                btn.addEventListener('click', () => {
-                    if (isPlaying) {
-                        synth.cancel(); // Stoppt die aktuelle Wiedergabe
-                        btn.innerHTML = playIcon;
-                        isPlaying = false;
-                        return;
-                    }
-
-                    synth.cancel(); // Falls woanders noch was läuft, stoppen
-                    isPlaying = true;
-                    btn.innerHTML = stopIcon;
-
-                    const paragraphs = container.querySelectorAll('p');
-                    let utterances = [];
-
-                    paragraphs.forEach(p => {
-                        const speakerTag = p.querySelector('strong');
-                        if (speakerTag) {
-                            const speaker = speakerTag.textContent.trim();
-                            const fullText = p.textContent.trim();
-                            // Sprecher-Namen aus dem gesprochenen Text entfernen
-                            const textToSpeak = fullText.substring(speaker.length).trim();
-
-                            if (textToSpeak) {
-                                const utterance = new SpeechSynthesisUtterance(textToSpeak);
-                                utterance.lang = 'de-DE';
-                                
-                                // Stimme zuweisen (Frau Eisenmann = Weiblich, Herr Hocke = Männlich)
-                                if (speaker.includes('Frau Eisenmann')) {
-                                    utterance.voice = getVoice('female');
-                                    utterance.pitch = 1.1; // Etwas höher
-                                } else if (speaker.includes('Herr Hocke')) {
-                                    utterance.voice = getVoice('male');
-                                    utterance.pitch = 0.9; // Etwas tiefer
-                                }
-                                utterances.push(utterance);
-                            }
-                        }
-                    });
-
-                    if (utterances.length > 0) {
-                        // Den Button zurücksetzen, wenn der letzte Text fertig gesprochen wurde
-                        utterances[utterances.length - 1].onend = () => {
-                            isPlaying = false;
-                            btn.innerHTML = playIcon;
-                        };
-                        // Alle Abschnitte aneinanderreihen
-                        utterances.forEach(u => synth.speak(u));
-                    } else {
-                        isPlaying = false;
-                        btn.innerHTML = playIcon;
-                    }
-                });
-
-                container.insertBefore(btn, container.firstChild);
-            });
-        });
-    </script>
 </body>
 
 </html>

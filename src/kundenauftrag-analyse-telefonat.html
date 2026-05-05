@@ -444,62 +444,65 @@
                 </div>
             </div>
 
-            <div class="inhaltsblock bg-secondary">
-                <div class="bg-analyse p-4 md:py-5 rounded-t-2xl w-full"></div>
-                <div class="kachelliste">
-                    <div class="flex gap-10 xl:py-8">
-                        <!-- Linkes Bild -->
-                        <div class="w-1/2"><img src="img/FrauEisenmann.png" class="rounded-2xl" /></div>
-                        <!-- Chat / Telefonat -->
-                        <div class="text-lg flex-grow space-y-2" id="dialog-container">
-                            <!-- Preload Status -->
-                            <div id="status-bar" class="p-4 text-xs text-secondary flex items-center gap-2">
-                                <div id="loader-icon" class="hidden animate-spin size-3 border-2 border-analyse border-t-transparent rounded-full"></div>
-                                <span id="status-text">Prüfe lokale Sprachdateien...</span>
-                            </div>
-
-                            <!-- Chat -->
-                            <div class="text2speech" data-id="tel_01" data-speaker="Herr Hocke">
-                                <div class="sprecherDiv">
-                                    <span>Herr Hocke</span>
-                                    <button class="audio-btns" onclick="togglePlayback(this)"><svg class="size-5 fill-white"><use xlink:href="#icon-audio-play"></use></svg></button>
-                                </div>
-                                <p class="leading-relaxed text-content">Guten Tag, <span>Frau Eisenmann</span>. Aus Ihrer Mail kann ich erkennen, dass Sie Ihr Wohn- und Geschäftsgebäude umbauen und erweitern wollen. Können Sie mir nähere Informationen zum Umfang der Baumaßnahme und der gewünschten Ausstattung geben?</p>
-                            </div>
-                            <div class="text2speech" data-id="tel_02" data-speaker="Frau Eisenmann">
-                                <div class="sprecherDiv">
-                                    <span>Frau Eisenmann</span>
-                                    <button class="audio-btns" onclick="togglePlayback(this)"><svg class="size-5 fill-white"><use xlink:href="#icon-audio-play"></use></svg></button>
-                                </div>
-                                <p class="leading-relaxed text-content">Guten Tag <span>Herr Hocke</span>, Ja, gerne gebe ich Ihnen nähere Informationen hierzu. Wir wollen im Dachgeschoss ein Kinderzimmer einbauen, welches Zugang zu einer Loggia haben wird. Außerdem soll ein Arbeitszimmer und ein Badezimmer neu eingerichtet werden. Natürlich sind der Flur und das Treppenhaus von den Umbaumaßnahmen auch betroffen. Ein weiterer Raum soll zunächst als Abstellraum dienen.</p>
-                            </div>
-                            <div class="text2speech" data-id="tel_03" data-speaker="Herr Hocke">
-                                <div class="sprecherDiv">
-                                    <span>Herr Hocke</span>
-                                    <button class="audio-btns" onclick="togglePlayback(this)"><svg class="size-5 fill-white"><use xlink:href="#icon-audio-play"></use></svg></button>
-                                </div>
-                                <p class="leading-relaxed text-content">Sind denn von den Räumlichkeiten schon Pläne vorhanden, aus denen der Umfang der Baumaßnahme erkennbar ist?</p>
-                            </div>
-                            <div class="text2speech" data-id="tel_04" data-speaker="Frau Eisenmann">
-                                <div class="sprecherDiv">
-                                    <span>Frau Eisenmann</span>
-                                    <button class="audio-btns" onclick="togglePlayback(this)"><svg class="size-5 fill-white"><use xlink:href="#icon-audio-play"></use></svg></button>
-                                </div>
-                                <p class="leading-relaxed text-content">Es gibt einen Grundrissplan, den ich Ihnen gerne zuschicken kann.</p>
-                            </div>
-                            <div class="text2speech" data-id="tel_05" data-speaker="Herr Hocke">
-                                <div class="sprecherDiv">
-                                    <span>Herr Hocke</span>
-                                    <button class="audio-btns" onclick="togglePlayback(this)"><svg class="size-5 fill-white"><use xlink:href="#icon-audio-play"></use></svg></button>
-                                </div>
-                                <p>Prima, dann können wir schon ungefähr abschätzen, welchen Umfang die Installationsarbeiten haben werden. Haben Sie sich auch schon Gedanken über die Raumheizung und eine eventuell mögliche Einzelraumregelung gemacht?</p>
-                            </div>
+            <div class="dialog inhaltsblock bg-secondary">
+                <div class="bg-analyse borderRandTop"></div>
+                <div class="dialogContentArea">
+                    <div class="bilderKiBlock">
+                        <img src="img/Eisenmann1.png" />
+                        <img src="img/Eisenmann2.png" />
+                        <img src="img/Eisenmann3.png" />
+                    </div>
+                    <!-- Chat / Telefonat -->
+                    <div id="dialog-container">
+                        <!-- Preload Status -->
+                        <div id="status-bar">
+                            <div id="loader-icon" class="border-analyse"></div>
+                            <span id="status-text">Prüfe lokale Sprachdateien...</span>
                         </div>
-                        <!-- Rechtes Bild -->
-                        <div class="w-1/2 ml-auto"><img src="img/HerrHocke.png" class="rounded-2xl" /></div>
+
+                        <div class="text2speech" data-id="tel_01" data-speaker="Herr Hocke" data-gender="male" data-cdate="2025-01-01T10:00:00Z">
+                            <div class="sprecherDiv">
+                                <span>Herr Hocke</span>
+                                <button class="audio-btns" onclick="togglePlayback(this)"><svg class="size-4 fill-white"><use xlink:href="#icon-audio-play"></use></svg></button>
+                            </div>
+                            <div class="contentChatDiv"><p class="text-content">Guten Tag, <span>Frau Eisenmann</span>. Aus Ihrer Mail kann ich erkennen, dass Sie Ihr Wohn- und Geschäftsgebäude umbauen und erweitern wollen. Können Sie mir nähere Informationen zum Umfang der Baumaßnahme und der gewünschten Ausstattung geben?</p></div>
+                        </div>
+                        <div class="text2speech" data-id="tel_02" data-speaker="Frau Eisenmann" data-gender="female" data-cdate="2025-01-01T10:05:00Z">
+                            <div class="sprecherDiv ml-auto">
+                                <span>Frau Eisenmann</span>
+                                <button class="audio-btns" onclick="togglePlayback(this)"><svg class="size-4 fill-white"><use xlink:href="#icon-audio-play"></use></svg></button>
+                            </div>
+                            <div class="contentChatDiv"><p class="text-content">Guten Tag <span>Herr Hocke</span>, Ja, gerne gebe ich Ihnen nähere Informationen hierzu. Wir wollen im Dachgeschoss ein Kinderzimmer einbauen, welches Zugang zu einer Loggia haben wird. Außerdem soll ein Arbeitszimmer und ein Badezimmer neu eingerichtet werden. Natürlich sind der Flur und das Treppenhaus von den Umbaumaßnahmen auch betroffen. Ein weiterer Raum soll zunächst als Abstellraum dienen.</p></div>
+                        </div>
+                        <div class="text2speech" data-id="tel_03" data-speaker="Herr Hocke" data-gender="male" data-cdate="2025-01-01T10:10:00Z">
+                            <div class="sprecherDiv">
+                                <span>Herr Hocke</span>
+                                <button class="audio-btns" onclick="togglePlayback(this)"><svg class="size-4 fill-white"><use xlink:href="#icon-audio-play"></use></svg></button>
+                            </div>
+                            <div class="contentChatDiv"><p class="text-content">Sind denn von den Räumlichkeiten schon Pläne vorhanden, aus denen der Umfang der Baumaßnahme erkennbar ist?</p></div>
+                        </div>
+                        <div class="text2speech" data-id="tel_04" data-speaker="Frau Eisenmann" data-gender="female" data-cdate="2025-01-01T10:15:00Z">
+                            <div class="sprecherDiv ml-auto">
+                                <span>Frau Eisenmann</span>
+                                <button class="audio-btns" onclick="togglePlayback(this)"><svg class="size-4 fill-white"><use xlink:href="#icon-audio-play"></use></svg></button>
+                            </div>
+                            <div class="contentChatDiv"><p class="text-content">Es gibt einen Grundrissplan, den ich Ihnen gerne zuschicken kann.</p></div>
+                        </div>
+                        <div class="text2speech" data-id="tel_05" data-speaker="Herr Hocke" data-gender="male" data-cdate="2025-01-01T10:20:00Z">
+                            <div class="sprecherDiv">
+                                <span>Herr Hocke</span>
+                                <button class="audio-btns" onclick="togglePlayback(this)"><svg class="size-4 fill-white"><use xlink:href="#icon-audio-play"></use></svg></button>
+                            </div>
+                            <div class="contentChatDiv"><p class="text-content">Prima, dann können wir schon ungefähr abschätzen, welchen Umfang die Installationsarbeiten haben werden. Haben Sie sich auch schon Gedanken über die Raumheizung und eine eventuell mögliche Einzelraumregelung gemacht?</p></div>
+                        </div>
+                    </div>
+                    <div class="bilderKiBlock">
+                        <img src="img/Hocke1.png" />
+                        <img src="img/Hocke2.png" />
+                        <img src="img/Hocke3.png" />
                     </div>
                 </div>
-                <div class="bg-analyse p-4 md:py-5 rounded-b-2xl w-full"></div>
+                <div class="bg-analyse borderRandBottom"></div>
             </div>
         </main>
 
@@ -514,299 +517,6 @@
     </div>
     
     <script src="js/flowbite.min.js"></script>
-    <script type="module">
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
-        import { getAuth, signInAnonymously, signInWithCustomToken, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
-        import { getFirestore, doc, getDoc, setDoc } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
-
-        // Your web app's Firebase configuration
-        const firebaseConfig = {
-            apiKey: "AIzaSyC_lZ9IK4UQl8LErpGpmPew5EzF7y1G7XQ",
-            authDomain: "ueba-ed770.firebaseapp.com",
-            projectId: "ueba-ed770",
-            storageBucket: "ueba-ed770.firebasestorage.app",
-            messagingSenderId: "39403510268",
-            appId: "1:39403510268:web:1b6e3d609874fce1f8ba79"
-        };
-
-        // Initialize Firebase
-        const app = initializeApp(firebaseConfig);
-        const geminiApiKey = "AIzaSyBW4DFrIsQ9mUG2wcQoO_A4y1iDuvhn4-U"; 
-        const auth = getAuth(app);
-        const db = getFirestore(app);
-        
-        const currentAppId = typeof __app_id !== 'undefined' ? __app_id : firebaseConfig.appId;
-        const pageId = "analyse_telefonat";
-
-        let user = null;
-        let currentAudio = null;
-        let activeElement = null;
-        let isChainPlaying = false;
-
-        // --- Auth ---
-        const initAuth = async () => {
-            try {
-                if (typeof __initial_auth_token !== 'undefined' && __initial_auth_token) {
-                    await signInWithCustomToken(auth, __initial_auth_token);
-                } else {
-                    await signInAnonymously(auth);
-                }
-            } catch (error) {
-                console.error("Auth error:", error);
-                document.getElementById('status-text').innerText = "Fehler bei der Cloud-Verbindung.";
-            }
-        };
-
-        onAuthStateChanged(auth, (u) => {
-            user = u;
-            if (user) {
-                document.getElementById('status-text').innerText = "Cloud-Backend verbunden.";
-                preload();
-            }
-        });
-
-        initAuth();
-
-        // --- Backend ---
-        async function getCachedAudio(id) {
-            if (!user) return null;
-            try {
-                const docRef = doc(db, 'artifacts', currentAppId, 'public', 'data', 'audio_cache', `${pageId}_${id}`);
-                const docSnap = await getDoc(docRef);
-                if (docSnap.exists()) {
-                    const base64 = docSnap.data().base64;
-                    const binaryString = atob(base64);
-                    const bytes = new Uint8Array(binaryString.length);
-                    for (let i = 0; i < binaryString.length; i++) bytes[i] = binaryString.charCodeAt(i);
-                    return new Blob([bytes], { type: 'audio/wav' });
-                }
-            } catch (e) { console.error("Cache Read Error:", e); }
-            return null;
-        }
-
-        async function saveAudioToCache(id, blob) {
-            if (!user) return;
-            try {
-                const reader = new FileReader();
-                reader.readAsDataURL(blob);
-                reader.onloadend = async () => {
-                    const base64 = reader.result.split(',')[1];
-                    const docRef = doc(db, 'artifacts', currentAppId, 'public', 'data', 'audio_cache', `${pageId}_${id}`);
-                    await setDoc(docRef, { base64: base64, timestamp: Date.now() });
-                };
-            } catch (e) { console.error("Cache Write Error:", e); }
-        }
-
-        function pcmToWav(pcmData, sampleRate) {
-            const buffer = new ArrayBuffer(44 + pcmData.length);
-            const view = new DataView(buffer);
-            const writeString = (o, s) => { for (let i=0; i<s.length; i++) view.setUint8(o+i, s.charCodeAt(i)); };
-            writeString(0, 'RIFF');
-            view.setUint32(4, 36 + pcmData.length, true);
-            writeString(8, 'WAVE');
-            writeString(12, 'fmt ');
-            view.setUint32(16, 16, true);
-            view.setUint16(20, 1, true); 
-            view.setUint16(22, 1, true); 
-            view.setUint32(24, sampleRate, true);
-            view.setUint32(28, sampleRate * 2, true);
-            view.setUint16(32, 2, true);
-            view.setUint16(34, 16, true);
-            writeString(36, 'data');
-            view.setUint32(40, pcmData.length, true);
-            const pcmView = new Int16Array(pcmData.buffer);
-            for (let i=0; i<pcmView.length; i++) view.setInt16(44 + i*2, pcmView[i], true);
-            return new Blob([buffer], { type: 'audio/wav' });
-        }
-
-        async function fetchTTS(text, speaker) {
-            const voice = (speaker === "Frau Eisenmann") ? "Aoede" : "Kore";
-            const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-tts:generateContent?key=${geminiApiKey}`;
-            
-            const payload = {
-                contents: [{ parts: [{ text: text }] }],
-                generationConfig: {
-                    responseModalities: ["AUDIO"],
-                    speechConfig: { voiceConfig: { prebuiltVoiceConfig: { voiceName: voice } } }
-                }
-            };
-
-            for (let i = 0; i < 5; i++) {
-                try {
-                    const resp = await fetch(url, { method: 'POST', body: JSON.stringify(payload) });
-                    const result = await resp.json();
-
-                    if (resp.status === 429) {
-                        const retryAfter = 30; // Standard 30 Sek falls kein Header
-                        document.getElementById('status-text').innerText = `Limit erreicht. Warte ${retryAfter}s...`;
-                        await new Promise(r => setTimeout(r, retryAfter * 1000));
-                        continue;
-                    }
-
-                    const audioPart = result.candidates?.[0]?.content?.parts?.[0]?.inlineData;
-                    if (!audioPart) throw new Error("Keine Audio-Daten");
-
-                    const rate = parseInt(audioPart.mimeType.match(/rate=(\d+)/)?.[1] || "24000");
-                    const binary = atob(audioPart.data);
-                    const bytes = new Uint8Array(binary.length);
-                    for (let j=0; j<binary.length; j++) bytes[j] = binary.charCodeAt(j);
-                    
-                    return pcmToWav(bytes, rate);
-                } catch (e) {
-                    if (i === 4) throw e;
-                    await new Promise(r => setTimeout(r, Math.pow(2, i) * 1000));
-                }
-            }
-        }
-
-        // --- Interaction Logic ---
-        window.updateButtonIcon = (el, type) => {
-            const btn = el.querySelector('.audio-btns');
-            if (!btn) return;
-            const iconId = type === 'pause' ? '#icon-audio-pause' : '#icon-audio-play';
-            const iconClass = type === 'pause' ? 'stroke-white' : 'fill-white';
-            btn.innerHTML = `<svg class="size-5 ${iconClass}"><use xlink:href="${iconId}"></use></svg>`;
-        };
-
-        window.togglePlayback = async (btn) => {
-            const el = btn.closest('.text2speech');
-            if (activeElement === el && currentAudio) {
-                if (currentAudio.paused) {
-                    window.updateButtonIcon(el, 'pause');
-                    currentAudio.play();
-                } else {
-                    window.updateButtonIcon(el, 'play');
-                    currentAudio.pause();
-                }
-                return;
-            }
-            startChainPlay(el);
-        };
-
-        async function playElement(el) {
-            if (!user) return;
-            const id = el.dataset.id;
-            const speaker = el.dataset.speaker;
-            const textContent = el.querySelector('.text-content') || el.querySelector('p');
-            
-            if (activeElement === el && currentAudio && currentAudio.paused) {
-                window.updateButtonIcon(el, 'pause');
-                await currentAudio.play();
-                return new Promise((resolve) => {
-                    currentAudio.onended = () => handleEnded(el, resolve);
-                });
-            }
-
-            stopAllPlayback(true);
-            activeElement = el;
-            el.classList.add('active-speech');
-            
-            const originalHTML = textContent.innerHTML;
-            if (!textContent.querySelector('mark')) {
-                textContent.innerHTML = `${originalHTML}`;
-            }
-            window.updateButtonIcon(el, 'pause');
-
-            let blob = await getCachedAudio(id);
-            if (!blob) {
-                document.getElementById('loader-icon').classList.remove('hidden');
-                document.getElementById('status-text').innerText = `Generiere Audio für ${speaker}...`;
-                blob = await fetchTTS(textContent.innerText, speaker);
-                await saveAudioToCache(id, blob);
-                document.getElementById('loader-icon').classList.add('hidden');
-                document.getElementById('status-text').innerText = "Bereit.";
-            }
-
-            const url = URL.createObjectURL(blob);
-            currentAudio = new Audio(url);
-            
-            return new Promise((resolve) => {
-                currentAudio.onended = () => handleEnded(el, resolve);
-                currentAudio.play();
-            });
-        }
-
-        function handleEnded(el, resolve) {
-            window.updateButtonIcon(el, 'play');
-            el.classList.remove('active-speech');
-            const mark = el.querySelector('mark');
-            if (mark) {
-                const textContent = el.querySelector('.text-content') || el.querySelector('p');
-                textContent.innerHTML = mark.innerHTML;
-            }
-            activeElement = null;
-            currentAudio = null;
-            resolve();
-        }
-
-        function stopAllPlayback(keepChain = false) {
-            if (!keepChain) {
-                isChainPlaying = false;
-            }
-            if (currentAudio) {
-                currentAudio.pause();
-                currentAudio = null;
-            }
-            document.querySelectorAll('.text2speech').forEach(e => {
-                e.classList.remove('active-speech');
-                window.updateButtonIcon(e, 'play');
-                const mark = e.querySelector('mark');
-                if (mark) {
-                    const textContent = e.querySelector('.text-content') || e.querySelector('p');
-                    textContent.innerHTML = mark.innerHTML;
-                }
-            });
-            activeElement = null;
-        }
-
-        async function startChainPlay(startNode) {
-            stopAllPlayback();
-            const nodes = Array.from(document.querySelectorAll('.text2speech'));
-            const startIndex = nodes.indexOf(startNode);
-            
-            isChainPlaying = true;
-            for (let i = startIndex; i < nodes.length; i++) {
-                if (!isChainPlaying) break;
-                await playElement(nodes[i]);
-            }
-            isChainPlaying = false;
-        }
-
-        async function preload() {
-            if (!user) return;
-            const elements = document.querySelectorAll('.text2speech');
-            document.getElementById('status-text').innerText = "Prüfe Cloud-Cache...";
-            
-            let missingItems = [];
-            for (const el of elements) {
-                const cached = await getCachedAudio(el.dataset.id);
-                if (!cached) missingItems.push(el);
-            }
-
-            if (missingItems.length > 0) {
-                document.getElementById('status-text').innerText = `${missingItems.length} Abschnitte werden vorbereitet...`;
-                document.getElementById('loader-icon').classList.remove('hidden');
-                
-                for (const el of missingItems) {
-                    if (!user) break;
-                    const id = el.dataset.id;
-                    try {
-                        const textContent = el.querySelector('.text-content') || el.querySelector('p');
-                        const blob = await fetchTTS(textContent.innerText, el.dataset.speaker);
-                        await saveAudioToCache(id, blob);
-                        
-                        // KÜNSTLICHE PAUSE: Verhindert 429 Errors bei schnellen Abfolgen
-                        await new Promise(r => setTimeout(r, 2500)); 
-                    } catch (e) { 
-                        console.error("Preload fehlgeschlagen", e); 
-                    }
-                }
-            }
-            
-            document.getElementById('loader-icon').classList.add('hidden');
-            document.getElementById('status-text').innerText = "Bereit (Alle Cloud-Inhalte synchronisiert)";
-        }
-    </script>
 </body>
 
 </html>
