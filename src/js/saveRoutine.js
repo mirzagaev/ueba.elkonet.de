@@ -123,7 +123,9 @@ function AJAXPost() {
         {
             value = elem[i].value;     
         }
-        params += elem[i].name + "=" + encodeURIComponent(value) + "&";           
+        if (elem[i].name) {
+            params += elem[i].name + "=" + encodeURIComponent(value) + "&";           
+        }
     }
 
     // NOTIZEN

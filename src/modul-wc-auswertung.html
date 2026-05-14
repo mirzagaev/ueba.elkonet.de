@@ -391,7 +391,7 @@
                                 const getChartOptions = () => {
                                     return {
                                         series: [75, 25],
-                                        colors: ["var(--color-green-400)", "var(--color-red-400)"],
+                                        colors: ["var(--color-green-600)", "var(--color-red-600)", "var(--color-neutral-600)"],
                                         chart: {
                                             height: 400,
                                             width: "100%",
@@ -450,14 +450,25 @@
                                 chart.render();
                             </script>
                         </div>
-                        <div class="grid grid-cols-1 xl:grid-cols-3 gap-5">
+                        <div class="grid grid-cols-1 xl:grid-cols-3 gap-5 text-center">
                             <p>Richtig: {$correctTotal} / {$frageCount}</p>
                             <p>Falsch: {$wrongTotal} / {$frageCount}</p>
                             <p>Nicht beantwortet: {$notAnsweredTotal} / {$frageCount}</p>
                         </div>
                         <div>
-                            <p>Sie haben 75% der Fragen richtig beantwortet!<br />Herzlichen Glückwunsch!</p>
+                            <div class="w-full flex items-center py-3 px-8 mb-2 text-green-700 rounded-2xl bg-white dark:bg-neutral-900 dark:text-green-500" role="alert">
+                                <svg class="shrink-0 inline size-8 mr-6 fill-green-600 dark:fill-green-500"><use xlink:href="#icon-check"></use></svg>
+                                <div>
+                                    <span class="font-medium">Super!</span> Sie beherrschen das Thema richtig gut.
+                                </div>
+                            </div>
                         </div>
+                        <div></div>
+                    </div>
+
+                    <div id="formelements" class="justify-center">
+                        <button type="submit" name="continueUnanswered" value="1" class="btn-auswerten">Unbeantwortete Fragen fortsetzen</button>
+                        <button type="submit" name="resetQuiz" value="1" class="btn-auswerten">Antworten zurücksetzen</button>
                     </div>
                 </div>
             </div>

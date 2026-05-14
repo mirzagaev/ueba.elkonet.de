@@ -11,6 +11,13 @@
 <body class="text-primary">
 	<svg class="hidden">
         <defs>
+            <symbol id="icon-projektdatenblatt" viewBox="0 0 24 24">
+                <path fill-rule="evenodd" d="M2.25 2.25a.75.75 0 0 0 0 1.5H3v10.5a3 3 0 0 0 3 3h1.21l-1.172 3.513a.75.75 0 0 0 1.424.474l.329-.987h8.418l.33.987a.75.75 0 0 0 1.422-.474l-1.17-3.513H18a3 3 0 0 0 3-3V3.75h.75a.75.75 0 0 0 0-1.5H2.25Zm6.04 16.5.5-1.5h6.42l.5 1.5H8.29Zm7.46-12a.75.75 0 0 0-1.5 0v6a.75.75 0 0 0 1.5 0v-6Zm-3 2.25a.75.75 0 0 0-1.5 0v3.75a.75.75 0 0 0 1.5 0V9Zm-3 2.25a.75.75 0 0 0-1.5 0v1.5a.75.75 0 0 0 1.5 0v-1.5Z" clip-rule="evenodd" />
+            </symbol>
+            <symbol id="icon-fertigungsprotokoll" viewBox="0 0 24 24">
+                <path fill-rule="evenodd" d="M5.625 1.5c-1.036 0-1.875.84-1.875 1.875v17.25c0 1.035.84 1.875 1.875 1.875h12.75c1.035 0 1.875-.84 1.875-1.875V12.75A3.75 3.75 0 0 0 16.5 9h-1.875a1.875 1.875 0 0 1-1.875-1.875V5.25A3.75 3.75 0 0 0 9 1.5H5.625ZM7.5 15a.75.75 0 0 1 .75-.75h7.5a.75.75 0 0 1 0 1.5h-7.5A.75.75 0 0 1 7.5 15Zm.75 2.25a.75.75 0 0 0 0 1.5H12a.75.75 0 0 0 0-1.5H8.25Z" clip-rule="evenodd" />
+                <path d="M12.971 1.816A5.23 5.23 0 0 1 14.25 5.25v1.875c0 .207.168.375.375.375H16.5a5.23 5.23 0 0 1 3.434 1.279 9.768 9.768 0 0 0-6.963-6.963Z" />
+            </symbol>
             <symbol id="icon-kundenkartei" viewBox="0 0 24 24">
                 <path fill-rule="evenodd" d="M4.5 3.75a3 3 0 0 0-3 3v10.5a3 3 0 0 0 3 3h15a3 3 0 0 0 3-3V6.75a3 3 0 0 0-3-3h-15Zm4.125 3a2.25 2.25 0 1 0 0 4.5 2.25 2.25 0 0 0 0-4.5Zm-3.873 8.703a4.126 4.126 0 0 1 7.746 0 .75.75 0 0 1-.351.92 7.47 7.47 0 0 1-3.522.877 7.47 7.47 0 0 1-3.522-.877.75.75 0 0 1-.351-.92ZM15 8.25a.75.75 0 0 0 0 1.5h3.75a.75.75 0 0 0 0-1.5H15ZM14.25 12a.75.75 0 0 1 .75-.75h3.75a.75.75 0 0 1 0 1.5H15a.75.75 0 0 1-.75-.75Zm.75 2.25a.75.75 0 0 0 0 1.5h3.75a.75.75 0 0 0 0-1.5H15Z" clip-rule="evenodd" />
             </symbol>
@@ -566,19 +573,25 @@
     <!-- Drawer Container -->
     <div id="drawer-container" class="fixed top-0 right-0 h-full w-full sm:w-90 bg-white dark:bg-neutral-700 text-neutral-900 drop-shadow-2xl shadow-2xl z-50 translate-x-full drawer-animate flex border-l border-neutral-200 dark:border-neutral-600">
         
-        <!-- Toggle Button (Vertikaler Tab) -->
-        <button id="drawer-toggle" class="absolute left-0 top-1/2 -translate-x-full -translate-y-1/2 bg-neutral-800 dark:bg-neutral-300 hover:bg-red-600 dark:hover:bg-neutral-100 text-white dark:text-black py-5 px-3 rounded-l-xl flex flex-col items-center gap-4 transition-all duration-200 group cursor-pointer" aria-label="Formulare öffnen/schließen">
-            <svg class="fill-white dark:fill-black size-5 -rotate-90" fill="none"><use xlink:href="#icon-ausbildungsnachweis"></use></svg>
-            <span class="vertical-text font-bold tracking-widest uppercase text-xs md:text-sm">Formulare</span>
-        </button>
+        <!-- Toggle Buttons (Vertikale Tabs) -->
+        <div class="absolute left-0 top-1/2 -translate-x-full -translate-y-1/2 flex flex-col gap-2">
+            <button id="drawer-toggle-formulare" onclick="toggleDrawer('formulare')" class="bg-neutral-800 dark:bg-neutral-300 hover:bg-red-600 dark:hover:bg-neutral-100 text-white dark:text-black py-5 px-3 rounded-l-xl flex flex-col items-center gap-4 transition-all duration-200 group cursor-pointer" aria-label="Formulare öffnen/schließen">
+                <svg class="fill-white dark:fill-black size-5 -rotate-90" fill="none"><use xlink:href="#icon-ausbildungsnachweis"></use></svg>
+                <span class="vertical-text font-bold tracking-widest uppercase text-xs md:text-sm">Formulare</span>
+            </button>
+            <button id="drawer-toggle-hilfe" onclick="toggleDrawer('hilfe')" class="bg-neutral-500 text-white py-5 px-3 rounded-l-xl flex flex-col items-center gap-4 transition-all duration-200 group cursor-pointer" aria-label="Hilfe öffnen/schließen">
+                <svg stroke-width="2" class="size-5 -rotate-90 stroke-white" fill="none"><use xlink:href="#icon-frage"></use></svg>
+                <span class="vertical-text font-bold tracking-widest uppercase text-xs md:text-sm">Hilfe</span>
+            </button>
+        </div>
 
         <!-- Wrapper für Menü und Content -->
         <div class="relative w-full h-full overflow-hidden">
-            <!-- SPALTE 1: Hauptmenü (Navigation) -->
-            <aside id="menu-aside" class="absolute inset-0 w-full h-full flex flex-col fade-transition opacity-100 z-10">
+            <!-- SPALTE 1: Hauptmenü Formulare -->
+            <aside id="menu-aside-formulare" class="absolute inset-0 w-full h-full flex flex-col fade-transition opacity-100 z-10">
                 <div class="border-b border-subnav flex items-center justify-between p-8 py-5 xl:p-10 xl:py-6 gap-2">
                     <h2 class="text-primary text-2xl font-semibold leading-7 pr-10">Online Formulare</h2>
-                    <button onclick="toggleDrawer()" class="btn-secondary w-8 h-8 p-0" title="Schließen">
+                    <button onclick="toggleDrawer('formulare')" class="btn-secondary w-8 h-8 p-0" title="Schließen">
                         <svg class="stroke-primary size-4 mx-auto"><use xlink:href="#icon-close"></use></svg>
                         <span class="sr-only">Schließen</span>
                     </button>
@@ -588,51 +601,105 @@
                     <ul class="space-y-1 px-5">
                         <li onclick="selectForm('Kundenkartei')">
                             <div class="group flex items-center gap-4 px-4 py-3 rounded-2xl hover:bg-neutral-100 dark:hover:bg-neutral-800 cursor-pointer transition-all border border-transparent">
-                                <svg class="size-6 fill-primary" fill="none"><use xlink:href="#icon-kundenkartei"></use></svg>
+                                <svg class="size-6 fill-primary"><use xlink:href="#icon-kundenkartei"></use></svg>
                                 <span class="font-medium text-primary">Kundenkartei</span>
                                 <svg class="stroke-primary size-5 ml-auto" fill="none"><use xlink:href="#icon-right"></use></svg>
                             </div>
                         </li>
                         <li onclick="selectForm('Besuchsbericht')">
                             <div class="group flex items-center gap-4 px-4 py-3 rounded-2xl hover:bg-neutral-100 cursor-pointer transition-all border border-transparent">
-                                <svg class="size-6 fill-primary" fill="none"><use xlink:href="#icon-besuchsbericht"></use></svg>
+                                <svg class="size-6 fill-primary"><use xlink:href="#icon-besuchsbericht"></use></svg>
                                 <span class="font-medium text-primary">Besuchsbericht</span>
+                                <svg class="stroke-primary size-5 ml-auto" fill="none"><use xlink:href="#icon-right"></use></svg>
+                            </div>
+                        </li>
+                        <li onclick="selectForm('Projektdatenblatt')">
+                            <div class="group flex items-center gap-4 px-4 py-3 rounded-2xl hover:bg-neutral-100 cursor-pointer transition-all border border-transparent">
+                                <svg class="size-6 fill-primary"><use xlink:href="#icon-projektdatenblatt"></use></svg>
+                                <span class="font-medium text-primary">Projektdatenblatt</span>
                                 <svg class="stroke-primary size-5 ml-auto" fill="none"><use xlink:href="#icon-right"></use></svg>
                             </div>
                         </li>
                         <li onclick="selectForm('Arbeitsplan')">
                             <div class="group flex items-center gap-4 px-4 py-3 rounded-2xl hover:bg-neutral-100 cursor-pointer transition-all border border-transparent">
-                                <svg class="size-6 fill-primary" fill="none"><use xlink:href="#icon-arbeitsplan"></use></svg>
+                                <svg class="size-6 fill-primary"><use xlink:href="#icon-arbeitsplan"></use></svg>
                                 <span class="font-medium text-primary">Arbeitsplan</span>
                                 <svg class="stroke-primary size-5 ml-auto" fill="none"><use xlink:href="#icon-right"></use></svg>
                             </div>
                         </li>
                         <li onclick="selectForm('Materialplan')">
                             <div class="group flex items-center gap-4 px-4 py-3 rounded-2xl hover:bg-neutral-100 cursor-pointer transition-all border border-transparent">
-                                <svg class="size-6 fill-primary" fill="none"><use xlink:href="#icon-basket"></use></svg>
+                                <svg class="size-6 fill-primary"><use xlink:href="#icon-materialplan"></use></svg>
                                 <span class="font-medium text-primary">Materialplan</span>
                                 <svg class="stroke-primary size-5 ml-auto" fill="none"><use xlink:href="#icon-right"></use></svg>
                             </div>
                         </li>
                         <li onclick="selectForm('Angebot')">
                             <div class="group flex items-center gap-4 px-4 py-3 rounded-2xl hover:bg-neutral-100 cursor-pointer transition-all border border-transparent">
-                                <svg class="size-6 fill-primary" fill="none"><use xlink:href="#icon-euro"></use></svg>
+                                <svg class="size-6 fill-primary"><use xlink:href="#icon-angebot"></use></svg>
                                 <span class="font-medium text-primary">Angebot</span>
+                                <svg class="stroke-primary size-5 ml-auto" fill="none"><use xlink:href="#icon-right"></use></svg>
+                            </div>
+                        </li>
+                        <li onclick="selectForm('Fertigungsprotokoll')">
+                            <div class="group flex items-center gap-4 px-4 py-3 rounded-2xl hover:bg-neutral-100 cursor-pointer transition-all border border-transparent">
+                                <svg class="size-6 fill-primary"><use xlink:href="#icon-fertigungsprotokoll"></use></svg>
+                                <span class="font-medium text-primary">Fertigungsprotokoll</span>
                                 <svg class="stroke-primary size-5 ml-auto" fill="none"><use xlink:href="#icon-right"></use></svg>
                             </div>
                         </li>
                         <li onclick="selectForm('Abnahme')">
                             <div class="group flex items-center gap-4 px-4 py-3 rounded-2xl hover:bg-neutral-100 cursor-pointer transition-all border border-transparent">
-                                <svg class="size-6 fill-primary" fill="none"><use xlink:href="#icon-check"></use></svg>
+                                <svg class="size-6 fill-primary"><use xlink:href="#icon-check"></use></svg>
                                 <span class="font-medium text-primary">Abnahme</span>
                                 <svg class="stroke-primary size-5 ml-auto" fill="none"><use xlink:href="#icon-right"></use></svg>
                             </div>
                         </li>
                         <li onclick="selectForm('Rechnung')">
                             <div class="group flex items-center gap-4 px-4 py-3 rounded-2xl hover:bg-neutral-100 cursor-pointer transition-all border border-transparent">
-                                <svg class="size-6 fill-primary" fill="none"><use xlink:href="#icon-rechnung"></use></svg>
+                                <svg class="size-6 fill-primary"><use xlink:href="#icon-rechnung"></use></svg>
                                 <span class="font-medium text-primary">Rechnung</span>
                                 <svg class="stroke-primary size-5 ml-auto" fill="none"><use xlink:href="#icon-right"></use></svg>
+                            </div>
+                        </li>
+                    </ul>
+                </nav>
+            </aside>
+
+            <!-- SPALTE 1: Hauptmenü Hilfe -->
+            <aside id="menu-aside-hilfe" class="absolute inset-0 w-full h-full flex flex-col fade-transition opacity-0 pointer-events-none z-10 hidden">
+                <div class="border-b border-subnav flex items-center justify-between p-8 py-5 xl:p-10 xl:py-6 gap-2">
+                    <h2 class="text-primary text-2xl font-semibold leading-7 pr-10">Hilfe</h2>
+                    <button onclick="toggleDrawer('hilfe')" class="btn-secondary w-8 h-8 p-0" title="Schließen">
+                        <svg class="stroke-primary size-4 mx-auto"><use xlink:href="#icon-close"></use></svg>
+                        <span class="sr-only">Schließen</span>
+                    </button>
+                </div>
+
+                <nav class="flex-1 overflow-y-auto py-4 custom-scrollbar">
+                    <ul class="space-y-2 px-5">
+                        <li onclick="selectForm('Analyse Hilfe')">
+                            <div class="group flex items-center gap-4 px-4 py-2 rounded-2xl bg-analyse cursor-pointer transition-all border border-transparent">
+                                <svg class="size-5 fill-white"><use xlink:href="#icon-analyse"></use></svg>
+                                <span class="font-medium text-white">Analyse</span>
+                            </div>
+                        </li>
+                        <li onclick="selectForm('Planung Hilfe')">
+                            <div class="group flex items-center gap-4 px-4 py-2 rounded-2xl bg-planung cursor-pointer transition-all border border-transparent">
+                                <svg class="size-6 fill-white"><use xlink:href="#icon-planung"></use></svg>
+                                <span class="font-medium text-white">Planung</span>
+                            </div>
+                        </li>
+                        <li onclick="selectForm('Durchführung Hilfe')">
+                            <div class="group flex items-center gap-4 px-4 py-2 rounded-2xl bg-durchfuehrung cursor-pointer transition-all border border-transparent">
+                                <svg class="size-6 fill-white"><use xlink:href="#icon-durchfuehrung"></use></svg>
+                                <span class="font-medium text-white">Durchführung</span>
+                            </div>
+                        </li>
+                        <li onclick="selectForm('Auswertung Hilfe')">
+                            <div class="group flex items-center gap-4 px-4 py-2 rounded-2xl bg-auswertung cursor-pointer transition-all border border-transparent">
+                                <svg class="size-6 fill-white"><use xlink:href="#icon-auswertung"></use></svg>
+                                <span class="font-medium text-white">Auswertung</span>
                             </div>
                         </li>
                     </ul>
@@ -652,7 +719,7 @@
                             <p class="text-[10px] text-secondary uppercase font-bold tracking-widest">ETE 4/22</p>
                         </div>
                     </div>
-                    <button onclick="toggleDrawer()" class="btn-secondary w-8 h-8 p-0" title="Minimieren">
+                    <button onclick="toggleDrawer(currentDrawerType)" class="btn-secondary w-8 h-8 p-0" title="Minimieren">
                         <svg class="stroke-primary size-6 mx-auto"><use xlink:href="#icon-minimieren"></use></svg>
                         <span class="sr-only">Minimieren</span>
                     </button>
@@ -660,6 +727,41 @@
 
                 <div class="flex-1 overflow-y-auto p-6 xl:px-12 md:p-8 custom-scrollbar">
                     <div class="space-y-8 pb-10">
+                        <div class="py-4 xl:py-6 md:flex-grow grid md:grid-cols-10 gap-4">
+                            <span class="text-xl text-primary font-light title-font tracking-widest uppercase mb-2 md:col-span-10">Auftraggeber</span>
+                            <span class="text-xl text-primary title-font md:col-span-10">Firma</span>
+                            <div class="md:col-start-1 md:col-span-5">
+                                <input placeholder="Name" maxlength="30" id="Firma_Name" name="Firma_Name" value="{$formular_extra.Firma_Name}" class="kundenauftrag-form-text" />
+                            </div>
+                            <div class="md:col-span-5">
+                                <input type="text" placeholder="Datum" id="Datum" name="Datum" value="{$formular_extra.Datum}" class="kundenauftrag-form-text" onfocus="(this.type='date')" onblur="if(!this.value)this.type='text'" />
+                            </div>
+                            <div class="md:col-span-10">
+                                <input placeholder="Straße" id="Firma_Strasse" name="Firma_Strasse" value="{$formular_extra.Firma_Strasse}" class="kundenauftrag-form-text" />
+                            </div>
+                            <div class="md:col-span-3">
+                                <input placeholder="PLZ" id="Firma_PLZ" name="Firma_PLZ" value="{$formular_extra.Firma_PLZ}" class="kundenauftrag-form-text" />
+                            </div>
+                            <div class="md:col-span-7">
+                                <input placeholder="Ort" id="Firma_Ort" name="Firma_Ort" value="{$formular_extra.Firma_Ort}" class="kundenauftrag-form-text" />
+                            </div>
+                            <div class="md:col-span-5">
+                                <input placeholder="Telefon" maxlength="30" id="Telefon" name="Telefon" value="{$formular_extra.Telefon}" class="kundenauftrag-form-text" />
+                            </div>
+                            <div class="md:col-span-5">
+                                <input placeholder="Mobil" id="Mobil" name="Mobil" value="{$formular_extra.Mobil}" class="kundenauftrag-form-text" />
+                            </div>
+                            <div class="md:col-span-10">
+                                <input placeholder="E-Mail" id="Email" name="Email" value="{$formular_extra.Email}" class="kundenauftrag-form-text" />
+                            </div>
+                            <div class="md:col-span-10"></div>
+                            <div class="md:col-span-10">
+                                <input placeholder="Anruf von" id="Anrufer" name="Anrufer" value="{$formular_extra.Anrufer}" class="kundenauftrag-form-text">
+                            </div>
+                            <div class="md:col-start-1 md:col-span-5">
+                                <input placeholder="Kontakt vor Ort" id="Ansprechpartner" name="Ansprechpartner" value="{$formular_extra.Ansprechpartner}" class="kundenauftrag-form-text" />
+                            </div>
+                        </div>
                         <div class="space-y-6">
                             <div class="grid grid-cols-1 gap-4">
                                 <label class="block text-[10px] font-bold text-neutral-400 uppercase tracking-widest">Eingabefeld</label>
@@ -691,31 +793,48 @@
 
     <script>
         const drawerContainer = document.getElementById('drawer-container');
-        const drawerToggle = document.getElementById('drawer-toggle');
-        const menuAside = document.getElementById('menu-aside');
+        const drawerToggleFormulare = document.getElementById('drawer-toggle-formulare');
+        const drawerToggleHilfe = document.getElementById('drawer-toggle-hilfe');
+        const menuAsideFormulare = document.getElementById('menu-aside-formulare');
+        const menuAsideHilfe = document.getElementById('menu-aside-hilfe');
         const contentPane = document.getElementById('content-pane');
         const detailTitle = document.getElementById('detail-title');
 
         let isDrawerOpen = false;
         let isFormSelected = false;
+        let currentDrawerType = 'formulare';
 
-        function toggleDrawer() {
-            isDrawerOpen = !isDrawerOpen;
+        function toggleDrawer(type = currentDrawerType) {
             const isMobile = window.innerWidth < 768;
 
-            if (isDrawerOpen) {
+            if (isDrawerOpen && currentDrawerType === type) {
+                isDrawerOpen = false;
+                drawerContainer.classList.add('translate-x-full');
+                if (drawerToggleFormulare) drawerToggleFormulare.classList.remove('opacity-0', 'pointer-events-none');
+                if (drawerToggleHilfe) drawerToggleHilfe.classList.remove('opacity-0', 'pointer-events-none');
+            } else {
+                isDrawerOpen = true;
+                currentDrawerType = type;
                 drawerContainer.classList.remove('translate-x-full');
                 
                 if (isMobile) {
-                    drawerToggle.classList.add('opacity-0', 'pointer-events-none');
+                    if (drawerToggleFormulare) drawerToggleFormulare.classList.add('opacity-0', 'pointer-events-none');
+                    if (drawerToggleHilfe) drawerToggleHilfe.classList.add('opacity-0', 'pointer-events-none');
                 }
-            } else {
-                drawerContainer.classList.add('translate-x-full');
-                drawerToggle.classList.remove('opacity-0', 'pointer-events-none');
-                
-                // Die Formular-Ansicht soll NICHT mehr zurückgesetzt werden,
-                // damit das zuletzt geöffnete Formular beim erneuten Öffnen erhalten bleibt.
-                // setTimeout(deselectForm, 400);
+
+                if (type === 'formulare') {
+                    menuAsideFormulare.classList.remove('hidden', 'opacity-0', 'pointer-events-none', '-translate-x-4');
+                    menuAsideFormulare.classList.add('opacity-100');
+                    if (menuAsideHilfe) menuAsideHilfe.classList.add('hidden', 'opacity-0', 'pointer-events-none', '-translate-x-4');
+                    if (menuAsideHilfe) menuAsideHilfe.classList.remove('opacity-100');
+                } else {
+                    if (menuAsideHilfe) menuAsideHilfe.classList.remove('hidden', 'opacity-0', 'pointer-events-none', '-translate-x-4');
+                    if (menuAsideHilfe) menuAsideHilfe.classList.add('opacity-100');
+                    menuAsideFormulare.classList.add('hidden', 'opacity-0', 'pointer-events-none', '-translate-x-4');
+                    menuAsideFormulare.classList.remove('opacity-100');
+                }
+
+                if (isFormSelected) deselectForm();
             }
         }
 
@@ -723,9 +842,9 @@
             isFormSelected = true;
             detailTitle.innerText = name;
             
-            // Logik: Menü ausblenden
-            menuAside.classList.remove('opacity-100');
-            menuAside.classList.add('opacity-0', 'pointer-events-none', '-translate-x-4');
+            let activeMenu = currentDrawerType === 'formulare' ? menuAsideFormulare : menuAsideHilfe;
+            activeMenu.classList.remove('opacity-100');
+            activeMenu.classList.add('opacity-0', 'pointer-events-none', '-translate-x-4');
             
             // Logik: Formular einblenden
             contentPane.classList.remove('opacity-0', 'pointer-events-none', 'translate-x-4');
@@ -748,9 +867,9 @@
             contentPane.classList.remove('opacity-100', 'translate-x-0');
             contentPane.classList.add('opacity-0', 'pointer-events-none', 'translate-x-4');
             
-            // Logik: Menü wieder einblenden
-            menuAside.classList.remove('opacity-0', 'pointer-events-none', '-translate-x-4');
-            menuAside.classList.add('opacity-100');
+            let activeMenu = currentDrawerType === 'formulare' ? menuAsideFormulare : menuAsideHilfe;
+            activeMenu.classList.remove('opacity-0', 'pointer-events-none', '-translate-x-4');
+            activeMenu.classList.add('opacity-100');
 
             // Container-Breite zurücksetzen
             drawerContainer.classList.remove('sm:w-1/2', 'xl:w-1/3');
@@ -758,11 +877,10 @@
 
             // Button wieder zeigen (falls Drawer noch offen ist)
             if (isDrawerOpen && window.innerWidth >= 768) {
-                drawerToggle.classList.remove('opacity-0', 'pointer-events-none');
+                if (drawerToggleFormulare) drawerToggleFormulare.classList.remove('opacity-0', 'pointer-events-none');
+                if (drawerToggleHilfe) drawerToggleHilfe.classList.remove('opacity-0', 'pointer-events-none');
             }
         }
-
-        drawerToggle.addEventListener('click', toggleDrawer);
 
         window.addEventListener('keydown', (e) => {
             if (e.key === 'Escape') {
@@ -774,9 +892,11 @@
         // Automatische Anpassung bei Resize
         window.addEventListener('resize', () => {
             if (window.innerWidth >= 768 && isDrawerOpen) {
-                drawerToggle.classList.remove('opacity-0', 'pointer-events-none');
+                if (drawerToggleFormulare) drawerToggleFormulare.classList.remove('opacity-0', 'pointer-events-none');
+                if (drawerToggleHilfe) drawerToggleHilfe.classList.remove('opacity-0', 'pointer-events-none');
             } else if (window.innerWidth < 768 && isDrawerOpen) {
-                drawerToggle.classList.add('opacity-0', 'pointer-events-none');
+                if (drawerToggleFormulare) drawerToggleFormulare.classList.add('opacity-0', 'pointer-events-none');
+                if (drawerToggleHilfe) drawerToggleHilfe.classList.add('opacity-0', 'pointer-events-none');
             }
         });
 
@@ -822,57 +942,6 @@
         });
     });
     </script>
-
-    <!-- CHATBOT -->
-    <button id="dropdownNavbarLink" data-dropdown-toggle="openChatbot" class="fixed bg-primary bottom-4 inline-flex right-4 text-primary items-center justify-center rounded-full cursor-pointer" type="button" aria-haspopup="dialog" aria-expanded="false" data-state="closed">
-        <svg stroke-width="1.5" fill="none" class="size-12 stroke-secondary"><use xlink:href="#icon-frage"></use></svg>
-    </button>
-    <div id="openChatbot" class="hidden fixed bottom-[calc(4rem+1.5rem)] right-0 mr-4 bg-primary shadow-sm p-6 rounded-lg w-[440px] h-[634px]">
-        <!-- Heading -->
-        <div class="flex flex-col space-y-1.5 pb-6">
-            <h2 class="font-semibold text-lg tracking-tight">Chatbot</h2>
-            <p class="text-sm text-secondary leading-3">Powered by Mendable and Vercel</p>
-        </div>
-
-        <!-- Chat Container -->
-        <div class="bg-primary flex flex-col gap-y-5">
-            <div class="flex">
-                <div class="shrink-0 relative inline-flex items-center justify-center w-8 h-8 overflow-hidden bg-secondary rounded-full">
-                    <svg stroke-width="1.5" class="size-8 p-1 fill-primary"><use xlink:href="#icon-aisymbol"></use></svg>
-                </div>
-                <div class="w-full ps-3">
-                    <div class="text-primary text-sm mt-1.5 mb-1.5">Hi, how can I help you today?</div>
-                </div>
-            </div>
-            <div class="flex">
-                <div class="shrink-0 relative inline-flex items-center justify-center w-8 h-8 overflow-hidden bg-secondary rounded-full">
-                    <span class="text-primary text-sm">MG</span>
-                </div>
-                <div class="w-full ps-3">
-                    <div class="text-primary text-sm mt-1.5 mb-1.5 ">fewafef</div>
-                </div>
-            </div>
-            <div class="flex">
-                <div class="shrink-0 relative inline-flex items-center justify-center w-8 h-8 overflow-hidden bg-secondary rounded-full">
-                    <svg stroke-width="1.5" class="size-8 p-1 fill-primary"><use xlink:href="#icon-aisymbol"></use></svg>
-                </div>
-                <div class="w-full ps-3">
-                    <div class="text-primary text-sm mt-1.5 mb-1.5 ">Sorry, I couldn't find any information in the documentation about that. Expect answer to be less accurateI could not find the answer to this in the verified sources.</div>
-                </div>
-            </div>
-            <div class="flex">
-                <div class="shrink-0 relative inline-flex items-center justify-center w-8 h-8 overflow-hidden bg-secondary rounded-full">
-                    <span class="text-primary text-sm">MG</span>
-                </div>
-                <div class="w-full ps-3">
-                    <form class="flex items-center justify-center w-full space-x-2">
-                        <input class="flex bg-secondary h-10 w-full rounded-2xl px-3 py-2 text-sm focus:outline-none disabled:cursor-not-allowed  text-primary focus-visible:ring-offset-2" placeholder="Type your message" value="">
-                        <button class="inline-flex items-center justify-center rounded-2xl text-sm font-medium disabled:pointer-events-none disabled:opacity-50 btn-primary h-10 px-4 py-2">Send</button>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
     
     <script src="js/flowbite.min.js"></script>
 </body>
