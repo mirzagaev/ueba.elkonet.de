@@ -14,6 +14,9 @@
             <symbol id="icon-projektdatenblatt" viewBox="0 0 24 24">
                 <path fill-rule="evenodd" d="M2.25 2.25a.75.75 0 0 0 0 1.5H3v10.5a3 3 0 0 0 3 3h1.21l-1.172 3.513a.75.75 0 0 0 1.424.474l.329-.987h8.418l.33.987a.75.75 0 0 0 1.422-.474l-1.17-3.513H18a3 3 0 0 0 3-3V3.75h.75a.75.75 0 0 0 0-1.5H2.25Zm6.04 16.5.5-1.5h6.42l.5 1.5H8.29Zm7.46-12a.75.75 0 0 0-1.5 0v6a.75.75 0 0 0 1.5 0v-6Zm-3 2.25a.75.75 0 0 0-1.5 0v3.75a.75.75 0 0 0 1.5 0V9Zm-3 2.25a.75.75 0 0 0-1.5 0v1.5a.75.75 0 0 0 1.5 0v-1.5Z" clip-rule="evenodd" />
             </symbol>
+            <symbol id="icon-auftragsstatus" fill="none" stroke-width="1.5" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M3 3v1.5M3 21v-6m0 0 2.77-.693a9 9 0 0 1 6.208.682l.108.054a9 9 0 0 0 6.086.71l3.114-.732a48.524 48.524 0 0 1-.005-10.499l-3.11.732a9 9 0 0 1-6.085-.711l-.108-.054a9 9 0 0 0-6.208-.682L3 4.5M3 15V4.5" />
+            </symbol>
             <symbol id="icon-fertigungsprotokoll" viewBox="0 0 24 24">
                 <path fill-rule="evenodd" d="M5.625 1.5c-1.036 0-1.875.84-1.875 1.875v17.25c0 1.035.84 1.875 1.875 1.875h12.75c1.035 0 1.875-.84 1.875-1.875V12.75A3.75 3.75 0 0 0 16.5 9h-1.875a1.875 1.875 0 0 1-1.875-1.875V5.25A3.75 3.75 0 0 0 9 1.5H5.625ZM7.5 15a.75.75 0 0 1 .75-.75h7.5a.75.75 0 0 1 0 1.5h-7.5A.75.75 0 0 1 7.5 15Zm.75 2.25a.75.75 0 0 0 0 1.5H12a.75.75 0 0 0 0-1.5H8.25Z" clip-rule="evenodd" />
                 <path d="M12.971 1.816A5.23 5.23 0 0 1 14.25 5.25v1.875c0 .207.168.375.375.375H16.5a5.23 5.23 0 0 1 3.434 1.279 9.768 9.768 0 0 0-6.963-6.963Z" />
@@ -575,11 +578,11 @@
         
         <!-- Toggle Buttons (Vertikale Tabs) -->
         <div class="absolute left-0 top-1/2 -translate-x-full -translate-y-1/2 flex flex-col gap-2">
-            <button id="drawer-toggle-formulare" onclick="toggleDrawer('formulare')" class="bg-neutral-800 dark:bg-neutral-300 hover:bg-red-600 dark:hover:bg-neutral-100 text-white dark:text-black py-5 px-3 rounded-l-xl flex flex-col items-center gap-4 transition-all duration-200 group cursor-pointer" aria-label="Formulare öffnen/schließen">
+            <button id="drawer-toggle-formulare" onclick="toggleDrawer('formulare')" class="bg-neutral-800 dark:bg-neutral-300 opacity-70 hover:opacity-100 text-white dark:text-black py-5 px-3 rounded-l-xl flex flex-col items-center gap-4 transition-all duration-200 group cursor-pointer" aria-label="Formulare öffnen/schließen">
                 <svg class="fill-white dark:fill-black size-5 -rotate-90" fill="none"><use xlink:href="#icon-ausbildungsnachweis"></use></svg>
                 <span class="vertical-text font-bold tracking-widest uppercase text-xs md:text-sm">Formulare</span>
             </button>
-            <button id="drawer-toggle-hilfe" onclick="toggleDrawer('hilfe')" class="bg-neutral-500 text-white py-5 px-3 rounded-l-xl flex flex-col items-center gap-4 transition-all duration-200 group cursor-pointer" aria-label="Hilfe öffnen/schließen">
+            <button id="drawer-toggle-hilfe" onclick="toggleDrawer('hilfe')" class="bg-red-600 hover:opacity-100 opacity-50 text-white py-5 px-3 rounded-l-xl flex flex-col items-center gap-4 transition-all duration-200 group cursor-pointer" aria-label="Hilfe öffnen/schließen">
                 <svg stroke-width="2" class="size-5 -rotate-90 stroke-white" fill="none"><use xlink:href="#icon-frage"></use></svg>
                 <span class="vertical-text font-bold tracking-widest uppercase text-xs md:text-sm">Hilfe</span>
             </button>
@@ -677,31 +680,64 @@
                 </div>
 
                 <nav class="flex-1 overflow-y-auto py-4 custom-scrollbar">
-                    <ul class="space-y-2 px-5">
-                        <li onclick="selectForm('Analyse Hilfe')">
-                            <div class="group flex items-center gap-4 px-4 py-2 rounded-2xl bg-analyse cursor-pointer transition-all border border-transparent">
-                                <svg class="size-5 fill-white"><use xlink:href="#icon-analyse"></use></svg>
-                                <span class="font-medium text-white">Analyse</span>
-                            </div>
-                        </li>
-                        <li onclick="selectForm('Planung Hilfe')">
-                            <div class="group flex items-center gap-4 px-4 py-2 rounded-2xl bg-planung cursor-pointer transition-all border border-transparent">
-                                <svg class="size-6 fill-white"><use xlink:href="#icon-planung"></use></svg>
-                                <span class="font-medium text-white">Planung</span>
-                            </div>
-                        </li>
-                        <li onclick="selectForm('Durchführung Hilfe')">
-                            <div class="group flex items-center gap-4 px-4 py-2 rounded-2xl bg-durchfuehrung cursor-pointer transition-all border border-transparent">
-                                <svg class="size-6 fill-white"><use xlink:href="#icon-durchfuehrung"></use></svg>
-                                <span class="font-medium text-white">Durchführung</span>
-                            </div>
-                        </li>
-                        <li onclick="selectForm('Auswertung Hilfe')">
-                            <div class="group flex items-center gap-4 px-4 py-2 rounded-2xl bg-auswertung cursor-pointer transition-all border border-transparent">
-                                <svg class="size-6 fill-white"><use xlink:href="#icon-auswertung"></use></svg>
-                                <span class="font-medium text-white">Auswertung</span>
-                            </div>
-                        </li>
+                <ul class="space-y-2 px-5" data-accordion="collapse">
+                    <li onclick="selectForm('Auftragsstart')">
+                        <div class="group flex items-center gap-4 px-4 py-2 rounded-2xl cursor-pointer transition-all border border-transparent">
+                            <svg class="size-6 stroke-primary"><use xlink:href="#icon-auftragsstart"></use></svg>
+                            <span class="font-medium">Auftragsstart</span>
+                        </div>
+                    </li>
+                    <li>
+                        <button type="button" class="group w-full flex items-center gap-4 px-4 py-2 rounded-2xl hover:bg-neutral-100 dark:hover:bg-neutral-800 cursor-pointer transition-all border border-transparent activeAccordion" data-accordion-target="#hilfe-1130672" aria-expanded="false" aria-controls="hilfe-1130672">
+                            <svg class="size-6 fill-analyse"><use xlink:href="#icon-analyse"></use></svg>
+                            <span class="font-medium text-primary">Analyse</span>
+                            <svg data-accordion-icon="" class="w-4 h-4 ml-auto shrink-0 stroke-primary rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5 5 1 1 5"></path></svg>
+                        </button>
+                        <div id="hilfe-1130672" class="w-full hidden">
+                            <ul class="space-y-1 mx-10 mt-1">
+                                <li>
+                                    <a onclick="event.preventDefault(); selectForm(this, 'Kundenauftrag')" href="/ueba/EEG/ETE+4_22+Pilot/Hilfe/Analyse/Kundenauftrag.html" class="block px-4 py-2 hover:bg-neutral-100 dark:hover:bg-neutral-800 rounded-lg text-primary text-sm transition-colors">Kundenauftrag</a>
+                                </li>
+                                <li>
+                                    <a onclick="event.preventDefault(); selectForm(this, 'Besuchsbericht')" href="/ueba/EEG/ETE+4_22+Pilot/Hilfe/Analyse/Besuchsbericht.html" class="block px-4 py-2 hover:bg-neutral-100 dark:hover:bg-neutral-800 rounded-lg text-primary text-sm transition-colors">Besuchsbericht</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+                                                                                                            
+                    <li>
+                        <button type="button" class="group w-full flex items-center gap-4 px-4 py-2 rounded-2xl hover:bg-neutral-100 dark:hover:bg-neutral-800 cursor-pointer transition-all border border-transparent inactiveAccordion" data-accordion-target="#hilfe-1130678" aria-expanded="false" aria-controls="hilfe-1130678">
+                            <svg class="size-6 fill-planung"><use xlink:href="#icon-planung"></use></svg>
+                            <span class="font-medium text-primary">Planung</span>
+                            <svg data-accordion-icon="" class="w-4 h-4 ml-auto shrink-0 stroke-primary rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5 5 1 1 5"></path></svg>
+                        </button>
+                        <div id="hilfe-1130678" class="w-full hidden">
+                            <ul class="pl-14 pr-4 py-2 space-y-1 border-l-2 border-neutral-100 dark:border-neutral-700 ml-7 mt-1"></ul>
+                        </div>
+                    </li>
+                                                                                                            
+                    <li>
+                        <button type="button" class="group w-full flex items-center gap-4 px-4 py-2 rounded-2xl hover:bg-neutral-100 dark:hover:bg-neutral-800 cursor-pointer transition-all border border-transparent inactiveAccordion" data-accordion-target="#hilfe-1130674" aria-expanded="false" aria-controls="hilfe-1130674">
+                            <svg class="size-6 fill-durchfuehrung"><use xlink:href="#icon-durchfuehrung"></use></svg>
+                            <span class="font-medium text-primary">Durchführung</span>
+                            <svg data-accordion-icon="" class="w-4 h-4 ml-auto shrink-0 stroke-primary rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5 5 1 1 5"></path></svg>
+                        </button>
+                        <div id="hilfe-1130674" class="w-full hidden">
+                            <ul class="pl-14 pr-4 py-2 space-y-1 border-l-2 border-neutral-100 dark:border-neutral-700 ml-7 mt-1"></ul>
+                        </div>
+                    </li>
+                                                                                                            
+                    <li>
+                        <button type="button" class="group w-full flex items-center gap-4 px-4 py-2 rounded-2xl hover:bg-neutral-100 dark:hover:bg-neutral-800 cursor-pointer transition-all border border-transparent inactiveAccordion" data-accordion-target="#hilfe-1130676" aria-expanded="false" aria-controls="hilfe-1130676">
+                            <svg class="size-6 fill-auswertung"><use xlink:href="#icon-auswertung"></use></svg>
+                            <span class="font-medium text-primary">Auswertung</span>
+                            <svg data-accordion-icon="" class="w-4 h-4 ml-auto shrink-0 stroke-primary rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5 5 1 1 5"></path></svg>
+                        </button>
+                        <div id="hilfe-1130676" class="w-full hidden">
+                            <ul class="pl-14 pr-4 py-2 space-y-1 border-l-2 border-neutral-100 dark:border-neutral-700 ml-7 mt-1"></ul>
+                        </div>
+                    </li>
+                                                                                    
                     </ul>
                 </nav>
             </aside>
@@ -726,7 +762,7 @@
                 </div>
 
                 <div class="flex-1 overflow-y-auto p-6 xl:px-12 md:p-8 custom-scrollbar">
-                    <div class="space-y-8 pb-10">
+                    <div class="space-y-8 pb-10" hidden>
                         <div class="py-4 xl:py-6 md:flex-grow grid md:grid-cols-10 gap-4">
                             <span class="text-xl text-primary font-light title-font tracking-widest uppercase mb-2 md:col-span-10">Auftraggeber</span>
                             <span class="text-xl text-primary title-font md:col-span-10">Firma</span>
@@ -786,6 +822,73 @@
                         <div class="w-full divide-y divide-secondary" id="drawer-form">
                         </div>
                     </div>
+                    <div class="space-y-8 pb-10">
+                        <!-- Einführung -->
+                        <div class="infobox bg-primary my-6" id="didaktik-introduce-open" data-accordion="open">
+                            <button type="button" class="bg-secondary w-full relative cursor-pointer kachelliste_headline inactiveAccordion" data-accordion-target="#didaktik-introduce-open-body-1" aria-expanded="false" aria-controls="didaktik-introduce-open-body-1">Einführung
+                                <svg data-accordion-icon class="w-4 h-4 absolute right-6 top-6 rotate-180 shrink-0"><use xlink:href="#icon-accordion-open"></use></svg>
+                            </button>
+                            <div id="didaktik-introduce-open-body-1" class="hidden kachelliste">
+                                <div>
+                                    <h3 class="font-medium text-xl">Was ist zu tun?</h3>
+                                    <ul>
+                                        <li>Bereitstellung und Test der Zugänge zu ueba.elkonet</li>
+                                        <li>Vorstellung der Lernziele der Ausbildungswoche und des Wochenablaufs mit Zeitplan</li>
+                                        <li>Sicherheitsunterweisung mit Anwendungsbeispielen für die Praxis</li>
+                                        <li>Ermittlung des Wissensstands der Auszubildenden, ggf. Ergänzung Fachwissen</li>
+                                        <li>Einweisung in den Kundenauftrag des Moduls und die fachlichen Informationen auf der Plattform[PG4]</li>
+                                    </ul>
+                                </div>
+                                <div id="lernmaterial-auszubildende-open" data-accordion="open">
+                                    <button type="button" class="text-left w-full relative cursor-pointer font-medium text-lg inactiveAccordion" data-accordion-target="#lernmaterial-auszubildende-body-1" aria-expanded="false" aria-controls="lernmaterial-auszubildende-body-1">
+                                        Lernmaterial Auszubildende
+                                        <svg data-accordion-icon class="w-4 h-4 absolute right-0 top-2 rotate-180 shrink-0"><use xlink:href="#icon-accordion-open"></use></svg>
+                                    </button>
+                                    <div id="lernmaterial-auszubildende-body-1" class="hidden py-4">
+                                        <div>Wenn Sie mit den Arbeitsaufträgen des Kundenauftrags schnell fertig sind, finden Sie in den zusätzlichen Übungen, weitere Aufgabenstellungen</div>
+                                        <div>Die Kategorie Formblätter beinhaltet wichtige Formulare zum Kundenauftrag</div>
+                                        <div>Die Herstellerinformationen bieten Ihnen den direkten Weg zu den Herstellern und einige Herstellerdokumente, die für den Kundenauftrag wichtig sind</div>
+                                    </div>
+                                </div>
+                                <div id="lernmaterial-ausbilder-open" data-accordion="open">
+                                    <button type="button" class="text-left w-full relative cursor-pointer font-medium text-lg inactiveAccordion" data-accordion-target="#lernmaterial-ausbilder-body-1" aria-expanded="false" aria-controls="lernmaterial-ausbilder-body-1">
+                                        Lernmaterial Ausbilder/in
+                                        <svg data-accordion-icon class="w-4 h-4 absolute right-0 top-2 rotate-180 shrink-0"><use xlink:href="#icon-accordion-open"></use></svg>
+                                    </button>
+                                    <div id="lernmaterial-ausbilder-body-1" class="hidden py-4">
+                                        <div>Wenn Sie mit den Arbeitsaufträgen des Kundenauftrags schnell fertig sind, finden Sie in den zusätzlichen Übungen, weitere Aufgabenstellungen</div>
+                                        <div>Die Kategorie Formblätter beinhaltet wichtige Formulare zum Kundenauftrag</div>
+                                        <div>Die Herstellerinformationen bieten Ihnen den direkten Weg zu den Herstellern und einige Herstellerdokumente, die für den Kundenauftrag wichtig sind</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="grid lg:grid-cols-2 gap-10 my-12 text-center">
+                            <div class="bg-secondary w-full rounded-2xl shadow-md overflow-hidden">
+                                <div class="w-full">
+                                    <img alt="gallery" class="max-w-full max-h-full object-cover mx-auto object-center block" src="https://dummyimage.com/600x400" />
+                                </div>
+                                <h4 class="w-full mt-3 md:mt-6 text-xl font-bold">Abnahme</h4>
+                                <p class="p-6 pt-2">Um späteren Reklamationen des Kunden aus dem Weg zu gehen, empfiehlt sich...</p>
+                                <a class="flex items-center w-fit mx-auto m-4 text-secondary" href="dashboard.html">
+                                    <svg class="size-5 fill-secondary"><use xlink:href="#icon-next"></use></svg>
+                                    <span class="ml-2 flex items-start flex-col leading-none title-font font-medium">mehr dazu</span>
+                                </a>
+                            </div>
+                            <div class="bg-secondary w-full rounded-2xl shadow-md overflow-hidden">
+                                <div class="w-full">
+                                    <img alt="gallery" class="max-w-full max-h-full object-cover mx-auto object-center block" src="https://dummyimage.com/600x400" />
+                                </div>
+                                <h4 class="w-full mt-3 md:mt-6 text-xl font-bold">Angebot</h4>
+                                <p class="p-6 pt-2">Um späteren Reklamationen des Kunden aus dem Weg zu gehen, empfiehlt sich...</p>
+                                <a class="flex items-center w-fit mx-auto m-4 text-secondary" href="dashboard.html">
+                                    <svg class="size-5 fill-secondary"><use xlink:href="#icon-next"></use></svg>
+                                    <span class="ml-2 flex items-start flex-col leading-none title-font font-medium">mehr dazu</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </section>
         </div>
@@ -810,8 +913,14 @@
             if (isDrawerOpen && currentDrawerType === type) {
                 isDrawerOpen = false;
                 drawerContainer.classList.add('translate-x-full');
-                if (drawerToggleFormulare) drawerToggleFormulare.classList.remove('opacity-0', 'pointer-events-none');
-                if (drawerToggleHilfe) drawerToggleHilfe.classList.remove('opacity-0', 'pointer-events-none');
+                if (drawerToggleFormulare) {
+                    drawerToggleFormulare.classList.remove('opacity-0', 'pointer-events-none', 'opacity-100');
+                    drawerToggleFormulare.classList.add('opacity-70');
+                }
+                if (drawerToggleHilfe) {
+                    drawerToggleHilfe.classList.remove('opacity-0', 'pointer-events-none', 'opacity-100');
+                    drawerToggleHilfe.classList.add('opacity-50');
+                }
             } else {
                 isDrawerOpen = true;
                 currentDrawerType = type;
@@ -820,6 +929,26 @@
                 if (isMobile) {
                     if (drawerToggleFormulare) drawerToggleFormulare.classList.add('opacity-0', 'pointer-events-none');
                     if (drawerToggleHilfe) drawerToggleHilfe.classList.add('opacity-0', 'pointer-events-none');
+                } else {
+                    if (type === 'formulare') {
+                        if (drawerToggleFormulare) {
+                            drawerToggleFormulare.classList.remove('opacity-70');
+                            drawerToggleFormulare.classList.add('opacity-100');
+                        }
+                        if (drawerToggleHilfe) {
+                            drawerToggleHilfe.classList.remove('opacity-100');
+                            drawerToggleHilfe.classList.add('opacity-50');
+                        }
+                    } else if (type === 'hilfe') {
+                        if (drawerToggleFormulare) {
+                            drawerToggleFormulare.classList.remove('opacity-100');
+                            drawerToggleFormulare.classList.add('opacity-70');
+                        }
+                        if (drawerToggleHilfe) {
+                            drawerToggleHilfe.classList.remove('opacity-50');
+                            drawerToggleHilfe.classList.add('opacity-100');
+                        }
+                    }
                 }
 
                 if (type === 'formulare') {

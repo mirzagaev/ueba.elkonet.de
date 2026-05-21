@@ -1165,6 +1165,12 @@
   .mx-8 {
     margin-inline: calc(var(--spacing) * 8);
   }
+  .mx-10 {
+    margin-inline: calc(var(--spacing) * 10);
+  }
+  .mx-12 {
+    margin-inline: calc(var(--spacing) * 12);
+  }
   .mx-auto {
     margin-inline: auto;
   }
@@ -1665,6 +1671,9 @@
   }
   .ml-3 {
     margin-left: calc(var(--spacing) * 3);
+  }
+  .ml-7 {
+    margin-left: calc(var(--spacing) * 7);
   }
   .ml-auto {
     margin-left: auto;
@@ -2414,6 +2423,10 @@
     border-left-style: var(--tw-border-style);
     border-left-width: 1px;
   }
+  .border-l-2 {
+    border-left-style: var(--tw-border-style);
+    border-left-width: 2px;
+  }
   .border-l-4 {
     border-left-style: var(--tw-border-style);
     border-left-width: 4px;
@@ -2607,6 +2620,9 @@
   .border-green-700 {
     border-color: var(--color-green-700);
   }
+  .border-neutral-100 {
+    border-color: var(--color-neutral-100);
+  }
   .border-neutral-200 {
     border-color: var(--color-neutral-200);
   }
@@ -2773,14 +2789,8 @@
   .bg-neutral-200 {
     background-color: var(--color-neutral-200);
   }
-  .bg-neutral-400 {
-    background-color: var(--color-neutral-400);
-  }
   .bg-neutral-500 {
     background-color: var(--color-neutral-500);
-  }
-  .bg-neutral-600 {
-    background-color: var(--color-neutral-600);
   }
   .bg-neutral-700 {
     background-color: var(--color-neutral-700);
@@ -3148,6 +3158,9 @@
       color: white !important;
     }
   }
+  .pr-4 {
+    padding-right: calc(var(--spacing) * 4);
+  }
   .pr-8 {
     padding-right: calc(var(--spacing) * 8);
   }
@@ -3183,6 +3196,9 @@
   }
   .pl-6 {
     padding-left: calc(var(--spacing) * 6);
+  }
+  .pl-14 {
+    padding-left: calc(var(--spacing) * 14);
   }
   .pl-20 {
     padding-left: calc(var(--spacing) * 20);
@@ -3518,9 +3534,6 @@
   }
   .opacity-55 {
     opacity: 55%;
-  }
-  .opacity-60 {
-    opacity: 60%;
   }
   .opacity-70 {
     opacity: 70%;
@@ -4720,11 +4733,6 @@
       background-color: var(--color-neutral-300);
     }
   }
-  .dark\:bg-neutral-500 {
-    &:where(.dark, .dark *) {
-      background-color: var(--color-neutral-500);
-    }
-  }
   .dark\:bg-neutral-600 {
     &:where(.dark, .dark *) {
       background-color: var(--color-neutral-600);
@@ -4956,15 +4964,6 @@
       &:hover {
         @media (hover: hover) {
           background-color: var(--color-gray-800);
-        }
-      }
-    }
-  }
-  .dark\:hover\:bg-neutral-100 {
-    &:where(.dark, .dark *) {
-      &:hover {
-        @media (hover: hover) {
-          background-color: var(--color-neutral-100);
         }
       }
     }
