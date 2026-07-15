@@ -1,0 +1,521 @@
+<div class="flex flex-col gap-6">
+
+    {if count($administrationViews) > 1}
+    <div class="flex flex-row justify-center gap-5 mt-4 mb-8 border-b border-neutral-200 dark:border-neutral-700 overflow-x-auto">
+        {foreach from=$administrationViews item=v}
+        <button type="button" onclick="switchAdministrationView('{$v}');"
+                class="cursor-pointer px-4 py-2.5 text-sm font-medium border-b-2 -mb-px whitespace-nowrap transition-colors {if $administrationView == $v}border-primary text-primary{else}border-transparent text-neutral-500 dark:text-neutral-400 hover:text-primary{/if}">
+            {if $v == 'uebersicht'}Übersicht{elseif $v == 'bildungszentren'}Bildungszentren{elseif $v == 'unternehmen'}Unternehmen{else}Benutzer{/if}
+        </button>
+        {/foreach}
+    </div>
+    {/if}
+
+    {if $administrationView == 'uebersicht'}
+    <div id="administrationKpiContainer">
+        {if $administrationKpisLazyPlaceholder}
+        <div class="animate-pulse grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+            <div class="h-24 bg-neutral-100 dark:bg-neutral-800 rounded-4xl"></div>
+            <div class="h-24 bg-neutral-100 dark:bg-neutral-800 rounded-4xl"></div>
+            <div class="h-24 bg-neutral-100 dark:bg-neutral-800 rounded-4xl"></div>
+            <div class="h-24 bg-neutral-100 dark:bg-neutral-800 rounded-4xl"></div>
+        </div>
+        {else}
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+            <div class="bg-secondary rounded-4xl shadow-sm hover:shadow-md border border-neutral-200 dark:border-neutral-700 p-5">
+                <div class="flex items-center justify-between mb-3">
+                    <span class="text-xs font-semibold text-secondary">Bildungszentren</span>
+                    <span class="flex items-center justify-center size-8 rounded-lg bg-secondary shrink-0"><svg class="stroke-primary size-4" fill="none"><use xlink:href="#icon-building"></use></svg></span>
+                </div>
+                <div class="text-3xl font-bold text-primary">{$administrationKpis.bzCount}</div>
+                <div class="text-xs text-secondary mt-1">aktive Standorte</div>
+            </div>
+            <div class="bg-secondary rounded-4xl shadow-sm hover:shadow-md border border-neutral-200 dark:border-neutral-700 p-5">
+                <div class="flex items-center justify-between mb-3">
+                    <span class="text-xs font-semibold text-secondary">Unternehmen</span>
+                    <span class="flex items-center justify-center size-8 rounded-lg bg-secondary shrink-0"><svg class="stroke-primary size-4" fill="none"><use xlink:href="#icon-briefcase"></use></svg></span>
+                </div>
+                <div class="text-3xl font-bold text-primary">{$administrationKpis.companyCount}</div>
+                <div class="text-xs text-secondary mt-1">registrierte Betriebe</div>
+            </div>
+            <div class="bg-secondary rounded-4xl shadow-sm hover:shadow-md border border-neutral-200 dark:border-neutral-700 p-5">
+                <div class="flex items-center justify-between mb-3">
+                    <span class="text-xs font-semibold text-secondary">Aktive Auszubildende</span>
+                    <span class="flex items-center justify-center size-8 rounded-lg bg-secondary shrink-0"><svg class="fill-primary size-4"><use xlink:href="#icon-ausbildungsnachweis"></use></svg></span>
+                </div>
+                <div class="text-3xl font-bold text-primary">{$administrationKpis.activeAzubiCount}</div>
+                <div class="text-xs text-secondary mt-1">in laufender Ausbildung</div>
+            </div>
+            <div class="bg-secondary rounded-4xl shadow-sm hover:shadow-md border border-neutral-200 dark:border-neutral-700 p-5">
+                <div class="flex items-center justify-between mb-3">
+                    <span class="text-xs font-semibold text-secondary">Ausbilder</span>
+                    <span class="flex items-center justify-center size-8 rounded-lg bg-secondary shrink-0"><svg class="stroke-primary size-4" fill="none"><use xlink:href="#icon-users"></use></svg></span>
+                </div>
+                <div class="text-3xl font-bold text-primary">{$administrationKpis.ausbilderCount}</div>
+                <div class="text-xs text-secondary mt-1">zugeordnete Ausbilder</div>
+            </div>
+        </div>
+        {/if}
+    </div>
+    {/if}
+
+    <div class="flex flex-wrap items-center gap-3">
+        {if $administrationScope == 'admin' && ($administrationView == 'benutzer' || $administrationView == 'uebersicht')}
+        <div class="flex items-center gap-2">
+            <button id="administrationBzDropdownButton" data-dropdown-toggle="administrationBzDropdown" type="button" class="btn-secondary text-sm">
+                <span>Bildungszentrum ({$administrationSelectedBzCount})</span>
+                <svg class="stroke-primary size-4 ml-2" fill="none"><use xlink:href="#icon-down"></use></svg>
+            </button>
+            <div id="administrationBzDropdown" class="z-10 hidden bg-white dark:bg-neutral-800 divide-y divide-neutral-300 dark:divide-neutral-700 rounded-lg shadow-lg w-56 border border-neutral-200 dark:border-neutral-700">
+                <ul class="py-2 text-sm max-h-64 overflow-y-auto custom-scrollbar">
+                    {foreach from=$administrationBzList item=bz}
+                    <li>
+                        <label class="flex items-center gap-2 px-4 py-2 hover:bg-neutral-200 dark:hover:bg-neutral-700 cursor-pointer">
+                            <input type="checkbox" class="administration-bz-checkbox" name="bz[]" value="{$bz.id}" {if $bz.checked}checked{/if} />
+                            {$bz.name}
+                        </label>
+                    </li>
+                    {/foreach}
+                </ul>
+            </div>
+        </div>
+        {/if}
+
+        {if $administrationView == 'benutzer' || $administrationView == 'uebersicht'}
+        <select id="administrationRoleFilter" onchange="loadCurrentView({literal}{{/literal}role: this.value, pg: 1{literal}}{/literal});" class="kundenauftrag-form-text text-sm">
+            <option value="all" {if $administrationRole == 'all'}selected{/if}>Alle Rollen</option>
+            <option value="ausbilder" {if $administrationRole == 'ausbilder'}selected{/if}>Nur Ausbilder</option>
+            <option value="azubi" {if $administrationRole == 'azubi'}selected{/if}>Nur Auszubildende</option>
+            <option value="noausbilder" {if $administrationRole == 'noausbilder'}selected{/if}>Ohne Ausbilder</option>
+        </select>
+        <select id="administrationStatusFilter" onchange="loadCurrentView({literal}{{/literal}status: this.value, pg: 1{literal}}{/literal});" class="kundenauftrag-form-text text-sm">
+            <option value="all" {if $administrationStatus == 'all'}selected{/if}>Alle Status</option>
+            <option value="aktiv" {if $administrationStatus == 'aktiv'}selected{/if}>In Ausbildung</option>
+            <option value="abgeschlossen" {if $administrationStatus == 'abgeschlossen'}selected{/if}>Abgeschlossen</option>
+        </select>
+        {/if}
+
+        <div class="flex items-center gap-2 ml-auto">
+            <form id="administrationSearchForm" method="get" action="{page_url page=$page}" class="flex items-center gap-2">
+                <input type="text" id="administrationSearchInput" name="search" value="{$administrationSearch|escape:'html'}" placeholder="{if $administrationView == 'benutzer' || $administrationView == 'uebersicht'}Suche nach Name oder Benutzername{elseif $administrationView == 'bildungszentren'}Suche nach Bildungszentrum{else}Suche nach Unternehmen{/if}" class="kundenauftrag-form-text text-sm w-64 max-w-full" />
+                <button type="submit" class="btn-secondary" title="Suchen">
+                    <svg class="stroke-primary size-5" fill="none"><use xlink:href="#icon-search"></use></svg>
+                </button>
+            </form>
+
+            <button type="button" onclick="exportAdministrationCsv();" class="btn-secondary text-sm" title="Als CSV exportieren">
+                Als CSV exportieren
+            </button>
+        </div>
+    </div>
+
+    <div id="administrationListContainer" data-view="{$administrationView}" data-sort="{$administrationSort}" data-dir="{$administrationDir}" data-pg="{$administrationPage}" class="flex flex-col gap-6 transition-opacity my-2">
+
+        {if $administrationLazyPlaceholder}
+        <div class="animate-pulse flex flex-col gap-4">
+            <div class="h-96 bg-neutral-100 dark:bg-neutral-800 rounded-4xl"></div>
+        </div>
+        {else}
+
+        {if $administrationView == 'bildungszentren'}
+        <div class="bg-primary rounded-4xl shadow-sm hover:shadow-md border border-neutral-200 dark:border-neutral-700 overflow-hidden">
+            <div class="overflow-x-auto">
+                <table class="w-full text-sm text-left">
+                    <thead class="bg-neutral-100 dark:bg-neutral-700 text-xs uppercase tracking-wide text-neutral-500 dark:text-neutral-400">
+                        <tr>
+                            <th scope="col" class="px-4 py-4 font-semibold cursor-pointer" onclick="sortAdministrationColumn('id');">ID</th>
+                            <th scope="col" class="px-4 py-4 font-semibold cursor-pointer" onclick="sortAdministrationColumn('name');">Name</th>
+                            <th scope="col" class="px-4 py-4 font-semibold cursor-pointer" onclick="sortAdministrationColumn('created');">Erstellt am</th>
+                            <th scope="col" class="px-4 py-4 font-semibold cursor-pointer" onclick="sortAdministrationColumn('students');">Schüler</th>
+                            <th scope="col" class="px-4 py-4 font-semibold cursor-pointer" onclick="sortAdministrationColumn('companies');">Unternehmen</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-neutral-300 dark:divide-neutral-700">
+                        {foreach from=$administrationBz item=b}
+                        <tr class="hover:bg-neutral-200 dark:hover:bg-neutral-800 transition-colors cursor-pointer" onclick="openBzDrawer({$b.id});">
+                            <td class="px-4 py-4 text-neutral-500 dark:text-neutral-400">{$b.id}</td>
+                            <td class="px-4 py-4">
+                                <div class="flex items-center gap-3">
+                                    <div class="flex items-center justify-center rounded-lg bg-secondary size-9 shrink-0">
+                                        <svg class="stroke-primary size-4" fill="none"><use xlink:href="#icon-building"></use></svg>
+                                    </div>
+                                    <span class="font-medium text-primary">{$b.name}</span>
+                                </div>
+                            </td>
+                            <td class="px-4 py-4 whitespace-nowrap">{$b.created}</td>
+                            <td class="px-4 py-4">{$b.students}</td>
+                            <td class="px-4 py-4">{$b.companies}</td>
+                        </tr>
+                        {foreachelse}
+                        <tr>
+                            <td colspan="5" class="text-center text-neutral-500 dark:text-neutral-400 py-8">Keine Bildungszentren gefunden.</td>
+                        </tr>
+                        {/foreach}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        {if $administrationTotalPages > 1}
+        <div class="flex items-center justify-between text-sm text-secondary my-5">
+            <span>Seite {$administrationPage} von {$administrationTotalPages} ({$administrationTotal} Bildungszentren)</span>
+            <div class="flex items-center gap-2">
+                {if $administrationPage > 1}
+                <a href="#" class="btn-secondary text-xs" onclick="event.preventDefault(); loadCurrentView({literal}{{/literal}pg: {$administrationPrevPage}{literal}}{/literal});">
+                    <svg class="stroke-primary size-4"><use xlink:href="#icon-left"></use></svg>
+                    <span class="ml-1">Zurück</span>
+                </a>
+                {/if}
+                {if $administrationPage < $administrationTotalPages}
+                <a href="#" class="btn-secondary text-xs" onclick="event.preventDefault(); loadCurrentView({literal}{{/literal}pg: {$administrationNextPage}{literal}}{/literal});">
+                    <span class="mr-1">Weiter</span>
+                    <svg class="stroke-primary size-4"><use xlink:href="#icon-right"></use></svg>
+                </a>
+                {/if}
+            </div>
+        </div>
+        {/if}
+
+        {elseif $administrationView == 'unternehmen'}
+        <div class="bg-primary rounded-4xl shadow-sm hover:shadow-md border border-neutral-200 dark:border-neutral-700 overflow-hidden">
+            <div class="overflow-x-auto">
+                <table class="w-full text-sm text-left">
+                    <thead class="bg-neutral-100 dark:bg-neutral-700 text-xs uppercase tracking-wide text-neutral-500 dark:text-neutral-400">
+                        <tr>
+                            <th scope="col" class="px-4 py-4 font-semibold cursor-pointer" onclick="sortAdministrationColumn('id');">ID</th>
+                            <th scope="col" class="px-4 py-4 font-semibold cursor-pointer" onclick="sortAdministrationColumn('name');">Name</th>
+                            <th scope="col" class="px-4 py-4 font-semibold cursor-pointer" onclick="sortAdministrationColumn('created');">Erstellt am</th>
+                            <th scope="col" class="px-4 py-4 font-semibold cursor-pointer" onclick="sortAdministrationColumn('azubis');">Auszubildende</th>
+                            <th scope="col" class="px-4 py-4 font-semibold cursor-pointer" onclick="sortAdministrationColumn('ausbilder');">Ausbilder</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-neutral-300 dark:divide-neutral-700">
+                        {foreach from=$administrationUnternehmen item=k}
+                        <tr class="hover:bg-neutral-200 dark:hover:bg-neutral-800 transition-colors cursor-pointer" onclick="openKundeDrawer('{$k.id}');">
+                            <td class="px-4 py-4 text-neutral-500 dark:text-neutral-400 whitespace-nowrap">{$k.id}</td>
+                            <td class="px-4 py-4">
+                                <div class="flex items-center gap-3">
+                                    <div class="flex items-center justify-center rounded-lg bg-neutral-100 dark:bg-neutral-700 size-9 shrink-0">
+                                        <svg class="stroke-primary size-4" fill="none"><use xlink:href="#icon-briefcase"></use></svg>
+                                    </div>
+                                    <span class="font-medium text-primary">{$k.name}</span>
+                                </div>
+                            </td>
+                            <td class="px-4 py-4 whitespace-nowrap">{$k.created}</td>
+                            <td class="px-4 py-4">{$k.azubis}</td>
+                            <td class="px-4 py-4">{$k.ausbilder}</td>
+                        </tr>
+                        {foreachelse}
+                        <tr>
+                            <td colspan="5" class="text-center text-neutral-500 dark:text-neutral-400 py-8">Keine Unternehmen gefunden.</td>
+                        </tr>
+                        {/foreach}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        {if $administrationTotalPages > 1}
+        <div class="flex items-center justify-between text-sm text-secondary my-5">
+            <span>Seite {$administrationPage} von {$administrationTotalPages} ({$administrationTotal} Unternehmen)</span>
+            <div class="flex items-center gap-2">
+                {if $administrationPage > 1}
+                <a href="#" class="btn-secondary text-xs" onclick="event.preventDefault(); loadCurrentView({literal}{{/literal}pg: {$administrationPrevPage}{literal}}{/literal});">
+                    <svg class="stroke-primary size-4"><use xlink:href="#icon-left"></use></svg>
+                    <span class="ml-1">Zurück</span>
+                </a>
+                {/if}
+                {if $administrationPage < $administrationTotalPages}
+                <a href="#" class="btn-secondary text-xs" onclick="event.preventDefault(); loadCurrentView({literal}{{/literal}pg: {$administrationNextPage}{literal}}{/literal});">
+                    <span class="mr-1">Weiter</span>
+                    <svg class="stroke-primary size-4"><use xlink:href="#icon-right"></use></svg>
+                </a>
+                {/if}
+            </div>
+        </div>
+        {/if}
+
+        {elseif $administrationView == 'uebersicht' || $administrationView == 'benutzer'}
+        <div class="bg-primary rounded-4xl shadow-sm hover:shadow-md border border-neutral-200 dark:border-neutral-700 overflow-hidden">
+            <div class="overflow-x-auto">
+                <table class="w-full text-sm text-left">
+                    <thead class="bg-neutral-100 dark:bg-neutral-700 text-xs uppercase tracking-wide text-neutral-500 dark:text-neutral-400">
+                        <tr>
+                            <th scope="col" class="px-4 py-4 font-semibold cursor-pointer" onclick="sortAdministrationColumn('name');">Name</th>
+                            <th scope="col" class="px-4 py-4 font-semibold cursor-pointer" onclick="sortAdministrationColumn('beruf');">Beruf</th>
+                            <th scope="col" class="px-4 py-4 font-semibold cursor-pointer" onclick="sortAdministrationColumn('zeitraum');">Ausbildungszeitraum</th>
+                            <th scope="col" class="px-4 py-4 font-semibold cursor-pointer" onclick="sortAdministrationColumn('status');">Status</th>
+                            <th scope="col" class="px-4 py-4 font-semibold cursor-pointer" onclick="sortAdministrationColumn('firma');">Firma</th>
+                            <th scope="col" class="px-4 py-4 font-semibold cursor-pointer" onclick="sortAdministrationColumn('ausbilder');">Ausbilder</th>
+                            <th scope="col" class="px-4 py-4 font-semibold cursor-pointer" onclick="sortAdministrationColumn('schule');">Schule</th>
+                            <th scope="col" class="px-4 py-4 font-semibold cursor-pointer" onclick="sortAdministrationColumn('lastLogin');">Letzter Login</th>
+                            <th scope="col" class="px-4 py-4 font-semibold text-right">Aktion</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-neutral-300 dark:divide-neutral-700">
+                        {foreach from=$administrationUsers item=u}
+                        <tr class="hover:bg-neutral-200 dark:hover:bg-neutral-800 transition-colors cursor-pointer {if !$u.in_ausbildung}opacity-50{/if}" onclick="openUserDrawer('{$u.user_id}', '{page_url page=$page ajax_user=$u.user_id}');" title="{if !$u.in_ausbildung}Nicht aktuell in Ausbildung{/if}">
+                            <td class="px-4 py-4">
+                                <div class="flex items-center gap-3">
+                                    <div class="flex items-center justify-center rounded-full bg-secondary size-10 shrink-0">
+                                        <span class="font-medium text-primary text-sm">{$u.vorname|substr:0:1}{$u.nachname|substr:0:1}</span>
+                                    </div>
+                                    <div>
+                                        <div class="flex items-center gap-2">
+                                            <span class="font-medium text-primary">{$u.name}</span>
+                                            {if $u.is_ausbilder}<span class="text-[10px] font-semibold px-2 py-0.5 rounded-full bg-violet-100 text-violet-700 shrink-0">Ausbilder</span>{/if}
+                                        </div>
+                                        <div class="text-xs text-neutral-500 dark:text-neutral-400">{$u.username}</div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="px-4 py-4">{$u.beruf}</td>
+                            <td class="px-4 py-4 whitespace-nowrap">{if $u.ausbildung_von || $u.ausbildung_bis}{$u.ausbildung_von} &ndash; {$u.ausbildung_bis}{/if}</td>
+                            <td class="px-4 py-4 whitespace-nowrap">
+                                {if $u.status.type == 'abgeschlossen'}
+                                <span class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-medium bg-green-100 text-green-800">Abgeschlossen</span>
+                                {elseif $u.status.type == 'lehrjahr'}
+                                <span class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-medium bg-sky-100 text-sky-700">{$u.status.lehrjahr}. Lehrjahr</span>
+                                {else}
+                                <span class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-medium bg-neutral-100 text-neutral-600">Unbekannt</span>
+                                {/if}
+                            </td>
+                            <td class="px-4 py-4">{$u.firma}</td>
+                            <td class="px-4 py-4 whitespace-nowrap">
+                                {if $u.is_ausbilder}
+                                <span class="text-neutral-400">&mdash;</span>
+                                {elseif $u.ausbilder_name}
+                                {$u.ausbilder_name}
+                                {else}
+                                <span class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-medium bg-red-100 text-red-700">Kein Ausbilder</span>
+                                {/if}
+                            </td>
+                            <td class="px-4 py-4">{$u.schule}</td>
+                            <td class="px-4 py-4 whitespace-nowrap">{$u.last_login}</td>
+                            <td class="px-4 py-4 text-right">
+                                <a href="#" class="btn-secondary" onclick="event.stopPropagation(); event.preventDefault(); openUserDrawer('{$u.user_id}', '{page_url page=$page ajax_user=$u.user_id}');" title="Details">
+                                    <svg class="stroke-primary size-5"><use xlink:href="#icon-right"></use></svg>
+                                    <span class="hidden xl:inline ml-2">Details</span>
+                                </a>
+                            </td>
+                        </tr>
+                        {foreachelse}
+                        <tr>
+                            <td colspan="9" class="text-center text-neutral-500 dark:text-neutral-400 py-8">Keine Benutzer gefunden.</td>
+                        </tr>
+                        {/foreach}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        {if $administrationTotalPages > 1}
+        <div class="flex items-center justify-between text-sm text-secondary my-5">
+            <span>Seite {$administrationPage} von {$administrationTotalPages} ({$administrationTotal} Benutzer)</span>
+            <div class="flex items-center gap-2">
+                {if $administrationPage > 1}
+                <a href="#" class="btn-secondary text-xs" onclick="event.preventDefault(); loadCurrentView({literal}{{/literal}pg: {$administrationPrevPage}{literal}}{/literal});">
+                    <svg class="stroke-primary size-4"><use xlink:href="#icon-left"></use></svg>
+                    <span class="ml-1">Zurück</span>
+                </a>
+                {/if}
+                {if $administrationPage < $administrationTotalPages}
+                <a href="#" class="btn-secondary text-xs" onclick="event.preventDefault(); loadCurrentView({literal}{{/literal}pg: {$administrationNextPage}{literal}}{/literal});">
+                    <span class="mr-1">Weiter</span>
+                    <svg class="stroke-primary size-4"><use xlink:href="#icon-right"></use></svg>
+                </a>
+                {/if}
+            </div>
+        </div>
+        {/if}
+        {/if}
+        {/if}
+    </div>
+</div>
+
+<!-- Detail-Drawer (Struktur/Stil analog zum Formulare/Hilfe-Drawer in tpl/header.html) -->
+<div id="administrationDrawer" class="fixed top-0 right-0 h-full w-full sm:w-2/3 md:w-1/2 lg:w-3/5 bg-white dark:bg-neutral-700 text-neutral-900 dark:text-white drop-shadow-2xl shadow-2xl z-50 translate-x-full drawer-animate flex flex-col border-l border-neutral-200 dark:border-neutral-600" tabindex="-1" aria-labelledby="administrationDrawerHeader">
+    <div class="p-6 pl-8 pr-8 xl:px-10 xl:py-6 border-b border-subnav flex items-center justify-between shrink-0">
+        <div id="administrationDrawerHeader" class="min-w-0">
+            {if $drawerUser}
+            <div class="flex items-center gap-2 flex-wrap">
+                <h2 class="text-xl font-semibold text-primary truncate">{$drawerUser.nachname} {$drawerUser.vorname}</h2>
+                {if $drawerUser.is_ausbilder}<span class="text-[10px] font-semibold px-2 py-0.5 rounded-full bg-violet-100 text-violet-700 shrink-0">Ausbilder</span>{/if}
+            </div>
+            <p class="text-xs text-secondary truncate mt-1">{$drawerUser.username} &middot; {$drawerUser.email}</p>
+            <p class="text-xs text-secondary truncate mt-0.5">
+                {if $drawerBeruf}{$drawerBeruf}{/if}
+                {if $drawerUser.ausbildung_von || $drawerUser.ausbildung_bis} &middot; {$drawerUser.ausbildung_von} &ndash; {$drawerUser.ausbildung_bis}{/if}
+            </p>
+            {elseif $drawerBz}
+            <h2 class="text-xl font-semibold text-primary truncate">{$drawerBz.name}</h2>
+            <p class="text-xs text-secondary truncate mt-1">Bildungszentrum &middot; ID {$drawerBz.id}</p>
+            {elseif $drawerUnternehmen}
+            <h2 class="text-xl font-semibold text-primary truncate">{$drawerUnternehmen.name}</h2>
+            <p class="text-xs text-secondary truncate mt-1">Unternehmen &middot; {$drawerUnternehmen.id}</p>
+            {else}
+            <h2 class="text-xl font-semibold text-primary truncate">Details</h2>
+            {/if}
+        </div>
+        <button type="button" onclick="closeUserDrawer();" class="btn-secondary w-8 h-8 p-0 shrink-0" title="Schließen">
+            <svg class="stroke-primary size-4 mx-auto"><use xlink:href="#icon-close"></use></svg>
+            <span class="sr-only">Schließen</span>
+        </button>
+    </div>
+    <div class="flex-1 overflow-y-auto custom-scrollbar p-6 md:p-8 xl:px-10">
+    <div id="administrationDrawerFragment">
+        {if $drawerUser}
+            <div class="flex flex-col gap-5">
+                <div id="drawerAccordion" data-accordion="collapse" class="rounded-xl border border-neutral-200 dark:border-neutral-700 overflow-hidden divide-y divide-neutral-300 dark:divide-neutral-700">
+                    <h3>
+                        <button type="button" class="group w-full flex items-center gap-3 px-5 py-4 hover:bg-neutral-200 dark:hover:bg-neutral-800 cursor-pointer transition-colors" data-accordion-target="#drawerFormulareBody" aria-expanded="false" aria-controls="drawerFormulareBody">
+                            <svg class="size-5 fill-primary"><use xlink:href="#icon-writedoc"></use></svg>
+                            <span class="font-medium text-primary">Formulare</span>
+                            <span class="text-xs text-secondary">({$drawerFormulare|@count})</span>
+                            <svg data-accordion-icon="" stroke-width="2" class="stroke-primary shrink-0 size-5 ml-auto" aria-hidden="true"><use xlink:href="#icon-down"></use></svg>
+                        </button>
+                    </h3>
+                    <div id="drawerFormulareBody" class="hidden">
+                        <div class="px-5 py-4">
+                            {if $drawerFormulare|@count > 0}
+                            <ul class="space-y-1">
+                                {foreach from=$drawerFormulare item=f}
+                                <li class="flex items-center justify-between gap-2 py-1">
+                                    <span class="text-sm">{$f.name}</span>
+                                    <a href="{page_url page=$page action="download_formular" user_id=$drawerUser.user_id formular_id=$f.formular_id}" target="_blank" class="btn-secondary text-xs" title="PDF ansehen">
+                                        <svg class="stroke-primary size-4"><use xlink:href="#icon-print"></use></svg>
+                                        <span class="ml-1">PDF ansehen</span>
+                                    </a>
+                                </li>
+                                {/foreach}
+                            </ul>
+                            {else}
+                            <p class="text-sm text-secondary">Keine ausgefüllten Formulare vorhanden.</p>
+                            {/if}
+                        </div>
+                    </div>
+
+                    <h3>
+                        <button type="button" class="group w-full flex items-center gap-3 px-5 py-4 hover:bg-neutral-200 dark:hover:bg-neutral-800 cursor-pointer transition-colors" data-accordion-target="#drawerBerichteBody" aria-expanded="false" aria-controls="drawerBerichteBody">
+                            <svg class="size-5 fill-primary"><use xlink:href="#icon-ausbildungsnachweis"></use></svg>
+                            <span class="font-medium text-primary">Wochenberichte</span>
+                            <span class="text-xs text-secondary">({$drawerBerichteSummary.total})</span>
+                            <svg data-accordion-icon="" stroke-width="2" class="stroke-primary shrink-0 size-5 ml-auto" aria-hidden="true"><use xlink:href="#icon-down"></use></svg>
+                        </button>
+                    </h3>
+                    <div id="drawerBerichteBody" class="hidden">
+                        <div class="px-5 py-4">
+                            {if $drawerBerichteSummary.total > 0}
+                            <div class="flex items-center justify-between gap-2">
+                                <p class="text-sm">
+                                    <span class="font-semibold">{$drawerBerichteSummary.signed}</span> von
+                                    <span class="font-semibold">{$drawerBerichteSummary.total}</span> Wochenberichten vollständig unterschrieben
+                                </p>
+                                {if $drawerBerichteSummary.signed > 0}
+                                <a href="{page_url page=$page action="print_wochenberichte_collection" user_id=$drawerUser.user_id}" target="_blank" class="btn-secondary text-xs shrink-0" title="Vollständige Berichte als Sammlung drucken">
+                                    <svg class="stroke-primary size-4"><use xlink:href="#icon-print"></use></svg>
+                                    <span class="ml-1">Drucken</span>
+                                </a>
+                                {/if}
+                            </div>
+                            {else}
+                            <p class="text-sm text-secondary">Keine Wochenberichte vorhanden.</p>
+                            {/if}
+                        </div>
+                    </div>
+
+                    <h3>
+                        <button type="button" class="group w-full flex items-center gap-3 px-5 py-4 bg-red-50 cursor-pointer transition-colors" data-accordion-target="#drawerLoeschenBody" aria-expanded="false" aria-controls="drawerLoeschenBody">
+                            <svg class="size-5 fill-red-600"><use xlink:href="#icon-trash"></use></svg>
+                            <span class="font-medium text-red-700">Daten löschen</span>
+                            <svg data-accordion-icon="" stroke-width="2" class="stroke-primary shrink-0 size-5 ml-auto" aria-hidden="true"><use xlink:href="#icon-down"></use></svg>
+                        </button>
+                    </h3>
+                    <div id="drawerLoeschenBody" class="hidden bg-red-50">
+                        <div class="px-5 py-4">
+                            <p class="text-xs text-neutral-900 mb-3">Ausgewählte Kategorien werden als gelöscht markiert (Soft-Delete) und in dieser Ansicht nicht mehr angezeigt.</p>
+                            <form id="administrationDeleteForm" onsubmit="return submitDeleteForm(event, '{$drawerUser.user_id}');">
+                                <div class="flex flex-col gap-1">
+                                    {foreach from=$drawerCategories key=catKey item=cat}
+                                    <label class="flex items-center gap-2 text-sm {if $cat.total == 0}opacity-50{/if}">
+                                        <input type="checkbox" name="categories[]" value="{$catKey}" {if $cat.total == 0}disabled{/if} />
+                                        {$cat.label} ({$cat.total})
+                                    </label>
+                                    {/foreach}
+                                </div>
+                                <button type="submit" class="btn-secondary mt-4 text-red-600">
+                                    <svg class="size-5 mr-2"><use xlink:href="#icon-trash"></use></svg> Ausgewählte Daten löschen
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="rounded-xl border border-amber-300 bg-amber-50 p-5">
+                    <h3 class="flex items-center gap-2 text-amber-600 font-medium uppercase text-xs tracking-widest mb-3">
+                        <svg class="size-4 fill-amber-600"><use xlink:href="#icon-folder"></use></svg>
+                        Speicherplatz
+                    </h3>
+                    <p class="text-sm text-neutral-900">Datenbank: {$drawerStorage.db_rows} Datensätze ({$drawerStorage.db_bytes_human})</p>
+                    <p class="text-sm text-neutral-900">Server (PDF-Ablage): {$drawerStorage.disk_bytes_human}</p>
+                </div>
+            </div>
+        {elseif $drawerBz}
+            <div class="flex flex-col gap-5">
+                <div class="rounded-xl border border-neutral-200 dark:border-neutral-700 divide-y divide-neutral-300 dark:divide-neutral-700">
+                    <div class="flex items-center justify-between gap-4 px-5 py-3"><span class="text-sm text-secondary">ID</span><span class="text-sm font-semibold">{$drawerBz.id}</span></div>
+                    <div class="flex items-center justify-between gap-4 px-5 py-3"><span class="text-sm text-secondary">Name</span><span class="text-sm font-semibold">{$drawerBz.name}</span></div>
+                    <div class="flex items-center justify-between gap-4 px-5 py-3"><span class="text-sm text-secondary">Erstellt am</span><span class="text-sm font-semibold">{$drawerBz.created}</span></div>
+                </div>
+                <div class="grid grid-cols-2 gap-3">
+                    <div class="rounded-xl border border-neutral-200 dark:border-neutral-700 bg-neutral-50 dark:bg-neutral-800 p-4">
+                        <div class="text-2xl font-bold text-primary">{$drawerBz.students}</div>
+                        <div class="text-xs text-secondary mt-1">Schüler gesamt</div>
+                    </div>
+                    <div class="rounded-xl border border-neutral-200 dark:border-neutral-700 bg-neutral-50 dark:bg-neutral-800 p-4">
+                        <div class="text-2xl font-bold text-primary">{$drawerBz.companies}</div>
+                        <div class="text-xs text-secondary mt-1">Unternehmen</div>
+                    </div>
+                </div>
+            </div>
+        {elseif $drawerUnternehmen}
+            <div class="flex flex-col gap-5">
+                <div class="rounded-xl border border-neutral-200 dark:border-neutral-700 divide-y divide-neutral-300 dark:divide-neutral-700">
+                    <div class="flex items-center justify-between gap-4 px-5 py-3"><span class="text-sm text-secondary">ID</span><span class="text-sm font-semibold">{$drawerUnternehmen.id}</span></div>
+                    <div class="flex items-center justify-between gap-4 px-5 py-3"><span class="text-sm text-secondary">Name</span><span class="text-sm font-semibold">{$drawerUnternehmen.name}</span></div>
+                    {if $drawerUnternehmen.ort}
+                    <div class="flex items-center justify-between gap-4 px-5 py-3"><span class="text-sm text-secondary">Ort</span><span class="text-sm font-semibold">{$drawerUnternehmen.ort}</span></div>
+                    {/if}
+                    {if $drawerUnternehmen.telefon}
+                    <div class="flex items-center justify-between gap-4 px-5 py-3"><span class="text-sm text-secondary">Telefon</span><span class="text-sm font-semibold">{$drawerUnternehmen.telefon}</span></div>
+                    {/if}
+                    {if $drawerUnternehmen.email}
+                    <div class="flex items-center justify-between gap-4 px-5 py-3"><span class="text-sm text-secondary">E-Mail</span><span class="text-sm font-semibold">{$drawerUnternehmen.email}</span></div>
+                    {/if}
+                    <div class="flex items-center justify-between gap-4 px-5 py-3"><span class="text-sm text-secondary">Erstellt am</span><span class="text-sm font-semibold">{$drawerUnternehmen.created}</span></div>
+                </div>
+                <div class="grid grid-cols-2 gap-3">
+                    <div class="rounded-xl border border-neutral-200 dark:border-neutral-700 bg-neutral-50 dark:bg-neutral-800 p-4">
+                        <div class="text-2xl font-bold text-primary">{$drawerUnternehmen.azubis}</div>
+                        <div class="text-xs text-secondary mt-1">Auszubildende</div>
+                    </div>
+                    <div class="rounded-xl border border-neutral-200 dark:border-neutral-700 bg-neutral-50 dark:bg-neutral-800 p-4">
+                        <div class="text-2xl font-bold text-primary">{$drawerUnternehmen.ausbilder}</div>
+                        <div class="text-xs text-secondary mt-1">Ausbilder</div>
+                    </div>
+                </div>
+            </div>
+        {else}
+            <p class="text-secondary p-4">Kein Eintrag ausgewählt oder kein Zugriff.</p>
+        {/if}
+    </div>
+    </div>
+</div>
+
+{capture assign="administration_js_path"}{$egotec_conf.skin_dir}{$site->skin}/v3/administration/js/administration.js{/capture}
+<script>
+{literal}
+    var administrationPageUrl = "{/literal}{page_url page=$page}{literal}";
+{/literal}
+</script>
+<script src="{$url_dir}skin/{$site->skin}/v3/administration/js/administration.js?v={$administration_js_path|filemtime}"></script>

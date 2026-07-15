@@ -246,6 +246,23 @@
         }
     }
 
+    .kundenauftrag-form-float-group {
+        @apply relative z-0 w-full;
+        input, select {
+            @apply block pt-5 pb-2 px-4 w-full bg-neutral-100 appearance-none focus:outline-none focus:ring-0 border-0;
+
+            @variant dark {
+                @apply bg-neutral-800 text-white;
+            }
+        }
+        label {
+            @apply absolute text-xs duration-300 transform top-1 z-10 px-4 origin-[0] peer-focus:font-medium peer-focus:start-0 peer-placeholder-shown:text-neutral-500 peer-placeholder-shown:translate-y-4 peer-focus:-translate-y-0 ;
+            @variant dark {
+                @apply peer-placeholder-shown:text-neutral-400;
+            }
+        }
+    }
+
     .kundenauftrag-form-text {
         @apply w-full bg-neutral-100 inline-flex py-3 px-4 rounded text-black items-center shadow-sm transition duration-500 ease-in-out transform leading-tight font-medium;
         @apply border border-neutral-200 placeholder:font-normal;
@@ -263,7 +280,7 @@
     }
 
     .kundenauftrag_table_wrap table {
-        @apply w-full text-sm text-left my-10;
+        @apply w-full text-sm text-left mt-4;
 
         thead {
             @apply border-b-1 border-neutral-300 font-medium;
@@ -273,20 +290,20 @@
             }
 
             th {
-                @apply px-6 py-3;
+                @apply px-2 py-2;
             }
         }
 
         tbody {
             td {
-                @apply px-6 py-3;
+                @apply px-2 py-2;
             }
         }
 
         tfoot {
             @apply font-bold;
             td {
-                @apply px-6 py-3 text-right;
+                @apply px-2 py-2 text-right;
             }
         }
     }
@@ -351,7 +368,7 @@
         @apply w-full rounded-2xl shadow-md;
 
         .kachelliste_headline {
-            @apply text-center text-2xl p-4 md:px-10 xl:px-15 font-bold shadow rounded-t-2xl w-full relative;
+            @apply text-center text-2xl p-4 px-6 xl:px-15 font-bold shadow rounded-t-2xl w-full relative;
         }
 
         .kachelliste_headline.inactiveAccordion {
@@ -359,6 +376,38 @@
         }
         .kachelliste_headline.activeAccordion {
             @apply rounded-b-none;
+        }
+        
+        .accordion_content {
+            @apply py-4 px-6 lg:py-6 lg:px-15;
+        }
+        .accordion_content ul {
+            @apply m-0 px-5;
+        }
+        
+        .accordion_content_area div,
+        .accordion_content_area p {
+            @apply relative pl-8;
+        }
+        .accordion_content_area a {
+            @apply pt-1;
+        }
+
+        .accordion_content_area div::before,
+        .accordion_content_area p::before {
+            content: "—";
+            @apply absolute top-1 left-0;
+        }
+        .accordion_content_area p::before {
+            @apply absolute inline size-5 bg-contain bg-no-repeat bg-[url(https://ueba.elkonet.de/skin/ueba/img/icons/next.svg)];
+            content: '';
+        }
+
+        .accordion_headline_nr {
+            @apply bg-white/40 rounded-full size-8 lg:size-10 text-base lg:text-lg inline-flex items-center justify-center;
+            @variant dark {
+                @apply bg-black/40;
+            }
         }
 
         .kachelliste {
@@ -418,12 +467,17 @@
             mask-position: center;
         }
     }
-    .dark .linksliste p::before {
+    .dark .linksliste p::before,
+    .dark .accordion_content_area p::before {
         @apply bg-[url(https://ueba.elkonet.de/skin/ueba/img/icons/next-light.svg)];
     }
 
     .btn_content {
         @apply flex items-center w-fit mx-auto hover:shadow-md shadow-sm rounded-4xl p-4;
+    }
+
+    .zeitbedarf {
+        @apply rounded-2xl p-3 mt-5 font-medium w-fit flex justify-between;
     }
 
     .quizwrap {
@@ -623,6 +677,12 @@
                     }
                     .audio-btns:hover { transform: scale(1.1); }
                     .audio-btns:disabled { opacity: 0.5; cursor: not-allowed; }
+                }
+                .dialogKommentar {
+                    @apply px-5 py-2 italic text-center bg-neutral-300 w-fit mx-auto rounded-xl my-6;
+                    @variant dark {
+                        @apply bg-neutral-500;
+                    }
                 }
                 .active-speech {
                     .contentChatDiv {

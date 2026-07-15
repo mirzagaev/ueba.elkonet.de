@@ -401,41 +401,31 @@
                     <div class="lg:py-4 flex">
                         <h1 class="text-3xl font-medium z-10">Materialplan</h1>
                     </div>
-                    <div class="w-full divide-y divide-secondary">
-                        <div class="relative overflow-x-auto py-4 xl:py-6">
-                            <table class="w-full text-sm text-left rtl:text-right text-body">
+                    <div class="w-full">
+                        <div class="relative overflow-x-auto kundenauftrag_table_wrap">
+                            <table>
                                 <thead class="text-sm text-body border-b-1 border-subnav">
                                     <tr>
-                                        <th scope="col" class="px-6 py-3 font-medium text-center">Pos.</th>
-                                        <th scope="col" class="px-6 py-3 rounded-s-base font-medium">Menge</th>
-                                        <th scope="col" class="px-6 py-3 rounded-s-base font-medium">Einzelpreis (€)</th>
-                                        <th scope="col" class="px-6 py-3 rounded-s-base font-medium">Material</th>
-                                        <th scope="col" class="px-6 py-3 rounded-e-base font-medium text-right">Gesamtpreis (€)</th>
+                                        <th scope="col" class="w-12 font-medium text-center">Pos.</th>
+                                        <th scope="col" class="rounded-s-base font-medium">Material</th>
+                                        <th scope="col" class="w-18 rounded-s-base font-medium text-right">Menge</th>
+                                        <th scope="col" class="w-24 rounded-s-base font-medium text-right">Einzelpreis (€)</th>
+                                        <th scope="col" class="w-28 rounded-e-base font-medium text-right">Gesamtpreis (€)</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <tr class="bg-neutral-primary">
-                                        <td class="text-center">1</td>
-                                        <td class="px-6 py-2 max-w-20">2,00</td>
-                                        <td class="px-6 py-2 max-w-20">40,00</td>
-                                        <th scope="row" class="px-6 py-2 font-normal">Stock</td>
-                                        <td class="px-6 py-2 text-right">80,00</td>
-                                    </tr>
-                                    <tr class="bg-neutral-primary">
-                                        <td class="text-center">2</td>
-                                        <td class="px-6 py-2 max-w-20">1,00</td>
-                                        <td class="px-6 py-2 max-w-20">60,00</td>
-                                        <th scope="row" class="px-6 py-2 font-normal">Buch</td>
-                                        <td class="px-6 py-2 text-right">80,00</td>
+                                        <td class="w-12 text-center">1</td>
+                                        <td class="font-normal text-left">2,00</td>
+                                        <td class="w-20 text-right">40,00</td>
+                                        <td class="w-36 text-right">Stock</td>
+                                        <td class="w-40 text-right">80,00</td>
                                     </tr>
                                 </tbody>
                                 <tfoot>
                                     <tr class="border-t-1 border-subnav font-bold text-base">
-                                        <td class=""></td>
-                                        <td class=""></td>
-                                        <td class=""></td>
-                                        <td class="text-right"></td>
-                                        <td class="px-6 py-2 text-right">Gesamtkosten Material (€): 880,00</td>
+                                        <td colspan="4" class="text-right">Gesamtkosten Material (€):</td>
+                                        <td class="text-right">880,00</td>
                                     </tr>
                                 </tfoot>
                             </table>

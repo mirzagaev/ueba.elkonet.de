@@ -394,13 +394,13 @@
                         <span class="font-medium">Gespeichert!</span> Change a few things up and try submitting again.
                     </div>
                 </div>
-
-                <div class="py-4 xl:py-6 flex flex-col sm:flex-row items-end gap-4 w-full mb-5">
-                    <button type="button" class="btn-success md:ml-auto">
-                        <svg class="fill-white size-5 mr-2"><use xlink:href="#icon-save"></use></svg> Speichern
+                
+                <div class="flex flex-row items-end gap-4 w-full mb-5">
+                    <button type="button" class="btn-success ml-auto" onclick="calculateTotals(); AJAXPost();" title="Speichern">
+                        <svg class="fill-white size-5"><use xlink:href="#icon-save"></use></svg> <span class="hidden xl:block ml-2">Speichern</span>
                     </button>
-                    <a href="kundenauftrag-form-kundenkartei-print.html" class="btn-secondary">
-                        <svg class="stroke-primary size-5 mr-2"><use xlink:href="#icon-print"></use></svg> Druckversion anzeigen
+                    <a href="{page_url page=$page print=1}" class="printForm btn-secondary" title="Druckvorschau anzeigen">
+                        <svg class="stroke-primary size-5"><use xlink:href="#icon-print"></use></svg> <span class="hidden xl:block ml-2">Druckvorschau anzeigen</span>
                     </a>
                 </div>
                 
@@ -419,20 +419,46 @@
                                     <option>Divers</option>
                                 </select>
                             </div>
-                            <div class="md:col-start-1 md:col-span-5">
-                                <input placeholder="Name" class="kundenauftrag-form-text">
+
+                            <div class="md:col-span-10 kundenauftrag-form-float-group">
+                                <select name="select">
+                                    <option value="">Bitte eine Option wählen</option>
+                                    <option value="1">Option 1</option>
+                                    <option value="2">Option 2</option>
+                                    <option value="3">Option 3</option>
+                                    <option value="4">Option 4</option>
+                                    <option value="5">Option 5</option>
+                                </select>
+                                <label for="select">Select an option</label>
                             </div>
-                            <div class="md:col-span-5">
-                                <input placeholder="Vorname" class="kundenauftrag-form-text">
+
+                            <div class="md:col-start-1 md:col-span-5 kundenauftrag-form-float-group">
+                                <input type="text" name="floating_name" id="floating_name" class="peer" placeholder=" " required />
+                                <label for="floating_name">Name</label>
                             </div>
-                            <div class="md:col-span-10">
-                                <input placeholder="Firma" class="kundenauftrag-form-text">
+                            <div class="md:col-span-5 kundenauftrag-form-float-group">
+                                <input type="text" name="floating_Vorname" id="floating_Vorname" class="peer" placeholder=" " required />
+                                <label for="floating_Vorname">Vorname</label>
                             </div>
-                            <div class="md:col-span-5">
-                                <input placeholder="Straße" class="kundenauftrag-form-text">
+                            <div class="md:col-span-10 kundenauftrag-form-float-group">
+                                <input type="text" name="floating_Firma" id="floating_Firma" class="peer" placeholder=" " required />
+                                <label for="floating_Firma">Firma</label>
                             </div>
-                            <div class="md:col-span-5">
-                                <input placeholder="PLZ / Ort" class="kundenauftrag-form-text">
+                            <div class="md:col-span-8 kundenauftrag-form-float-group">
+                                <input type="text" name="floating_Strasse" id="floating_Strasse" class="peer" placeholder=" " required />
+                                <label for="floating_Strasse">Straße</label>
+                            </div>
+                            <div class="md:col-span-2 kundenauftrag-form-float-group">
+                                <input type="text" name="floating_PLZ" id="floating_PLZ" class="peer" placeholder=" " required />
+                                <label for="floating_PLZ">Hausnummer</label>
+                            </div>
+                            <div class="md:col-span-3 kundenauftrag-form-float-group">
+                                <input type="text" name="floating_Strasse" id="floating_Strasse" class="peer" placeholder=" " required />
+                                <label for="floating_Strasse">PLZ</label>
+                            </div>
+                            <div class="md:col-span-7 kundenauftrag-form-float-group">
+                                <input type="text" name="floating_PLZ" id="floating_PLZ" class="peer" placeholder=" " required />
+                                <label for="floating_PLZ">Ort</label>
                             </div>
                             <div class="md:col-span-10"></div>
                             <div class="md:col-span-5">

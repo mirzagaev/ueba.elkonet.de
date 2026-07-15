@@ -1,0 +1,13 @@
+{
+    "blocks": {
+        "modulpage": {
+            "title": "Modul - Startseite (1/3 Bild, 2/3 Text)"
+        },
+		"infobox": {
+			"title": "Infobox mit Überschrift"
+		},
+		"linkbox": {
+			"title": "Linkbox mit Überschrift"
+		}
+    }
+}
