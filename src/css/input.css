@@ -713,6 +713,42 @@
         }
     }
 
+    .dashboard {
+        table {
+            @apply bg-neutral-50 w-full text-sm text-left;
+            @variant dark {
+                @apply bg-neutral-800;
+            }
+            thead {
+                @apply uppercase tracking-wide text-black font-bold shadow-sm;
+
+                @variant dark {
+                    @apply bg-neutral-700 text-neutral-300;
+                }
+                tr {
+                    th {
+                        @apply px-4 py-2 xl:py-4 cursor-pointer;
+                    }
+                    th:first-child {
+                        @apply xl:pl-8;
+                    }
+                    th:last-child {
+                        @apply xl:pr-8;
+                    }
+                }
+            }
+            tbody {
+                @apply divide-y divide-neutral-300 dark:divide-neutral-700;
+                tr {
+                    @apply hover:bg-neutral-200 dark:hover:bg-neutral-800 cursor-pointer;
+                    td {
+                        @apply px-4 xl:px-8 py-4;
+                    }
+                }
+            }
+        }
+    }
+
     /* Sanfte Transition für Breite und Position */
     .drawer-animate {
         transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1), 
