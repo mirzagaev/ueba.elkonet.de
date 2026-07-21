@@ -573,67 +573,8 @@
                 <div id="dashboardPersonaContainer" class="dashboard">
                     <div class="flex flex-col gap-5 xl:gap-10 mt-2">
                         <div>
-                            <h1>Systemverwaltung</h1>
-                            <p class="text-secondary mt-3">Zentrale Übersicht über alle Bildungszentren, Betriebe und Benutzer.</p>
-                        </div>
-
-                        <!-- Statistik -->
-                        <div class="statistik_fakten md:grid-cols-3">
-                            <div class="bg-analyse/20 statistik_fakt">
-                                <div>
-                                    <div class="statistik_zahl">20</div>
-                                    <span
-                                        class="statistik_icon bg-analyse">
-                                        <svg class="stroke-white size-10" fill="none">
-                                            <use xlink:href="#icon-building"></use>
-                                        </svg>
-                                    </span>
-                                </div>
-                                <div>
-                                    <span class="fakt_name">Bildungszentren</span>
-                                    <span class="statistik_plus">
-                                        <svg class="stroke-green-800 size-3" fill="none" stroke-width="3"><use xlink:href="#icon-up"></use></svg>
-                                        +1 diesen Monat
-                                    </span>
-                                </div>
-                            </div>
-                            <div class="bg-planung/20 statistik_fakt">
-                                <div>
-                                    <div class="statistik_zahl">1683</div>
-                                    <span
-                                        class="statistik_icon bg-planung">
-                                        <svg class="stroke-white size-10" fill="none">
-                                            <use xlink:href="#icon-briefcase"></use>
-                                        </svg>
-                                    </span>
-                                </div>
-                                <div>
-                                    <span class="fakt_name">Unternehmen</span>
-                                    <span class="statistik_plus">
-                                        <svg class="stroke-green-800 size-3" fill="none" stroke-width="3"><use xlink:href="#icon-up"></use></svg>
-                                        +3 Unternehmen diesen Monat
-                                    </span>
-                                </div>
-                            </div>
-                            <div
-                                class="bg-durchfuehrung/20 statistik_fakt">
-                                <div>
-                                    <div class="statistik_zahl">9306</div>
-                                    <span
-                                        class="statistik_icon bg-durchfuehrung">
-                                        <svg class="stroke-white size-10" fill="none">
-                                            <use xlink:href="#icon-users"></use>
-                                        </svg>
-                                    </span>
-                                </div>
-                                <div>
-                                    <span class="fakt_name">Aktive Benutzer</span>
-                                    <span class="statistik_plus">
-                                        <svg class="stroke-green-800 size-3" fill="none" stroke-width="3"><use xlink:href="#icon-up"></use></svg>
-                                        +128 Benutzer diesen Monat
-                                    </span>
-                                </div>
-                            </div>
+                            <h1>Elektro Technologie Zentrum Stuttgart</h1>
+                            <p class="text-secondary mt-3">Zentrale Übersicht über alle Betriebe und Benutzer.</p>
                         </div>
 
                         <div class="grid grid-cols-1 xl:grid-cols-3 xl:gap-10">
@@ -1223,7 +1164,45 @@
                             </div>
                             
                             <!-- Unternehmen und BZ -->
-                            <div class="order-first xl:order-last grid grid-cols-1 md:grid-cols-2 xl:grid-cols-1 gap-5 xl:gap-10 mb-5 xl:mb-0 h-fit" id="dashboard_list_company_bz">
+                            <div class="grid grid-cols-1 gap-5 xl:gap-10 order-first xl:order-last mb-5 xl:mb-0 h-fit" id="dashboard_list_company_bz">
+                                <!-- Statistik -->
+                                <div class="statistik_fakten md:grid-cols-2 xl:grid-cols-1">
+                                    <div class="bg-planung/20 statistik_fakt">
+                                        <div>
+                                            <div class="statistik_zahl">1683</div>
+                                            <span class="statistik_icon bg-planung">
+                                                <svg class="stroke-white size-10" fill="none">
+                                                    <use xlink:href="#icon-briefcase"></use>
+                                                </svg>
+                                            </span>
+                                        </div>
+                                        <div>
+                                            <span class="fakt_name">Unternehmen</span>
+                                            <span class="statistik_plus">
+                                                <svg fill="none" stroke-width="3"><use xlink:href="#icon-up"></use></svg>
+                                                +3 Unternehmen diesen Monat
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <div class="bg-durchfuehrung/20 statistik_fakt">
+                                        <div>
+                                            <div class="statistik_zahl">9306</div>
+                                            <span
+                                                class="statistik_icon bg-durchfuehrung">
+                                                <svg class="stroke-white size-10" fill="none">
+                                                    <use xlink:href="#icon-users"></use>
+                                                </svg>
+                                            </span>
+                                        </div>
+                                        <div>
+                                            <span class="fakt_name">Aktive Benutzer</span>
+                                            <span class="statistik_plus">
+                                                <svg fill="none" stroke-width="3"><use xlink:href="#icon-up"></use></svg>
+                                                +128 Benutzer diesen Monat
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
                                 <div
                                     class="bg-primary rounded-2xl shadow-sm overflow-hidden border border-secondary">
                                     <div class="flex items-center px-4 xl:px-8 py-3 xl:py-5 shadow-sm">
@@ -1288,80 +1267,6 @@
                                                 <td class="text-secondary whitespace-nowrap">10.09.2024</td>
                                                 <td class="text-right text-secondary whitespace-nowrap">2 Azubis
                                                 </td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
-                                <div
-                                    class="bg-primary rounded-2xl shadow-sm overflow-hidden border border-secondary">
-                                    <div class="flex items-center px-4 xl:px-8 py-3 xl:py-5">
-                                        <svg class="stroke-secondary size-5 xl:size-8 shrink-0 mr-2 xl:mr-4" fill="none"><use xlink:href="#icon-building"></use></svg>
-                                        <span class="text-base xl:text-xl font-medium text-primary shrink-0">Bildungszentren</span>
-                                        <input type="text" id="secondaryBzSearch"
-                                            oninput="debounceSecondarySearch('bz', this.value);" placeholder="Suchen…"
-                                            class="kundenauftrag-form-text text-xs ml-auto hidden w-40">
-                                        <button type="button" onclick="openRegisterDrawer('bz');" class="ml-auto btn-secondary py-2 dark:bg-neutral-700">
-                                            Bildungszentrum anlegen
-                                            <svg class="stroke-primary size-4 ml-2" fill="none"><use xlink:href="#icon-plus"></use></svg>
-                                        </button>
-                                    </div>
-
-                                    <div class="flex flex-row items-center gap-4 px-4 xl:px-5 py-1 xl:py-3 w-full overflow-hidden">
-                                        <div class="flex items-center gap-2 w-full">
-                                            <form id="dashboardSearchForm" method="get" action="/ueba/dashboard-nonactive-1-preview-1.html"
-                                                class="flex items-center gap-2 w-full relative">
-                                                <input type="text" id="dashboardSearchInput" name="search" value=""
-                                                    placeholder="Bildungszentren durchsuchen"
-                                                    class="kundenauftrag-form-text bg-white dark:bg-neutral-900 rounded-full text-sm max-w-full pl-15">
-                                                <button type="submit" class="absolute left-5" title="Suchen">
-                                                    <svg class="stroke-primary size-5" fill="none">
-                                                        <use xlink:href="#icon-search"></use>
-                                                    </svg>
-                                                </button>
-                                            </form>
-                                        </div>
-                                    </div>
-                                    <table id="table_bz_liste" data-search=""
-                                        data-sort="name" data-dir="asc">
-                                        <thead>
-                                            <tr>
-                                                <th
-                                                    onclick="sortSecondaryColumn('bz', 'name');">Name</th>
-                                                <th
-                                                    onclick="sortSecondaryColumn('bz', 'created');">Erstellt am</th>
-                                                <th></th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr
-                                                onclick="openBzDrawer(23);">
-                                                <td class="font-medium text-primary">BBZ-Marburg</td>
-                                                <td class="text-secondary whitespace-nowrap">15.06.2026</td>
-                                                <td class="text-right text-secondary whitespace-nowrap">0
-                                                    Unternehmen</td>
-                                            </tr>
-                                            <tr
-                                                onclick="openBzDrawer(24);">
-                                                <td class="font-medium text-primary">Berufliche Bildungsstätte
-                                                    Tuttlingen GmbH</td>
-                                                <td class="text-secondary whitespace-nowrap">30.09.2022</td>
-                                                <td class="text-right text-secondary whitespace-nowrap">0
-                                                    Unternehmen</td>
-                                            </tr>
-                                            <tr
-                                                onclick="openBzDrawer(32);">
-                                                <td class="font-medium text-primary">Bildungsakademie HWK
-                                                    Karlsruhe</td>
-                                                <td class="text-secondary whitespace-nowrap">23.06.2026</td>
-                                                <td class="text-right text-secondary whitespace-nowrap">4
-                                                    Unternehmen</td>
-                                            </tr>
-                                            <tr
-                                                onclick="openBzDrawer(30);">
-                                                <td class="font-medium text-primary">BZL</td>
-                                                <td class="text-secondary whitespace-nowrap">03.07.2026</td>
-                                                <td class="text-right text-secondary whitespace-nowrap">111
-                                                    Unternehmen</td>
                                             </tr>
                                         </tbody>
                                     </table>

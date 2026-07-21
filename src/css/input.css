@@ -25,7 +25,6 @@
 }
 
 @layer components {
-
     BODY {
         @apply bg-white;
         background-repeat: no-repeat;
@@ -100,6 +99,57 @@
 
         @variant dark {
             @apply stroke-white;
+        }
+    }
+
+    .templateLayout {
+        @apply flex flex-col;
+        > div,
+        > p {
+            @apply my-3;
+        }
+    }
+
+    .page-headline {
+        @apply text-2xl xl:text-3xl font-bold flex items-center;
+    }
+    .page-intro {
+        @apply text-lg xl:text-xl mt-3;
+    }
+    .alert-info {
+        @apply xl:container mx-auto w-full bg-sky-100 border-l-4 border-sky-700 text-sky-700 p-4 flex;
+        @variant dark {
+            @apply text-white bg-auswertung/50;
+        }
+    }
+    .alert-error {
+        @apply xl:container mx-auto w-full bg-red-100 border-l-4 border-red-700 text-red-700 p-4 flex;
+        @variant dark {
+            @apply text-white bg-analyse/50;
+        }
+    }
+    .alert-success {
+        @apply xl:container mx-auto w-full bg-green-100 border-l-4 border-green-700 text-green-700 p-4 flex;
+        @variant dark {
+            @apply text-white bg-durchfuehrung/50;
+        }
+    }
+    .alert-warning {
+        @apply xl:container mx-auto w-full bg-orange-100 border-l-4 border-orange-700 text-orange-700 p-4 flex;
+        @variant dark {
+            @apply text-white bg-planung/50;
+        }
+    }
+    .alert-hinweis {
+        @apply xl:container mx-auto w-full bg-gray-100 border-l-4 border-gray-700 text-gray-700 p-4 flex;
+        @variant dark {
+            @apply text-white bg-neutral-600 border-neutral-400;
+        }
+    }
+    .large-notice {
+        @apply xl:container mx-auto w-full bg-neutral-100 border-l-4 border-neutral-700 text-neutral-700 p-4 text-lg flex;
+        @variant dark {
+            @apply text-white bg-neutral-600 border-neutral-400;
         }
     }
 
@@ -198,14 +248,14 @@
     }
 
     .btn-secondary {
-        @apply p-3 flex items-center cursor-pointer bg-neutral-200 hover:bg-neutral-300 font-semibold text-sm;
+        @apply p-3 inline-flex items-center cursor-pointer bg-neutral-200 hover:bg-neutral-300 font-semibold text-sm;
         @variant dark {
             @apply text-white bg-neutral-800 hover:bg-neutral-600;
         }
     }
 
     .btn-success {
-        @apply p-3 flex items-center cursor-pointer font-medium text-sm;
+        @apply p-3 inline-flex items-center cursor-pointer font-medium text-sm;
         @apply bg-success hover:bg-success-strong text-white;
         @variant dark {
             @apply bg-success-strong hover:bg-success;
@@ -213,7 +263,7 @@
     }
 
     .btn-print {
-        @apply p-3 flex items-center cursor-pointer bg-neutral-200 font-semibold text-sm;
+        @apply p-3 inline-flex items-center cursor-pointer bg-neutral-200 font-semibold text-sm;
         @apply box-border border border-transparent;
         @variant dark {
             @apply bg-neutral-700;
@@ -714,6 +764,51 @@
     }
 
     .dashboard {
+        .badge_lehrjahr {
+            @apply inline-flex items-center px-3 py-2 rounded-full text-sm font-medium bg-sky-100 text-sky-700;
+            @variant dark {
+                @apply bg-auswertung/20 text-white;
+            }
+        }
+        .badge_fail {
+            @apply w-fit inline-flex items-center px-3 py-2 rounded-full text-sm font-medium bg-red-100 text-red-700;
+            @variant dark {
+                @apply bg-auswertung/20 text-white;
+            }
+        }
+        .badge_success {
+            @apply w-fit inline-flex items-center gap-1 px-3 py-2 rounded-full text-sm font-medium bg-durchfuehrung/30 hover:bg-durchfuehrung/60 transition-colors shrink-0;
+            @variant dark {
+                @apply bg-durchfuehrung/30 text-white;
+            }
+        }
+        .statistik_fakten {
+            @apply grid grid-cols-1 gap-5 xl:gap-10;
+            .statistik_fakt {
+                @apply rounded-2xl shadow-sm hover:shadow-md p-5 xl:p-8;
+                div:first-child {
+                    @apply flex items-center;
+                    .statistik_zahl {
+                        @apply text-2xl xl:text-5xl 2xl:text-6xl font-bold my-2;
+                    }
+                    .statistik_icon {
+                        @apply ml-auto flex items-center justify-center w-fit p-2 rounded-lg shrink-0;
+                    }
+                }
+                div:last-child {
+                    @apply flex items-center justify-between gap-2 flex-wrap;
+                    .fakt_name {
+                        @apply font-semibold;
+                    }
+                    .statistik_plus {
+                        @apply inline-flex items-center gap-1 text-xs font-semibold px-2 py-0.5 rounded-full bg-green-100 text-green-800 shrink-0;
+                        svg {
+                            @apply stroke-green-800 size-4;
+                        }
+                    }
+                }
+            }
+        }
         table {
             @apply bg-neutral-50 w-full text-sm text-left;
             @variant dark {
