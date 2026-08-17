@@ -1,0 +1,90 @@
+<div class="page_headline">
+    <h2 class="text-2xl xl:text-3xl font-bold flex items-center">
+        {$page->field.title}
+    </h2>
+</div>
+
+{if !$isAdmin}
+    <div class="alert-info mt-4">Kein Zugriff auf diese Seite.</div>
+{elseif empty($formulare) && empty($wissenschecks)}
+    <div class="alert-info mt-4">Keine unterstützten Module (Formular-Unterseiten oder WissensCheck) im aktuellen Kontext gefunden.</div>
+{else}
+
+    {if $generalError}
+        <div class="alert-info mt-4 border border-red-600 text-red-700">{$generalError}</div>
+    {/if}
+
+    {if $formulare|@count > 0}
+    <table class="w-full text-sm border border-neutral-200">
+        <thead class="bg-neutral-200">
+            <tr class="text-left">
+                <th class="px-4 py-3 font-semibold uppercase">Formular</th>
+                <th class="px-4 py-3 font-semibold uppercase">Alte formular_id</th>
+                <th class="px-4 py-3 font-semibold uppercase"></th>
+                <th class="px-4 py-3 font-semibold uppercase">Status</th>
+            </tr>
+        </thead>
+        <tbody class="bg-white divide-y divide-neutral-200">
+            {foreach from=$formulare item=f}
+            <tr>
+                <td class="px-4 py-4 align-top">
+                    <div class="font-semibold">{$f.label}</div>
+                    <div class="text-neutral-500 mt-1 text-xs">Ziel: „{$f.targetTitle}" (formular_id {$f.targetId})</div>
+
+                    <form id="migrationForm_{$f.suffix}" method="post" action="{page_url page=$page}" onsubmit="return confirm('Alle Nutzer-Datensätze der angegebenen alten formular_id wirklich nach „{$f.label|escape}" (formular_id {$f.targetId}) übertragen? Bestehende Zieldaten werden überschrieben.');">
+                        <input type="hidden" name="formular_typ" value="{$f.suffix}">
+                        <input type="hidden" name="new_formular_id" value="{$f.targetId}">
+                    </form>
+                </td>
+                <td class="px-4 py-4 align-top">
+                    <input type="number" name="old_formular_id" form="migrationForm_{$f.suffix}" class="border border-neutral-300 rounded px-2 py-1 w-32" required>
+                </td>
+                <td class="px-4 py-4 align-top">
+                    <button type="submit" form="migrationForm_{$f.suffix}" name="migrate_formular" value="1" class="btn-success">Migrieren</button>
+                </td>
+                <td class="px-4 py-4 align-top">
+                    {if $f.result}
+                        <div class="alert-info">
+                            {$f.result.migriert} von {$f.result.gefunden} Datensatz/Datensätzen übertragen.
+                        </div>
+                    {/if}
+                </td>
+            </tr>
+            {/foreach}
+        </tbody>
+    </table>
+    {/if}
+
+    {if $wissenschecks|@count > 0}
+    <table class="w-full text-sm border border-neutral-200">
+        <thead class="bg-neutral-200">
+            <tr class="text-left">
+                <th class="px-4 py-3 font-semibold uppercase">WissensCheck</th>
+                <th class="px-4 py-3 font-semibold uppercase"></th>
+            </tr>
+        </thead>
+        <tbody class="bg-white divide-y divide-neutral-200">
+            {foreach from=$wissenschecks item=wc}
+            <tr>
+                <td class="px-4 py-4 align-top">
+                    <div class="font-semibold">{$wc.title}</div>
+                    <div class="text-neutral-500 mt-1 text-xs">Stellt alle alten Frage-/Antwortseiten (swlfragebogen) unterhalb dieser Seite (Seiten-ID {$wc.id}) auf die neuen v3-Seitentypen um.</div>
+
+                    <form id="migrationFormWc_{$wc.id}" method="post" action="{page_url page=$page}" onsubmit="return confirm('Alle Frage-/Antwortseiten dieser WissensCheck-Seite jetzt auf die neuen v3-Seitentypen umstellen?');">
+                        <input type="hidden" name="wc_page_id" value="{$wc.id}">
+                    </form>
+                </td>
+                <td class="px-4 py-4 align-top">
+                    <button type="submit" form="migrationFormWc_{$wc.id}" name="migrate_wissenscheck" value="1" class="btn-success">Migrieren</button>
+                </td>
+            </tr>
+            {/foreach}
+        </tbody>
+    </table>
+        {if $wc.result}
+            <div class="alert-info">
+                {$wc.result.entries} Frage(n) und {$wc.result.choices} Antwort(en) umgestellt.
+            </div>
+        {/if}
+    {/if}
+{/if}

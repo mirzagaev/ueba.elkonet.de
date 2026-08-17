@@ -1,0 +1,833 @@
+{get_path page=$page show_self=1 var=pfad with_root=true}
+{foreach from=$pfad item=breadlink name=breadcrump}
+    {if $breadlink->field.type == "v3/modul"}
+        {assign var="modulPage" value=$breadlink}
+    {/if}
+    {if $breadlink->field.type == "v3/modul/kundenauftrag"}
+        {assign var="kundenauftragPage" value=$breadlink}
+    {/if}
+{/foreach}
+
+{if $kundenauftragPage}
+{navigation id=$kundenauftragPage->field.id var=kundenauftragforms}
+    {foreach from=$kundenauftragforms item=formpage name=auftragsnav}
+        {if $formpage->field.type == "v3/formular"}
+            {assign var="formularePage" value=$formpage}
+        {/if}
+        {if $formpage->field.type == "v3/modul/hilfe"}
+            {assign var="hilfePage" value=$formpage}
+        {/if}
+    {/foreach}
+{navigation_end}
+{/if}
+
+{assign var="dashboardPage" value="1130887"}
+{assign var="settingsPage" value="1131240"}
+{assign var="farbetitelberufe" value="#931917"}
+
+<header class="flex flex-wrap flex-row items-center bg-primary text-primary shadow-md">
+{if strpos($page->field.type, "v3/modul") !== false || strpos($page->field.type, "v3/dashboard") !== false || strpos($page->field.type, "v3") !== false}
+    {if $auth->getId()}
+    <button class="flex md:hidden ml-3 text-primary items-center p-2 cursor-pointer" type="button" data-drawer-target="ueba-mobilsidebar" data-drawer-show="ueba-mobilsidebar" data-drawer-position="left" aria-controls="ueba-mobilsidebar">
+        <svg class="size-7 stroke-primary" stroke-width="0.5"><use xlink:href="#icon-burger"></use></svg>
+    </button>
+    {/if}
+
+    {if $auth->getId()}
+        {if $schulzahl > 1 OR $schulzahl == 0}
+            {assign var="meine_schule" value="0"}
+            <a class="w-fit mx-3 md:mx-6 my-1 bg-opacity-25 bg-white/40 p-2 flex rounded-xl" href="{$homeLink}/?sid={$school}">
+                <img id="imgbrandinglogo" class="h-12" alt="{$currHost}" src="{$url_dir}skin/{$site->skin}/img/ELKOnet_Logo_Vector.png" />
+            </a>
+        {else}
+            {foreach from=$schulID item=school name=schloif}
+                {* $smarty.foreach.schloif.iteration *}
+                {assign var="meine_schule" value=$school}
+                <!--I>Bildungszentrum ID: ({$school})</I-->
+            {/foreach}
+            
+            {get_pages var="seiten" query.where="id=$school"}
+    
+            {foreach from=$seiten item="seite"}
+                {if $seite->extra.brandinglogo|count_characters > 1}
+                <a class="py-5 flex md:px-10" data-schulID="{$schulID}" href="{$homeLink}/?sid={$school}">
+                    <img id="imgbrandinglogo" class="h-12" alt="{$currHost}" src="{$seite->extra.brandinglogo}" />
+                </a>
+                {else}
+                <a class="w-fit mx-3 md:mx-6 my-1 bg-opacity-25 bg-white/40 p-2 flex rounded-xl" data-schulID="{$schulID}" href="{$homeLink}/?sid={$school}">
+                    <img id="imgbrandinglogo" class="h-12" alt="{$currHost}" src="{$url_dir}skin/{$site->skin}/img/ELKOnet_Logo_Vector.png" />
+                </a>
+                {/if}
+                
+                {if $seite->extra.colortitelberufe} 
+                    {assign var="farbetitelberufe" value=$seite->extra.colortitelberufe}
+                {/if}
+            {/foreach}
+        {/if}
+
+        {if $InteDigiKundePID!=""}
+            {get_pages var="inteDigiKunden" query.where="id=$InteDigiKundePID"}
+            {foreach from=$inteDigiKunden item="inteDigiKunde"}
+                {if $inteDigiKunde->extra.brandinglogo|count_characters > 1}
+                <a class="py-5 flex md:px-10" {if $meine_schule!="0" && $meine_schule!=""}href="{$homeLink}/?sid={$school}{else}href='#'{/if}">
+                    <img id="imgbrandinglogo" class="h-12" alt="https://lernportal.elkonet.de/" src="{$inteDigiKunde->extra.brandinglogo}" />
+                </a>
+                {/if}
+            {/foreach}
+        {/if}
+    {else} 
+    <!-- ELKOnet-Logo als default einblenden -->
+    <a class="w-fit mx-3 md:mx-6 my-1 bg-opacity-25 bg-white/40 p-2 flex rounded-xl" href="{$homeLink}/?sid={$school}">
+        <img id="imgbrandinglogo" class="h-12" alt="{$currHost}" src="{$url_dir}skin/{$site->skin}/img/ELKOnet_Logo_Vector.png" />
+    </a>
+    {/if}
+
+    <!-- MOBIL: Sidebar -->
+    {if $auth->getId()}
+    <div id="ueba-mobilsidebar" class="max-w-96 absolute left-0 top-0 z-40 pb-11 overflow-y-auto transition-transform -translate-x-full bg-secondary shadow-lg h-screen" tabindex="-1" aria-labelledby="drawer-label" aria-hidden="true">
+        
+        <div class="flex items-center py-4 px-8 gap-4 bg-subnav" id="avatarButton" type="button" type="button">
+            <div>
+                <h2 id="drawer-label" class="text-primary text-lg font-semibold leading-7">Ausbildungsportal</h2>
+                <a class="text-secondary text-opacity-20 text-sm font-normal leading-snug" href="{$currHost}">ueba.elkonet.de</a>
+            </div>
+            <div>
+                <button type="button" data-drawer-hide="ueba-mobilsidebar" aria-controls="ueba-mobilsidebar" data-drawer-position="left" class="text-primary text-sm absolute top-5 right-2 inline-flex items-center justify-center px-2">
+                    <svg fill="none" class="size-7 p-1"><use xlink:href="#icon-close"></use></svg>
+                    <span class="sr-only">Menü schließen</span>
+                </button>
+            </div>
+        </div>
+
+        {if $auth->getId()}
+        <div class="flex items-center py-4 px-6.5 gap-3.5 bg-primary" id="avatarButton" type="button" type="button" data-dropdown-toggle="userDropdown">
+            <div class="relative inline-flex items-center justify-center w-9 h-9 overflow-hidden bg-secondary rounded-full">
+                {if $auth->user->extra.profile_picture}
+                <img src="{$currHost}/{$auth->user->extra.profile_picture}" class="w-9 h-9" />
+                {else}
+                <span class="font-medium text-primary text-lg">{$auth->user->extra.vorname|substr:0:1}{$auth->user->extra.name|substr:0:1}</span>
+                {/if}
+            </div>
+            <div class="font-medium">
+                <div class="leading-snug">{$auth->user->extra.vorname} {$auth->user->extra.name}</div>
+                <div class="text-sm font-normal truncate">
+                    {if $schulzahl > 1 OR $schulzahl == 0}
+                        {assign var="meine_schule" value="0"}
+                    {else}
+                        {foreach from=$schulenneu item=school name=schloif}
+                            {assign var="meine_schule" value=$school}
+                            {$school}
+                        {/foreach}
+                    {/if}
+                </div>
+            </div>
+        </div>
+        {/if}
+
+        <div class="p-5 py-3">
+            <ul id="sidebar_mainnav">
+                {if $auth->getId() == "3d3815b595f1eefe40c0c91f674dc6d1"}
+                <li>
+                    <a href="{page_url id=$dashboardPage}">
+                        <svg class="size-6 stroke-primary"><use xlink:href="#icon-dashboard2"></use></svg>
+                        <span class="flex-1 ms-5 whitespace-nowrap">Dashboard</span>
+                    </a>
+                </li>
+                {/if}
+                {if strpos($page->field.type, "modul") !== false}
+                <li>
+                    <a href="{page_url page=$modulPage}" class="{if $page->field.id == $modulPage->field.id}bg-primary{/if}">
+                        <svg class="size-6 fill-primary"><use xlink:href="#icon-folder"></use></svg>
+                        <span class="flex-1 ms-5 whitespace-nowrap">{$modulPage->field.name}</span>
+                    </a>
+                </li>
+                {navigation id=$modulPage->field.id var=modulnavmobile}
+                {foreach from=$modulnavmobile item=modullink name=modulnavmob}
+                <li>
+                    <a href="{page_url page=$modullink}" class="{if $page->field.id == $modullink->field.id}bg-primary{/if}">
+                        {if strpos($modullink->field.name|lower, "method") !== false}
+                            <svg class="size-6 fill-primary"><use xlink:href="#icon-methodik"></use></svg>
+                        {else}
+                            <svg class="size-6 fill-primary"><use xlink:href="#icon-{$modullink->field.name|lower}"></use></svg>
+                        {/if}
+                        <span class="flex-1 ms-5 whitespace-nowrap">{$modullink->field.name}</span>
+                    </a>
+                </li>
+                {/foreach}
+                {navigation_end}
+                {/if}
+                {if $auth->getId() == "3d3815b595f1eefe40c0c91f674dc6d1"}
+                <li>
+                    <a href="#">
+                        <svg class="size-6 fill-primary"><use xlink:href="#icon-ausbildungsnachweis"></use></svg>
+                        <span class="flex-1 ms-5 whitespace-nowrap">Ausbildungsnachweis</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="{page_url id=$settingsPage}">
+                        <svg class="size-6 stroke-primary" fill="none" stroke-width="1.5"><use xlink:href="#icon-settings"></use></svg>
+                        <span class="flex-1 ms-5 whitespace-nowrap">Einstellungen</span>
+                    </a>
+                </li>
+                {/if}
+                <li>
+                    <a href="{logout_url id=1}" class="flex items-center p-3 text-primary rounded-lg group">
+                        <svg class="size-6 stroke-primary" fill="none" viewBox="0 0 24 24" stroke-width="1.5"><use xlink:href="#icon-logout"></use></svg>
+                        <span class="flex-1 ms-5 whitespace-nowrap">Abmelden</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+
+        <div class="p-4 bz_info w-full absolute bottom-0 bg-subnav flex items-center gap-4">
+            <div>
+                {if $auth->getId()}
+                    {if $schulzahl > 1 OR $schulzahl == 0}
+                        {assign var="meine_schule" value="0"}
+                        <a class="w-fit mx-3 md:mx-6 my-1 bg-opacity-25 bg-white/40 p-2 flex rounded-xl" href="{$homeLink}/?sid={$school}">
+                            <img id="imgbrandinglogo" class="h-12" alt="{$currHost}" src="{$url_dir}skin/{$site->skin}/img/ELKOnet_Logo_Vector.png" />
+                        </a>
+                    {else}
+                        {foreach from=$schulID item=school name=schloif}
+                            {* $smarty.foreach.schloif.iteration *}
+                            {assign var="meine_schule" value=$school}
+                            <!--I>Bildungszentrum ID: ({$school})</I-->
+                        {/foreach}
+                        
+                        {get_pages var="seiten" query.where="id=$school"}
+                
+                        {foreach from=$seiten item="seite"}
+                            {if $seite->extra.brandinglogo|count_characters > 1}
+                            <a class="block" data-schulID="{$schulID}" href="{$homeLink}/?sid={$school}">
+                                <img id="imgbrandinglogo" class="w-20 h-auto" alt="{$currHost}" src="{$seite->extra.brandinglogo}" />
+                            </a>
+                            {else}
+                            <a class="block" data-schulID="{$schulID}" href="{$homeLink}/?sid={$school}">
+                                <img id="imgbrandinglogo" class="w-20 h-auto" alt="{$currHost}" src="{$url_dir}skin/{$site->skin}/img/ELKOnet_Logo_Vector.png" />
+                            </a>
+                            {/if}
+                            
+                            {if $seite->extra.colortitelberufe} 
+                                {assign var="farbetitelberufe" value=$seite->extra.colortitelberufe}
+                            {/if}
+                        {/foreach}
+                    {/if}
+
+                    {if $InteDigiKundePID!=""}
+                        {get_pages var="inteDigiKunden" query.where="id=$InteDigiKundePID"}
+                        {foreach from=$inteDigiKunden item="inteDigiKunde"}
+                            {if $inteDigiKunde->extra.brandinglogo|count_characters > 1}
+                            <a class="block" {if $meine_schule!="0" && $meine_schule!=""}href="{$homeLink}/?sid={$school}{else}href='#'{/if}">
+                                <img id="imgbrandinglogo" class="w-20 h-auto" alt="https://lernportal.elkonet.de/" src="{$inteDigiKunde->extra.brandinglogo}" />
+                            </a>
+                            {/if}
+                        {/foreach}
+                    {/if}
+                {else} 
+                <!-- ELKOnet-Logo als default einblenden -->
+                <a class="block" href="index.html">
+                    <img class="w-20 h-auto" src="{$url_dir}skin/{$site->skin}/img/ELKOnet_Logo_Vector.png" />
+                </a>
+                {/if}
+            </div>
+            <div class="leading-snug text-secondary text-xs font-medium">{$beruf->field.name}</div>
+        </div>
+    </div>
+    {/if}
+
+    <div class="flex p-5 ml-auto gap-4 xl:pr-10">
+        <button type="button" id="dropdownNotificationButton" data-dropdown-toggle="dropdownNotification" class="bg-secondary cursor-pointer relative inline-flex items-center px-3 py-2 text-sm font-medium text-center text-secondary rounded-full">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M14.857 17.082a23.848 23.848 0 0 0 5.454-1.31A8.967 8.967 0 0 1 18 9.75V9A6 6 0 0 0 6 9v.75a8.967 8.967 0 0 1-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 0 1-5.714 0m5.714 0a3 3 0 1 1-5.714 0" />
+            </svg>
+        </button>
+
+        <!-- Benachrichtigungen -->
+        <div id="dropdownNotification" class="z-20 hidden w-full max-w-sm bg-secondary rounded-lg shadow-sm" aria-labelledby="dropdownNotificationButton">
+            <div class="block px-4 py-2 font-medium text-center text-primary rounded-t-lg bg-secondary">Benachrichtigungen</div>
+            <div class="bg-primary">
+                <a href="#" class="flex px-4 py-3">
+                    <div class="shrink-0 relative inline-flex items-center justify-center w-10 h-10 overflow-hidden bg-secondary rounded-full">
+                        <span class="font-medium text-gray-600">JL</span>
+                    </div>
+                    <div class="w-full ps-3">
+                        <div class="text-primary text-sm mb-1.5 ">Die UEBA-Plattform wurde aktualisiert. Wir haben für dich eine neue Anleitung geschrieben.</div>
+                        <div class="text-xs text-secondary">vor kurzem</div>
+                    </div>
+                </a>
+            </div>
+            <a href="#" class="block py-2 text-sm font-medium text-center text-primary rounded-b-lg bg-secondary">
+                <div class="inline-flex items-center">
+                <svg class="w-4 h-4 me-2 text-gray-500 " aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 14">
+                    <path d="M10 0C4.612 0 0 5.336 0 7c0 1.742 3.546 7 10 7 6.454 0 10-5.258 10-7 0-1.664-4.612-7-10-7Zm0 10a3 3 0 1 1 0-6 3 3 0 0 1 0 6Z"/>
+                </svg>
+                    Alle aufrufen
+                </div>
+            </a>
+        </div>
+
+        <!-- DESKTOP: Profil -->
+        <div class="hidden md:block cursor-pointer">
+            {if $auth->getId()}
+            <div class="flex items-center gap-4" id="avatarButton" type="button" type="button" data-dropdown-toggle="userDropdown">
+                <div class="relative inline-flex items-center justify-center w-12 h-12 overflow-hidden bg-secondary rounded-full">
+                    {if $auth->user->extra.profile_picture}
+                    <img src="{$currHost}/{$auth->user->extra.profile_picture}" class="w-12 h-12" />
+                    {else}
+                    <span class="font-medium text-primary text-lg">{$auth->user->extra.vorname|substr:0:1}{$auth->user->extra.name|substr:0:1}</span>
+                    {/if}
+                </div>
+                <div class="font-medium">
+                    <div>{$auth->user->extra.vorname} {$auth->user->extra.name}</div>
+                    <div class="text-sm text-secondary">
+                    {if $schulzahl > 1 OR $schulzahl == 0}
+                        {assign var="meine_schule" value="0"}
+                    {else}
+                        {foreach from=$schulenneu item=school name=schloif}
+                            {assign var="meine_schule" value=$school}
+                            {$school}
+                        {/foreach}
+                    {/if}
+                    </div>
+                </div>
+            </div>
+
+            <div id="userDropdown" class="z-20 hidden bg-primary divide-y divide-neutral-300 dark:divide-neutral-700 rounded-lg shadow-lg w-fit">
+                <div class="px-4 py-3 text-sm text-secondary">
+                    <div>{$auth->user->field.username}</div>
+                    <div class="font-medium truncate">{$auth->user->field.email}</div>
+                </div>
+                {if $auth->getId() == "3d3815b595f1eefe40c0c91f674dc6d1"}
+                <ul class="py-2 text-sm" aria-labelledby="avatarButton">
+                    <li>
+                        <a href="{page_url id=$dashboardPage}" class="block px-4 py-2 text-secondary">Dashboard</a>
+                    </li>
+                    <li>
+                        <a href="#" class="block px-4 py-2 text-secondary">Ausbildungsnachweis</a>
+                    </li>
+                    <li>
+                        <form class="clickable" id="bearbForm" method="post" action="{page_url id=1131198 editID=$editID}">
+                            <textarea id="theContent" name="theContent" hidden></textarea>
+                            {if $hasPerm && $page->extra.is_editable == 1}
+                            <a class="block px-4 py-2 text-secondary" onclick="document.getElementById('bearbForm').submit();">
+                            {else}
+                            <a class="block px-4 py-2 text-secondary" style="cursor: not-allowed;" disabled>
+                            {/if}
+                                Seite bearbeiten
+                            </a>
+                        </form>
+                    </li>
+                    <li>
+                        <a href="{page_url id=$settingsPage}" class="block px-4 py-2 text-secondary">Einstellungen</a>
+                    </li>
+                </ul>
+                {/if}
+                <div class="py-1">
+                    {if $saml && $showIdPLoginBtn==1}
+                        <a href="{logout_url id=1}" class="block px-4 py-2 text-sm text-secondary">Abmelden</a>
+                    {else}
+                        <a href="{logout_url id=1}" class="block px-4 py-2 text-sm text-secondary">Abmelden</a>
+                    {/if}
+                </div>
+            </div>
+            {else}
+            <div class="flex items-center gap-4 cursor-pointer" data-modal-target="loginModal" data-modal-toggle="loginModal">
+                <div class="relative inline-flex items-center justify-center w-12 h-12 overflow-hidden bg-secondary rounded-full">
+                    <svg class="size-full bg-transparent text-secondary" fill="none" stroke-width="3"><use xlink:href="#icon-usersymbol"></use></svg>
+                </div>
+                
+                <div class="font-medium">
+                    <span class="block">Nicht eingeloggt</span>
+                    <span class="block text-sm text-secondary">ueba.elkonet.de</span>
+                </div>
+            </div>
+            {/if}
+        </div>
+    </div>
+{else}
+    <a class="w-fit py-2 dark:p-3 mx-6 my-2 bg-opacity-25 bg-white/40 flex rounded-3xl" href="{$homeLink}/?sid={$school}">
+        <img id="imgbrandinglogo" class="h-18" alt="{$currHost}" src="{$url_dir}skin/{$site->skin}/img/ELKOnet_Logo_Vector.png" />
+    </a>
+
+    <div class="flex p-5 ml-auto gap-4 xl:pr-10">
+    </div>
+{/if}
+</header>
+{if $auth->getId() && ((strpos($page->field.type, "kundenauftrag") !== false && $formularePage) || $hilfePage)}
+<!-- Drawer Container -->
+<!-- Desktop: md:w-1/3 | Mobile: w-full -->
+<div id="drawer-container" class="fixed top-0 right-0 h-full w-full sm:w-90 bg-white dark:bg-neutral-700 text-neutral-900 drop-shadow-2xl shadow-2xl z-50 translate-x-full drawer-animate flex border-l border-neutral-200 dark:border-neutral-600">
+    
+    <!-- Toggle Buttons (Vertikale Tabs) -->
+    <div class="absolute left-0 top-1/2 -translate-x-full -translate-y-1/2 flex flex-col gap-2">
+        {if $formularePage}
+        <button id="drawer-toggle-formulare" onclick="toggleDrawer('formulare')" class="drawer-btn" aria-label="Formulare öffnen/schließen">
+            <svg class="fill-white dark:fill-black size-5 -rotate-90" fill="none"><use xlink:href="#icon-ausbildungsnachweis"></use></svg>
+                <span class="vertical-text">{$formularePage->field.name}</span>
+        </button>
+        {/if}
+        {if $hilfePage}
+        <button id="drawer-toggle-hilfe" onclick="toggleDrawer('hilfe')" class="drawer-btn" aria-label="Hilfe öffnen/schließen">
+            <svg stroke-width="2" class="size-5 -rotate-90 stroke-white dark:stroke-black" fill="none"><use xlink:href="#icon-frage"></use></svg>
+                <span class="vertical-text">{$hilfePage->field.name}</span>
+        </button>
+        {/if}
+    </div>
+
+    <!-- Wrapper für Menü und Content -->
+    <div class="relative w-full h-full overflow-hidden">
+        <!-- SPALTE 1: Hauptmenü Formulare -->
+        <aside id="menu-aside-formulare" class="absolute inset-0 w-full h-full flex flex-col fade-transition opacity-100 z-10">
+            <div class="border-b border-subnav flex items-center justify-between p-8 py-5 xl:p-10 xl:py-6 gap-2">
+                <h2 class="text-primary text-2xl font-semibold leading-7 pr-10">{$formularePage->field.name}</h2>
+                <button onclick="toggleDrawer()" class="btn-secondary w-8 h-8 p-0" title="Schließen">
+                    <svg class="stroke-primary size-4 mx-auto"><use xlink:href="#icon-close"></use></svg>
+                    <span class="sr-only">Schließen</span>
+                </button>
+            </div>
+
+            <nav class="flex-1 overflow-y-scroll py-4">
+                <ul class="space-y-1 px-5">
+                    {if $formularePage}
+                        {navigation id=$formularePage->field.id var=formSubpages}
+                            {foreach from=$formSubpages item=formular}
+                            {if $formular->field.inactive == 0}
+                            <li>
+                                <a onclick="event.preventDefault(); selectForm(this, '{$formular->field.name}')" href="{page_url page=$formular}" {if strpos($formular->field.type, "angebot") || strpos($formular->field.type, "rechnung")}class="printForm" data-print-only="true"{/if}>
+                                    <div class="group flex items-center gap-4 px-4 py-3 rounded-2xl hover:bg-neutral-100 dark:hover:bg-neutral-800 cursor-pointer transition-all border border-transparent">
+                                        <svg class="size-6 fill-primary"><use xlink:href="#icon-{$formular->field.name|replace:'ü':'ue'|lower}"></use></svg>
+                                        <span class="font-medium text-primary">{$formular->field.name}</span>
+                                        <svg class="stroke-primary size-5 ml-auto" fill="none"><use xlink:href="#icon-right"></use></svg>
+                                    </div>
+                                </a>
+                            </li>
+                            {/if}
+                            {/foreach}
+                        {navigation_end}
+                    {/if}
+                </ul>
+            </nav>
+        </aside>
+
+        <!-- SPALTE 1: Hauptmenü Hilfe -->
+        <aside id="menu-aside-hilfe" class="absolute inset-0 w-full h-full flex flex-col fade-transition opacity-0 pointer-events-none z-10 hidden">
+            <div class="border-b border-subnav flex items-center justify-between p-8 py-5 xl:p-10 xl:py-6 gap-2">
+                <h2 class="text-primary text-2xl font-semibold leading-7 pr-10">{$hilfePage->field.name|default:"Hilfe"}</h2>
+                <button onclick="toggleDrawer('hilfe')" class="btn-secondary w-8 h-8 p-0" title="Schließen">
+                    <svg class="stroke-primary size-4 mx-auto"><use xlink:href="#icon-close"></use></svg>
+                    <span class="sr-only">Schließen</span>
+                </button>
+            </div>
+
+            <nav class="flex-1 overflow-y-scroll py-4">
+                <ul class="space-y-2 px-5" data-accordion="collapse">
+                    {if $hilfePage}
+                        {navigation id=$hilfePage->field.id var=hilfeSubpages}
+                            {foreach from=$hilfeSubpages item=hilfe}
+                                {if $hilfe->field.inactive == 0}
+                                    {get_children page=$hilfe var="hilfechildren"}
+                                <li>
+                                    {if $hilfechildren}
+                                    <button type="button" class="group w-full flex items-center gap-4 px-4 py-2 rounded-2xl hover:bg-neutral-100 dark:hover:bg-neutral-800 cursor-pointer transition-all border border-transparent" data-accordion-target="#hilfe-{$hilfe->field.id}" aria-expanded="false" aria-controls="hilfe-{$hilfe->field.id}">
+                                        <svg class="size-6 {if $hilfe->field.name == 'Auftragsstart'}stroke-primary{else}fill-primary{/if}"><use xlink:href="#icon-{$hilfe->field.name|replace:'ü':'ue'|lower}"></use></svg>
+                                        <span class="font-medium text-primary">{$hilfe->field.name}</span>
+                                        <svg data-accordion-icon="" stroke-width="2" class="stroke-primary rotate-180 shrink-0 size-5 ml-auto" aria-hidden="true"><use xlink:href="#icon-up"></use></svg>
+                                    </button>
+                                    <div id="hilfe-{$hilfe->field.id}" class="hidden w-full">
+                                        <ul class="space-y-1 mx-10 mt-1">
+                                            {foreach from=$hilfechildren item=hilfeC}
+                                            <li>
+                                                <a onclick="event.preventDefault(); selectForm(this, '{$hilfeC->field.name}')" href="{page_url page=$hilfeC}" class="block px-4 py-2 hover:bg-neutral-100 dark:hover:bg-neutral-800 rounded-lg text-primary text-sm transition-colors">{$hilfeC->field.name}</a>
+                                            </li>
+                                            {/foreach}
+                                        </ul>
+                                    </div>
+                                    {else}
+                                    <a onclick="event.preventDefault(); selectForm(this, '{$hilfe->field.name}')" href="{page_url page=$hilfe}">
+                                        <div class="group flex items-center gap-4 px-4 py-3 rounded-2xl hover:bg-neutral-100 dark:hover:bg-neutral-800 cursor-pointer transition-all border border-transparent">
+                                            <svg class="size-6 {if $hilfe->field.name == 'Auftragsstart'}stroke-primary{else}fill-primary{/if}"><use xlink:href="#icon-{$hilfe->field.name|replace:'ü':'ue'|lower}"></use></svg>
+                                            <span class="font-medium text-primary">{$hilfe->field.name}</span>
+                                            <svg class="stroke-primary size-5 ml-auto" fill="none"><use xlink:href="#icon-right"></use></svg>
+                                        </div>
+                                    </a>
+                                    {/if}
+                                </li>
+                                {/if}
+                            {/foreach}
+                        {navigation_end}
+                    {/if}
+                </ul>
+            </nav>
+        </aside>
+
+        <!-- SPALTE 2: Inhaltsbereich (Formular) -->
+        <section id="content-pane" class="absolute inset-0 w-full h-full flex flex-col fade-transition opacity-0 pointer-events-none z-20 translate-x-4 text-primary">
+            <div class="p-6 pl-20 pr-8 xl:pr-8 xl:px-20 border-b border-subnav flex items-center justify-between shrink-0">
+                <div class="flex items-center gap-3 overflow-hidden">
+                    <button onclick="deselectForm()" class="cursor-pointer p-0 left-8 absolute" title="Zurück">
+                        <svg class="stroke-primary size-6 mx-auto" fill="none"><use xlink:href="#icon-left"></use></svg>
+                        <span class="sr-only">Zurück</span>
+                    </button>
+                    <div class="truncate">
+                        <h3 id="detail-title" class="text-xl font-semibold text-primary truncate uppercase tracking-tight">Formular</h3>
+                        <p id="detail-subtitle" class="text-[10px] text-secondary uppercase font-bold tracking-widest">{$modulPage->field.name}</p>
+                    </div>
+                </div>
+                <button onclick="toggleDrawer()" class="btn-secondary w-8 h-8 p-0" title="Minimieren">
+                    <svg class="stroke-primary size-6 mx-auto"><use xlink:href="#icon-minimieren"></use></svg>
+                    <span class="sr-only">Minimieren</span>
+                </button>
+            </div>
+
+            <div class="flex-1 overflow-y-auto p-6 md:p-8 xl:px-12 custom-scrollbar">
+                <div class="space-y-8" id="drawer-content"></div>
+            </div>
+        </section>
+    </div>
+</div>
+
+<script type="module" src="{$url_dir}skin/{$site->skin}/v3/formular/js/rte.js"></script>
+<script>
+{literal}
+    const drawerContainer = document.getElementById('drawer-container');
+    const drawerToggleFormulare = document.getElementById('drawer-toggle-formulare');
+    const drawerToggleHilfe = document.getElementById('drawer-toggle-hilfe');
+    const menuAsideFormulare = document.getElementById('menu-aside-formulare');
+    const menuAsideHilfe = document.getElementById('menu-aside-hilfe');
+    const contentPane = document.getElementById('content-pane');
+    const detailTitle = document.getElementById('detail-title');
+    const detailSubtitle = document.getElementById('detail-subtitle');
+    const originalSubtitle = detailSubtitle ? detailSubtitle.innerText : '';
+
+    let isDrawerOpen = false;
+    let isFormSelected = false;
+    let isPrintView = false;
+    let lastFormUrl = null;
+    let lastFormTitle = '';
+    let lastFormPrintOnly = false;
+    let currentDrawerType = 'formulare';
+    let selectedFormDrawerType = null;
+
+    function toggleDrawer(type = currentDrawerType) {
+        const isMobile = window.innerWidth < 768;
+
+        if (isDrawerOpen && currentDrawerType === type) {
+            isDrawerOpen = false;
+            drawerContainer.classList.add('translate-x-full');
+            if (drawerToggleFormulare) drawerToggleFormulare.classList.remove('opacity-0', 'pointer-events-none');
+            if (drawerToggleHilfe) drawerToggleHilfe.classList.remove('opacity-0', 'pointer-events-none');
+        } else {
+            isDrawerOpen = true;
+            currentDrawerType = type;
+            drawerContainer.classList.remove('translate-x-full');
+            
+            if (isMobile) {
+                if (drawerToggleFormulare) drawerToggleFormulare.classList.add('opacity-0', 'pointer-events-none');
+                if (drawerToggleHilfe) drawerToggleHilfe.classList.add('opacity-0', 'pointer-events-none');
+            } else {
+                if (type === 'formulare') {
+                    if (drawerToggleFormulare) {
+                        drawerToggleFormulare.classList.remove('opacity-70');
+                        drawerToggleFormulare.classList.add('opacity-100');
+                    }
+                    if (drawerToggleHilfe) {
+                        drawerToggleHilfe.classList.remove('opacity-100');
+                        drawerToggleHilfe.classList.add('opacity-50');
+                    }
+                } else if (type === 'hilfe') {
+                    if (drawerToggleFormulare) {
+                        drawerToggleFormulare.classList.remove('opacity-100');
+                        drawerToggleFormulare.classList.add('opacity-70');
+                    }
+                    if (drawerToggleHilfe) {
+                        drawerToggleHilfe.classList.remove('opacity-50');
+                        drawerToggleHilfe.classList.add('opacity-100');
+                    }
+                }
+            }
+
+            if (isFormSelected && selectedFormDrawerType !== type) {
+                // Anderer Tab als der zuletzt ausgewählte Formularinhalt — Auswahl zurücksetzen,
+                // damit der neu geklickte Tab sein eigenes Menü statt des alten Inhalts zeigt
+                isFormSelected = false;
+                contentPane.classList.remove('opacity-100', 'translate-x-0');
+                contentPane.classList.add('opacity-0', 'pointer-events-none', 'translate-x-4');
+                drawerContainer.classList.remove('sm:w-1/2', 'xl:w-1/3');
+                drawerContainer.classList.add('sm:w-90');
+            }
+
+            if (isFormSelected) {
+                // Formular/Print bereits geladen — einfach wieder einblenden ohne neu zu laden
+                contentPane.classList.remove('opacity-0', 'pointer-events-none', 'translate-x-4');
+                contentPane.classList.add('opacity-100', 'translate-x-0');
+                menuAsideFormulare.classList.add('hidden', 'opacity-0', 'pointer-events-none');
+                menuAsideFormulare.classList.remove('opacity-100');
+                if (menuAsideHilfe) menuAsideHilfe.classList.add('hidden', 'opacity-0', 'pointer-events-none');
+                if (menuAsideHilfe) menuAsideHilfe.classList.remove('opacity-100');
+            } else if (type === 'formulare') {
+                menuAsideFormulare.classList.remove('hidden', 'opacity-0', 'pointer-events-none', '-translate-x-4');
+                menuAsideFormulare.classList.add('opacity-100');
+                if (menuAsideHilfe) menuAsideHilfe.classList.add('hidden', 'opacity-0', 'pointer-events-none', '-translate-x-4');
+                if (menuAsideHilfe) menuAsideHilfe.classList.remove('opacity-100');
+            } else {
+                if (menuAsideHilfe) menuAsideHilfe.classList.remove('hidden', 'opacity-0', 'pointer-events-none', '-translate-x-4');
+                if (menuAsideHilfe) menuAsideHilfe.classList.add('opacity-100');
+                menuAsideFormulare.classList.add('hidden', 'opacity-0', 'pointer-events-none', '-translate-x-4');
+                menuAsideFormulare.classList.remove('opacity-100');
+            }
+        }
+    }
+
+    function selectForm(element, title) {
+        isFormSelected = true;
+        isPrintView = false;
+        lastFormUrl = element.getAttribute('href');
+        lastFormTitle = title;
+        lastFormPrintOnly = element.hasAttribute('data-print-only');
+        selectedFormDrawerType = currentDrawerType;
+
+        detailTitle.innerHTML = `${title} <svg class="animate-spin inline-block ml-3 h-5 w-5 text-red-600" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>`;
+
+        if (detailSubtitle) {
+            if (currentDrawerType === 'hilfe') {
+                detailSubtitle.innerText = 'Hilfe';
+            } else {
+                detailSubtitle.innerText = originalSubtitle;
+            }
+        }
+
+        let activeMenu = currentDrawerType === 'formulare' ? menuAsideFormulare : menuAsideHilfe;
+        activeMenu.classList.remove('opacity-100');
+        activeMenu.classList.add('opacity-0', 'pointer-events-none', '-translate-x-4');
+
+        contentPane.classList.remove('opacity-0', 'pointer-events-none', 'translate-x-4');
+        contentPane.classList.add('opacity-100', 'translate-x-0');
+
+        // Container verbreitern
+        drawerContainer.classList.remove('sm:w-90');
+        drawerContainer.classList.add('sm:w-1/2', 'xl:w-1/3');
+
+        if (window.innerWidth < 768) {
+            if (drawerToggleFormulare) drawerToggleFormulare.classList.add('opacity-0', 'pointer-events-none');
+            if (drawerToggleHilfe) drawerToggleHilfe.classList.add('opacity-0', 'pointer-events-none');
+        }
+
+        const drawerContent = document.getElementById('drawer-content');
+        const url = element.getAttribute('href');
+
+        drawerContent.innerHTML = `
+            <div class="flex flex-col items-center justify-center py-20 h-full gap-4">
+                <svg class="animate-spin h-10 w-10 text-red-600" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>
+                <span class="text-neutral-500 font-medium animate-pulse">Inhalt wird geladen...</span>
+            </div>
+        `;
+
+        if (typeof window.destroyRTE === 'function') {
+            window.destroyRTE();
+        }
+
+        $('#drawer-content').load(url, function(response, status, xhr) {
+            if (status === "error") {
+                console.error("Fehler beim Laden des Formulars: " + xhr.status + " " + xhr.statusText);
+                detailTitle.innerText = title;
+                return;
+            }
+
+            detailTitle.innerText = title;
+
+            if (typeof initFlowbite === 'function') initFlowbite();
+            if (typeof doInitActions === 'function') doInitActions();
+
+            if (typeof window.initRTE === 'function') {
+                window.initRTE(document.getElementById('drawer-content'));
+            } else {
+                console.warn('window.initRTE ist nicht verfügbar');
+            }
+
+            $('#drawer-content').find('#footer').remove();
+        });
+    }
+
+    function deselectForm() {
+        isFormSelected = false;
+        selectedFormDrawerType = null;
+
+        // Logik: Formular ausblenden
+        contentPane.classList.remove('opacity-100', 'translate-x-0');
+        contentPane.classList.add('opacity-0', 'pointer-events-none', 'translate-x-4');
+        
+        let activeMenu = currentDrawerType === 'formulare' ? menuAsideFormulare : menuAsideHilfe;
+        activeMenu.classList.remove('opacity-0', 'pointer-events-none', '-translate-x-4');
+        activeMenu.classList.add('opacity-100');
+
+        if (detailSubtitle) {
+            detailSubtitle.innerText = originalSubtitle;
+        }
+
+        // Container-Breite zurücksetzen
+        drawerContainer.classList.remove('sm:w-1/2', 'xl:w-1/3');
+        drawerContainer.classList.add('sm:w-90');
+
+        // Button wieder zeigen (falls Drawer noch offen ist)
+        if (isDrawerOpen && window.innerWidth >= 768) {
+            if (drawerToggleFormulare) drawerToggleFormulare.classList.remove('opacity-0', 'pointer-events-none');
+            if (drawerToggleHilfe) drawerToggleHilfe.classList.remove('opacity-0', 'pointer-events-none');
+        }
+    }
+
+    window.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') {
+            if (isPrintView && lastFormUrl && !lastFormPrintOnly) {
+                isPrintView = false;
+                drawerContainer.classList.add('sm:w-1/2', 'xl:w-1/3');
+                const drawerContent = document.getElementById('drawer-content');
+                drawerContent.innerHTML = `
+                    <div class="flex flex-col items-center justify-center py-20 h-full gap-4">
+                        <svg class="animate-spin h-10 w-10 text-red-600" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>
+                        <span class="text-neutral-500 font-medium animate-pulse">Inhalt wird geladen...</span>
+                    </div>
+                `;
+                if (typeof window.destroyRTE === 'function') window.destroyRTE();
+                $('#drawer-content').load(lastFormUrl, function(response, status, xhr) {
+                    if (status === 'error') return;
+                    detailTitle.innerText = lastFormTitle;
+                    if (typeof initFlowbite === 'function') initFlowbite();
+                    if (typeof doInitActions === 'function') doInitActions();
+                    if (typeof window.initRTE === 'function') window.initRTE(document.getElementById('drawer-content'));
+                    $('#drawer-content').find('#footer').remove();
+                });
+            } else if (isFormSelected) {
+                deselectForm();
+            } else if (isDrawerOpen) {
+                toggleDrawer();
+            }
+        }
+    });
+
+    // Automatische Anpassung bei Resize
+    window.addEventListener('resize', () => {
+        if (window.innerWidth >= 768 && isDrawerOpen) {
+            if (drawerToggleFormulare) drawerToggleFormulare.classList.remove('opacity-0', 'pointer-events-none');
+            if (drawerToggleHilfe) drawerToggleHilfe.classList.remove('opacity-0', 'pointer-events-none');
+        } else if (window.innerWidth < 768 && isDrawerOpen) {
+            if (drawerToggleFormulare) drawerToggleFormulare.classList.add('opacity-0', 'pointer-events-none');
+            if (drawerToggleHilfe) drawerToggleHilfe.classList.add('opacity-0', 'pointer-events-none');
+        }
+    });
+
+    // Event-Delegation für Print-Links und Zurück-Buttons innerhalb des Drawers
+    $(document).on('click', '.printForm, #drawer-content a[title="Zurück"]', function(e) {
+        e.preventDefault();
+        const $link = $(this);
+
+        function openPrintPreview() {
+            const url = $link.attr('href');
+            const drawerContent = document.getElementById('drawer-content');
+
+            if ($link.hasClass('printForm')) {
+                isPrintView = true;
+                drawerContainer.classList.remove('sm:w-1/2', 'xl:w-1/3');
+            } else if ($link.attr('title') === 'Zurück') {
+                isPrintView = false;
+                drawerContainer.classList.add('sm:w-1/2', 'xl:w-1/3');
+            }
+
+            drawerContent.innerHTML = `
+                <div class="flex flex-col items-center justify-center py-20 h-full gap-4">
+                    <svg class="animate-spin h-10 w-10 text-red-600" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>
+                    <span class="text-neutral-500 font-medium animate-pulse">Inhalt wird geladen...</span>
+                </div>
+            `;
+
+            if (typeof window.destroyRTE === 'function') {
+                window.destroyRTE();
+            }
+
+            $('#drawer-content').load(url, function(response, status, xhr) {
+                if (status === "error") {
+                    console.error("Fehler beim Laden der Druckansicht: " + xhr.status + " " + xhr.statusText);
+                    return;
+                }
+
+                if (typeof initFlowbite === 'function') initFlowbite();
+                if (typeof doInitActions === 'function') doInitActions();
+
+                if (typeof window.initRTE === 'function') {
+                    window.initRTE(document.getElementById('drawer-content'));
+                }
+
+                $('#drawer-content').find('#footer').remove();
+            });
+        }
+
+        // Vor der Druckvorschau: bei ungespeicherten Änderungen nachfragen, ob gespeichert werden soll.
+        if ($link.hasClass('printForm') && $link.attr('data-print-only') !== 'true' && typeof getFormChanged === 'function' && getFormChanged()) {
+            if (confirm('Sie haben ungespeicherte Änderungen. Möchten Sie diese vor der Druckvorschau speichern?')) {
+                if (typeof calculateTotals === 'function') calculateTotals();
+                if (typeof AJAXPost === 'function') AJAXPost();
+            }
+        }
+
+        openPrintPreview();
+    });
+{/literal}
+</script>
+{/if}
+
+{if $auth->getId() && strpos($page->field.type, "modul") !== false}
+<!-- DESKTOP: Modul nav -->
+<nav class="hidden md:block bg-subnav w-full h-auto">
+{navigation id=$modulPage->field.id var=modulnavigation}
+    <div class="grid h-full w-fit {if $uIsAzubi}grid-cols-4{else}grid-cols-5{/if} mx-auto font-medium text-sm md:text-base xl:text-xl">
+        <a href="{page_url page=$modulPage}" class="inline-flex flex-col items-center justify-center px-5 {if $page->field.id == $modulPage->field.id}dark:bg-neutral-600 bg-neutral-200{else}dark:hover:bg-neutral-600 hover:bg-neutral-200{/if} group cursor-pointer px-1 lg:px-3 2xl:px-5 py-3 xl:py-5 pt-3">
+            <svg class="fill-primary size-14 xl:size-18 p-3 xl:p-4"><use xlink:href="#icon-folder"></use></svg>
+            <span>{$modulPage->field.name}</span>
+        </a>
+        {foreach from=$modulnavigation item=modullink name=modulnav1}
+        {if $modullink->extra.no_nav_item!=1}
+        <a href="{page_url page=$modullink}" class="inline-flex flex-col items-center justify-center text-center px-5 {if $page->field.id == $modullink->field.id}dark:bg-neutral-600 bg-neutral-200{else}dark:hover:bg-neutral-600 hover:bg-neutral-200{/if} group cursor-pointer px-1 lg:px-3 2xl:px-5 py-3 xl:py-5 pt-3">
+            <svg class="fill-primary size-14 xl:size-18 p-3 xl:p-4"><use xlink:href="#icon-{$modullink->extra.typ}"></use></svg>
+            <span>{$modullink->field.name}</span>
+        </a>
+        {/if}
+        {/foreach}
+    </div>
+{navigation_end}
+</nav>
+{/if}
+
+{if !$page->extra.no_bread && strpos($page->field.type, "dashboard") === false}
+<!-- DESKTOP: Breadcrumbmenu -->
+<nav class="hidden md:block mx-auto w-fit py-5 xl:px-20 border-b border-subnav" aria-label="Breadcrumb">
+    <ol class="inline-flex items-center space-x-1 md:space-x-2">
+        {foreach from=$pfad item=breadlink name=breadcrump}
+        <li>
+            <div class="flex items-center gap-2">
+            {if $smarty.foreach.breadcrump.last}
+            <span class="text-xs font-medium text-secondary">{$breadlink->field.name}</span>
+            {else}
+                <a {if $breadlink->extra.no_nav_item==0}href="{page_url page=$breadlink}"{/if} class="text-xs font-medium text-primary">{$breadlink->field.name}</a>
+                <svg class="stroke-primary size-4" fill="none"><use xlink:href="#icon-right"></use></svg>
+            {/if}
+            </div>
+        </li>
+        {/foreach}
+    </ol>
+</nav>
+{/if}
+
+{if !$auth->getId()}
+<!-- LOGIN MODAL -->
+<div id="loginModal" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
+    <div class="relative p-4 w-full max-w-md max-h-full">
+        <div class="relative bg-white dark:bg-neutral-800 rounded-2xl shadow-2xl p-6 sm:p-8">
+            <button type="button" class="absolute top-4 right-4 text-secondary hover:text-primary p-1 cursor-pointer" data-modal-hide="loginModal">
+                <svg class="stroke-primary size-4 mx-auto"><use xlink:href="#icon-close"></use></svg>
+                <span class="sr-only">Schließen</span>
+            </button>
+
+            {include file=v3/login/body.html}
+        </div>
+    </div>
+</div>
+{/if}

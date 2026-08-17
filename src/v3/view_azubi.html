@@ -1,0 +1,48 @@
+<div class="page_headline my-12">
+    <h2 class="text-3xl font-bold my-6">Hallo {$auth->user->extra.anrede} {$auth->user->extra.name}, Willkommen in unserem Ausbildungsportal!</h2>
+    <h3 class="text-xl my-6">Los geht&acute;s!</h3>
+</div>
+
+<section class="flex sm:flex-row flex-col xl:my-20 gap-10">
+    <div class="w-full h-full sm:w-1/2 md:w-1/3 relative">
+        <img class="w-full object-cover object-center block relative rounded-3xl shadow-xl" alt="{$pageBeruf->field.title}" src="{$pageBeruf->extra.beruf_img}" />
+        <div class="w-full p-4 bg-neutral-800/60 text-center text-sm font-medium rounded-b-3xl absolute z-10 bottom-0">
+            <h2 class="text-lg lg:text-xl xl:text-2xl text-white font-semibold title-font mb-1">{$pageBeruf->field.title}</h2>
+        </div>
+    </div>
+    <div class="w-full sm:w-1/2 md:w-2/3 grid grid-cols-1 lg:grid-cols-2 gap-4 h-fit -mt-6">
+        {navigation page=$pageBeruf var=subpages}
+        {foreach from=$subpages item=subpage name=nav2}
+            {if $subpage->extra.no_nav_item != 1}
+                {if strpos($subpage->field.type, "modul") !== false || strpos($subpage->field.type, "swlkursstartseite") !== false}
+                    <a class="{if !$subpage->extra.modul_old}bg-primary{else}bg-primary/70 opacity-70 border border-secondary{/if} rounded-4xl flex items-start p-4 hover:shadow-md shadow-sm cursor-pointer text-secondary" href="{page_url page=$subpage}">
+                        <svg class="size-6 m-1 fill-primary shrink-0 self-start"><use xlink:href="#icon-next"></use></svg>
+                        <span class="block pl-3">
+                            <span class="title-font text-md font-medium block">{$subpage->field.name}</span>
+                            <span class="text-sm block pt-2">{$subpage->field.title}</span>
+                        </span>
+                    </a>
+                {elseif strpos($subpage->field.type, "stufentrennung") !== false}
+                    <div class="lg:col-span-2 h-0.5 bg-primary my-2"></div>
+                {elseif strpos($subpage->field.type, "berichtsheftswl") !== false}
+                    <div class="lg:col-span-2 h-0.5 bg-primary my-2"></div>
+                    <a class="bg-secondary rounded-4xl flex items-center p-4 py-3 hover:shadow-md shadow-sm lg:col-span-1 lg:col-start-1" href="{page_url page=$subpage}">
+                        <svg class="size-6 m-1 fill-primary"><use xlink:href="#icon-next"></use></svg>
+                        <span class="pl-3 block leading-none title-font text-secondary font-medium text-lg">{$subpage->field.name}</span>
+                    </a>
+                {elseif $subpage->extra.no_nav_item == 1}
+                {elseif strpos($subpage->field.type, "swlfragebogen/form") !== false}
+                    <h4 class="w-full text-secondary font-semibold leading-snug pb-3 border-t-1 border-subnav mt-4"></h4>
+                    <a class="{if !$subpage->extra.modul_old}bg-secondary{else}opacity-70 border-1 border-neutral-300{/if} rounded-4xl flex items-center p-2 h-full hover:shadow-md shadow-sm cursor-pointer text-secondary w-full lg:w-auto" href="{page_url page=$subpage}">
+                        <svg class="size-5 m-1 fill-primary shrink-0 self-start"><use xlink:href="#icon-next"></use></svg>
+                        <span class="block px-1 title-font {if !$subpage->extra.modul_old}font-medium{/if} text-md">{$subpage->field.name}</span>
+                    </a>
+                {else}
+                    <h4 class="text-secondary font-medium leading-snug my-6 text-lg lg:col-span-2">{$subpage->field.name}</h4>
+                {/if}
+            {/if}
+        {/foreach}
+
+        {navigation_end}
+    </div>
+</section>

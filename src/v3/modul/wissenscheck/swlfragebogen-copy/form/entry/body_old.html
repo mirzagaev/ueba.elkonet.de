@@ -1,0 +1,69 @@
+ {get_path page=$page var=path bottomup=1 show_self=0} 
+<div class="formular_neu"> 
+<table border="0" width="100%" bgcolor="#FFFFFF" ALIGN="CENTER" CELLPADDING="0" CELLSPACING="0">
+<tr> 
+<td colspan="4" height="28">
+<table width="100%" border="0" cellspacing="0" cellpadding="0" align="left"> 
+    <tr>
+    <td height="29" width="3" bgcolor="#677173" style="background-color:#677173;color:#677173">.</td>
+    <td height="29" bgcolor="#f5f5f5" style="font-size:14px;" valing="center">
+    &nbsp;&nbsp;<strong>{$page->field.name}</strong></td> 
+    </tr>
+</table>
+</td></tr>
+
+ {if $page->field.content} <tr> <td colspan="4" height="50"><b>{$page->field.content}</b></td></tr>
+{/if} <tr> <td width="0"></td><td colspan="2" height="200"> {assign var=page_id
+value=$page->field.id} {if $smarty.request.abgeschickt} {* * wenn schon gewaehlt
+*} <form> <b>Auswertung</b> <br /> {get_children id=$page->field.id var="antworten"}
+<table border="0" width="100%"> {foreach from=$antworten item=antwort} {assign
+var=farbe value="#fff"} {assign var=falsch value="0"} {assign var=markiert value="0"}
+{* * erstmal pruefen ob die aktuelle Antwort * ausgewaehlt worden ist *} {foreach
+from=$markierte_antworten item=ma} {if $antwort->field.id == $ma} {assign var=markiert
+value="1"} {/if} {/foreach} {if $antwort->extra.correct == ">>>"} {* * Die Richtige
+Antwort wird gruen markiert *} {assign var=farbe value="#f5f5f5"} {else} {if $markiert==1}
+{* * Die Falsche Antwort wird rot markiert *} {assign var=farbe value="#fff"}
+{assign var=falsch value="1"} {/if} {/if} <tr> <td> <table border="0" width="596" cellpadding="0" cellspacing="0">
+<tr style="background-color:{$farbe}" VALIGN="MIDDLE"> <td align="left" width="10" HEIGHT="29">
+{* * Wenn Mehrfachauswahl, dann checkbox *} {if $page->extra.mehrfachauswahl ===
+"checked"} {strip}<input type="checkbox" name="{$antwort->field.id}" value="{$antwort->field.id}" {if $markiert==1} checked {/if} />
+{/strip}{else}<input type="radio" name="{$page->field.id}" value="{$antwort->field.id}" {if $markiert==1}checked="CHECKED"{/if} />
+{/if}</td><td  align="left" width="590" HEIGHT="29"> {$antwort->field.title}</td></tr>
+{if $antwort->field.content} 
+<tr> 
+<td width="10" HEIGHT="29"></td>
+<td  align="left" width="590" HEIGHT="29">
+{$antwort->field.content}</td></tr> {/if} {* * wenn man es ausgewaehlt hat und
+es falsch/richtig ist, * dann zeige den Falsch/Richtig-Content *} {if $markiert==1}
+{if $falsch==1 && $antwort->extra.content_falsch!=""} 
+
+<tr> 
+<td width="10" HEIGHT="20"></td><td  align="left" width="590" HEIGHT="29">
+{$antwort->extra.content_falsch}
+</td>
+</tr>
+
+ {elseif $falsch==0 && $antwort->extra.content_richtig!=""}
+<tr> <td width="10" HEIGHT="29"></td><td  align="left" width="590" HEIGHT="29">
+{$antwort->extra.content_richtig}</td></tr> {/if} {/if} </table></td></tr> {/foreach}
+</table></form>{else} {* * wenn noch nicht gewaehlt *} <form name="{$page->field.id}" method="post">
+<input type="hidden" name="abgeschickt" value="1" /> {get_children id=$page->field.id
+var="antworten"} <table border="0" width="596" cellpadding="0"> {foreach from=$antworten
+item=antwort} <tr> <td> <table border="0" cellpadding="0" cellspacing="2" width="596">
+<tr> <td valign="MIDDLE" width="10" HEIGHT="25"> {if $page->extra.mehrfachauswahl
+=== "checked"} <input type="checkbox" name="{$antwort->field.id}" value="{$antwort->field.id}" />
+{else} <input type="radio" name="{$page->field.id}" value="{$antwort->field.id}" />
+{/if}</td><td align="left" HEIGHT="25"> {$antwort->field.title}</td></tr> {if
+$antwort->field.content} <tr> <td HEIGHT="25"></td><td align="left" HEIGHT="25">
+{$antwort->field.content}</td></tr> {/if} </table></td></tr> {/foreach} </table><br>
+<input type="submit" name="sndpoll{$page->field.id}" value="Auswerten"> </form>{/if}</td><td width="92" height="200"></td></tr>
+<tr> <td width="0"></td><td colspan="3">&nbsp;</td></tr> <tr> <td width="0"></td><td colspan="3">
+<table width="100%" border="0" cellspacing="0" cellpadding="5" bgcolor="#FFFFFF">
+<tr> <td height="26"><nobr> {get_sibling var=prev page=$page direction=prev reverse=true}
+{if $prev} <a href="{page_url page=$prev}"><img style="WIDTH: 48px; HEIGHT: 48px" title="vorige Frage" border="0" hspace="0" alt="vorige Frage" src="index.php?id=20017416&amp;width=48&amp;height=48&amp;nonactive=1&amp;lang=de&amp;site=multimedia" /></a>
+{/if} </nobr></td><td height="26" align="right"><nobr> {get_sibling var=next page=$page
+direction=next} {if $next} <a href="{page_url page=$next}"><img style="WIDTH: 48px; HEIGHT: 48px" title="n&auml;chste Frage" border="0" hspace="0" alt="n&auml;chste Frage" src="index.php?id=20017418&amp;width=48&amp;height=48&amp;nonactive=1&amp;lang=de&amp;site=multimedia" /></a>
+{/if} </nobr></td></tr> </table></td></tr> <tr> <td width="0"> </td><td width="452"></td><td align="right" colspan="2"></td></tr>
+</table>
+</div>
+<p>&nbsp;</p>

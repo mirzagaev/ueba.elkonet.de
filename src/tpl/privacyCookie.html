@@ -1,0 +1,61 @@
+{literal}
+<script type="text/javascript">
+    var cookieMode = 1;
+    var cookieName = 'ga-disable-{/literal}{$site->admin.google.analytics_account}{literal}';
+    if(cookieName.length<12){cookieName = 'ga-disable-{/literal}{$site->name}{literal}'; cookieMode=2;}
+</script>
+{/literal}
+
+<div id="privacy-background"></div>
+<div id="privacy-container">
+    <div id="privacy-title">
+        Cookie Einstellungen
+    </div>
+    <div id="privacy-text" style="font-size: 18px;">
+        Bitte treffen Sie eine Auswahl um fortzufahren.<br>
+        Weitere Informationen zu den Auswirkungen Ihrer Auswahl finden Sie unter <a href="javascript:void(0)" onclick="showCookieHelp()">Hilfe</a>.
+        <br>&nbsp;<br>
+    </div>
+    <div id="privacy-settings" style="font-size: 18px;">
+        <div>
+            <label class="switch" style="display: inline-block;">
+              <input type="checkbox" checked disabled>
+              <span class="slider disabled"></span>
+            </label>
+            <div class="sliderTxt" style="">Technisch notwendige Cookies</div>
+        </div>
+        <br>
+        <div>
+            <label class="switch" style="display: inline-block;">
+              <input id="cbCookieAnalytics" type="checkbox" checked>
+              <span class="slider"></span>
+            </label>
+            <div class="sliderTxt">Analytische Cookies</div>
+        </div>
+        <br>
+        Weitere Informationen zu den Auswirkungen Ihrer Auswahl finden Sie unter <a href="javascript:void(0)" onclick="showCookieHelp()">Hilfe</a>.<br><br>
+        <a href="javascript:void(0)" onclick="hideCookieSettings()">Zurück</a>
+    </div>
+    <div id="privacy-help" style="font-size: 18px;">
+        Um fortfahren zu können, müssen Sie eine Cookie-Auswahl treffen.<br><br>
+        <b>Notwendige Cookies:</b><br>
+        Für den ordnungsgemäßen Betrieb der Webseite sind technisch notwendige Cookies erforderlich, welche eine
+        reibungslose Navigation und Nutzung der Webseite ermöglichen (beispielsweise den Zugang zum
+        zugangsbeschränkten Bereich erlauben). Diese Cookies sind systembedingt nicht abschaltbar.<br><br>
+        <b>Analytische Cookies:</b><br>
+        Wir setzen das Analysetool Google Analytics ein, um Besucher-Informationen wie z.B. Browser, Land, oder die
+        Dauer, wie lange ein Benutzer auf unserer Seite verweilt, zu messen. Ihre IP-Adresse wird anonymisiert
+        übertragen, die Verbindung zu Google ist verschlüsselt.<br><br>
+        Weitere Informationen erhalten Sie hier: <a target="_blank" href="/Datenschutzerklärung.html">Datenschutzerklärung</a>. Zum <a target="_blank" href="/Impressum.html">Impressum</a>. <br><br>
+        <a href="javascript:void(0)" onclick="hideCookieHelp()">Zurück</a>
+        <br>
+        <br>
+    </div>
+    <div id="privacy-buttons" style="font-size: 18px;">
+      <br>
+      <span id="btnAllowCookies" onclick="cookieAllow()">Alle Cookies zulassen</span>&nbsp;
+      <span id="btnCookieSettings" onclick="cookieOpenSettings()">Einstellungen</span>
+      <span id="btnOnlyCookies" style="display: none" onclick="cookieRestrict()">Akzeptieren</span>
+      <span id="btnCookieSave" onclick="cookieSaveSettings()">Auswahl speichern</span>
+    </div>
+</div>

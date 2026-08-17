@@ -1,0 +1,85 @@
+{if $loginMessage!=""}
+{$loginMessage}
+{/if}
+<div class="my-auto">
+    <!-- Willkommenstext -->
+    <div class="loginWillkommensText text-center xl:mb-5 xl:mt-10">
+        <h1 class="text-4xl 2xl:text-5xl font-bold tracking-tight mb-6 leading-tight">Anmeldung f&uuml;r: {$page->field.name}</h1>
+        <h3 class="text-lg xl:text-xl font-medium leading-relaxed">Leider ist ihre Sitzung abgelaufen oder Sie waren noch nicht angemeldet</h3>
+    </div>
+
+    <!-- Anmeldeoptionen -->
+    <div class="grid grid-cols-1 w-full overflow-hidden items-center">
+        <!-- Login Options (Initial View) -->
+        <div id="loginOptions" class="w-full col-start-1 row-start-1 p-1 transition-transform duration-500 ease-in-out transform translate-x-0">
+            <div class="sm:mx-auto sm:w-full sm:max-w-md">
+                <h2 class="text-2xl xl:text-3xl font-bold leading-9 tracking-tight text-gray-900 dark:text-white">Anmeldung</h2>
+                <p class="mt-2 text-sm leading-6 text-gray-500 dark:text-gray-300">
+                    Bitte wählen Sie Ihren Zugangsbereich
+                </p>
+            </div>
+
+            <div class="mt-10 sm:mx-auto sm:w-full sm:max-w-md space-y-4">
+                <!-- Button 1: Primär -->
+                <a href="#" id="loginUebaBtn" class="group relative flex w-full items-center justify-center rounded-xl bg-neutral-800 px-4 py-4 text-sm sm:text-base font-semibold shadow-lg hover:bg-red-600 text-white transition-all duration-300 dark:bg-white dark:text-neutral-900 dark:hover:bg-red-500 dark:hover:text-white">
+                    <svg class="mr-3 h-4 w-4 lg:h-5 lg:w-5 group-hover:text-white transition-colors dark:text-gray-500 dark:group-hover:text-white"><use xlink:href="#icon-loginicon"></use></svg>
+                    Anmelden bei Ausbildungsportal
+                </a>
+
+                <div class="my-4 xl:my-8 flex items-center gap-4">
+                    <hr class="w-full border-gray-300 dark:border-neutral-400">
+                    <p class="text-sm text-gray-800 dark:text-neutral-200 text-center">oder</p>
+                    <hr class="w-full border-gray-300 dark:border-neutral-400">
+                </div>
+
+                <!-- Button 2: Sekundär -->
+                <a href="{page_url id=1087273 path=$smarty.get.path sid=$school}" id="loginUebaBtn" class="group relative flex w-full items-center justify-center rounded-xl bg-neutral-800 px-4 py-4 text-sm sm:text-base font-semibold text-white shadow-lg hover:bg-red-600 transition-all duration-300 dark:bg-white dark:text-neutral-900 dark:hover:bg-red-500 dark:hover:text-white">
+                    <svg class="mr-3 h-4 w-4 lg:h-5 lg:w-5 text-white group-hover:text-white transition-colors dark:text-gray-500 dark:group-hover:text-white"><use xlink:href="#icon-loginicon"></use></svg>
+                    Anmelden bei Lernwelt
+                </a>
+            </div>
+        </div>
+
+        <!-- Login Form (Hidden by default, slides in from the left) -->
+        <form id="loginUebaForm" method="post" action="{page_url page=$page path=$smarty.get.path}" class="w-full h-fit col-start-1 row-start-1 p-1 transition-transform duration-500 ease-in-out transform -translate-x-full">
+            <div class="sm:mx-auto sm:w-full sm:max-w-md">
+                <a href="#" id="backToLoginOptions" class="inline-flex items-center gap-2 text-sm text-red-600 dark:text-white mb-8">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="size-5">
+                        <path fill-rule="evenodd" d="M17 10a.75.75 0 0 1-.75.75H5.707l2.147 2.146a.75.75 0 0 1-1.06 1.06l-3.5-3.5a.75.75 0 0 1 0-1.06l3.5-3.5a.75.75 0 1 1 1.06 1.06L5.707 9.25H16.25A.75.75 0 0 1 17 10Z" clip-rule="evenodd" />
+                    </svg>
+                    Zurück
+                </a>
+                <h2 class="text-2xl xl:text-3xl font-bold leading-9 tracking-tight text-gray-900 dark:text-white">Login Ausbildungsportal</h2>
+                <p class="mt-2 text-sm leading-6 text-gray-500 dark:text-gray-300">
+                    Bitte geben Sie Ihre Zugangsdaten ein.
+                </p>
+            </div>
+            <div class="xl:mt-10 sm:mx-auto sm:w-full sm:max-w-md space-y-4">
+                <div class="flex items-center w-full bg-secondary h-12 rounded-full overflow-hidden mt-8 pl-6 gap-2">
+                    <svg class="size-6 bg-transparent text-secondary"><use xlink:href="#icon-user"></use></svg>
+                    <input type="text" name="username" placeholder="Benutzername" class="bg-secondary text-primary placeholder-secondary dark:placeholder-neutral-400 border-transparent focus:border-transparent focus:outline-none focus:ring-0 text-sm w-full h-full" required />                 
+                </div>
+                <div class="flex items-center w-full bg-secondary h-12 rounded-full overflow-hidden pl-6 gap-2 relative mt-6">
+                    <svg class="size-6 bg-transparent text-secondary"><use xlink:href="#icon-lock"></use></svg>
+                    <input type="password" id="password" name="password" placeholder="Passwort" class="bg-secondary text-primary placeholder-secondary dark:placeholder-neutral-400 border-transparent focus:border-transparent focus:outline-none focus:ring-0 text-sm w-full h-full" required />
+
+                    <button type="button" class="toggle-btn z-20 bg-transparent  absolute right-1 p-2 cursor-pointer text-xl">
+                        <svg id="pwTogglerSVG" class="size-5 stroke-secondary"><use xlink:href="#icon-eye"></use></svg>
+                    </button>
+                </div>
+
+                <input type="hidden" name="doauth" value="{$doauth}">
+                <input type="hidden" name="loginsite" value="1"> 
+
+                <div class="text-sm text-right">
+                    <a href="#" class="font-semibold text-secondary underline dark:text-white">Passwort vergessen?</a>
+                </div>
+                <div>
+                    <button type="submit" class="flex w-full justify-center rounded-full cursor-pointer bg-red-600 hover:bg-red-700 px-3 py-3 text-sm sm:text-base font-semibold leading-6 text-white shadow-sm focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-600 transition-colors">Anmelden</button>
+                </div>
+
+                <p class="text-sm mt-6 text-secondary">Sie haben noch keinen Zugang? <a href="#" class="text-secondary dark:text-white font-medium tracking-wide underline">Kontaktieren Sie uns</a></p>
+            </div>
+        </form>
+    </div>
+</div>

@@ -1,0 +1,52 @@
+{if $auth->getId()}
+<b>{t}Angemeldet als{/t} {$auth->user->field.username}</b>&nbsp;
+<a href="{logout_url}"><img src="{$url_dir}skin/{$site->skin}/images/ap9_logout.gif" /></a>&nbsp;&nbsp;
+{else}
+<table border="0" width="600">
+  <tr bgcolor="#FFFFFF">
+    <td valign="top"> 
+      <table border="0" width="600">
+        <tr>
+          <td width="619" bgcolor="#FFFFFF" height="15"></td>
+        </tr>
+        <tr> 
+          <td class="bg_infe" width="619" bgcolor="CFDCE5" height="25"> <strong><img src="index.php?id=163200&amp;width=9&amp;height=9&amp;lang=de&amp;site=multimedia" border="0" height="9" hspace="0" width="9" />&nbsp; 
+            Anmeldung f&uuml;r: {$page->field.name}</strong></td>
+        </tr>
+        <tr valign="top" bgcolor="#FFFFFF"> 
+          <td><br>
+            Leider ist ihre Sitzung abgelaufen oder Sie waren noch nicht angemeldet. 
+            <br>
+            <br>
+            Bitte geben Sie jetzt Ihren Benutzernamen und Ihr Passwort ein um 
+            "{$page->field.name}" aufrufen zu k&ouml;nnen. <br>
+            &nbsp; </td>
+        </tr>
+        <tr align="left" bgcolor="#FFFFFF"> 
+          <td valign="middle"> 
+            <hr noshade>
+          </td>
+        </tr>
+        <form name="frm_login" action="{page_url page=$page}" method="post">
+          <input type="hidden" name="doauth" value="{$doauth}">
+          <tr align="left" bgcolor="#FFFFFF"> 
+            <td valign="middle"> <b>Benutzername: </b> 
+              <input name="username" type="text" value="" size="10">
+              <b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Passwort: 
+              </b> 
+              <input name="password" type="password" value="" size="10">
+              <a href="javascript:document.forms.frm_login.submit();"> 
+              <input type="image" src="{$url_dir}skin/{$site->skin}/images/ap9_login_neutral.gif" alt="Login" border="0">
+              </a> </td>
+          </tr>
+          <tr bgcolor="#FFFFFF"> 
+            <td align="right"> 
+              <hr noshade>
+            </td>
+          </tr>
+        </form>
+      </table>
+</td>
+</tr>
+</table>
+{/if}

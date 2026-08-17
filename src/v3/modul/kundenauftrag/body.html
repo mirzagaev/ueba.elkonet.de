@@ -1,0 +1,28 @@
+<div class="page_headline">
+    <h2 class="text-2xl xl:text-3xl font-bold flex items-center">{$page->field.title}</h2>
+    <h3 class="text-lg xl:text-xl mt-3">{$page->field.short}</h3>
+</div>
+
+{navigation id=$page->field.id var=kundenauftragnav}
+<section class="w-full mx-auto my-20 flex flex-wrap xl:items-end text-center lg:text-xl" id="kundenauftrag_wrap">
+    {foreach from=$kundenauftragnav item=auftragspage name=auftragsnav}
+        {counter assign="c"}
+        {if $auftragspage->field.type == "v3/modul/kundenauftrag/prozess"}
+        <div class="w-1/4 my-auto">
+            <a href="{page_url page=$auftragspage}" class="flex flex-col items-{if $c==2 || $c==3}center{elseif $c==1}end{else}start{/if} h-full transition-transform duration-300 ease-in-out hover:scale-105">
+                <svg class="{if $c==2 || $c==3}w-full{else}w-4/5{/if} h-auto fill-white" viewBox="0 0 260 250" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M10 10 L210 10 L260 125 L210 240 L10 240 L60 125 Z" class="fill-{$auftragspage->field.name|replace:'ü':'ue'|lower}" filter="url(#shadowLeft)" />
+                    {if $c==2 || $c==3}
+                        <use x="95" y="40" width="80" height="80" xlink:href="#icon-{$auftragspage->field.name|replace:'ü':'ue'|lower}"></use>
+                        <text x="130" y="190" font-weight="bold" font-size="20" fill="white" text-anchor="middle" class="uppercase">{$auftragspage->field.name}</text>
+                    {else}
+                        <use x="110" y="50" width="70" height="70" xlink:href="#icon-{$auftragspage->field.name|replace:'ü':'ue'|lower}"></use>
+                        <text x="135" y="185" font-weight="bold" font-size="20" fill="white" text-anchor="middle" class="uppercase">{$auftragspage->field.name}</text>
+                    {/if}
+                </svg>
+            </a>
+        </div>
+        {/if}
+    {/foreach}
+</section>
+{navigation_end}

@@ -1,0 +1,107 @@
+<form method="post" name="formular_abnahme" id="formular_abnahme" action="{page_url page=$page}"> 
+    <input type="hidden" name="prevPage" value="{page_url page=$page}">
+
+    <!-- Save Modal (Required for saveRoutine.js) -->
+    <div id="saveModal" style="display:none;" class="fixed inset-0 z-50 flex items-center justify-center bg-neutral-800/50 backdrop-blur-sm">
+        <div class="modal-content bg-white dark:bg-neutral-800 p-6 rounded-xl shadow-2xl flex flex-col items-center gap-4 min-w-[200px]">
+            <div class="inline-block h-8 w-8 animate-spin rounded-full border-4 border-solid border-current border-e-transparent align-[-0.125em] text-surface motion-reduce:animate-[spin_1.5s_linear_infinite] dark:text-white" id="loader" role="status" aria-label="loading">
+                <span class="!absolute !-m-px !h-px !w-px !overflow-hidden !whitespace-nowrap !border-0 !p-0 ![clip:rect(0,0,0,0)]">Loading...</span>
+            </div>
+            <div id="checkSuccess" style="display:none;" class="fill-emerald-700">
+                <svg class="size-10"><use xlink:href="#icon-check"></use></svg>
+            </div>
+            <div id="checkFail" style="display:none;" class="text-red-500">
+                <svg class="size-8"><use xlink:href="#icon-close"></use></svg>
+            </div>
+            <p id="modalText" class="font-medium text-gray-800 dark:text-neutral-200">Speichern...</p>
+        </div>
+    </div>
+
+    <div class="flex flex-row items-end gap-4 w-full mb-5">
+        <button type="button" class="btn-success ml-auto" onclick="AJAXPost();" title="Speichern">
+            <svg class="fill-white size-5"><use xlink:href="#icon-save"></use></svg><span class="hidden xl:block ml-2">Speichern</span>
+        </button>
+        <a href="{page_url page=$page print=1}" class="printForm btn-secondary" title="Druckvorschau anzeigen">
+            <svg class="stroke-primary size-5"><use xlink:href="#icon-print"></use></svg><span class="hidden xl:block ml-2">Druckvorschau anzeigen</span>
+        </a>
+    </div>
+
+    <div class="w-full">
+        <span class="text-xl text-primary font-light title-font tracking-widest uppercase mb-2 md:col-span-10">Dokumentation</span>
+        <div class="py-2 my-2 md:flex-grow grid md:grid-cols-4 gap-4 border-b-1 border-subnav">
+            <div class="md:col-span-3">
+                <span class="font-semibold">Art der Dokumentation</span>
+            </div>
+            <div class="text-center">
+                <span class="font-semibold">vorhanden</span>
+            </div>
+        </div>
+        <div class="kundenauftrag_doku_wrap">
+        {section name=rows start=1 loop=22}
+            {assign var="i" value=$smarty.section.rows.index}
+            {assign var="a_key" value="a$i"}
+            {assign var="hv_key" value="hv$i"}
+            {if $i <= 3 || $formular_extra.$a_key || $formular_extra.$hv_key}
+            <div class="py-2 md:flex-grow grid md:grid-cols-4 gap-4">
+                <div class="md:col-span-3">
+                    <textarea class="kundenauftrag-form-text" name="a{$i}" id="a{$i}">{$formular_extra.$a_key}</textarea>
+                </div>
+                <div class="text-center">
+                    <label class="container clickable" style="padding-left: 0px;">
+                        <input type="checkbox" name="hv{$i}" value="x" {if $formular_extra.$hv_key =='x'}checked{/if} />
+                        <span class="checkmark"></span>
+                    </label>
+                </div>
+            </div>
+            {/if}
+        {/section}
+        </div>
+        <div class="py-4 xl:py-6 flex flex-col md:flex-row items-end gap-4 w-full mt-5">
+            <a href="#" class="btn-secondary dark:bg-neutral-800 ml-auto" id="addTask">
+                <svg class="size-5 mr-2"><use xlink:href="#icon-position"></use></svg> Position hinzufügen
+            </a>
+        </div>
+    </div>
+
+    <div class="flex flex-col items-end gap-4 w-full mt-5">
+        <a href="{page_url page=$page print=1}" class="printForm btn-secondary" title="Druckvorschau anzeigen">
+            <svg class="stroke-primary size-5 mr-2"><use xlink:href="#icon-print"></use></svg> Druckvorschau anzeigen
+        </a>
+        <button type="button" class="btn-success md:ml-auto" onclick="AJAXPost();" title="Speichern">
+            <svg class="fill-white size-5 mr-2"><use xlink:href="#icon-save"></use></svg> Speichern
+        </button>
+        <input type="hidden" name="save_formular_abnahme" value="speichern und Druckvorschau anzeigen" />
+        <input type="hidden" id="form_status" value="1" />
+    </div>
+</form>
+<script>
+{literal}
+    $('#addTask').click(function(e) {
+        e.preventDefault();
+        const wrap = $('.kundenauftrag_doku_wrap');
+        
+        let maxIndex = 0;
+        wrap.find('textarea').each(function() {
+            let match = $(this).attr('name').match(/\d+/);
+            if (match && parseInt(match[0]) > maxIndex) {
+                maxIndex = parseInt(match[0]);
+            }
+        });
+        let count = maxIndex + 1;
+        
+        const html = `
+            <div class="py-2 md:flex-grow grid md:grid-cols-4 gap-4">
+                <div class="md:col-span-3">
+                    <textarea class="kundenauftrag-form-text" name="a${count}" id="a${count}"></textarea>
+                </div>
+                <div class="text-center">
+                    <label class="container clickable" style="padding-left: 0px;">
+                        <input type="checkbox" name="hv${count}" value="x" />
+                        <span class="checkmark"></span>
+                    </label>
+                </div>
+            </div>`;
+        wrap.append(html);
+    });
+{/literal}
+</script>

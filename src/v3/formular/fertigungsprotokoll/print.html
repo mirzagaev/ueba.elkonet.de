@@ -1,0 +1,60 @@
+{get_path page=$page show_self=1 var=pfad with_root=true}
+{foreach from=$pfad item=breadlink name=breadcrump}
+    {if $breadlink->field.type == "v3/modul"}
+        {assign var="modulPage" value=$breadlink}
+    {/if}
+{/foreach}
+<section>
+    <div class="flex flex-col sm:flex-row items-center gap-4 w-full mb-5">
+        <a href="{page_url page=$page}" title="Zurück" class="btn-secondary">
+            <svg class="stroke-primary size-4 mr-2"><use xlink:href="#icon-back"></use></svg> Zurück
+        </a>
+        <a href="{page_url page=$page print=1 form=11 query_param.modulPage=$modulPage->field.id}" target="_blank" title="PDF generieren" class="ml-auto btn-secondary">
+            <svg class="stroke-primary size-5 mr-2"><use xlink:href="#icon-print"></use></svg> Drucken
+        </a>
+    </div>
+    <div class="container xl:px-20 2xl:px-32 mx-auto">
+        <div class="bg-neutral-50 dark:bg-neutral-800 border-1 border-subnav dark:border-none shadow-xl p-10 md:px-20 relative">
+            <span class="absolute right-5 top-3 xl:top-5 text-xl lg:text-4xl xl:text-6xl font-semibold text-neutral-200/60 dark:text-neutral-600/70 uppercase selection:bg-transparent">Druckvorschau</span>
+            <div class="lg:py-4 xl:pt-12 flex">
+                <h1 class="text-3xl font-medium z-10">{$page->field.title} {$modulPage->field.name}</h1>
+            </div>
+            <div class="w-full">
+                <div class="py-4 xl:py-6 md:flex-grow">
+                    <div class="col-span-3 sm:col-span-4">
+                        <span class="text-xl font-light title-font tracking-widest uppercase mb-2">Dokumentation</span>
+                    </div>
+                    <div class="pt-2 kundenauftrag_textarea_html" id="print-editor-field"></div>
+                    <script>
+                        window.savedContent2 = '{$formular_extra.Dokumentation}';
+                    </script>
+                </div>
+                <div class="py-4 xl:py-6 sm:flex-grow grid sm:grid-cols-4 gap-2">
+                    <div class="col-span-3 sm:col-span-4">
+                        <span class="text-xl font-light title-font tracking-widest uppercase mb-2">Intern</span>
+                    </div>
+                    <div class="col-span-1">
+                        <span class="font-semibold">Erstellt von:</span>
+                    </div>
+                    <div class="col-span-2 sm:col-span-1">
+                        <span>{$formular_extra.Sachbearbeiter}</span>
+                    </div>
+                    <div class="col-span-1">
+                        <span class="font-semibold">Am:</span>
+                    </div>
+                    <div class="col-span-2 sm:col-span-1">
+                        <span>{$formular_extra.Datum|date_format:"%d.%m.%Y"}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="flex flex-col sm:flex-row items-center gap-4 w-full mt-10">
+        <a href="{page_url page=$page zur_druckansicht=0 admin_flag=0}" title="Zurück" class="btn-secondary">
+            <svg class="stroke-primary size-4 mr-2"><use xlink:href="#icon-back"></use></svg> Zurück
+        </a>
+        <a href="{page_url page=$page print=1 form=11 query_param.modulPage=$modulPage->field.id}" target="_blank" title="PDF generieren" class="ml-auto btn-secondary">
+            <svg class="stroke-primary size-5 mr-2"><use xlink:href="#icon-print"></use></svg> Drucken
+        </a>
+    </div>
+</section>

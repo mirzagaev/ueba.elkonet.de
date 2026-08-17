@@ -578,13 +578,13 @@
         
         <!-- Toggle Buttons (Vertikale Tabs) -->
         <div class="absolute left-0 top-1/2 -translate-x-full -translate-y-1/2 flex flex-col gap-2">
-            <button id="drawer-toggle-formulare" onclick="toggleDrawer('formulare')" class="bg-neutral-800 dark:bg-neutral-300 opacity-70 hover:opacity-100 text-white dark:text-black py-5 px-3 rounded-l-xl flex flex-col items-center gap-4 transition-all duration-200 group cursor-pointer" aria-label="Formulare öffnen/schließen">
+            <button id="drawer-toggle-formulare" onclick="toggleDrawer('formulare')" class="drawer-btn" aria-label="Formulare öffnen/schließen">
                 <svg class="fill-white dark:fill-black size-5 -rotate-90" fill="none"><use xlink:href="#icon-ausbildungsnachweis"></use></svg>
-                <span class="vertical-text font-bold tracking-widest uppercase text-xs md:text-sm">Formulare</span>
+                <span class="vertical-text">Formulare</span>
             </button>
-            <button id="drawer-toggle-hilfe" onclick="toggleDrawer('hilfe')" class="bg-red-600 hover:opacity-100 opacity-50 text-white py-5 px-3 rounded-l-xl flex flex-col items-center gap-4 transition-all duration-200 group cursor-pointer" aria-label="Hilfe öffnen/schließen">
-                <svg stroke-width="2" class="size-5 -rotate-90 stroke-white" fill="none"><use xlink:href="#icon-frage"></use></svg>
-                <span class="vertical-text font-bold tracking-widest uppercase text-xs md:text-sm">Hilfe</span>
+            <button id="drawer-toggle-hilfe" onclick="toggleDrawer('hilfe')" class="drawer-btn" aria-label="Hilfe öffnen/schließen">
+                <svg stroke-width="2" class="size-5 -rotate-90 stroke-white dark:stroke-black" fill="none"><use xlink:href="#icon-frage"></use></svg>
+                <span class="vertical-text">Hilfe</span>
             </button>
         </div>
 

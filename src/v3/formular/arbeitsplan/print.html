@@ -1,0 +1,87 @@
+{get_path page=$page show_self=1 var=pfad with_root=true}
+{foreach from=$pfad item=breadlink name=breadcrump}
+    {if $breadlink->field.type == "v3/modul"}
+        {assign var="modulPage" value=$breadlink}
+    {/if}
+{/foreach}
+<section>
+    <div class="flex flex-col sm:flex-row items-center gap-4 w-full mb-5">
+        <a href="{page_url page=$page zur_druckansicht=0 admin_flag=0}" title="Zurück" class="btn-secondary">
+            <svg class="stroke-primary size-4 mr-2"><use xlink:href="#icon-back"></use></svg> Zurück
+        </a>
+        <a href="{page_url page=$page print=1 form=3 query_param.modulPage=$modulPage->field.id}" target="_blank" title="PDF generieren" class="ml-auto btn-secondary">
+            <svg class="stroke-primary size-5 mr-2"><use xlink:href="#icon-print"></use></svg> Drucken
+        </a>
+    </div>
+    <div class="container xl:px-20 2xl:px-32 mx-auto">
+        <div class="bg-neutral-50 dark:bg-neutral-800 border-1 border-subnav dark:border-none shadow-xl p-10 md:px-20 relative">
+            <span class="absolute right-5 top-3 xl:top-5 text-xl lg:text-4xl xl:text-6xl font-semibold text-neutral-200/60 dark:text-neutral-600/70 uppercase selection:bg-transparent">Druckvorschau</span>
+            <div class="lg:py-4 xl:pt-12 flex">
+                <h1 class="text-3xl font-medium z-10">{$page->field.title} {$modulPage->field.name}</h1>
+            </div>
+            <div class="w-full">
+                <div class="py-4 xl:py-6 md:flex-grow grid md:grid-cols-12 text-right">
+                    <div class="md:col-start-7 md:col-span-4 py-2">
+                        <span class="font-semibold">angenommener Stundensatz (€):</span>
+                    </div>
+                    <div class="md:col-span-2 font-semibold px-3 py-2">
+                        {assign var="stdsatz_clean" value=$formular_extra.stdsatz|default:0|replace:".":""|replace:",":"."}
+                        {$stdsatz_clean|floatval|number_format:2:",":"."}
+                    </div>
+
+                    <div class="md:col-start-7 md:col-span-4 py-2">
+                        <span class="font-semibold">Arbeitszeit Gesamt (Min):</span>
+                    </div>
+                    <div class="md:col-span-2 font-semibold px-3 py-2">
+                        {assign var="z_gesamt_clean" value=$formular_extra.z_gesamt|default:0|replace:".":""|replace:",":"."}
+                        {$z_gesamt_clean|floatval|number_format:0:",":"."}
+                    </div>
+
+                    <div class="md:col-start-7 md:col-span-4 py-2">
+                        <span class="font-bold text-base">Gesamtkosten Lohn (€):</span>
+                    </div>
+                    <div class="md:col-span-2 font-bold px-3 py-2 text-base">
+                        {assign var="k_gesamt_clean" value=$formular_extra.k_gesamt|default:0|replace:".":""|replace:",":"."}
+                        {$k_gesamt_clean|floatval|number_format:2:",":"."}
+                    </div>
+                </div>
+                <div class="relative overflow-x-auto kundenauftrag_table_wrap">
+                    <table>
+                        <thead class="bg-secondary">
+                            <tr>
+                                <th scope="col" class="font-medium text-center">Pos.</th>
+                                <th scope="col" class="rounded-s-base font-medium">Tätigkeit</th>
+                                <th scope="col" class="rounded-s-base font-medium">Hilfsmittel / Vorschriften</th>
+                                <th scope="col" class="rounded-e-base font-medium text-right">benötigte Zeit (Min)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        {section name=rows start=1 loop=22}
+                            {assign var="i" value=$smarty.section.rows.index}
+                            {assign var="a_key" value="a$i"}
+                            {assign var="hv_key" value="hv$i"}
+                            {assign var="z_key" value="z$i"}
+                            {if $formular_extra.$a_key || $formular_extra.$hv_key || $formular_extra.$z_key}
+                            <tr class="bg-neutral-primary align-top">
+                                <td class="text-center">{$i}</td>
+                                <td scope="row" class="font-normal">{$formular_extra.$a_key|nl2br}</td>
+                                <td>{$formular_extra.$hv_key|nl2br}</td>
+                                <td class="max-w-20 text-right">{if $formular_extra.$z_key}{$formular_extra.$z_key|replace:",":"."|floatval|number_format:0:",":"."}{/if}</td>
+                            </tr>
+                            {/if}
+                        {/section}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="flex flex-col sm:flex-row items-center gap-4 w-full mt-10">
+        <a href="{page_url page=$page zur_druckansicht=0 admin_flag=0}" title="Zurück" class="btn-secondary">
+            <svg class="stroke-primary size-4 mr-2"><use xlink:href="#icon-back"></use></svg> Zurück
+        </a>
+        <a href="{page_url page=$page print=1 form=3 query_param.modulPage=$modulPage->field.id}" target="_blank" title="PDF generieren" class="ml-auto btn-secondary">
+            <svg class="stroke-primary size-5 mr-2"><use xlink:href="#icon-print"></use></svg> Drucken
+        </a>
+    </div>
+</section>

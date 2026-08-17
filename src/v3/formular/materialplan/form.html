@@ -1,0 +1,171 @@
+<form method="post" name="formular_materialplan" id="formular_materialplan" action="{page_url page=$page}"> 
+    <input type="hidden" name="prevPage" value="{page_url page=$page}">
+
+    <!-- Save Modal (Required for saveRoutine.js) -->
+    <div id="saveModal" style="display:none;" class="fixed inset-0 z-50 flex items-center justify-center bg-neutral-800/50 backdrop-blur-sm">
+        <div class="modal-content bg-white dark:bg-neutral-800 p-6 rounded-xl shadow-2xl flex flex-col items-center gap-4 min-w-[200px]">
+            <div class="inline-block h-8 w-8 animate-spin rounded-full border-4 border-solid border-current border-e-transparent align-[-0.125em] text-surface motion-reduce:animate-[spin_1.5s_linear_infinite] dark:text-white" id="loader" role="status" aria-label="loading">
+                <span class="!absolute !-m-px !h-px !w-px !overflow-hidden !whitespace-nowrap !border-0 !p-0 ![clip:rect(0,0,0,0)]">Loading...</span>
+            </div>
+            <div id="checkSuccess" style="display:none;" class="fill-emerald-700">
+                <svg class="size-10"><use xlink:href="#icon-check"></use></svg>
+            </div>
+            <div id="checkFail" style="display:none;" class="text-red-500">
+                <svg class="size-8"><use xlink:href="#icon-close"></use></svg>
+            </div>
+            <p id="modalText" class="font-medium text-gray-800 dark:text-neutral-200">Speichern...</p>
+        </div>
+    </div>
+
+    <div class="flex flex-row items-end gap-4 w-full mb-5">
+        <button type="button" class="btn-success ml-auto" onclick="calculateTotals(); AJAXPost();" title="Speichern">
+            <svg class="fill-white size-5"><use xlink:href="#icon-save"></use></svg><span class="hidden xl:block ml-2">Speichern</span>
+        </button>
+        <a href="{page_url page=$page print=1}" class="printForm btn-secondary" title="Druckvorschau anzeigen">
+            <svg class="stroke-primary size-5"><use xlink:href="#icon-print"></use></svg><span class="hidden xl:block ml-2">Druckvorschau anzeigen</span>
+        </a>
+    </div>
+
+    <div class="w-full">
+        <div class="flex items-center justify-between gap-4 mt-10 mb-5">
+            <span class="ml-auto font-bold text-base">Gesamtkosten Material (€):</span>
+            <input type="hidden" name="gesamtkosten" value="{$formular_extra.gesamtkosten}" />
+            <span id="gesamtkosten" class="font-bold text-base">{$formular_extra.gesamtkosten}</span>
+        </div>
+        <div class="relative overflow-x-scroll kundenauftrag_table_wrap">
+            <table>
+                <thead class="text-sm text-body">
+                    <tr>
+                        <th scope="col" class="font-medium text-center">Pos.</th>
+                        <th scope="col" class="rounded-s-base font-medium">Material</th>
+                        <th scope="col" class="rounded-s-base font-medium text-right">Menge</th>
+                        <th scope="col" class="rounded-s-base font-medium text-right">Einzelpreis (€)</th>
+                        <th scope="col" class="rounded-e-base font-medium text-right">Gesamtpreis (€)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                {section name=qwe start=1 loop=54}
+                    {capture assign=menge}{$smarty.section.qwe.index}_menge{/capture} 
+                    {capture assign=mat_preis}{$smarty.section.qwe.index}_mat_preis{/capture}
+                    {capture assign=mat_tae}{$smarty.section.qwe.index}_mat_tae{/capture}
+                    {capture assign=az}{$smarty.section.qwe.index}_az{/capture} 
+                    {capture assign=stdlohn}{$smarty.section.qwe.index}_stdlohn{/capture}
+                    {capture assign=lohnk}{$smarty.section.qwe.index}_lohnk{/capture}
+                    {capture assign=ep}{$smarty.section.qwe.index}_ep{/capture} 
+                    {capture assign=gp}{$smarty.section.qwe.index}_gp{/capture}
+                    {capture assign=mat_gp}{$smarty.section.qwe.index}_mat_gp{/capture}
+
+                    {if $smarty.section.qwe.index <= 3 || $formular_extra.$menge || $formular_extra.$mat_preis || $formular_extra.$mat_tae}
+                    <tr class="bg-neutral-primary align-top">
+                        <td class="text-center p-3">{$smarty.section.qwe.index}</td>
+                        <td class="align-top">
+                            <textarea class="kundenauftrag-form-text min-h-20 min-w-48 xl:min-w-72 text-sm" id="{$mat_tae}" name="{$mat_tae}">{$formular_extra.$mat_tae}</textarea>
+                        </td>
+                        <td scope="row" class="align-top">
+                            <input type="text" placeholder="0" class="w-18 kundenauftrag-form-text text-sm mat_menge text-right" id="{$menge}" name="{$menge}" value="{$formular_extra.$menge}" />
+                        </td>
+                        <td scope="row" class="align-top">
+                            <input type="text" placeholder="0.00" class="w-24 kundenauftrag-form-text text-sm mat_preis text-right" id="{$mat_preis}" name="{$mat_preis}" value="{$formular_extra.$mat_preis}">
+                        </td>
+                        <td class="align-top">
+                            <input type="text" placeholder="0.00" class="border-0 w-28 font-medium text-sm text-right mat_gp px-0 py-3" id="{$mat_gp}" name="{$mat_gp}" value="{$formular_extra.$mat_gp|replace:',':'.'}" readonly disabled />
+                        </td>
+                    </tr>
+                    {/if}
+                {/section}
+                </tbody>
+            </table>
+        </div>
+        <div class="py-4 xl:py-6 flex flex-col md:flex-row items-end gap-4 w-full mt-5">
+            <a href="#" class="btn-secondary dark:bg-neutral-800 ml-auto" id="addTask">
+                <svg class="size-5 mr-2"><use xlink:href="#icon-position"></use></svg> Position hinzufügen
+            </a>
+        </div>
+        <div class="flex flex-col md:flex-row items-end gap-4 w-full">
+            <a href="#" class="btn-secondary dark:bg-neutral-800 ml-auto" id="countPrice">
+                <svg class="size-5 mr-2"><use xlink:href="#icon-calculator"></use></svg> Gesamtpreis berechnen
+            </a>
+        </div>
+    </div>
+
+    <div class="flex flex-col items-end gap-4 w-full mt-5">
+        <a href="{page_url page=$page print=1}" class="printForm btn-secondary" title="Druckvorschau anzeigen">
+            <svg class="stroke-primary size-5 mr-2"><use xlink:href="#icon-print"></use></svg> Druckvorschau anzeigen
+        </a>
+        <button type="button" class="btn-success md:ml-auto" onclick="calculateTotals(); AJAXPost();" title="Speichern">
+            <svg class="fill-white size-5 mr-2"><use xlink:href="#icon-save"></use></svg> Speichern
+        </button>
+        <input type="hidden" name="save_formular_materialplan" value="speichern und Druckvorschau anzeigen" />
+        <input type="hidden" id="form_status" value="1" />
+    </div>
+</form>
+<script>
+{literal}
+    $('#addTask').click(function(e) {
+        e.preventDefault();
+        const tbody = $('.kundenauftrag_table_wrap table tbody');
+        const count = tbody.find('tr').length + 1;
+        const html = `
+            <tr class="bg-neutral-primary align-top">
+                <td class="text-center p-3">${count}</td>
+                <td scope="row"><input type="number" class="w-18 kundenauftrag-form-text text-sm mat_menge" name="${count}_menge"></td>
+                <td scope="row"><input placeholder="in €" class="w-24 kundenauftrag-form-text text-sm mat_preis" name="${count}_mat_preis"></td>
+                <td class="align-top"><textarea class="kundenauftrag-form-text min-h-20 min-w-48 xl:min-w-72 text-sm" name="${count}_mat_tae"></textarea></td>
+                <td><input type="text" placeholder="in €" class="w-28 kundenauftrag-form-text text-sm mat_gp px-0 py-3" name="${count}_mat_gp" readonly disabled /></td>
+            </tr>`;
+        tbody.append(html);
+    });
+
+    // Funktion global definieren, damit sie im onclick="calculateTotals()" verwendet werden kann
+    window.calculateTotals = function() {
+        let gesamtKosten = 0;
+        const tbody = $('.kundenauftrag_table_wrap table tbody');
+        
+        tbody.find('tr').each(function() {
+            const row = $(this);
+            const mengeEl = row.find('.mat_menge');
+            const preisEl = row.find('.mat_preis');
+            const gpEl = row.find('.mat_gp');
+            
+            let menge = parseFloat(mengeEl.val().replace(',', '.')) || 0;
+            let preis = parseFloat(preisEl.val().replace(',', '.')) || 0;
+            
+            let zeilenPreis = 0;
+            if(menge > 0 && preis > 0) {
+                zeilenPreis = menge * preis;
+            }
+            
+            // Zeilensumme aktualisieren (2 Nachkommastellen)
+            if(zeilenPreis > 0) {
+                gpEl.val(zeilenPreis.toFixed(2).replace('.', ','));
+            } else {
+                gpEl.val('');
+            }
+            
+            gesamtKosten += zeilenPreis;
+        });
+
+        // Gesamtsumme aktualisieren
+        $('input[name=gesamtkosten]').val(gesamtKosten.toFixed(2).replace('.', ','));
+        $('#gesamtkosten').text(
+            new Intl.NumberFormat('de-DE', {
+                minimumFractionDigits: 2,
+                maximumFractionDigits: 2
+            }).format(gesamtKosten)
+        );
+    };
+
+    $('#countPrice').click(function(e) {
+        e.preventDefault();
+        calculateTotals();
+    });
+
+    // Automatische Berechnung bei Eingabe in Menge oder Preis Felder
+    $('.kundenauftrag_table_wrap').on('input', '.mat_menge, .mat_preis', function() {
+        calculateTotals();
+    });
+
+    // Initiale Berechnung beim Laden der Seite
+    calculateTotals();
+{/literal}
+</script>

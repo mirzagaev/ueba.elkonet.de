@@ -1,0 +1,130 @@
+{get_path page=$page show_self=1 var=pfad with_root=true}
+{foreach from=$pfad item=breadlink name=breadcrump}
+    {if $breadlink->field.type == "v3/modul"}
+        {assign var="modulPage" value=$breadlink}
+    {/if}
+{/foreach}
+<section>
+    <div class="flex flex-col sm:flex-row items-center gap-4 w-full mb-5">
+        <a href="{page_url page=$page print=1 form=7 modulPage=$modulPage->field.id}" target="_blank" title="PDF generieren" class="ml-auto btn-secondary">
+            <svg class="stroke-primary size-5 mr-2"><use xlink:href="#icon-print"></use></svg> Drucken
+        </a>
+    </div>
+    <div class="container xl:px-20 2xl:px-32 mx-auto">
+        <div class="bg-neutral-50 dark:bg-neutral-800 border-1 border-subnav dark:border-none shadow-xl p-10 md:px-20 relative">
+            <span class="absolute right-5 top-3 xl:top-5 text-xl lg:text-4xl xl:text-6xl font-semibold text-neutral-200/60 dark:text-neutral-600/70 uppercase selection:bg-transparent">Druckvorschau</span>
+            <div class="lg:py-4 xl:pt-12 flex">
+                <h1 class="text-3xl font-medium z-10">{$page->field.title} {$modulPage->field.name}</h1>
+            </div>
+            <div class="w-full">
+                <div class="relative overflow-x-auto kundenauftrag_table_wrap">
+                    <div class="py-4 xl:py-6 md:flex-grow">
+                        <p class="my-12">{$kundenkartei_extra.Bezeichnung} {$kundenkartei_extra.Vorname} {$kundenkartei_extra.Name}<br/>{$kundenkartei_extra.Strasse} {$kundenkartei_extra.Hausnummer}<br/>{$kundenkartei_extra.PLZ} {$kundenkartei_extra.Postleit_ort}</p>
+                        <span class="my-5 block text-right">{$smarty.now|date_format:"%d.%m.%Y"}</span>
+                        <p class="my-3">Sehr geehrte Damen und Herren,</p>
+                        <p class="my-3">in Anlehnung an die Auflistung der benötigten Materialien und der angefallenen Arbeitszeit, erlauben wir uns, den folgenden Betrag in Rechnung zu stellen:</p>
+                    </div>
+                    <span class="text-xl font-light title-font tracking-widest uppercase mb-4 block">Materialkosten</span>
+                    <table>
+                        <thead class="bg-secondary">
+                            <tr>
+                                <th scope="col" class="rounded-s-base font-medium">Material</th>
+                                <th scope="col" class="w-20 rounded-s-base font-medium text-right">Menge</th>
+                                <th scope="col" class="w-36 rounded-s-base font-medium text-right">Einzelpreis (€)</th>
+                                <th scope="col" class="w-40 rounded-e-base font-medium text-right">Gesamtpreis (€)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        {section name=rows start=1 loop=54}
+                            {assign var="i" value=$smarty.section.rows.index}
+                            {assign var="menge" value=$i|cat:"_menge"}
+                            {assign var="mat_preis" value=$i|cat:"_mat_preis"}
+                            {assign var="mat_tae" value=$i|cat:"_mat_tae"}
+                            {assign var="mat_gp" value=$i|cat:"_mat_gp"}
+
+                            {assign var="mat_preis_clean" value=$materialplan_extra.$mat_preis|default:0|replace:".":""|replace:",":"."}
+                            {assign var="mat_gp_clean" value=$materialplan_extra.$mat_gp|default:0|replace:".":""|replace:",":"."}
+
+                            {if $materialplan_extra.$menge || $materialplan_extra.$mat_preis || $materialplan_extra.$mat_tae}
+                            <tr class="bg-neutral-primary">
+                                <td class="font-normal text-left">{$materialplan_extra.$mat_tae|nl2br}</td>
+                                <td class="w-20 text-right">{$materialplan_extra.$menge}</td>
+                                <td class="w-36 text-right">{$materialplan_extra.$mat_preis|floatval|number_format:2:",":"."}</td>
+                                <td class="w-40 text-right">{$mat_gp_clean|floatval|number_format:2:",":"."}</td>
+                            </tr>
+                            {/if}
+                        {/section}
+                        </tbody>
+                        <tfoot>
+                            <tr class="border-t-1 border-subnav font-bold text-base">
+                                <td colspan="3" class="text-right">Gesamtkosten Material (€):</td>
+                                {assign var="gesamtkosten_clean" value=$materialplan_extra.gesamtkosten|default:0|replace:".":""|replace:",":"."}
+                                <td class="text-right">{$gesamtkosten_clean|floatval|number_format:2:",":"."}</td>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+                <div class="relative overflow-x-auto kundenauftrag_table_wrap">
+                    <span class="text-xl font-light title-font tracking-widest uppercase mb-4 block">Lohnkosten</span>
+                    <table>
+                        <tbody>
+                            <tr class="font-medium">
+                                <td colspan="3" class="text-right">Arbeitszeit Gesamt (Min):</td>
+                                <td class="w-40 text-right">{$arbeitsplan_extra.z_gesamt|floatval|number_format:0:",":"."}</td>
+                            </tr>
+                            <tr class="font-medium">
+                                <td colspan="3" class="text-right">Stundensatz (€):</td>
+                                <td class="w-40 text-right">{$arbeitsplan_extra.stdsatz|floatval|number_format:2:",":"."}</td>
+                            </tr>
+                        </tbody>
+                        <tfoot>
+                            <tr class="border-t-1 border-subnav font-bold">
+                                <td colspan="3" class="text-right">Gesamtkosten Lohn (€):</td>
+                                <td class="w-40 text-right">{$arbeitsplan_extra.k_gesamt|floatval|number_format:2:",":"."}</td>
+                            </tr>
+                        </tfoot>
+                    </table>
+                    {assign var="mk" value=$materialplan_extra.gesamtkosten|default:"0"|replace:",":"."}
+                    {if $mk == ""}{assign var="mk" value=0}{/if}
+                    {assign var="ak" value=$arbeitsplan_extra.k_gesamt|default:"0"|replace:",":"."}
+                    {if $ak == ""}{assign var="ak" value=0}{/if}
+                    {assign var="summe_netto" value=$mk+$ak}
+                    {assign var="mwst" value=$summe_netto*0.19}
+                    {assign var="summe_brutto" value=$summe_netto+$mwst}
+                    <table>
+                        <tbody>
+                            <tr class="font-medium">
+                                <td colspan="3" class="text-right">Summe Material- und Lohnkosten (€):</td>
+                                <td class="w-40 text-right">{$summe_netto|floatval|number_format:2:",":"."}</td>
+                            </tr>
+                            <tr class="font-medium">
+                                <td colspan="3" class="text-right">MWSt (19%):</td>
+                                <td class="w-40 text-right">{$mwst|floatval|number_format:2:",":"."}</td>
+                            </tr>
+                        </tbody>
+                        <tfoot>
+                            <tr class="border-subnav border-t-1 font-bold text-lg">
+                                <td colspan="3" class="text-right">Rechnungsbetrag (€):</td>
+                                <td class="w-40 text-right">{$summe_brutto|floatval|number_format:2:",":"."}</td>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+                <div class="py-4 xl:py-6 md:flex-grow">
+                    <p class="my-3">Bitte überweisen Sie den oben genannten Betrag innerhalb der nächsten 14 Tage auf das folgende Konto:</p>
+                    <p class="my-3">BW-Bank
+                        <br/>IBAN: DE89 3704 0044 0532 0130 00
+                        <br/>BIC: WELADEDEXXX
+                    </p>
+                    <p class="my-3">Ust-Id.Nr.: DE123456789</p>
+                    <p class="my-3">Mit freundlichen Grüßen</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="flex flex-col sm:flex-row items-center gap-4 w-full mt-10">
+        <a href="{page_url page=$page print=1 form=7 query_param.modulPage=$modulPage->field.id}" target="_blank" title="PDF generieren" class="ml-auto btn-secondary">
+            <svg class="stroke-primary size-5 mr-2"><use xlink:href="#icon-print"></use></svg> Drucken
+        </a>
+    </div>
+</section>

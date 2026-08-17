@@ -1,0 +1,765 @@
+<div class="flex flex-col gap-10 my-6">
+    <div id="dashboardPersonaContainer">
+        {if $dashboardPersonaLazyPlaceholder}
+        <div class="animate-pulse flex flex-col gap-4 mt-2">
+            <div class="h-8 bg-neutral-100 dark:bg-neutral-800 rounded-lg w-72 max-w-full"></div>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                <div class="h-24 bg-secondary rounded-2xl"></div>
+                <div class="h-24 bg-secondary rounded-2xl"></div>
+                <div class="h-24 bg-secondary rounded-2xl"></div>
+                <div class="h-24 bg-secondary rounded-2xl"></div>
+            </div>
+        </div>
+        {else}
+        <div class="flex flex-col gap-6 mt-2">
+            <div>
+                <h1>{$dashboardPersonaTitle}</h1>
+                {if $dashboardPersonaSubtitle}<p class="text-secondary mt-3">{$dashboardPersonaSubtitle}</p>{/if}
+            </div>
+
+            {if $dashboardPersonaDemo}
+            <div class="text-xs font-medium text-amber-800 bg-amber-50 border border-amber-200 rounded-lg px-3 py-2 w-fit">
+                Beispieldaten – keine echten Systemdaten.
+            </div>
+            {/if}
+
+            {if $dashboardPersonaStats|@count > 0}
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 my-5">
+                {foreach from=$dashboardPersonaStats item=stat}
+                <div class="bg-secondary rounded-2xl shadow-sm hover:shadow-md border border-neutral-200 dark:border-neutral-700 p-5">
+                    <div class="flex items-center">
+                        <div class="text-4xl font-bold text-primary my-2">{$stat.value}</div>
+                        <span class="ml-auto flex items-center justify-center w-fit p-2 rounded-lg bg-{$stat.tw_class}/20 shrink-0">
+                            {if $stat.icon == 'ausbildungsnachweis'}
+                            <svg class="fill-{$stat.tw_class} size-6"><use xlink:href="#icon-ausbildungsnachweis"></use></svg>
+                            {elseif $stat.icon == 'writedoc'}
+                            <svg class="fill-{$stat.tw_class} size-6"><use xlink:href="#icon-writedoc"></use></svg>
+                            {else}
+                            <svg class="stroke-{$stat.tw_class} size-6" fill="none"><use xlink:href="#icon-{$stat.icon}"></use></svg>
+                            {/if}
+                        </span>
+                    </div>
+                    <span class="font-semibold text-secondary">{$stat.label}</span>
+                </div>
+                {/foreach}
+            </div>
+            {/if}
+
+            {if $dashboardPersona == 'admin'}
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-10">
+                <div class="bg-primary rounded-2xl shadow-sm border border-neutral-200 dark:border-neutral-700 overflow-hidden">
+                    <div class="flex items-center px-5 py-3 bg-secondary gap-3">
+                        <svg class="stroke-planung size-7 shrink-0" fill="none"><use xlink:href="#icon-briefcase"></use></svg>
+                        <span class="font-medium text-primary shrink-0">Unternehmen</span>
+                        <input type="text" id="secondaryUnternehmenSearch" oninput="debounceSecondarySearch('unternehmen', this.value);" placeholder="Suchen…" class="kundenauftrag-form-text text-xs ml-auto w-40" />
+                        <button type="button" onclick="toggleCreateForm('createUnternehmenForm');" class="text-xs btn-primary shrink-0">Betrieb anlegen</button>
+                    </div>
+                    <form id="createUnternehmenForm" class="hidden p-4 border-b border-neutral-200 dark:border-neutral-700 flex flex-col gap-2" onsubmit="return submitCreateUnternehmen(event);">
+                        <div class="grid grid-cols-2 gap-2">
+                            <input type="text" name="kunden_name" required placeholder="Name *" class="kundenauftrag-form-text text-sm" />
+                            <input type="text" name="ort" placeholder="Ort" class="kundenauftrag-form-text text-sm" />
+                            <input type="text" name="telefon" placeholder="Telefon" class="kundenauftrag-form-text text-sm" />
+                            <input type="email" name="email" placeholder="E-Mail" class="kundenauftrag-form-text text-sm" />
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <button type="submit" class="btn-primary text-xs">Speichern</button>
+                            <button type="button" onclick="toggleCreateForm('createUnternehmenForm');" class="btn-secondary text-xs">Abbrechen</button>
+                        </div>
+                    </form>
+                    <table class="w-full text-sm text-left" id="table_unternehmen_liste" data-search="{$dashboardPersonaSecondarySearch|default:''|escape:'html'}" data-sort="{$dashboardPersonaSecondarySort|default:'name'}" data-dir="{$dashboardPersonaSecondaryDir|default:'asc'}">
+                        <thead class="bg-secondary text-xs uppercase tracking-wide text-secondary">
+                            <tr>
+                                <th class="px-5 py-2 font-semibold cursor-pointer" onclick="sortSecondaryColumn('unternehmen', 'name');">Name</th>
+                                <th class="px-5 py-2 font-semibold cursor-pointer" onclick="sortSecondaryColumn('unternehmen', 'created');">Erstellt am</th>
+                                <th class="px-5 py-2 font-semibold"></th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-neutral-300 dark:divide-neutral-700">
+                            {foreach from=$dashboardPersonaSecondaryBetriebe item=b}
+                            <tr class="hover:bg-neutral-200 dark:hover:bg-neutral-800 cursor-pointer" onclick="openKundeDrawer('{$b.id}');">
+                                <td class="px-5 py-3 font-medium text-primary">{$b.name}</td>
+                                <td class="px-5 py-3 text-secondary whitespace-nowrap">{$b.created}</td>
+                                <td class="px-5 py-3 text-right text-secondary whitespace-nowrap">{$b.azubis} Azubis</td>
+                            </tr>
+                            {foreachelse}
+                            <tr><td colspan="3" class="px-5 py-6 text-center text-secondary">Keine Unternehmen gefunden.</td></tr>
+                            {/foreach}
+                        </tbody>
+                    </table>
+                </div>
+                <div class="bg-primary rounded-2xl shadow-sm border border-neutral-200 dark:border-neutral-700 overflow-hidden">
+                    <div class="flex items-center px-5 py-3 bg-secondary gap-3">
+                        <svg class="stroke-analyse size-7 shrink-0" fill="none"><use xlink:href="#icon-building"></use></svg>
+                        <span class="font-medium text-primary shrink-0">Bildungszentren</span>
+                        <input type="text" id="secondaryBzSearch" oninput="debounceSecondarySearch('bz', this.value);" placeholder="Suchen…" class="kundenauftrag-form-text text-xs ml-auto w-40" />
+                        {if $createSchulePage}
+                        <a href="{page_url page=$createSchulePage}" class="text-xs btn-primary shrink-0">Bildungszentrum anlegen</a>
+                        {/if}
+                    </div>
+                    <table class="w-full text-sm text-left" id="table_bz_liste" data-search="{$dashboardPersonaSecondarySearch|default:''|escape:'html'}" data-sort="{$dashboardPersonaSecondarySort|default:'name'}" data-dir="{$dashboardPersonaSecondaryDir|default:'asc'}">
+                        <thead class="bg-secondary text-xs uppercase tracking-wide text-secondary">
+                            <tr>
+                                <th class="px-5 py-2 font-semibold cursor-pointer" onclick="sortSecondaryColumn('bz', 'name');">Name</th>
+                                <th class="px-5 py-2 font-semibold cursor-pointer" onclick="sortSecondaryColumn('bz', 'created');">Erstellt am</th>
+                                <th class="px-5 py-2 font-semibold"></th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-neutral-300 dark:divide-neutral-700">
+                            {foreach from=$dashboardPersonaSecondaryBz item=bz}
+                            <tr class="hover:bg-neutral-200 dark:hover:bg-neutral-800 cursor-pointer" onclick="openBzDrawer({$bz.id});">
+                                <td class="px-5 py-3 font-medium text-primary">{$bz.name}</td>
+                                <td class="px-5 py-3 text-secondary whitespace-nowrap">{$bz.created}</td>
+                                <td class="px-5 py-3 text-right text-secondary whitespace-nowrap">{$bz.companies} Unternehmen</td>
+                            </tr>
+                            {foreachelse}
+                            <tr><td colspan="3" class="px-5 py-6 text-center text-secondary">Keine Bildungszentren gefunden.</td></tr>
+                            {/foreach}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            {/if}
+
+            {if $dashboardPersona == 'mitarbeiter'}
+            <div class="bg-primary rounded-2xl shadow-sm border border-neutral-200 dark:border-neutral-700 overflow-hidden">
+                <div class="flex items-center px-5 py-4 border-b border-neutral-200 dark:border-neutral-700 gap-3">
+                    <span class="font-medium text-primary shrink-0">Unternehmen</span>
+                    <input type="text" id="secondaryUnternehmenSearch" oninput="debounceSecondarySearch('unternehmen', this.value);" placeholder="Suchen…" class="kundenauftrag-form-text text-xs ml-auto w-40" />
+                    <button type="button" onclick="toggleCreateForm('createUnternehmenForm');" class="text-xs btn-primary shrink-0">Betrieb anlegen</button>
+                </div>
+                <form id="createUnternehmenForm" class="hidden p-4 border-b border-neutral-200 dark:border-neutral-700 flex flex-col gap-2" onsubmit="return submitCreateUnternehmen(event);">
+                    <div class="grid grid-cols-2 gap-2">
+                        <input type="text" name="kunden_name" required placeholder="Name *" class="kundenauftrag-form-text text-sm" />
+                        <input type="text" name="ort" placeholder="Ort" class="kundenauftrag-form-text text-sm" />
+                        <input type="text" name="telefon" placeholder="Telefon" class="kundenauftrag-form-text text-sm" />
+                        <input type="email" name="email" placeholder="E-Mail" class="kundenauftrag-form-text text-sm" />
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <button type="submit" class="btn-primary text-xs">Speichern</button>
+                        <button type="button" onclick="toggleCreateForm('createUnternehmenForm');" class="btn-secondary text-xs">Abbrechen</button>
+                    </div>
+                </form>
+                <table class="w-full text-sm text-left" id="table_unternehmen_liste" data-search="{$dashboardPersonaSecondarySearch|default:''|escape:'html'}" data-sort="{$dashboardPersonaSecondarySort|default:'name'}" data-dir="{$dashboardPersonaSecondaryDir|default:'asc'}">
+                    <thead class="bg-secondary text-xs uppercase tracking-wide text-secondary">
+                        <tr>
+                            <th class="px-5 py-2 font-semibold cursor-pointer" onclick="sortSecondaryColumn('unternehmen', 'name');">Name</th>
+                            <th class="px-5 py-2 font-semibold cursor-pointer" onclick="sortSecondaryColumn('unternehmen', 'created');">Erstellt am</th>
+                            <th class="px-5 py-2 font-semibold"></th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-neutral-300 dark:divide-neutral-700">
+                        {foreach from=$dashboardPersonaSecondaryBetriebe item=b}
+                        <tr class="hover:bg-neutral-200 dark:hover:bg-neutral-800 cursor-pointer" onclick="openKundeDrawer('{$b.id}');">
+                            <td class="px-5 py-3 font-medium text-primary">{$b.name}</td>
+                            <td class="px-5 py-3 text-secondary whitespace-nowrap">{$b.created}</td>
+                            <td class="px-5 py-3 text-right text-secondary whitespace-nowrap">{$b.azubis} Azubis</td>
+                        </tr>
+                        {foreachelse}
+                        <tr><td colspan="3" class="px-5 py-6 text-center text-secondary">Keine Unternehmen gefunden.</td></tr>
+                        {/foreach}
+                    </tbody>
+                </table>
+            </div>
+            {/if}
+
+            {if $dashboardPersona == 'ausbilder'}
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-4 items-start">
+                <div class="bg-primary rounded-2xl shadow-sm border border-neutral-200 dark:border-neutral-700 overflow-hidden">
+                    <div class="px-5 py-4 border-b border-neutral-200 dark:border-neutral-700 font-medium text-primary">Zu signierende Berichte</div>
+                    <div class="flex flex-col gap-3 p-4">
+                        {foreach from=$dashboardPersonaPending item=p}
+                        <div class="border border-neutral-200 dark:border-neutral-700 rounded-xl p-4 flex flex-col gap-2">
+                            <div class="flex items-center gap-3">
+                                <span class="flex items-center justify-center rounded-full bg-secondary size-9 shrink-0 text-sm font-medium text-primary">{$p.initials}</span>
+                                <div class="flex-1 min-w-0">
+                                    <div class="font-semibold text-sm text-primary">{$p.name}</div>
+                                    <div class="text-xs text-secondary">KW {$p.kw}{if $p.zeitraum} &middot; {$p.zeitraum}{/if}</div>
+                                </div>
+                                <span class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-medium bg-amber-100 text-amber-800 shrink-0">Eingereicht</span>
+                            </div>
+                            {if $p.stunden}<div class="text-xs text-secondary">{$p.stunden} Stunden</div>{/if}
+                            <a href="{page_url page=$page action="download_wochenbericht" bericht_id=$p.bericht_id}" target="_blank" class="btn-secondary text-xs w-fit">
+                                <svg class="stroke-primary size-4"><use xlink:href="#icon-print"></use></svg>
+                                <span class="ml-1">PDF ansehen</span>
+                            </a>
+                        </div>
+                        {foreachelse}
+                        <p class="text-sm text-secondary p-2">Keine Wochenberichte warten aktuell auf Ihre Signatur.</p>
+                        {/foreach}
+                    </div>
+                    <div class="px-5 py-3 text-xs text-secondary border-t border-neutral-200 dark:border-neutral-700">Signatur erfolgt im Bereich &bdquo;Ausbildungsnachweis&ldquo;.</div>
+                </div>
+                <div class="bg-primary rounded-2xl shadow-sm border border-neutral-200 dark:border-neutral-700 overflow-hidden">
+                    <div class="px-5 py-4 border-b border-neutral-200 dark:border-neutral-700 font-medium text-primary">Meine Azubis &ndash; Berichtsstatus</div>
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-sm text-left">
+                            <thead class="border-b-1 border-subnav uppercase tracking-wide">
+                                <tr><th class="px-4 py-3 font-semibold">Name</th><th class="px-4 py-3 font-semibold">Beruf</th><th class="px-4 py-3 font-semibold">Signiert</th></tr>
+                            </thead>
+                            <tbody class="divide-y divide-neutral-300 dark:divide-neutral-700">
+                                {foreach from=$dashboardPersonaList item=row}
+                                <tr>
+                                    <td class="px-4 py-3 font-medium text-primary">{$row.name}</td>
+                                    <td class="px-4 py-3">{$row.beruf}</td>
+                                    <td class="px-4 py-3">
+                                        {if $row.offen > 0}
+                                        <span class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-medium bg-amber-100 text-amber-800">{$row.signed}/{$row.total} &ndash; {$row.offen} offen</span>
+                                        {else}
+                                        <span class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-medium bg-green-100 text-green-800">{$row.signed}/{$row.total} vollständig</span>
+                                        {/if}
+                                    </td>
+                                </tr>
+                                {foreachelse}
+                                <tr><td colspan="3" class="text-center text-secondary py-8">Keine Azubis zugeordnet.</td></tr>
+                                {/foreach}
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="px-5 py-3 text-xs text-secondary border-t border-neutral-200 dark:border-neutral-700">Vollständige Liste mit Details im Reiter &bdquo;Benutzer&ldquo; unten.</div>
+                </div>
+            </div>
+            {/if}
+
+            {if $dashboardPersona == 'pruefer' && $dashboardPersonaList|@count > 0}
+            <div class="bg-primary rounded-2xl shadow-sm border border-neutral-200 dark:border-neutral-700 overflow-hidden">
+                <div class="px-5 py-4 border-b border-neutral-200 dark:border-neutral-700 font-medium text-primary">Prüflinge</div>
+                <div class="overflow-x-auto">
+                    <table class="w-full text-sm text-left">
+                        <thead class="border-b-1 border-subnav uppercase tracking-wide">
+                            <tr><th class="px-4 py-3 font-semibold">Name</th><th class="px-4 py-3 font-semibold">Beruf</th><th class="px-4 py-3 font-semibold">Betrieb</th><th class="px-4 py-3 font-semibold">Ausbilder</th><th class="px-4 py-3 font-semibold">Berichte</th></tr>
+                        </thead>
+                        <tbody class="divide-y divide-neutral-300 dark:divide-neutral-700">
+                            {foreach from=$dashboardPersonaList item=row}
+                            <tr>
+                                <td class="px-4 py-3 font-medium text-primary">{$row.name}</td>
+                                <td class="px-4 py-3">{$row.beruf}</td>
+                                <td class="px-4 py-3">{$row.betrieb}</td>
+                                <td class="px-4 py-3">{$row.ausbilder}</td>
+                                <td class="px-4 py-3">{$row.berichte}</td>
+                            </tr>
+                            {/foreach}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            {/if}
+
+            {if $dashboardPersona == 'dozent'}
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-4 items-start">
+                {if $dashboardPersonaList|@count > 0}
+                <div class="bg-primary rounded-2xl shadow-sm border border-neutral-200 dark:border-neutral-700 overflow-hidden">
+                    <div class="px-5 py-4 border-b border-neutral-200 dark:border-neutral-700 font-medium text-primary">Meine Module</div>
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-sm text-left">
+                            <thead class="border-b-1 border-subnav uppercase tracking-wide">
+                                <tr><th class="px-4 py-3 font-semibold">Code</th><th class="px-4 py-3 font-semibold">Titel</th><th class="px-4 py-3 font-semibold">Teilnehmer</th><th class="px-4 py-3 font-semibold">Zeitraum</th></tr>
+                            </thead>
+                            <tbody class="divide-y divide-neutral-300 dark:divide-neutral-700">
+                                {foreach from=$dashboardPersonaList item=row}
+                                <tr>
+                                    <td class="px-4 py-3 font-medium text-primary">{$row.code}</td>
+                                    <td class="px-4 py-3">{$row.title}</td>
+                                    <td class="px-4 py-3">{$row.teilnehmer}</td>
+                                    <td class="px-4 py-3">{$row.zeitraum}</td>
+                                </tr>
+                                {/foreach}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                {/if}
+                {if $dashboardPersonaTeilnehmerListe|@count > 0}
+                <div class="bg-primary rounded-2xl shadow-sm border border-neutral-200 dark:border-neutral-700 overflow-hidden">
+                    <div class="px-5 py-4 border-b border-neutral-200 dark:border-neutral-700 font-medium text-primary">ÜBA-Teilnehmer</div>
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-sm text-left">
+                            <thead class="border-b-1 border-subnav uppercase tracking-wide">
+                                <tr><th class="px-4 py-3 font-semibold">Name</th><th class="px-4 py-3 font-semibold">Beruf</th><th class="px-4 py-3 font-semibold">Betrieb</th></tr>
+                            </thead>
+                            <tbody class="divide-y divide-neutral-300 dark:divide-neutral-700">
+                                {foreach from=$dashboardPersonaTeilnehmerListe item=row}
+                                <tr>
+                                    <td class="px-4 py-3 font-medium text-primary">{$row.name}</td>
+                                    <td class="px-4 py-3">{$row.beruf}</td>
+                                    <td class="px-4 py-3">{$row.betrieb}</td>
+                                </tr>
+                                {/foreach}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                {/if}
+            </div>
+            {/if}
+
+            {if $dashboardPersona == 'teilnehmer' && $dashboardPersonaList|@count > 0}
+            <div class="bg-primary rounded-2xl shadow-sm border border-neutral-200 dark:border-neutral-700 overflow-hidden">
+                <div class="px-5 py-4 border-b border-neutral-200 dark:border-neutral-700 font-medium text-primary">Meine Kurse &amp; Seminare</div>
+                <div class="overflow-x-auto">
+                    <table class="w-full text-sm text-left">
+                        <thead class="border-b-1 border-subnav uppercase tracking-wide">
+                            <tr><th class="px-4 py-3 font-semibold">Titel</th><th class="px-4 py-3 font-semibold">Zeitraum</th><th class="px-4 py-3 font-semibold">Ort</th></tr>
+                        </thead>
+                        <tbody class="divide-y divide-neutral-300 dark:divide-neutral-700">
+                            {foreach from=$dashboardPersonaList item=row}
+                            <tr>
+                                <td class="px-4 py-3 font-medium text-primary">{$row.title}</td>
+                                <td class="px-4 py-3">{$row.zeitraum}</td>
+                                <td class="px-4 py-3">{$row.ort}</td>
+                            </tr>
+                            {/foreach}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            {/if}
+
+            {if $dashboardPersona == 'azubi'}
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-4 items-start">
+                <div class="bg-primary rounded-2xl shadow-sm border border-neutral-200 dark:border-neutral-700 overflow-hidden">
+                    <div class="flex items-center justify-between px-5 py-4 border-b border-neutral-200 dark:border-neutral-700">
+                        <span class="font-medium text-primary">Meine Formulare</span>
+                        {if $dashboardPersonaWochenberichteSigned > 0}
+                        <a href="{page_url page=$page action="print_wochenberichte_collection" user_id=$dashboardSelfUserId}" target="_blank" class="btn-secondary text-xs" title="Vollständige Wochenberichte als Sammlung drucken">
+                            <svg class="stroke-primary size-4"><use xlink:href="#icon-print"></use></svg>
+                            <span class="ml-1">Wochenberichte drucken</span>
+                        </a>
+                        {/if}
+                    </div>
+                    <div class="p-5">
+                        {if $dashboardPersonaFormulare|@count > 0}
+                        <ul class="space-y-2">
+                            {foreach from=$dashboardPersonaFormulare item=f}
+                            <li class="flex items-center justify-between gap-2">
+                                <span class="text-sm">{$f.name}</span>
+                                <a href="{page_url page=$page action="download_formular" user_id=$dashboardSelfUserId formular_id=$f.formular_id}" target="_blank" class="btn-secondary text-xs" title="PDF ansehen">
+                                    <svg class="stroke-primary size-4"><use xlink:href="#icon-print"></use></svg>
+                                    <span class="ml-1">PDF ansehen</span>
+                                </a>
+                            </li>
+                            {/foreach}
+                        </ul>
+                        {else}
+                        <p class="text-sm text-secondary">Noch keine Formulare ausgefüllt.</p>
+                        {/if}
+                    </div>
+                </div>
+                <div class="bg-primary rounded-2xl shadow-sm border border-neutral-200 dark:border-neutral-700 overflow-hidden">
+                    <div class="px-5 py-4 border-b border-neutral-200 dark:border-neutral-700 font-medium text-primary">Meine Module</div>
+                    <div class="p-5">
+                        <div class="text-xs font-medium text-amber-800 bg-amber-50 border border-amber-200 rounded-lg px-3 py-2 w-fit mb-3">Beispieldaten &ndash; Modulfortschritt ist im System noch nicht hinterlegt.</div>
+                        <div class="flex flex-col gap-2">
+                            <div class="flex items-center gap-3 bg-secondary rounded-lg px-3 py-2">
+                                <span class="text-xs font-bold text-secondary w-20 shrink-0">ETE 4/22</span>
+                                <span class="text-sm flex-1">Gebäude- und infrastrukturtechnische Systeme integrieren</span>
+                                <span class="text-xs font-semibold text-sky-700 shrink-0">Aktiv</span>
+                            </div>
+                            <div class="flex items-center gap-3 bg-secondary rounded-lg px-3 py-2">
+                                <span class="text-xs font-bold text-secondary w-20 shrink-0">ET 3/22</span>
+                                <span class="text-sm flex-1">Digitale Übertragungsstrecken installieren</span>
+                                <span class="text-xs font-semibold text-neutral-500 shrink-0">Offen</span>
+                            </div>
+                            <div class="flex items-center gap-3 bg-secondary rounded-lg px-3 py-2">
+                                <span class="text-xs font-bold text-secondary w-20 shrink-0">ET 2/22</span>
+                                <span class="text-sm flex-1">Steuerungen planen, montieren und prüfen</span>
+                                <span class="text-xs font-semibold text-green-700 shrink-0">Fertig</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {/if}
+
+            {if $dashboardViews|@count == 0}
+            <div>
+                <a href="#" onclick="event.preventDefault(); openUserDrawer('{$dashboardSelfUserId}', '{page_url page=$page ajax_user=$dashboardSelfUserId}');" class="btn-secondary text-sm w-fit">
+                    <svg class="stroke-primary size-4"><use xlink:href="#icon-writedoc"></use></svg>
+                    <span class="ml-2">Meine Daten verwalten</span>
+                </a>
+            </div>
+            {/if}
+        </div>
+        {/if}
+    </div>
+
+    {if $dashboardViews|@count > 0}
+    <div class="bg-primary rounded-2xl shadow-sm border border-neutral-200 dark:border-neutral-700 overflow-hidden">
+        <div class="flex items-center px-5 py-3 bg-secondary">
+            <svg class="stroke-durchfuehrung size-7 mr-3" fill="none"><use xlink:href="#icon-users"></use></svg>
+            <span class="font-medium text-primary">Benutzer</span>
+            {if $createAusbilderPage || $createSchuelerPage}
+            <div class="ml-auto flex items-center gap-2">
+                {if $createAusbilderPage}
+                <a href="{page_url page=$createAusbilderPage}" class="text-xs btn-primary">Neuer Ausbilder</a>
+                {/if}
+                {if $createSchuelerPage}
+                <a href="{page_url page=$createSchuelerPage}" class="text-xs btn-primary">Neuer Azubi</a>
+                {/if}
+            </div>
+            {/if}
+        </div>
+
+        <div class="flex flex-row items-center gap-4 p-5 w-full overflow-hidden">
+            <div class="flex items-center gap-2 w-full">
+                <form id="dashboardSearchForm" method="get" action="{page_url page=$page}" class="flex items-center gap-2 w-full relative">
+                    <input type="text" id="dashboardSearchInput" name="search" value="{$dashboardSearch|escape:'html'}" placeholder="Suche nach Name oder Benutzername" class="kundenauftrag-form-text bg-white dark:bg-neutral-900 rounded-full text-sm max-w-full" />
+                    <button type="submit" class="absolute right-5" title="Suchen">
+                        <svg class="stroke-primary size-5" fill="none"><use xlink:href="#icon-search"></use></svg>
+                    </button>
+                </form>
+            </div>
+
+            <select id="dashboardRoleFilter" onchange="loadCurrentView({literal}{{/literal}role: this.value, pg: 1{literal}}{/literal});" class="kundenauftrag-form-text text-sm w-fit ml-auto dark:bg-neutral-900">
+                <option value="all" {if $dashboardRole == 'all'}selected{/if}>Alle Rollen</option>
+                <option value="ausbilder" {if $dashboardRole == 'ausbilder'}selected{/if}>Nur Ausbilder</option>
+                <option value="azubi" {if $dashboardRole == 'azubi'}selected{/if}>Nur Auszubildende</option>
+                <option value="noausbilder" {if $dashboardRole == 'noausbilder'}selected{/if}>Ohne Ausbilder</option>
+            </select>
+            <select id="dashboardStatusFilter" onchange="loadCurrentView({literal}{{/literal}status: this.value, pg: 1{literal}}{/literal});" class="kundenauftrag-form-text text-sm pr-8 w-fit">
+                <option value="all" {if $dashboardStatus == 'all'}selected{/if}>Alle Status</option>
+                <option value="aktiv" {if $dashboardStatus == 'aktiv'}selected{/if}>In Ausbildung</option>
+                <option value="abgeschlossen" {if $dashboardStatus == 'abgeschlossen'}selected{/if}>Abgeschlossen</option>
+            </select>
+
+            {if $dashboardScope == 'admin'}
+            <div class="flex items-center gap-2">
+                <button id="dashboardBzDropdownButton" data-dropdown-toggle="dashboardBzDropdown" type="button" class="btn-secondary text-sm">
+                    <span>Bildungszentrum ({$dashboardSelectedBzCount})</span>
+                    <svg class="stroke-primary size-4 ml-2" fill="none"><use xlink:href="#icon-down"></use></svg>
+                </button>
+                <div id="dashboardBzDropdown" class="z-10 hidden bg-white dark:bg-neutral-800 divide-y divide-neutral-300 dark:divide-neutral-700 rounded-lg shadow-lg w-56 border border-neutral-200 dark:border-neutral-700">
+                    <ul class="py-2 text-sm max-h-64 overflow-y-auto custom-scrollbar">
+                        {foreach from=$dashboardBzList item=bz}
+                        <li>
+                            <label class="flex items-center gap-2 px-4 py-2 hover:bg-neutral-200 dark:hover:bg-neutral-700 cursor-pointer">
+                                <input type="checkbox" class="dashboard-bz-checkbox" name="bz[]" value="{$bz.id}" {if $bz.checked}checked{/if} />
+                                {$bz.name}
+                            </label>
+                        </li>
+                        {/foreach}
+                    </ul>
+                </div>
+            </div>
+            {/if}
+
+            <button type="button" onclick="exportDashboardCsv();" class="btn-secondary text-sm" title="Als CSV exportieren">
+                Als CSV exportieren
+            </button>
+        </div>
+
+        <div id="dashboardListContainer" data-view="{$dashboardView}" data-sort="{$dashboardSort}" data-dir="{$dashboardDir}" data-pg="{$dashboardPage}" class="flex flex-col gap-6 transition-opacity">
+
+            {if $dashboardLazyPlaceholder}
+            <div class="animate-pulse flex flex-col gap-4">
+                <div class="h-96 bg-neutral-100 dark:bg-neutral-800 rounded-4xl"></div>
+            </div>
+            {else}
+
+            <div class="overflow-x-auto">
+                <table class="w-full text-sm text-left">
+                    <thead class="border-b-1 border-subnav uppercase tracking-wide">
+                        <tr>
+                            <th scope="col" class="px-4 py-4 font-semibold cursor-pointer" onclick="sortDashboardColumn('name');">Name</th>
+                            <th scope="col" class="px-4 py-4 font-semibold cursor-pointer" onclick="sortDashboardColumn('beruf');">Beruf</th>
+                            <th scope="col" class="px-4 py-4 font-semibold cursor-pointer" onclick="sortDashboardColumn('status');">Status</th>
+                            <th scope="col" class="px-4 py-4 font-semibold cursor-pointer" onclick="sortDashboardColumn('firma');">Firma</th>
+                            <th scope="col" class="px-4 py-4 font-semibold cursor-pointer" onclick="sortDashboardColumn('ausbilder');">Ausbilder</th>
+                            <th scope="col" class="px-4 py-4 font-semibold cursor-pointer" onclick="sortDashboardColumn('schule');">Schule</th>
+                            <th scope="col" class="px-4 py-4 font-semibold cursor-pointer" onclick="sortDashboardColumn('lastLogin');">Letzter Login</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-neutral-300 dark:divide-neutral-700">
+                        {foreach from=$dashboardUsers item=u}
+                        <tr class="hover:bg-neutral-200 dark:hover:bg-neutral-800 transition-colors cursor-pointer {if !$u.in_ausbildung}opacity-50{/if}" onclick="openUserDrawer('{$u.user_id}', '{page_url page=$page ajax_user=$u.user_id}');" title="{if !$u.in_ausbildung}Nicht aktuell in Ausbildung{/if}">
+                            <td class="px-4 py-4">
+                                <div class="flex items-center gap-3">
+                                    <div class="flex items-center justify-center rounded-full bg-secondary size-10 shrink-0">
+                                        <span class="font-medium text-primary text-sm">{$u.vorname|substr:0:1}{$u.nachname|substr:0:1}</span>
+                                    </div>
+                                    <div>
+                                        <div class="flex items-center gap-2">
+                                            <span class="font-medium text-primary">{$u.name}</span>
+                                        </div>
+                                        <div class="text-xs text-neutral-500 dark:text-neutral-400">{$u.username}</div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="px-4 py-4">{$u.beruf}</td>
+                            <td class="px-4 py-4 whitespace-nowrap">
+                                {if $u.is_ausbilder}
+                                <span class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-medium bg-violet-100 text-violet-700 shrink-0">Ausbilder</span>
+                                {else}
+                                    {if $u.status.type == 'abgeschlossen'}
+                                    <span class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-medium bg-green-100 text-green-800">Abgeschlossen</span>
+                                    {elseif $u.status.type == 'lehrjahr'}
+                                    <span class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-medium bg-sky-100 text-sky-700">{$u.status.lehrjahr}. Lehrjahr</span>
+                                    {else}
+                                    <span class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-medium bg-neutral-100 text-neutral-600">Unbekannt</span>
+                                    {/if}
+                                {/if}
+                            </td>
+                            <td class="px-4 py-4">{$u.firma}
+                                <div class="text-sm">{if $u.ausbildung_von || $u.ausbildung_bis}{$u.ausbildung_von} &ndash; {$u.ausbildung_bis}{/if}</div>
+                            </td>
+                            <td class="px-4 py-4 whitespace-nowrap">
+                                {if $u.is_ausbilder}
+                                <span class="text-neutral-400">&mdash;</span>
+                                {elseif $u.ausbilder_name}
+                                {$u.ausbilder_name}
+                                {else}
+                                <span class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-medium bg-red-100 text-red-700">Nicht zugeordnet</span>
+                                {/if}
+                            </td>
+                            <td class="px-4 py-4">{$u.schule}</td>
+                            <td class="px-4 py-4 whitespace-nowrap">{$u.last_login}</td>
+                        </tr>
+                        {foreachelse}
+                        <tr>
+                            <td colspan="9" class="text-center text-neutral-500 dark:text-neutral-400 py-8">Keine Benutzer gefunden.</td>
+                        </tr>
+                        {/foreach}
+                    </tbody>
+                </table>
+            </div>
+
+            {if $dashboardTotalPages > 1}
+            <div class="flex items-center justify-between text-sm text-secondary border-t-1 border-subnav p-5">
+                <span>Seite {$dashboardPage} von {$dashboardTotalPages} ({$dashboardTotal} Benutzer)</span>
+                <div class="flex items-center gap-2">
+                    {if $dashboardPage > 1}
+                    <a href="#" class="btn-secondary text-xs" onclick="event.preventDefault(); loadCurrentView({literal}{{/literal}pg: {$dashboardPrevPage}{literal}}{/literal});">
+                        <svg class="stroke-primary size-4"><use xlink:href="#icon-left"></use></svg>
+                        <span class="ml-1">Zurück</span>
+                    </a>
+                    {/if}
+                    {if $dashboardPage < $dashboardTotalPages}
+                    <a href="#" class="btn-secondary text-xs" onclick="event.preventDefault(); loadCurrentView({literal}{{/literal}pg: {$dashboardNextPage}{literal}}{/literal});">
+                        <span class="mr-1">Weiter</span>
+                        <svg class="stroke-primary size-4"><use xlink:href="#icon-right"></use></svg>
+                    </a>
+                    {/if}
+                </div>
+            </div>
+            {/if}
+            {/if}
+        </div>
+    </div>
+    {/if}
+</div>
+
+<!-- Detail-Drawer (Struktur/Stil analog zum Formulare/Hilfe-Drawer in tpl/header.html) -->
+<div id="dashboardDrawer" class="fixed top-0 right-0 h-full w-full sm:w-2/3 md:w-1/2 lg:w-3/5 bg-white dark:bg-neutral-700 text-neutral-900 dark:text-white drop-shadow-2xl shadow-2xl z-50 translate-x-full drawer-animate flex flex-col border-l border-neutral-200 dark:border-neutral-600" tabindex="-1" aria-labelledby="dashboardDrawerHeader">
+    <div class="p-6 pl-8 pr-8 xl:px-10 xl:py-6 border-b border-subnav flex items-center justify-between shrink-0">
+        <div id="dashboardDrawerHeader" class="min-w-0">
+            {if $drawerUser}
+            <div class="flex items-center gap-2 flex-wrap">
+                <h2 class="text-xl font-semibold text-primary truncate">{$drawerUser.nachname} {$drawerUser.vorname}</h2>
+                {if $drawerUser.is_ausbilder}<span class="text-[10px] font-semibold px-2 py-0.5 rounded-full bg-violet-100 text-violet-700 shrink-0">Ausbilder</span>{/if}
+            </div>
+            <p class="text-xs text-secondary truncate mt-1">{$drawerUser.username} &middot; {$drawerUser.email}</p>
+            <p class="text-xs text-secondary truncate mt-0.5">
+                {if $drawerBeruf}{$drawerBeruf}{/if}
+                {if $drawerUser.ausbildung_von || $drawerUser.ausbildung_bis} &middot; {$drawerUser.ausbildung_von} &ndash; {$drawerUser.ausbildung_bis}{/if}
+            </p>
+            {elseif $drawerBz}
+            <h2 class="text-xl font-semibold text-primary truncate">{$drawerBz.name}</h2>
+            <p class="text-xs text-secondary truncate mt-1">Bildungszentrum &middot; ID {$drawerBz.id}</p>
+            {elseif $drawerUnternehmen}
+            <h2 class="text-xl font-semibold text-primary truncate">{$drawerUnternehmen.name}</h2>
+            <p class="text-xs text-secondary truncate mt-1">Unternehmen &middot; {$drawerUnternehmen.id}</p>
+            {else}
+            <h2 class="text-xl font-semibold text-primary truncate">Details</h2>
+            {/if}
+        </div>
+        <button type="button" onclick="closeUserDrawer();" class="btn-secondary w-8 h-8 p-0 shrink-0" title="Schließen">
+            <svg class="stroke-primary size-4 mx-auto"><use xlink:href="#icon-close"></use></svg>
+            <span class="sr-only">Schließen</span>
+        </button>
+    </div>
+    <div class="flex-1 overflow-y-auto custom-scrollbar p-6 md:p-8 xl:px-10">
+    <div id="dashboardDrawerFragment">
+        {if $drawerUser}
+            <div class="flex flex-col gap-5">
+                <div id="drawerAccordion" data-accordion="collapse" class="rounded-xl border border-neutral-200 dark:border-neutral-700 overflow-hidden divide-y divide-neutral-300 dark:divide-neutral-700">
+                    <h3>
+                        <button type="button" class="group w-full flex items-center gap-3 px-5 py-4 hover:bg-neutral-200 dark:hover:bg-neutral-800 cursor-pointer transition-colors" data-accordion-target="#drawerFormulareBody" aria-expanded="false" aria-controls="drawerFormulareBody">
+                            <svg class="size-5 fill-primary"><use xlink:href="#icon-writedoc"></use></svg>
+                            <span class="font-medium text-primary">Formulare</span>
+                            <span class="text-xs text-secondary">({$drawerFormulare|@count})</span>
+                            <svg data-accordion-icon="" stroke-width="2" class="stroke-primary shrink-0 size-5 ml-auto" aria-hidden="true"><use xlink:href="#icon-down"></use></svg>
+                        </button>
+                    </h3>
+                    <div id="drawerFormulareBody" class="hidden">
+                        <div class="px-5 py-4">
+                            {if $drawerFormulare|@count > 0}
+                            <ul class="space-y-1">
+                                {foreach from=$drawerFormulare item=f}
+                                <li class="flex items-center justify-between gap-2 py-1">
+                                    <span class="text-sm">{$f.name}</span>
+                                    <a href="{page_url page=$page action="download_formular" user_id=$drawerUser.user_id formular_id=$f.formular_id}" target="_blank" class="btn-secondary text-xs" title="PDF ansehen">
+                                        <svg class="stroke-primary size-4"><use xlink:href="#icon-print"></use></svg>
+                                        <span class="ml-1">PDF ansehen</span>
+                                    </a>
+                                </li>
+                                {/foreach}
+                            </ul>
+                            {else}
+                            <p class="text-sm text-secondary">Keine ausgefüllten Formulare vorhanden.</p>
+                            {/if}
+                        </div>
+                    </div>
+
+                    <h3>
+                        <button type="button" class="group w-full flex items-center gap-3 px-5 py-4 hover:bg-neutral-200 dark:hover:bg-neutral-800 cursor-pointer transition-colors" data-accordion-target="#drawerBerichteBody" aria-expanded="false" aria-controls="drawerBerichteBody">
+                            <svg class="size-5 fill-primary"><use xlink:href="#icon-ausbildungsnachweis"></use></svg>
+                            <span class="font-medium text-primary">Wochenberichte</span>
+                            <span class="text-xs text-secondary">({$drawerBerichteSummary.total})</span>
+                            <svg data-accordion-icon="" stroke-width="2" class="stroke-primary shrink-0 size-5 ml-auto" aria-hidden="true"><use xlink:href="#icon-down"></use></svg>
+                        </button>
+                    </h3>
+                    <div id="drawerBerichteBody" class="hidden">
+                        <div class="px-5 py-4">
+                            {if $drawerBerichteSummary.total > 0}
+                            <div class="flex items-center justify-between gap-2">
+                                <p class="text-sm">
+                                    <span class="font-semibold">{$drawerBerichteSummary.signed}</span> von
+                                    <span class="font-semibold">{$drawerBerichteSummary.total}</span> Wochenberichten vollständig unterschrieben
+                                </p>
+                                {if $drawerBerichteSummary.signed > 0}
+                                <a href="{page_url page=$page action="print_wochenberichte_collection" user_id=$drawerUser.user_id}" target="_blank" class="btn-secondary text-xs shrink-0" title="Vollständige Berichte als Sammlung drucken">
+                                    <svg class="stroke-primary size-4"><use xlink:href="#icon-print"></use></svg>
+                                    <span class="ml-1">Drucken</span>
+                                </a>
+                                {/if}
+                            </div>
+                            {else}
+                            <p class="text-sm text-secondary">Keine Wochenberichte vorhanden.</p>
+                            {/if}
+                        </div>
+                    </div>
+
+                    <h3>
+                        <button type="button" class="group w-full flex items-center gap-3 px-5 py-4 bg-red-50 cursor-pointer transition-colors" data-accordion-target="#drawerLoeschenBody" aria-expanded="false" aria-controls="drawerLoeschenBody">
+                            <svg class="size-5 fill-red-600"><use xlink:href="#icon-trash"></use></svg>
+                            <span class="font-medium text-red-700">Daten löschen</span>
+                            <svg data-accordion-icon="" stroke-width="2" class="stroke-primary shrink-0 size-5 ml-auto" aria-hidden="true"><use xlink:href="#icon-down"></use></svg>
+                        </button>
+                    </h3>
+                    <div id="drawerLoeschenBody" class="hidden bg-red-50">
+                        <div class="px-5 py-4">
+                            <p class="text-xs text-neutral-900 mb-3">Ausgewählte Kategorien werden als gelöscht markiert (Soft-Delete) und in dieser Ansicht nicht mehr angezeigt.</p>
+                            <form id="dashboardDeleteForm" onsubmit="return submitDeleteForm(event, '{$drawerUser.user_id}');">
+                                <div class="flex flex-col gap-1">
+                                    {foreach from=$drawerCategories key=catKey item=cat}
+                                    <label class="flex items-center gap-2 text-sm {if $cat.total == 0}opacity-50{/if}">
+                                        <input type="checkbox" name="categories[]" value="{$catKey}" {if $cat.total == 0}disabled{/if} />
+                                        {$cat.label} ({$cat.total})
+                                    </label>
+                                    {/foreach}
+                                </div>
+                                <button type="submit" class="btn-secondary mt-4 text-red-600">
+                                    <svg class="size-5 mr-2"><use xlink:href="#icon-trash"></use></svg> Ausgewählte Daten löschen
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="rounded-xl border border-amber-300 bg-amber-50 p-5">
+                    <h3 class="flex items-center gap-2 text-amber-600 font-medium uppercase text-xs tracking-widest mb-3">
+                        <svg class="size-4 fill-amber-600"><use xlink:href="#icon-folder"></use></svg>
+                        Speicherplatz
+                    </h3>
+                    <p class="text-sm text-neutral-900">Datenbank: {$drawerStorage.db_rows} Datensätze ({$drawerStorage.db_bytes_human})</p>
+                    <p class="text-sm text-neutral-900">Server (PDF-Ablage): {$drawerStorage.disk_bytes_human}</p>
+                </div>
+            </div>
+        {elseif $drawerBz}
+            <div class="flex flex-col gap-5">
+                <div class="rounded-xl border border-neutral-200 dark:border-neutral-700 divide-y divide-neutral-300 dark:divide-neutral-700">
+                    <div class="flex items-center justify-between gap-4 px-5 py-3"><span class="text-sm text-secondary">ID</span><span class="text-sm font-semibold">{$drawerBz.id}</span></div>
+                    <div class="flex items-center justify-between gap-4 px-5 py-3"><span class="text-sm text-secondary">Name</span><span class="text-sm font-semibold">{$drawerBz.name}</span></div>
+                    {if $drawerBz.strasse || $drawerBz.plz || $drawerBz.ort}
+                    <div class="flex items-center justify-between gap-4 px-5 py-3"><span class="text-sm text-secondary">Adresse</span><span class="text-sm font-semibold">{$drawerBz.strasse}{if $drawerBz.strasse && ($drawerBz.plz || $drawerBz.ort)}, {/if}{$drawerBz.plz} {$drawerBz.ort}</span></div>
+                    {/if}
+                    {if $drawerBz.ansprechpartner}
+                    <div class="flex items-center justify-between gap-4 px-5 py-3"><span class="text-sm text-secondary">Ansprechpartner</span><span class="text-sm font-semibold">{$drawerBz.ansprechpartner}</span></div>
+                    {/if}
+                    {if $drawerBz.telefon}
+                    <div class="flex items-center justify-between gap-4 px-5 py-3"><span class="text-sm text-secondary">Telefon</span><span class="text-sm font-semibold">{$drawerBz.telefon}</span></div>
+                    {/if}
+                    {if $drawerBz.email}
+                    <div class="flex items-center justify-between gap-4 px-5 py-3"><span class="text-sm text-secondary">E-Mail</span><span class="text-sm font-semibold">{$drawerBz.email}</span></div>
+                    {/if}
+                    {if $drawerBz.anbieter}
+                    <div class="flex items-center justify-between gap-4 px-5 py-3"><span class="text-sm text-secondary">Anbieter</span><span class="text-sm font-semibold">{$drawerBz.anbieter}</span></div>
+                    {/if}
+                    {if $drawerBz.kontingent}
+                    <div class="flex items-center justify-between gap-4 px-5 py-3"><span class="text-sm text-secondary">Kontingent</span><span class="text-sm font-semibold">{$drawerBz.kontingent}</span></div>
+                    {/if}
+                    {if $drawerBz.freieSchueler}
+                    <div class="flex items-center justify-between gap-4 px-5 py-3"><span class="text-sm text-secondary">Freie Schülerplätze</span><span class="text-sm font-semibold">{$drawerBz.freieSchueler}</span></div>
+                    {/if}
+                    <div class="flex items-center justify-between gap-4 px-5 py-3"><span class="text-sm text-secondary">Erstellt am</span><span class="text-sm font-semibold">{$drawerBz.created}</span></div>
+                </div>
+                <div class="grid grid-cols-2 gap-3">
+                    <div class="rounded-xl border border-neutral-200 dark:border-neutral-700 bg-neutral-50 dark:bg-neutral-800 p-4">
+                        <div class="text-2xl font-bold text-primary">{$drawerBz.students}</div>
+                        <div class="text-xs text-secondary mt-1">Schüler gesamt</div>
+                    </div>
+                    <div class="rounded-xl border border-neutral-200 dark:border-neutral-700 bg-neutral-50 dark:bg-neutral-800 p-4">
+                        <div class="text-2xl font-bold text-primary">{$drawerBz.companies}</div>
+                        <div class="text-xs text-secondary mt-1">Unternehmen</div>
+                    </div>
+                </div>
+            </div>
+        {elseif $drawerUnternehmen}
+            <div class="flex flex-col gap-5">
+                <div class="rounded-xl border border-neutral-200 dark:border-neutral-700 divide-y divide-neutral-300 dark:divide-neutral-700">
+                    <div class="flex items-center justify-between gap-4 px-5 py-3"><span class="text-sm text-secondary">ID</span><span class="text-sm font-semibold">{$drawerUnternehmen.id}</span></div>
+                    <div class="flex items-center justify-between gap-4 px-5 py-3"><span class="text-sm text-secondary">Name</span><span class="text-sm font-semibold">{$drawerUnternehmen.name}</span></div>
+                    {if $drawerUnternehmen.strasse || $drawerUnternehmen.plz || $drawerUnternehmen.ort}
+                    <div class="flex items-center justify-between gap-4 px-5 py-3"><span class="text-sm text-secondary">Adresse</span><span class="text-sm font-semibold">{$drawerUnternehmen.strasse}{if $drawerUnternehmen.strasse && ($drawerUnternehmen.plz || $drawerUnternehmen.ort)}, {/if}{$drawerUnternehmen.plz} {$drawerUnternehmen.ort}</span></div>
+                    {/if}
+                    {if $drawerUnternehmen.telefon}
+                    <div class="flex items-center justify-between gap-4 px-5 py-3"><span class="text-sm text-secondary">Telefon</span><span class="text-sm font-semibold">{$drawerUnternehmen.telefon}</span></div>
+                    {/if}
+                    {if $drawerUnternehmen.mobil}
+                    <div class="flex items-center justify-between gap-4 px-5 py-3"><span class="text-sm text-secondary">Mobil</span><span class="text-sm font-semibold">{$drawerUnternehmen.mobil}</span></div>
+                    {/if}
+                    {if $drawerUnternehmen.fax}
+                    <div class="flex items-center justify-between gap-4 px-5 py-3"><span class="text-sm text-secondary">Fax</span><span class="text-sm font-semibold">{$drawerUnternehmen.fax}</span></div>
+                    {/if}
+                    {if $drawerUnternehmen.email}
+                    <div class="flex items-center justify-between gap-4 px-5 py-3"><span class="text-sm text-secondary">E-Mail</span><span class="text-sm font-semibold">{$drawerUnternehmen.email}</span></div>
+                    {/if}
+                    {if $drawerUnternehmen.typ}
+                    <div class="flex items-center justify-between gap-4 px-5 py-3"><span class="text-sm text-secondary">Typ</span><span class="text-sm font-semibold">{$drawerUnternehmen.typ}{if $drawerUnternehmen.typ2} / {$drawerUnternehmen.typ2}{/if}</span></div>
+                    {/if}
+                    <div class="flex items-center justify-between gap-4 px-5 py-3"><span class="text-sm text-secondary">Erstellt am</span><span class="text-sm font-semibold">{$drawerUnternehmen.created}</span></div>
+                </div>
+                <div class="grid grid-cols-2 gap-3">
+                    <div class="rounded-xl border border-neutral-200 dark:border-neutral-700 bg-neutral-50 dark:bg-neutral-800 p-4">
+                        <div class="text-2xl font-bold text-primary">{$drawerUnternehmen.azubis}</div>
+                        <div class="text-xs text-secondary mt-1">Auszubildende</div>
+                    </div>
+                    <div class="rounded-xl border border-neutral-200 dark:border-neutral-700 bg-neutral-50 dark:bg-neutral-800 p-4">
+                        <div class="text-2xl font-bold text-primary">{$drawerUnternehmen.ausbilder}</div>
+                        <div class="text-xs text-secondary mt-1">Ausbilder</div>
+                    </div>
+                </div>
+            </div>
+        {else}
+            <p class="text-secondary p-4">Kein Eintrag ausgewählt oder kein Zugriff.</p>
+        {/if}
+    </div>
+    </div>
+</div>
+
+{capture assign="dashboard_js_path"}{$egotec_conf.skin_dir}{$site->skin}/v3/dashboard/js/dashboard.js{/capture}
+<script>
+{literal}
+    var dashboardPageUrl = "{/literal}{page_url page=$page}{literal}";
+{/literal}
+</script>
+<script src="{$url_dir}skin/{$site->skin}/v3/dashboard/js/dashboard.js?v={$dashboard_js_path|filemtime}"></script>

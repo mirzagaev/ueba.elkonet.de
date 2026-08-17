@@ -1,0 +1,197 @@
+{strip}
+{if !$showlogin}
+	{if $smarty.request.editID}
+		{get_path id=$smarty.request.editID show_self=1 var=pfad with_root=true}
+		<nav class="hidden md:block mx-auto w-fit py-5 xl:px-20 border-b border-subnav" aria-label="Breadcrumb">
+			<ol class="inline-flex items-center space-x-1 md:space-x-2">
+				{foreach from=$pfad item=entry name=breadcrump}
+				<li>
+					<div class="flex items-center gap-2">
+						<a {if $entry->extra.no_nav_item==0}href="{page_url page=$entry}"{/if} class="text-xs font-medium text-primary">{$entry->field.name}</a>
+						{if !$smarty.foreach.breadcrump.last}
+							<svg class="stroke-primary size-4" fill="none"><use xlink:href="#icon-right"></use></svg>
+						{else}
+							{assign var="currentPage" value=$entry}
+						{/if}
+					</div>
+				</li>
+				{/foreach}
+			</ol>
+		</nav>
+
+		{if $lastEditorName}
+		<div class="alert-info">Zuletzt editiert von:&nbsp;<b>{$lastEditorName}</b>&nbsp;am&nbsp;<b>{$lastEditDate}</b>&nbsp;um&nbsp;{$lastEditTime} Uhr.</div>
+		{/if}
+
+		<div class="alert-hinweis"><strong>Hinweis:</strong>&nbsp;Alle von Ihnen gemachten &Auml;nderungen bzw. Erg&auml;nzungen sind nur f&uuml;r&nbsp;<b>Ihre</b>&nbsp;Schule sichtbar!</div>
+
+		<div id="edithinweis" class="flex flex-wrap items-center justify-between gap-3 my-4">
+			<div class="flex items-center gap-3">
+				<a href="{page_url page=$currentPage}" id="thelink" title="Zurück" class="btn-secondary">
+					<svg class="stroke-primary size-4 mr-1" stroke-width="2" fill="none"><use xlink:href="#icon-left"></use></svg>
+					Zurück zur Seite <span class="font-bold ml-1">{$entry->field.name}</span>
+				</a>
+			</div>
+			<button type="button" class="btn-secondary" data-modal-target="resetSiteModal" data-modal-toggle="resetSiteModal">Seite zurücksetzen</button>
+		</div>
+
+		<form method="post" name="ueba_zusatzform" id="ueba_zusatzform" action="{page_url page=$page}">
+			<div class="bg-subnav overflow-hidden p-1">
+				{include file="tinymce/editor.html"}
+				<input type="hidden" name="editID" value="{$smarty.request.editID}">
+			</div>
+
+			{* Der alte TinyMCE 3 ({input type="wysiwyg_legacy"}) wird komplett vom Egotec-Framework
+			   initialisiert (kein content_css-Parameter verfügbar). Um trotzdem zu zeigen, wie der
+			   Inhalt später auf der echten Seite aussieht, wird das Tailwind-Stylesheet nachträglich
+			   ins Editor-iframe injiziert, sobald TinyMCE fertig initialisiert hat — ohne die eigene
+			   Initialisierung (inkl. Sitemap-Link-Picker über tiny_ego_browser) anzufassen. *}
+			{literal}
+			<script>
+				(function() {
+					var isDark = document.documentElement.classList.contains('dark');
+
+					function injectEditorStylesheet(ed) {
+						var doc = ed.getDoc();
+						if (!doc || !doc.head || doc.getElementById('etz-editor-stylesheet')) {
+							return;
+						}
+						var link = doc.createElement('link');
+						link.id = 'etz-editor-stylesheet';
+						link.rel = 'stylesheet';
+						link.href = '{/literal}{$url_dir}skin/{$site->skin}/style_tailwind.css{literal}';
+						doc.head.appendChild(link);
+						if (isDark) {
+							doc.documentElement.classList.add('dark');
+						}
+					}
+
+					function whenTinyMCEReady(callback) {
+						if (window.tinyMCE) {
+							callback();
+						} else {
+							setTimeout(function() { whenTinyMCEReady(callback); }, 100);
+						}
+					}
+
+					whenTinyMCEReady(function() {
+						// Bereits initialisierte Editoren (falls dieses Script nach onAddEditor lädt) direkt behandeln...
+						tinyMCE.editors && tinyMCE.editors.forEach && tinyMCE.editors.forEach(function(ed) {
+							ed.onInit.add(injectEditorStylesheet);
+						});
+						// ...und künftig hinzugefügte Editoren ebenfalls abdecken.
+						tinyMCE.onAddEditor.add(function(mgr, ed) {
+							ed.onInit.add(injectEditorStylesheet);
+						});
+					});
+				})();
+			</script>
+			{/literal}
+
+			<div class="mt-6">
+				<strong class="block mb-2">Wo soll Ihr Inhalt platziert werden?</strong>
+				<div class="flex flex-wrap gap-2">
+					<label class="cursor-pointer">
+						<input type="radio" name="displayOrt" value="top" class="peer sr-only" {if $formOrt == 'top'}checked{/if}>
+						<span class="block px-4 py-2 rounded-full text-sm bg-primary text-secondary peer-checked:bg-neutral-200 dark:peer-checked:bg-neutral-600 peer-checked:font-semibold transition-colors">Über vorhandenem Inhalt</span>
+					</label>
+					<label class="cursor-pointer">
+						<input type="radio" name="displayOrt" value="bottom" class="peer sr-only" {if $formOrt == 'bottom'}checked{/if}>
+						<span class="block px-4 py-2 rounded-full text-sm bg-primary text-secondary peer-checked:bg-neutral-200 dark:peer-checked:bg-neutral-600 peer-checked:font-semibold transition-colors">Unter vorhandenem Inhalt</span>
+					</label>
+					<label class="cursor-pointer">
+						<input type="radio" name="displayOrt" value="instead" class="peer sr-only" {if $formOrt == 'instead' || $formOrt == ''}checked{/if}>
+						<span class="block px-4 py-2 rounded-full text-sm bg-primary text-secondary peer-checked:bg-neutral-200 dark:peer-checked:bg-neutral-600 peer-checked:font-semibold transition-colors">Anstatt des vorhandenen Inhalts</span>
+					</label>
+				</div>
+			</div>
+
+			<input type="hidden" name="currentPath" value="{page_url page=$entry}" />
+			<input type="hidden" name="saveIsPressed" value="Speichern" />
+
+			<button type="submit" class="btn-success mt-4" title="Speichern">
+				<svg class="fill-white size-5"><use xlink:href="#icon-save"></use></svg><span class="hidden xl:block ml-2">Speichern</span>
+			</button>
+		</form>
+		<!-- Reset-Bestätigung -->
+		<div id="resetSiteModal" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
+			<div class="relative p-4 w-full max-w-md max-h-full">
+				<div class="relative bg-white dark:bg-neutral-800 rounded-2xl shadow-2xl p-6 sm:p-8">
+					<button type="button" class="absolute top-4 right-4 text-secondary hover:text-primary p-1 cursor-pointer" data-modal-hide="resetSiteModal">
+						<svg class="stroke-primary size-4 mx-auto"><use xlink:href="#icon-close"></use></svg>
+						<span class="sr-only">Schließen</span>
+					</button>
+					<h2 class="text-lg font-semibold text-primary mb-3">Seite wirklich zurücksetzen?</h2>
+					<p class="text-sm text-secondary mb-1">Hierdurch wird die Seite in den originalen Zustand der ÜBA-Plattform zurückgesetzt.</p>
+					<p class="text-sm text-secondary mb-6">Außerdem wird das Design auf die neuste Version aktualisiert.</p>
+					<div class="flex justify-end gap-3">
+						<button type="button" class="btn-secondary" data-modal-hide="resetSiteModal">Nein</button>
+						<!-- form="ueba_zusatzform": das Modal liegt außerhalb des <form>-Elements, daher HTML5-Form-Assoziation über das form-Attribut.
+						     onclick leert zuerst den (alten) TinyMCE-3-Editor; der native submit (kein document.forms...submit()!)
+						     löst danach TinyMCEs automatisches triggerSave() beim "submit"-Event aus, damit das Textarea den
+						     geleerten Inhalt überträgt. Rot statt btn-primary, damit sich die destruktive Aktion optisch von "Nein" abhebt. -->
+						<button type="submit" form="ueba_zusatzform" class="inline-flex items-center rounded-full cursor-pointer bg-red-600 hover:bg-red-700 px-4 py-2 text-sm font-semibold text-white transition-colors" data-modal-hide="resetSiteModal" onclick="clearAllEditors();">Ja</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	{else}
+		<div class="alert-warning">
+			<div>
+				<h3 class="font-semibold mb-1">Zu bearbeitende Seite wurde nicht festgelegt.</h3>
+				<p>Bitte rufen Sie den Editor nur über den Bearbeiten-Button auf der jeweiligen Seite auf.</p>
+			</div>
+		</div>
+	{/if}
+{else}
+	<div id="meinContent2" class="max-w-md mx-auto">
+		<div class="sm:mx-auto sm:w-full sm:max-w-md">
+			<h2 class="text-2xl xl:text-3xl font-bold leading-9 tracking-tight text-gray-900 dark:text-white">Externer Editor</h2>
+			<p class="mt-2 text-sm leading-6 text-gray-500 dark:text-gray-300">Bitte geben Sie das Passwort Ihres&nbsp;Bildungszentrums&nbsp;ein.</p>
+		</div>
+
+		<form id="loginUebaForm" method="post" name="ueba_zusatzform" action="{page_url page=$page}" class="w-full h-fit col-start-1 row-start-1 p-1 transition-transform duration-500 ease-in-out transform translate-x-0">
+			<input type="hidden" name="editID" value="{$smarty.request.editID}">
+			<input type="hidden" id="theContent" name="theContent" value='{$thecontent}'>
+			<input type="hidden" name="login" value="Anmelden" />
+
+            <div class="xl:mt-10 sm:mx-auto sm:w-full sm:max-w-md space-y-4">
+                <div class="flex items-center w-full bg-secondary h-12 rounded-full overflow-hidden pl-6 gap-2 relative mt-6">
+                    <svg class="size-6 bg-transparent text-secondary"><use xlink:href="#icon-lock"></use></svg>
+                    <input type="password" name="editpass" id="password" placeholder="Schulpasswort" class="bg-secondary text-primary placeholder-secondary dark:placeholder-neutral-400 border-transparent focus:border-transparent focus:outline-none focus:ring-0 text-sm w-full h-full" required="">
+
+                    <button type="button" class="toggle-btn z-20 bg-transparent absolute right-1 p-2 cursor-pointer text-xl">
+                        <svg id="pwTogglerSVG" class="size-5 stroke-secondary"><use xlink:href="#icon-eye"></use></svg>
+                    </button>
+                </div>
+
+                <div>
+                    <button type="submit" onclick="document.forms.ueba_zusatzform.submit();" class="flex w-full justify-center rounded-full cursor-pointer bg-red-600 hover:bg-red-700 px-3 py-3 text-sm sm:text-base font-semibold leading-6 text-white shadow-sm focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-600 transition-colors">Anmelden</button>
+                </div>
+            </div>
+        </form>
+
+		{if $errlogin}
+			<div class="xl:container mx-auto w-full my-10 bg-red-100 border-l-4 border-red-700 text-red-700 p-4">Das eingegebene Passwort ist leider falsch. Versuchen Sie es erneut.</div>
+		{/if}
+	</div>
+{/if}
+{literal}
+<script Language="JavaScript">
+	// Leert alle (im Normalfall genau einen) TinyMCE-3-Editoren auf der Seite, bevor der Ja-Button
+	// im Reset-Modal das Formular ganz normal absendet (echter Button-Klick, kein document.forms...
+	// submit()!, damit TinyMCEs automatisches triggerSave() beim "submit"-Event noch greift und den
+	// geleerten Inhalt ins Textarea überträgt).
+	function clearAllEditors()
+	{
+		if (!window.tinyMCE) {
+			return;
+		}
+		for (var i = 0; i < tinyMCE.editors.length; i++)
+		{
+			tinyMCE.editors[i].setContent('');
+		}
+	}
+</script>
+{/literal}
+{/strip}

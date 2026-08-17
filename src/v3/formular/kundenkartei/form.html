@@ -1,0 +1,159 @@
+<form method="post" name="formular_kundenkartei" id="formular_kundenkartei" action="{page_url page=$page}"> 
+    <input type="hidden" name="prevPage" value="{page_url page=$page}">
+
+    <!-- Save Modal (Required for saveRoutine.js) -->
+    <div id="saveModal" style="display:none;" class="fixed inset-0 z-50 flex items-center justify-center bg-neutral-800/50 backdrop-blur-sm">
+        <div class="modal-content bg-white dark:bg-neutral-800 p-6 rounded-xl shadow-2xl flex flex-col items-center gap-4 min-w-[200px]">
+            <div class="inline-block h-8 w-8 animate-spin rounded-full border-4 border-solid border-current border-e-transparent align-[-0.125em] text-surface motion-reduce:animate-[spin_1.5s_linear_infinite] dark:text-white" id="loader" role="status" aria-label="loading">
+                <span class="!absolute !-m-px !h-px !w-px !overflow-hidden !whitespace-nowrap !border-0 !p-0 ![clip:rect(0,0,0,0)]">Loading...</span>
+            </div>
+            <div id="checkSuccess" style="display:none;" class="fill-emerald-700">
+                <svg class="size-10"><use xlink:href="#icon-check"></use></svg>
+            </div>
+            <div id="checkFail" style="display:none;" class="text-red-500">
+                <svg class="size-8"><use xlink:href="#icon-close"></use></svg>
+            </div>
+            <p id="modalText" class="font-medium text-gray-800 dark:text-neutral-200">Speichern...</p>
+        </div>
+    </div>
+
+    <div class="flex flex-row items-end gap-4 w-full mb-5">
+        <button type="button" class="btn-success ml-auto" onclick="AJAXPost();" title="Speichern">
+            <svg class="fill-white size-5"><use xlink:href="#icon-save"></use></svg><span class="hidden xl:block ml-2">Speichern</span>
+        </button>
+        <a href="{page_url page=$page print=1}" class="printForm btn-secondary" title="Druckvorschau anzeigen">
+            <svg class="stroke-primary size-5"><use xlink:href="#icon-print"></use></svg><span class="hidden xl:block ml-2">Druckvorschau anzeigen</span>
+        </a>
+    </div>
+
+    <div class="w-full">
+        <div class="py-4 xl:py-6 md:flex-grow grid md:grid-cols-10 gap-4">
+            <span class="text-xl text-primary font-light title-font tracking-widest uppercase mb-2 md:col-span-10">Kundendaten</span>
+            <div class="md:col-span-10 kundenauftrag-form-float-group">
+                <select name="Bezeichnung" id="Bezeichnung">
+                    <option value=""></option>
+                    <option value="Frau" {if $formular_extra.Bezeichnung == "Frau"}selected{/if}>Frau</option>
+                    <option value="Herr" {if $formular_extra.Bezeichnung == "Herr"}selected{/if}>Herr</option>
+                    <option value="Divers" {if $formular_extra.Bezeichnung == "Divers"}selected{/if}>Divers</option>
+                </select>
+                <label for="Bezeichnung">Anrede</label>
+            </div>
+
+            <div class="md:col-start-1 md:col-span-5 kundenauftrag-form-float-group">
+                <input type="text" name="Name" id="floating_Name" class="peer" placeholder=" " required value="{$formular_extra.Name}" />
+                <label for="floating_Name">Name</label>
+            </div>
+            <div class="md:col-span-5 kundenauftrag-form-float-group">
+                <input type="text" name="Vorname" id="floating_Vorname" class="peer" placeholder=" " required value="{$formular_extra.Vorname}" />
+                <label for="floating_Vorname">Vorname</label>
+            </div>
+            <div class="md:col-span-10 kundenauftrag-form-float-group">
+                <input type="text" name="Firma" id="floating_Firma" class="peer" placeholder=" " required value="{$formular_extra.Firma}" />
+                <label for="floating_Firma">Firma</label>
+            </div>
+            <div class="md:col-span-8 kundenauftrag-form-float-group">
+                <input type="text" name="Strasse" id="floating_Strasse" class="peer" placeholder=" " required value="{$formular_extra.Strasse}" />
+                <label for="floating_Strasse">Straße</label>
+            </div>
+            <div class="md:col-span-2 kundenauftrag-form-float-group">
+                <input type="text" name="Hausnummer" id="floating_Hausnummer" class="peer" placeholder=" " required value="{$formular_extra.Hausnummer}" />
+                <label for="floating_Hausnummer">Hausnr.</label>
+            </div>
+            <div class="md:col-span-3 kundenauftrag-form-float-group">
+                <input type="text" name="PLZ" id="floating_PLZ" class="peer" placeholder=" " required value="{$formular_extra.PLZ}" />
+                <label for="floating_PLZ">PLZ</label>
+            </div>
+            <div class="md:col-span-7 kundenauftrag-form-float-group">
+                <input type="text" name="Postleit_ort" id="floating_Postleit_ort" class="peer" placeholder=" " required value="{$formular_extra.Postleit_ort}" />
+                <label for="floating_Postleit_ort">Ort</label>
+            </div>
+            <div class="md:col-span-10"></div>
+            <div class="md:col-span-5 kundenauftrag-form-float-group">
+                <input type="text" name="Telefon" id="floating_Telefon" class="peer" placeholder=" " required value="{$formular_extra.Telefon}" />
+                <label for="floating_Telefon">Telefon</label>
+            </div>
+            <div class="md:col-span-5 kundenauftrag-form-float-group">
+                <input type="text" name="Mobil" id="floating_Mobil" class="peer" placeholder=" " required value="{$formular_extra.Mobil}" />
+                <label for="floating_Mobil">Mobil</label>
+            </div>
+            <div class="md:col-span-10 kundenauftrag-form-float-group">
+                <input type="text" name="Email" id="floating_Email" class="peer" placeholder=" " required value="{$formular_extra.Email}" />
+                <label for="floating_Email">Email</label>
+            </div>
+            <div class="md:col-span-10"></div>
+            <div class="md:col-span-10 kundenauftrag-form-float-group">
+                <input type="text" name="Anrufer" id="floating_Anrufer" class="peer" placeholder=" " required value="{$formular_extra.Anrufer}" />
+                <label for="floating_Anrufer">Anruf von</label>
+            </div>
+            <div class="md:col-start-1 md:col-span-5 kundenauftrag-form-float-group">
+                <input type="text" name="Ansprechpartner" id="floating_Ansprechpartner" class="peer" placeholder=" " required value="{$formular_extra.Ansprechpartner}" />
+                <label for="floating_Ansprechpartner">Kontakt vor Ort</label>
+            </div>
+            <div class="md:col-span-5 kundenauftrag-form-float-group">
+                <input type="date" name="Termin" id="floating_Termin" class="peer" placeholder=" " required value="{$formular_extra.Termin}" />
+                <label for="floating_Termin">Termin vor Ort</label>
+            </div>
+        </div>
+        <div class="py-4 xl:py-6 md:flex-grow">
+            <span class="text-xl text-primary font-light title-font tracking-widest uppercase mb-4 block">Notizen</span>
+            <!-- Tiptap -->
+            <div class="bg-neutral-100 shadow-sm rounded overflow-hidden dark:bg-neutral-600">
+                <div id="hs-editor-tiptap">
+                    <div class="sticky top-0 bg-neutral-200 flex align-middle gap-x-0.5 border-b border-gray-200 p-2 dark:bg-neutral-800 dark:border-neutral-700">
+                        <button class="size-8 inline-flex justify-center items-center gap-x-2 text-sm font-semibold rounded-full border border-transparent text-gray-800 hover:bg-gray-100 focus:outline-hidden focus:bg-gray-100 disabled:opacity-50 disabled:pointer-events-none dark:text-white dark:hover:bg-neutral-700 dark:focus:bg-neutral-700" type="button" data-hs-editor-bold="">
+                            <svg class="shrink-0 size-4"><use xlink:href="#icon-rte-bold"></use></svg>
+                        </button>
+                        <button class="size-8 inline-flex justify-center items-center gap-x-2 text-sm font-semibold rounded-full border border-transparent text-gray-800 hover:bg-gray-100 focus:outline-hidden focus:bg-gray-100 disabled:opacity-50 disabled:pointer-events-none dark:text-white dark:hover:bg-neutral-700 dark:focus:bg-neutral-700" type="button" data-hs-editor-italic="">
+                            <svg class="shrink-0 size-4"><use xlink:href="#icon-rte-italic"></use></svg>
+                        <button class="size-8 inline-flex justify-center items-center gap-x-2 text-sm font-semibold rounded-full border border-transparent text-gray-800 hover:bg-gray-100 focus:outline-hidden focus:bg-gray-100 disabled:opacity-50 disabled:pointer-events-none dark:text-white dark:hover:bg-neutral-700 dark:focus:bg-neutral-700" type="button" data-hs-editor-underline="">
+                            <svg class="shrink-0 size-4"><use xlink:href="#icon-rte-underline"></use></svg>
+                        </button>
+                        <button class="size-8 inline-flex justify-center items-center gap-x-2 text-sm font-semibold rounded-full border border-transparent text-gray-800 hover:bg-gray-100 focus:outline-hidden focus:bg-gray-100 disabled:opacity-50 disabled:pointer-events-none dark:text-white dark:hover:bg-neutral-700 dark:focus:bg-neutral-700" type="button" data-hs-editor-strike="">
+                            <svg class="shrink-0 size-4"><use xlink:href="#icon-rte-strike"></use></svg>
+                        </button>
+                        <button class="size-8 inline-flex justify-center items-center gap-x-2 text-sm font-semibold rounded-full border border-transparent text-gray-800 hover:bg-gray-100 focus:outline-hidden focus:bg-gray-100 disabled:opacity-50 disabled:pointer-events-none dark:text-white dark:hover:bg-neutral-700 dark:focus:bg-neutral-700" type="button" data-hs-editor-link="">
+                            <svg class="shrink-0 size-4"><use xlink:href="#icon-rte-link"></use></svg>
+                        </button>
+                        <button class="size-8 inline-flex justify-center items-center gap-x-2 text-sm font-semibold rounded-full border border-transparent text-gray-800 hover:bg-gray-100 focus:outline-hidden focus:bg-gray-100 disabled:opacity-50 disabled:pointer-events-none dark:text-white dark:hover:bg-neutral-700 dark:focus:bg-neutral-700" type="button" data-hs-editor-ol="">
+                            <svg class="shrink-0 size-4"><use xlink:href="#icon-rte-ol"></use></svg>
+                        </button>
+                        <button class="size-8 inline-flex justify-center items-center gap-x-2 text-sm font-semibold rounded-full border border-transparent text-gray-800 hover:bg-gray-100 focus:outline-hidden focus:bg-gray-100 disabled:opacity-50 disabled:pointer-events-none dark:text-white dark:hover:bg-neutral-700 dark:focus:bg-neutral-700" type="button" data-hs-editor-ul="">
+                            <svg class="shrink-0 size-4"><use xlink:href="#icon-rte-ul"></use></svg>
+                        </button>
+                        <button class="size-8 inline-flex justify-center items-center gap-x-2 text-sm font-semibold rounded-full border border-transparent text-gray-800 hover:bg-gray-100 focus:outline-hidden focus:bg-gray-100 disabled:opacity-50 disabled:pointer-events-none dark:text-white dark:hover:bg-neutral-700 dark:focus:bg-neutral-700" type="button" data-hs-editor-blockquote="">
+                            <svg class="shrink-0 size-4"><use xlink:href="#icon-rte-blockquote"></use></svg>
+                        </button>
+                    </div>
+                    <div class="h-64 overflow-auto" data-hs-editor-field=""></div>
+                    <script>
+                        window.savedContent = '{$formular_extra.Notizen|escape:"javascript"}';
+                    </script>
+                    <input type="hidden" name="rte_editor_fieldname" id="rte_editor_fieldname" value="Notizen" />
+                </div>
+            </div>
+            <!-- End Tiptap -->
+        </div>
+        <div class="py-4 xl:py-6 md:flex-grow grid md:grid-cols-4 gap-2">
+            <span class="text-xl text-primary font-light title-font tracking-widest uppercase mb-2 md:col-span-4">Intern</span>
+            <div class="md:col-span-2 kundenauftrag-form-float-group">
+                <input type="text" name="Sachbearbeiter" id="floating_Sachbearbeiter" class="peer" placeholder=" " required value="{$formular_extra.Sachbearbeiter}" />
+                <label for="floating_Sachbearbeiter">Erstellt von</label>
+            </div>
+            <div class="md:col-span-2 kundenauftrag-form-float-group">
+                <input type="date" name="Datum" id="floating_Datum" class="peer" placeholder=" " required value="{$formular_extra.Datum}" />
+                <label for="floating_Datum">Datum</label>
+            </div>
+        </div>
+    </div>
+
+    <div class="flex flex-col items-end gap-4 w-full mt-5">
+        <a href="{page_url page=$page print=1}" class="printForm btn-secondary" title="Druckvorschau anzeigen">
+            <svg class="stroke-primary size-5 mr-2"><use xlink:href="#icon-print"></use></svg> Druckvorschau anzeigen
+        </a>
+        <button type="button" class="btn-success md:ml-auto" onclick="AJAXPost();" title="Speichern">
+            <svg class="fill-white size-5 mr-2"><use xlink:href="#icon-save"></use></svg> Speichern
+        </button>
+        <input type="hidden" name="save_formular_kundenkartei" value="Speichern und Druckvorschau anzeigen" />
+        <input type="hidden" id="form_status" value="1" />
+    </div>
+</form>

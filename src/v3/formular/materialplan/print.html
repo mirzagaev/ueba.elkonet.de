@@ -1,0 +1,76 @@
+{get_path page=$page show_self=1 var=pfad with_root=true}
+{foreach from=$pfad item=breadlink name=breadcrump}
+    {if $breadlink->field.type == "v3/modul"}
+        {assign var="modulPage" value=$breadlink}
+    {/if}
+{/foreach}
+<section>
+    <div class="flex flex-col sm:flex-row items-center gap-4 w-full mb-5">
+        <a href="{page_url page=$page}" title="Zurück" class="btn-secondary">
+            <svg class="stroke-primary size-4 mr-2"><use xlink:href="#icon-back"></use></svg> Zurück
+        </a>
+        <a href="{page_url page=$page print=1 form=4 query_param.modulPage=$modulPage->field.id}" target="_blank" title="PDF generieren" class="ml-auto btn-secondary">
+            <svg class="stroke-primary size-5 mr-2"><use xlink:href="#icon-print"></use></svg> Drucken
+        </a>
+    </div>
+    <div class="container xl:px-20 2xl:px-32 mx-auto">
+        <div class="bg-neutral-50 dark:bg-neutral-800 border-1 border-subnav dark:border-none shadow-xl p-10 md:px-20 relative">
+            <span class="absolute right-5 top-3 xl:top-5 text-xl lg:text-4xl xl:text-6xl font-semibold text-neutral-200/60 dark:text-neutral-600/70 uppercase selection:bg-transparent">Druckvorschau</span>
+            <div class="lg:py-4 xl:pt-12 flex">
+                <h1 class="text-3xl font-medium z-10">{$page->field.title} {$modulPage->field.name}</h1>
+            </div>
+            <div class="w-full divide-y divide-secondary">
+                <div class="relative overflow-x-auto kundenauftrag_table_wrap">
+                    <table>
+                        <thead class="bg-secondary">
+                            <tr>
+                                <th scope="col" class="w-12 font-medium text-center">Pos.</th>
+                                <th scope="col" class="rounded-s-base font-medium">Material</th>
+                                <th scope="col" class="w-20 rounded-s-base font-medium text-right">Menge</th>
+                                <th scope="col" class="w-36 rounded-s-base font-medium text-right">Einzelpreis (€)</th>
+                                <th scope="col" class="w-40 rounded-e-base font-medium text-right">Gesamtpreis (€)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        {section name=rows start=1 loop=54}
+                            {assign var="i" value=$smarty.section.rows.index}
+                            {assign var="menge" value=$i|cat:"_menge"}
+                            {assign var="mat_preis" value=$i|cat:"_mat_preis"}
+                            {assign var="mat_tae" value=$i|cat:"_mat_tae"}
+                            {assign var="mat_gp" value=$i|cat:"_mat_gp"}
+
+                            {assign var="mat_preis_clean" value=$formular_extra.$mat_preis|default:0|replace:".":""|replace:",":"."}
+                            {assign var="mat_gp_clean" value=$formular_extra.$mat_gp|default:0|replace:".":""|replace:",":"."}
+
+                            {if $formular_extra.$menge || $formular_extra.$mat_preis || $formular_extra.$mat_tae}
+                            <tr class="bg-neutral-primary">
+                                <td class="w-12 text-center">{$i}</td>
+                                <td class="font-normal text-left">{$formular_extra.$mat_tae|nl2br}</td>
+                                <td class="w-20 text-right">{$formular_extra.$menge}</td>
+                                <td class="w-36 text-right">{$mat_preis_clean|floatval|number_format:2:",":"."}</td>
+                                <td class="w-40 text-right">{$mat_gp_clean|floatval|number_format:2:",":"."}</td>
+                            </tr>
+                            {/if}
+                        {/section}
+                        </tbody>
+                        <tfoot>
+                            <tr class="border-t-1 border-subnav font-bold text-base">
+                                <td colspan="4" class="text-right">Gesamtkosten Material (€):</td>
+                                {assign var="gesamtkosten_clean" value=$formular_extra.gesamtkosten|default:0|replace:".":""|replace:",":"."}
+                                <td class="text-right">{$gesamtkosten_clean|floatval|number_format:2:",":"."}</td>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="flex flex-col sm:flex-row items-center gap-4 w-full mt-10">
+        <a href="{page_url page=$page}" title="Zurück" class="btn-secondary">
+            <svg class="stroke-primary size-4 mr-2"><use xlink:href="#icon-back"></use></svg> Zurück
+        </a>
+        <a href="{page_url page=$page print=1 form=4 query_param.modulPage=$modulPage->field.id}" target="_blank" title="PDF generieren" class="ml-auto btn-secondary">
+            <svg class="stroke-primary size-5 mr-2"><use xlink:href="#icon-print"></use></svg> Drucken
+        </a>
+    </div>
+</section>

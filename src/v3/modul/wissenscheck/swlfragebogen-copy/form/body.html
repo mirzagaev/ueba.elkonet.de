@@ -1,0 +1,18 @@
+{* <!-- eine automatische weiterleitung zur ersten Frage --> *}
+
+<script language="JavaScript" type="text/javascript">
+<!--
+{get_children page=$page query.where='type="fragebogen/form/entry"' var=entries}
+
+//document.location.href="{page_url id=$entries.0->field.id}";
+
+// -->
+</script>
+<!--table width="98%" cellspacing="3" border="0" class="tblrubrik" align="center"-->
+<table width="100%" cellspacing="3" border="0" align="center">
+    <tr>
+      <td width="100%" valign="top" style="line-height: 1.6;">
+      {$page->field.content}
+      </td>
+    </tr>
+</table>

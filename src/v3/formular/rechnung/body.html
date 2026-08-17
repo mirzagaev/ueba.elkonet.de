@@ -1,0 +1,5 @@
+{if $auth->getId()}
+    {include file=v3/formular/rechnung/print.html}
+{else}
+	{include file=v3/formular/anmeldung_erforderlich.html}
+{/if}

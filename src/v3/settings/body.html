@@ -1,0 +1,165 @@
+<div class="page_headline">
+    <h2 class="text-2xl xl:text-3xl font-bold flex items-center">
+        {$page->field.title}
+    </h2>
+</div>
+
+<div class="space-y-8">
+
+    {if $isAusbilder}
+    <!-- Ihre Benachrichtigungen -->
+    <section>
+        <h3 class="text-xl font-semibold mb-3">Ihre Benachrichtigungen</h3>
+        <div class="bg-neutral-100 dark:bg-neutral-800 rounded-2xl p-6 flex items-start justify-between gap-6">
+            <div>
+                <div class="font-semibold mb-1">Bericht signiert</div>
+                <div class="text-sm text-neutral-500">Wenn Sie die Funktion "Bericht signiert" deaktivieren, erhalten Sie keine E-Mail-Benachrichtigungen über neu signierte Nachweise Ihrer Auszubildenden.</div>
+            </div>
+            <label class="inline-flex items-center cursor-pointer shrink-0 mt-1">
+                <input id="toggleReminderAusb" type="checkbox" class="sr-only peer" onclick="toggleReminderAusb()" {if $ausbState==0}checked{/if}>
+                <div class="settings-toggle-bg relative w-11 h-6 rounded-full bg-neutral-300 dark:bg-neutral-600 peer"></div>
+            </label>
+        </div>
+    </section>
+
+    <!-- Benachrichtigungen für Auszubildende Ihrer Organisation -->
+    <section>
+        <h3 class="text-xl font-semibold mb-3">Benachrichtigungen für Auszubildende Ihrer Organisation</h3>
+        <div class="bg-neutral-100 dark:bg-neutral-800 rounded-2xl p-6 flex items-start justify-between gap-6">
+            <div>
+                <div class="font-semibold mb-1">Ausbildungsnachweis-Erinnerung</div>
+                <div class="text-sm text-neutral-500">Wenn Sie die Funktion der "Ausbildungsnachweis-Erinnerung" aktivieren, bekommen alle Auszubildenden, welche Ihrer Organisation zugeordnet sind, eine E-Mail-Benachrichtigung, sofern es noch fehlende Nachweise gibt.</div>
+            </div>
+            <label class="inline-flex items-center cursor-pointer shrink-0 mt-1">
+                <input id="toggleReminder" type="checkbox" class="sr-only peer" onclick="toggleReminder()" {if $remState==1}checked{/if}>
+                <div class="settings-toggle-bg relative w-11 h-6 rounded-full bg-neutral-300 dark:bg-neutral-600 peer"></div>
+            </label>
+        </div>
+    </section>
+
+    <!-- Lernplattform -->
+    <section>
+        <h3 class="text-xl font-semibold mb-3">Lernplattform</h3>
+        <div class="bg-neutral-100 dark:bg-neutral-800 rounded-2xl p-6">
+            <div class="font-semibold mb-1">Startdatum für die Nutzung des digitalen Berichtshefts</div>
+            <div class="text-sm text-neutral-500 mb-4">Nutzen Sie diese Funktion, wenn Ihre Auszubildenden (aktiv registrierte Auszubildenden) bereits auf die klassische Art (Papierform) Wochenberichte geschrieben haben. Sie haben hier die Möglichkeit ein Startdatum für Ihren Ausbildungsbetrieb festzulegen, ab dem das online Berichtsheft der ÜBA-Plattform im Betrieb eingesetzt wird. Anhand dieser Angabe werden Ausbildungsnachweise, die vor dem Einsatz der ÜBA-Plattform geschrieben worden sind, in den Filtern nicht berücksichtigt. Diese Funktion führt zu einer besseren Übersicht der Wochenberichte.</div>
+            <input type="date" id="kundenreleasedate" value="{$kunden_release_from}" onchange="changeReleaseDate()" class="bg-white dark:bg-neutral-900 border border-neutral-300 dark:border-neutral-600 rounded-lg px-3 py-2">
+            <input type="hidden" id="kunden_id" value="{$kunden_id}">
+        </div>
+    </section>
+    {/if}
+
+    <!-- System-Design -->
+    <section>
+        <h3 class="text-xl font-semibold mb-3">System-Design</h3>
+        <div class="bg-neutral-100 dark:bg-neutral-800 rounded-2xl p-6">
+            <div class="font-semibold mb-1">Erscheinungsbild</div>
+            <div class="text-sm text-neutral-500 mb-4">Legen Sie fest, ob die Oberfläche hell, dunkel oder passend zu Ihrer Systemeinstellung angezeigt wird.</div>
+
+            <div class="inline-flex rounded-xl overflow-hidden border border-neutral-300 dark:border-neutral-600" id="systemStyleSwitch">
+                <button type="button" data-mode="light" class="system-style-btn bg-transparent px-4 py-2 text-sm font-medium cursor-pointer" onclick="setSystemStyleUI('light')">Hell</button>
+                <button type="button" data-mode="dark" class="system-style-btn bg-transparent px-4 py-2 text-sm font-medium cursor-pointer border-l border-neutral-300 dark:border-neutral-600" onclick="setSystemStyleUI('dark')">Dunkel</button>
+                <button type="button" data-mode="auto" class="system-style-btn bg-transparent px-4 py-2 text-sm font-medium cursor-pointer border-l border-neutral-300 dark:border-neutral-600" onclick="setSystemStyleUI('auto')">Automatisch</button>
+            </div>
+        </div>
+    </section>
+</div>
+
+<style>
+{literal}
+    .system-style-btn.active { background: var(--color-blue-600); color: #fff; }
+    .settings-toggle-bg:after {
+        content: "";
+        position: absolute;
+        top: 0.125rem;
+        left: 0.125rem;
+        background: #fff;
+        border: 1px solid var(--color-neutral-300);
+        border-radius: 9999px;
+        height: 1.25rem;
+        width: 1.25rem;
+        transition: all 0.15s;
+    }
+    input:checked + .settings-toggle-bg {
+        background-color: var(--color-blue-600);
+    }
+    input:checked + .settings-toggle-bg:after {
+        transform: translateX(100%);
+        border-color: #fff;
+    }
+{/literal}
+</style>
+
+<script>
+var ajaxUrl = "{$actual_link}";
+</script>
+<script>
+{literal}
+(function () {
+    function highlightActive() {
+        var current = localStorage.getItem('theme') || 'auto';
+        document.querySelectorAll('#systemStyleSwitch .system-style-btn').forEach(function (btn) {
+            btn.classList.toggle('active', btn.getAttribute('data-mode') === current);
+        });
+    }
+    highlightActive();
+    window.setSystemStyleUIHighlight = highlightActive;
+})();
+
+function setSystemStyleUI(mode) {
+    if (typeof setSystemStyle === 'function') {
+        setSystemStyle(mode);
+    }
+    if (typeof window.setSystemStyleUIHighlight === 'function') {
+        window.setSystemStyleUIHighlight();
+    }
+}
+
+function ajaxPostSettings(params, onDone) {
+    var xhr = new XMLHttpRequest();
+    xhr.open('POST', ajaxUrl, true);
+    xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+    xhr.timeout = 5000;
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState === 4) {
+            onDone(xhr.status === 200, xhr.responseText);
+        }
+    };
+    xhr.onerror = function () { onDone(false, ''); };
+    xhr.ontimeout = function () { onDone(false, ''); };
+    xhr.send('ajax=1&' + params);
+}
+
+function toggleReminderAusb() {
+    var checkbox = document.getElementById('toggleReminderAusb');
+    var isActive = checkbox.checked;
+    var state = isActive ? 2 : 1; // checked=aktiv -> Zeile loeschen (2), unchecked=deaktiviert -> Zeile einfuegen (1)
+    ajaxPostSettings('remAusb=1&state=' + state, function (ok, data) {
+        if (!ok || data === '0') {
+            checkbox.checked = !checkbox.checked;
+        }
+    });
+}
+
+function toggleReminder() {
+    var checkbox = document.getElementById('toggleReminder');
+    var isActive = checkbox.checked;
+    var state = isActive ? 1 : 2; // checked=aktiv -> aktivieren (1), unchecked -> deaktivieren (2)
+    ajaxPostSettings('remEma=1&state=' + state, function (ok, data) {
+        if (!ok || data === '0') {
+            checkbox.checked = !checkbox.checked;
+        }
+    });
+}
+
+function changeReleaseDate() {
+    var releaseFromVal = document.getElementById('kundenreleasedate').value;
+    var kundenIdVal = document.getElementById('kunden_id').value;
+    ajaxPostSettings('kunden_id=' + encodeURIComponent(kundenIdVal) + '&release_from=' + encodeURIComponent(releaseFromVal), function (ok, data) {
+        if (!ok || data === '0') {
+            console.warn('Startdatum konnte nicht gespeichert werden.');
+        }
+    });
+}
+{/literal}
+</script>

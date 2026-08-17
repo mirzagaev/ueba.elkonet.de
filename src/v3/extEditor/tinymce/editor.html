@@ -1,0 +1,8 @@
+{assign var="editor_content" value=$thecontent}
+{if $formdata}
+	{assign var="editor_content" value=$formdata}
+{/if}
+{input version=5 type="wysiwyg_legacy" name="content" no_mediapool=1 no_content=1 no_search=1 no_site_change=0 width=100% height=700 content=$editor_content no_auto=1 standalone=1 toolbar_location="top" startId=$schuleMediaPageId multimedia=$schuleMediaSite
+buttons.1="undo,redo,separator,line,cut,copy,paste,pastetext,pasteword,separator,line,search,replace,separator,line,link,unlink,anchor,image,separator,line,bold,italic,underline,strikethrough,sub,sup,removeformat,separator,line,justifyleft,justifyright,justifycenter,justifyfull"
+buttons.2="newline,bullist,numlist,separator,line,outdent,indent,forecolor,backcolor,advhr,separator,line,visualaid,tablecontrols"
+buttons.3="newline,egotecCssClean,egotecSpellchecker,separator,line,nonbreaking,blockquote,pagebreak,separator,line,charmap,cleanup,code"}

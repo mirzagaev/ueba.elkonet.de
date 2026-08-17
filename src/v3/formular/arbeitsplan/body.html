@@ -1,0 +1,10 @@
+{if $auth->getId()}
+    {if $smarty.request.print == 1}
+        {include file=v3/formular/arbeitsplan/print.html}
+    {else}
+        {include file=v3/formular/arbeitsplan/form.html}
+        {include file=v3/formular/hilfestellung.html}
+    {/if}
+{else}
+	{include file=v3/formular/anmeldung_erforderlich.html}
+{/if}

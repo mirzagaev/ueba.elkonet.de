@@ -121,6 +121,23 @@
 			<symbol id="icon-right" viewBox="0 0 20 20">
 				<path d="M7.5 15L11.0858 11.4142C11.7525 10.7475 12.0858 10.4142 12.0858 10C12.0858 9.58579 11.7525 9.25245 11.0858 8.58579L7.5 5" stroke="#777777" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" />
 			</symbol>
+			<symbol id="icon-user" viewBox="0 0 24 24" fill="currentColor">
+				<path fill-rule="evenodd" d="M7.5 6a4.5 4.5 0 1 1 9 0 4.5 4.5 0 0 1-9 0ZM3.751 20.105a8.25 8.25 0 0 1 16.498 0 .75.75 0 0 1-.437.695A18.683 18.683 0 0 1 12 22.5c-2.786 0-5.433-.608-7.812-1.7a.75.75 0 0 1-.437-.695Z" clip-rule="evenodd" />
+			</symbol>
+			<symbol id="icon-lock" fill="currentColor" viewBox="0 0 24 24">
+				<path fill-rule="evenodd" d="M12 1.5a5.25 5.25 0 0 0-5.25 5.25v3a3 3 0 0 0-3 3v6.75a3 3 0 0 0 3 3h10.5a3 3 0 0 0 3-3v-6.75a3 3 0 0 0-3-3v-3c0-2.9-2.35-5.25-5.25-5.25Zm3.75 8.25v-3a3.75 3.75 0 1 0-7.5 0v3h7.5Z" clip-rule="evenodd" />
+			</symbol>
+			<symbol id="icon-eye" fill="none" stroke-width="1.5" viewBox="0 0 24 24">
+				<path stroke-linecap="round" stroke-linejoin="round" d="M2.036 12.322a1.012 1.012 0 0 1 0-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178Z" />
+				<path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
+			</symbol>
+			<symbol id="icon-eye-slash" fill="none" stroke-width="1.5" viewBox="0 0 24 24">
+				<path stroke-linecap="round" stroke-linejoin="round" d="M3.98 8.223A10.477 10.477 0 0 0 1.934 12C3.226 16.338 7.244 19.5 12 19.5c.993 0 1.953-.138 2.863-.395M6.228 6.228A10.451 10.451 0 0 1 12 4.5c4.756 0 8.773 3.162 10.065 7.498a10.522 10.522 0 0 1-4.293 5.774M6.228 6.228 3 3m3.228 3.228 3.65 3.65m7.894 7.894L21 21m-3.228-3.228-3.65-3.65m0 0a3 3 0 1 0-4.243-4.243m4.242 4.242L9.88 9.88" />
+			</symbol>
+			<symbol id="icon-loginicon" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+				<path fill-rule="evenodd" d="M3 4.25A2.25 2.25 0 015.25 2h5.5A2.25 2.25 0 0113 4.25v2a.75.75 0 01-1.5 0v-2a.75.75 0 00-.75-.75h-5.5a.75.75 0 00-.75.75v11.5c0 .414.336.75.75.75h5.5a.75.75 0 00.75-.75v-2a.75.75 0 011.5 0v2A2.25 2.25 0 0110.75 18h-5.5A2.25 2.25 0 013 15.75V4.25z" clip-rule="evenodd" />
+				<path fill-rule="evenodd" d="M19 10a.75.75 0 00-.75-.75H8.704l1.048-.943a.75.75 0 10-1.004-1.114l-2.5 2.25a.75.75 0 000 1.114l2.5 2.25a.75.75 0 101.004-1.114l-1.048-.943h9.546A.75.75 0 0019 10z" clip-rule="evenodd" />
+			</symbol>
 		</defs>
 	</svg>
     
@@ -271,7 +288,7 @@
                 </div>
 
                 <!-- PROFIL -->
-                <div class="hidden md:block cursor-pointer" >
+                <div class="hidden md:block cursor-pointer" data-modal-target="loginModal" data-modal-toggle="loginModal">
                     <div class="flex items-center gap-4">
                         <div class="relative inline-flex items-center justify-center w-12 h-12 overflow-hidden bg-secondary rounded-full">
                             <svg class="size-full bg-transparent text-secondary" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -279,10 +296,10 @@
                                 <path d="M11.818 10.5975C10.2992 12.6412 7.42106 13.0631 5.37731 11.5537C5.01171 11.2818 4.69296 10.9631 4.42107 10.5975C4.28982 10.4006 4.27107 10.1475 4.37419 9.94123L4.51482 9.65059C4.84296 8.95684 5.53671 8.51624 6.30546 8.51624H9.95231C10.7023 8.51624 11.3867 8.94749 11.7242 9.62249L11.8742 9.93184C11.968 10.1475 11.9586 10.4006 11.818 10.5975Z" fill="currentColor"></path>
                             </svg>
                         </div>
-                        
+
                         <div class="font-medium">
-                            <a href="modul-user.html">Nicht eingeloggt</a>
-                            <a href="modul-user.html" class="block text-sm text-secondary">ueba.elkonet.de</a>
+                            <span class="block">Nicht eingeloggt</span>
+                            <span class="block text-sm text-secondary">ueba.elkonet.de</span>
                         </div>
                     </div>
                 </div>
@@ -427,7 +444,85 @@
             </ul>
         </footer>
     </div>
-    
+
+    <!-- LOGIN MODAL -->
+    <div id="loginModal" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
+        <div class="relative p-4 w-full max-w-md max-h-full">
+            <div class="relative bg-white dark:bg-neutral-800 rounded-2xl shadow-2xl p-6 sm:p-8">
+                <button type="button" class="absolute top-4 right-4 text-secondary hover:text-primary p-1 cursor-pointer" data-modal-hide="loginModal">
+                    <svg class="size-4"><use xlink:href="#icon-close"></use></svg>
+                    <span class="sr-only">Schließen</span>
+                </button>
+
+                <div class="grid grid-cols-1 w-full overflow-hidden items-stretch">
+                    <!-- Anmeldeoptionen -->
+                    <div id="loginOptions" class="w-full h-full flex flex-col justify-center col-start-1 row-start-1 p-1 transition-transform duration-500 ease-in-out transform translate-x-0">
+                        <h2 class="text-xl font-bold leading-9 tracking-tight text-gray-900 dark:text-white">Anmeldung</h2>
+                        <p class="mt-2 text-sm leading-6 text-gray-500 dark:text-gray-300">
+                            Bitte wählen Sie Ihren Zugangsbereich
+                        </p>
+
+                        <div class="mt-8 space-y-4">
+                            <a href="#" id="loginUebaBtn" class="group relative flex w-full items-center justify-center rounded-xl bg-neutral-800 px-4 py-4 text-sm font-semibold shadow-lg hover:bg-red-600 text-white transition-all duration-300 dark:bg-white dark:text-neutral-900 dark:hover:bg-red-500 dark:hover:text-white">
+                                <svg class="mr-3 h-4 w-4 group-hover:text-white transition-colors dark:text-gray-500 dark:group-hover:text-white"><use xlink:href="#icon-loginicon"></use></svg>
+                                Anmelden bei Ausbildungsportal
+                            </a>
+
+                            <div class="my-4 flex items-center gap-4">
+                                <hr class="w-full border-gray-300 dark:border-neutral-400">
+                                <p class="text-sm text-gray-800 dark:text-neutral-200 text-center">oder</p>
+                                <hr class="w-full border-gray-300 dark:border-neutral-400">
+                            </div>
+
+                            <a href="#" id="loginUebaBtn" class="group relative flex w-full items-center justify-center rounded-xl bg-neutral-800 px-4 py-4 text-sm font-semibold text-white shadow-lg hover:bg-red-600 transition-all duration-300 dark:bg-white dark:text-neutral-900 dark:hover:bg-red-500 dark:hover:text-white">
+                                <svg class="mr-3 h-4 w-4 text-white group-hover:text-white transition-colors dark:text-gray-500 dark:group-hover:text-white"><use xlink:href="#icon-loginicon"></use></svg>
+                                Anmelden bei Lernwelt
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Login Form -->
+                    <form id="loginUebaForm" class="w-full h-fit col-start-1 row-start-1 p-1 transition-transform duration-500 ease-in-out transform -translate-x-full">
+                        <a href="#" id="backToLoginOptions" class="inline-flex items-center gap-2 text-sm text-red-600 dark:text-white mb-6">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="size-5">
+                                <path fill-rule="evenodd" d="M17 10a.75.75 0 0 1-.75.75H5.707l2.147 2.146a.75.75 0 0 1-1.06 1.06l-3.5-3.5a.75.75 0 0 1 0-1.06l3.5-3.5a.75.75 0 1 1 1.06 1.06L5.707 9.25H16.25A.75.75 0 0 1 17 10Z" clip-rule="evenodd" />
+                            </svg>
+                            Zurück
+                        </a>
+                        <h2 class="text-xl font-bold leading-9 tracking-tight text-gray-900 dark:text-white">Login Ausbildungsportal</h2>
+                        <p class="mt-2 text-sm leading-6 text-gray-500 dark:text-gray-300">
+                            Bitte geben Sie Ihre Zugangsdaten ein.
+                        </p>
+
+                        <div class="mt-6 space-y-4">
+                            <div class="flex items-center w-full bg-secondary dark:bg-neutral-700 h-12 rounded-full overflow-hidden pl-6 gap-2">
+                                <svg class="size-6 bg-transparent text-secondary"><use xlink:href="#icon-user"></use></svg>
+                                <input type="email" placeholder="Benutzername" class="bg-transparent text-primary placeholder-secondary dark:placeholder-neutral-400 border-transparent focus:border-transparent focus:outline-none focus:ring-0 text-sm w-full h-full" required />
+                            </div>
+                            <div class="flex items-center w-full bg-secondary dark:bg-neutral-700 h-12 rounded-full overflow-hidden pl-6 gap-2 relative">
+                                <svg class="size-6 bg-transparent text-secondary"><use xlink:href="#icon-lock"></use></svg>
+                                <input type="password" id="password" name="password" placeholder="Passwort" class="bg-transparent text-primary placeholder-secondary dark:placeholder-neutral-400 border-transparent focus:border-transparent focus:outline-none focus:ring-0 text-sm w-full h-full" required />
+
+                                <button type="button" class="toggle-btn z-20 bg-primary absolute right-1 p-2 cursor-pointer text-xl">
+                                    <svg id="pwTogglerSVG" class="size-5 stroke-black"><use xlink:href="#icon-eye"></use></svg>
+                                </button>
+                            </div>
+
+                            <div class="text-sm text-right">
+                                <a href="#" class="font-semibold text-secondary underline dark:text-white">Passwort vergessen?</a>
+                            </div>
+                            <div>
+                                <button type="submit" class="flex w-full justify-center rounded-full cursor-pointer bg-red-600 hover:bg-red-700 px-3 py-3 text-sm font-semibold leading-6 text-white shadow-sm focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-600 transition-colors">Anmelden</button>
+                            </div>
+
+                            <p class="text-sm text-secondary">Sie haben noch keinen Zugang? <a href="#" class="text-secondary dark:text-white font-medium tracking-wide underline">Kontaktieren Sie uns</a></p>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <script src="js/flowbite.min.js"></script>
 </body>
 

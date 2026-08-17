@@ -1,0 +1,17 @@
+{if $page->extra.formular_hilfevideo}
+<div id="formularHilfeAccordion" data-accordion="collapse" class="bg-primary rounded-xl border border-neutral-200 dark:border-neutral-700 overflow-hidden mb-5">
+	<h3>
+		<button type="button" class="group w-full flex items-center gap-3 px-5 py-4 bg-secondary hover:bg-neutral-200 dark:hover:bg-neutral-800 cursor-pointer transition-colors"
+				data-accordion-target="#formularHilfeAccordionBody" aria-expanded="false" aria-controls="formularHilfeAccordionBody">
+			<svg class="size-5 stroke-primary" fill="none" stroke-width="1.5"><use xlink:href="#icon-frage"></use></svg>
+			<span class="font-medium text-primary">{if $page->extra.formular_hilfevideo_titel}{$page->extra.formular_hilfevideo_titel}{else}{t}Hilfestellung zum Ausfüllen{/t}{/if}</span>
+			<svg data-accordion-icon="" stroke-width="2" class="stroke-primary shrink-0 size-5 ml-auto" aria-hidden="true"><use xlink:href="#icon-down"></use></svg>
+		</button>
+	</h3>
+	<div id="formularHilfeAccordionBody" class="hidden">
+		<div class="px-5 py-4 border-t border-neutral-200 dark:border-neutral-700">
+			{video src=$page->extra.formular_hilfevideo controls=1 attr.controls="controls" attr.class="w-full rounded-lg max-h-[70vh]"}
+		</div>
+	</div>
+</div>
+{/if}
