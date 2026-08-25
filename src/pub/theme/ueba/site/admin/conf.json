@@ -1,0 +1,52 @@
+{
+	"template_block": true,
+    "layouts": {
+        "dreispaltig": {
+            "title": "Kundengespräch: Dreispaltig"
+        },
+        "zweispaltig": {
+            "title": "Kundengespräch: Zweispaltig"
+        }
+    },
+	"blocks": {
+        "modulpage": {
+            "title": "Modulseite: 1/3 Bild, 2/3 Text"
+        },
+		"infobox": {
+			"title": "Infobox"
+		},
+		"linkbox": {
+			"title": "Linkbox"
+		},
+		"aussage": {
+			"title": "Dialog: Aussage"
+		},
+		"kommentar": {
+			"title": "Dialog: Kommentar"
+		},
+		"bilder": {
+			"title": "Dialog: Bilder"
+		},
+		"didaktischer_fahrplan_vorbereitung": {
+			"title": "Methodik: Fahrplan: Vorbereitung"
+		},
+		"didaktischer_fahrplan_ablauf": {
+			"title": "Methodik: Fahrplan: Ablauf"
+		},
+		"alert-warning": {
+			"title": "Meldung: Warnung"
+		},
+		"alert-success": {
+			"title": "Meldung: Erfolgreich"
+		},
+		"alert-error": {
+			"title": "Meldung: Fehler"
+		},
+		"alert-info": {
+			"title": "Meldung: Information"
+		},
+		"hilfe-item": {
+			"title": "Hilfe: Inhaltselement"
+		}
+	}
+}

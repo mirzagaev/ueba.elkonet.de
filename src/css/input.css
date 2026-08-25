@@ -422,8 +422,14 @@
     }
 
     .contentarea {
-        p {
-            @apply mb-3;
+        p:not(:first-child) {
+            @apply mt-3;
+        }
+        a {
+            @apply underline;
+        }
+        ul {
+            @apply mx-8 py-1;
         }
         .toggletextcontent {
             @apply cursor-pointer mt-2 underline;

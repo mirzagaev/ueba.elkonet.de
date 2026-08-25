@@ -23,6 +23,8 @@
 
 {assign var="dashboardPage" value="1130887"}
 {assign var="settingsPage" value="1131240"}
+{assign var="notificationPage" value="1131244"}
+{assign var="hilfesupportPage" value="1131246"}
 {assign var="farbetitelberufe" value="#931917"}
 
 <header class="flex flex-wrap flex-row items-center bg-primary text-primary shadow-md">
@@ -84,33 +86,113 @@
 
     <!-- MOBIL: Sidebar -->
     {if $auth->getId()}
-    <div id="ueba-mobilsidebar" class="max-w-96 absolute left-0 top-0 z-40 pb-11 overflow-y-auto transition-transform -translate-x-full bg-secondary shadow-lg h-screen" tabindex="-1" aria-labelledby="drawer-label" aria-hidden="true">
-        
-        <div class="flex items-center py-4 px-8 gap-4 bg-subnav" id="avatarButton" type="button" type="button">
+    <div id="ueba-mobilsidebar" class="w-72 absolute left-0 top-0 z-40 flex flex-col h-screen -translate-x-full transition-transform bg-primary shadow-xl" tabindex="-1" aria-labelledby="drawer-label" aria-hidden="true">
+
+        <div class="flex items-center justify-between bg-secondary gap-3 px-6 py-3">
             <div>
-                <h2 id="drawer-label" class="text-primary text-lg font-semibold leading-7">Ausbildungsportal</h2>
-                <a class="text-secondary text-opacity-20 text-sm font-normal leading-snug" href="{$currHost}">ueba.elkonet.de</a>
+                <h2 id="drawer-label" class="text-primary text-lg font-semibold"><a href="{page_url id=1}">Ausbildungsportal</a></h2>
+                <a class="text-secondary text-xs font-normal" href="{page_url id=1}">ueba.elkonet.de</a>
             </div>
+            <button type="button" data-drawer-hide="ueba-mobilsidebar" aria-controls="ueba-mobilsidebar" data-drawer-position="left" class="text-secondary rounded-full p-2 hover:bg-neutral-200 dark:hover:bg-neutral-900 transition-colors cursor-pointer">
+                <svg class="size-4 stroke-primary"><use xlink:href="#icon-close"></use></svg>
+                <span class="sr-only">Menü schließen</span>
+            </button>
+        </div>
+
+        <nav class="flex-1 overflow-y-auto px-3 py-4 space-y-6">
             <div>
-                <button type="button" data-drawer-hide="ueba-mobilsidebar" aria-controls="ueba-mobilsidebar" data-drawer-position="left" class="text-primary text-sm absolute top-5 right-2 inline-flex items-center justify-center px-2">
-                    <svg fill="none" class="size-7 p-1"><use xlink:href="#icon-close"></use></svg>
-                    <span class="sr-only">Menü schließen</span>
-                </button>
+                <ul class="space-y-1" id="sidebar_mainnav">
+                    {if $auth->getId() == "3d3815b595f1eefe40c0c91f674dc6d1"}
+                    <li>
+                        <a href="{page_url id=$dashboardPage}" class="flex items-center gap-3 rounded-2xl px-3 py-2.5 text-sm font-medium text-primary hover:bg-neutral-200 dark:hover:bg-neutral-900 transition-all {if $page->field.id == $dashboardPage}bg-secondary font-semibold{/if}">
+                            <svg class="size-5 stroke-primary shrink-0"><use xlink:href="#icon-dashboard2"></use></svg>
+                            <span class="flex-1 truncate">Dashboard</span>
+                        </a>
+                    </li>
+                    {/if}
+                    {if strpos($page->field.type, "modul") !== false}
+                    <li>
+                        <a href="{page_url page=$modulPage}" class="flex items-center gap-3 rounded-2xl px-3 py-2.5 text-sm font-medium text-primary hover:bg-neutral-200 dark:hover:bg-neutral-900 transition-all {if $page->field.id == $modulPage->field.id}bg-secondary font-semibold{/if}">
+                            <svg class="size-5 fill-primary shrink-0"><use xlink:href="#icon-folder"></use></svg>
+                            <span class="flex-1 truncate">{$modulPage->field.name}</span>
+                        </a>
+                        {navigation id=$modulPage->field.id var=modulnavmobile}
+                        {if $modulnavmobile}
+                        <ul class="mt-1 ms-5 ps-3 space-y-1 border-l border-subnav">
+                            {foreach from=$modulnavmobile item=modullink name=modulnavmob}
+                            <li>
+                                <a href="{page_url page=$modullink}" class="flex items-center gap-3 rounded-2xl px-3 py-2 text-sm text-primary hover:bg-neutral-200 dark:hover:bg-neutral-900 transition-all {if $page->field.id == $modullink->field.id}bg-secondary font-semibold{/if}">
+                                    {if strpos($modullink->field.name|lower, "method") !== false}
+                                        <svg class="size-4 fill-primary shrink-0"><use xlink:href="#icon-methodik"></use></svg>
+                                    {else}
+                                        <svg class="size-4 fill-primary shrink-0"><use xlink:href="#icon-{$modullink->field.name|lower}"></use></svg>
+                                    {/if}
+                                    <span class="flex-1 truncate">{$modullink->field.name}</span>
+                                </a>
+                            </li>
+                            {/foreach}
+                        </ul>
+                        {/if}
+                        {navigation_end}
+                    </li>
+                    {/if}
+                    {if $auth->getId() == "3d3815b595f1eefe40c0c91f674dc6d1"}
+                    <li>
+                        <a href="#" class="flex items-center gap-3 rounded-2xl px-3 py-2.5 text-sm font-medium text-primary hover:bg-neutral-200 dark:hover:bg-neutral-900 transition-all">
+                            <svg class="size-5 fill-primary shrink-0"><use xlink:href="#icon-ausbildungsnachweis"></use></svg>
+                            <span class="flex-1 truncate">Ausbildungsnachweis</span>
+                        </a>
+                    </li>
+                    {/if}
+                </ul>
             </div>
+
+            {if $auth->getId() == "3d3815b595f1eefe40c0c91f674dc6d1"}
+            <div>
+                <p class="px-3 mb-2 text-xs font-semibold uppercase text-secondary">System</p>
+                <ul class="space-y-1">
+                    <li>
+                        <a href="{page_url id=$notificationPage}" class="flex items-center gap-3 rounded-2xl px-3 py-2.5 text-sm font-medium text-primary hover:bg-neutral-200 dark:hover:bg-neutral-900 transition-all {if $page->field.id == $notificationPage}bg-secondary font-semibold{/if}">
+                            <svg class="size-5 stroke-primary shrink-0" fill="none" stroke-width="1.5"><use xlink:href="#icon-notification"></use></svg>
+                            <span class="flex-1 truncate">Benachrichtigungen</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{page_url id=$settingsPage}" class="flex items-center gap-3 rounded-2xl px-3 py-2.5 text-sm font-medium text-primary hover:bg-neutral-200 dark:hover:bg-neutral-900 transition-all {if $page->field.id == $settingsPage}bg-secondary font-semibold{/if}">
+                            <svg class="size-5 stroke-primary shrink-0" fill="none" stroke-width="1.5"><use xlink:href="#icon-settings"></use></svg>
+                            <span class="flex-1 truncate">Einstellungen</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{if $hilfesupportPage}{page_url id=$hilfesupportPage}{else}#{/if}" class="flex items-center gap-3 rounded-2xl px-3 py-2.5 text-sm font-medium text-primary hover:bg-neutral-200 dark:hover:bg-neutral-900 transition-all">
+                            <svg class="size-5 stroke-primary shrink-0" fill="none" stroke-width="1.5"><use xlink:href="#icon-frage"></use></svg>
+                            <span class="flex-1 truncate">Hilfe & Support</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            {/if}
+        </nav>
+
+        <div hidden class="px-3 py-3 border-t border-subnav">
+            <a href="{logout_url id=1}" class="flex items-center gap-3 rounded-2xl px-3 py-2.5 text-sm font-medium hover:bg-neutral-200 dark:hover:bg-neutral-900 transition-all">
+                <svg class="size-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><use xlink:href="#icon-logout"></use></svg>
+                <span class="flex-1 truncate">Abmelden</span>
+            </a>
         </div>
 
         {if $auth->getId()}
-        <div class="flex items-center py-4 px-6.5 gap-3.5 bg-primary" id="avatarButton" type="button" type="button" data-dropdown-toggle="userDropdown">
-            <div class="relative inline-flex items-center justify-center w-9 h-9 overflow-hidden bg-secondary rounded-full">
+        <div class="flex items-center py-4 px-6 gap-3 border-t border-subnav">
+            <div class="relative inline-flex items-center justify-center w-9 h-9 overflow-hidden bg-secondary rounded-full shrink-0">
                 {if $auth->user->extra.profile_picture}
                 <img src="{$currHost}/{$auth->user->extra.profile_picture}" class="w-9 h-9" />
                 {else}
                 <span class="font-medium text-primary text-lg">{$auth->user->extra.vorname|substr:0:1}{$auth->user->extra.name|substr:0:1}</span>
                 {/if}
             </div>
-            <div class="font-medium">
-                <div class="leading-snug">{$auth->user->extra.vorname} {$auth->user->extra.name}</div>
-                <div class="text-sm font-normal truncate">
+            <div class="font-medium min-w-0">
+                <div class="text-sm leading-snug text-primary truncate">{$auth->user->extra.vorname} {$auth->user->extra.name}</div>
+                <div class="text-xs font-normal text-secondary truncate">
                     {if $schulzahl > 1 OR $schulzahl == 0}
                         {assign var="meine_schule" value="0"}
                     {else}
@@ -121,65 +203,13 @@
                     {/if}
                 </div>
             </div>
+            <a href="{logout_url id=1}" class="ml-auto">
+                <svg class="size-5 stroke-primary" fill="none" stroke-width="1.5"><use xlink:href="#icon-logout"></use></svg>
+            </a>
         </div>
         {/if}
 
-        <div class="p-5 py-3">
-            <ul id="sidebar_mainnav">
-                {if $auth->getId() == "3d3815b595f1eefe40c0c91f674dc6d1"}
-                <li>
-                    <a href="{page_url id=$dashboardPage}">
-                        <svg class="size-6 stroke-primary"><use xlink:href="#icon-dashboard2"></use></svg>
-                        <span class="flex-1 ms-5 whitespace-nowrap">Dashboard</span>
-                    </a>
-                </li>
-                {/if}
-                {if strpos($page->field.type, "modul") !== false}
-                <li>
-                    <a href="{page_url page=$modulPage}" class="{if $page->field.id == $modulPage->field.id}bg-primary{/if}">
-                        <svg class="size-6 fill-primary"><use xlink:href="#icon-folder"></use></svg>
-                        <span class="flex-1 ms-5 whitespace-nowrap">{$modulPage->field.name}</span>
-                    </a>
-                </li>
-                {navigation id=$modulPage->field.id var=modulnavmobile}
-                {foreach from=$modulnavmobile item=modullink name=modulnavmob}
-                <li>
-                    <a href="{page_url page=$modullink}" class="{if $page->field.id == $modullink->field.id}bg-primary{/if}">
-                        {if strpos($modullink->field.name|lower, "method") !== false}
-                            <svg class="size-6 fill-primary"><use xlink:href="#icon-methodik"></use></svg>
-                        {else}
-                            <svg class="size-6 fill-primary"><use xlink:href="#icon-{$modullink->field.name|lower}"></use></svg>
-                        {/if}
-                        <span class="flex-1 ms-5 whitespace-nowrap">{$modullink->field.name}</span>
-                    </a>
-                </li>
-                {/foreach}
-                {navigation_end}
-                {/if}
-                {if $auth->getId() == "3d3815b595f1eefe40c0c91f674dc6d1"}
-                <li>
-                    <a href="#">
-                        <svg class="size-6 fill-primary"><use xlink:href="#icon-ausbildungsnachweis"></use></svg>
-                        <span class="flex-1 ms-5 whitespace-nowrap">Ausbildungsnachweis</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="{page_url id=$settingsPage}">
-                        <svg class="size-6 stroke-primary" fill="none" stroke-width="1.5"><use xlink:href="#icon-settings"></use></svg>
-                        <span class="flex-1 ms-5 whitespace-nowrap">Einstellungen</span>
-                    </a>
-                </li>
-                {/if}
-                <li>
-                    <a href="{logout_url id=1}" class="flex items-center p-3 text-primary rounded-lg group">
-                        <svg class="size-6 stroke-primary" fill="none" viewBox="0 0 24 24" stroke-width="1.5"><use xlink:href="#icon-logout"></use></svg>
-                        <span class="flex-1 ms-5 whitespace-nowrap">Abmelden</span>
-                    </a>
-                </li>
-            </ul>
-        </div>
-
-        <div class="p-4 bz_info w-full absolute bottom-0 bg-subnav flex items-center gap-4">
+        <div hidden class="p-4 bz_info w-full bg-subnav flex items-center gap-4">
             <div>
                 {if $auth->getId()}
                     {if $schulzahl > 1 OR $schulzahl == 0}
@@ -236,50 +266,20 @@
     {/if}
 
     <div class="flex p-5 ml-auto gap-4 xl:pr-10">
-        <button type="button" id="dropdownNotificationButton" data-dropdown-toggle="dropdownNotification" class="bg-secondary cursor-pointer relative inline-flex items-center px-3 py-2 text-sm font-medium text-center text-secondary rounded-full">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M14.857 17.082a23.848 23.848 0 0 0 5.454-1.31A8.967 8.967 0 0 1 18 9.75V9A6 6 0 0 0 6 9v.75a8.967 8.967 0 0 1-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 0 1-5.714 0m5.714 0a3 3 0 1 1-5.714 0" />
-            </svg>
-        </button>
-
-        <!-- Benachrichtigungen -->
-        <div id="dropdownNotification" class="z-20 hidden w-full max-w-sm bg-secondary rounded-lg shadow-sm" aria-labelledby="dropdownNotificationButton">
-            <div class="block px-4 py-2 font-medium text-center text-primary rounded-t-lg bg-secondary">Benachrichtigungen</div>
-            <div class="bg-primary">
-                <a href="#" class="flex px-4 py-3">
-                    <div class="shrink-0 relative inline-flex items-center justify-center w-10 h-10 overflow-hidden bg-secondary rounded-full">
-                        <span class="font-medium text-gray-600">JL</span>
-                    </div>
-                    <div class="w-full ps-3">
-                        <div class="text-primary text-sm mb-1.5 ">Die UEBA-Plattform wurde aktualisiert. Wir haben für dich eine neue Anleitung geschrieben.</div>
-                        <div class="text-xs text-secondary">vor kurzem</div>
-                    </div>
-                </a>
-            </div>
-            <a href="#" class="block py-2 text-sm font-medium text-center text-primary rounded-b-lg bg-secondary">
-                <div class="inline-flex items-center">
-                <svg class="w-4 h-4 me-2 text-gray-500 " aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 14">
-                    <path d="M10 0C4.612 0 0 5.336 0 7c0 1.742 3.546 7 10 7 6.454 0 10-5.258 10-7 0-1.664-4.612-7-10-7Zm0 10a3 3 0 1 1 0-6 3 3 0 0 1 0 6Z"/>
-                </svg>
-                    Alle aufrufen
-                </div>
-            </a>
-        </div>
-
         <!-- DESKTOP: Profil -->
         <div class="hidden md:block cursor-pointer">
             {if $auth->getId()}
-            <div class="flex items-center gap-4" id="avatarButton" type="button" type="button" data-dropdown-toggle="userDropdown">
-                <div class="relative inline-flex items-center justify-center w-12 h-12 overflow-hidden bg-secondary rounded-full">
+            <div class="flex items-center gap-3 p-2 rounded-full hover:bg-neutral-200 dark:hover:bg-neutral-900 transition-all" id="avatarButton" data-dropdown-toggle="userDropdown" data-dropdown-placement="bottom-end">
+                <div class="relative inline-flex items-center justify-center w-10 h-10 overflow-hidden bg-secondary rounded-full shrink-0">
                     {if $auth->user->extra.profile_picture}
-                    <img src="{$currHost}/{$auth->user->extra.profile_picture}" class="w-12 h-12" />
+                    <img src="{$currHost}/{$auth->user->extra.profile_picture}" class="w-10 h-10" />
                     {else}
                     <span class="font-medium text-primary text-lg">{$auth->user->extra.vorname|substr:0:1}{$auth->user->extra.name|substr:0:1}</span>
                     {/if}
                 </div>
-                <div class="font-medium">
-                    <div>{$auth->user->extra.vorname} {$auth->user->extra.name}</div>
-                    <div class="text-sm text-secondary">
+                <div class="font-medium min-w-0">
+                    <div class="text-sm leading-snug truncate">{$auth->user->extra.vorname} {$auth->user->extra.name}</div>
+                    <div class="text-xs text-secondary truncate">
                     {if $schulzahl > 1 OR $schulzahl == 0}
                         {assign var="meine_schule" value="0"}
                     {else}
@@ -290,45 +290,68 @@
                     {/if}
                     </div>
                 </div>
+                <svg class="size-4 stroke-secondary shrink-0" fill="none" stroke-width="1.5"><use xlink:href="#icon-down"></use></svg>
             </div>
 
-            <div id="userDropdown" class="z-20 hidden bg-primary divide-y divide-neutral-300 dark:divide-neutral-700 rounded-lg shadow-lg w-fit">
-                <div class="px-4 py-3 text-sm text-secondary">
-                    <div>{$auth->user->field.username}</div>
-                    <div class="font-medium truncate">{$auth->user->field.email}</div>
-                </div>
+            <div id="userDropdown" class="text-sm z-20 hidden bg-primary divide-y divide-neutral-300 dark:divide-neutral-700 rounded-2xl shadow-lg border border-subnav w-72 overflow-hidden">
                 {if $auth->getId() == "3d3815b595f1eefe40c0c91f674dc6d1"}
-                <ul class="py-2 text-sm" aria-labelledby="avatarButton">
+                <ul aria-labelledby="avatarButton">
                     <li>
-                        <a href="{page_url id=$dashboardPage}" class="block px-4 py-2 text-secondary">Dashboard</a>
+                        <a href="{page_url id=$dashboardPage}" class="flex items-center gap-3 px-4 py-3 text-secondary hover:bg-neutral-200 dark:hover:bg-neutral-900 transition-all">
+                            <svg class="size-5 stroke-primary shrink-0"><use xlink:href="#icon-dashboard2"></use></svg>
+                            Dashboard
+                        </a>
                     </li>
                     <li>
-                        <a href="#" class="block px-4 py-2 text-secondary">Ausbildungsnachweis</a>
+                        <a href="#" class="flex items-center gap-3 px-4 py-3 text-secondary hover:bg-neutral-200 dark:hover:bg-neutral-900 transition-all">
+                            <svg class="size-5 fill-primary shrink-0"><use xlink:href="#icon-ausbildungsnachweis"></use></svg>
+                            Ausbildungsnachweis
+                        </a>
                     </li>
                     <li>
                         <form class="clickable" id="bearbForm" method="post" action="{page_url id=1131198 editID=$editID}">
                             <textarea id="theContent" name="theContent" hidden></textarea>
                             {if $hasPerm && $page->extra.is_editable == 1}
-                            <a class="block px-4 py-2 text-secondary" onclick="document.getElementById('bearbForm').submit();">
+                            <a class="flex items-center gap-3 px-4 py-3 text-secondary hover:bg-neutral-200 dark:hover:bg-neutral-900 transition-all" onclick="document.getElementById('bearbForm').submit();">
                             {else}
-                            <a class="block px-4 py-2 text-secondary" style="cursor: not-allowed;" disabled>
+                            <a class="flex items-center gap-3 px-4 py-3 text-secondary" style="cursor: not-allowed;" disabled>
                             {/if}
+                                <svg class="size-5 stroke-primary shrink-0" fill="none" stroke-width="1.5"><use xlink:href="#icon-pencil"></use></svg>
                                 Seite bearbeiten
                             </a>
                         </form>
                     </li>
                     <li>
-                        <a href="{page_url id=$settingsPage}" class="block px-4 py-2 text-secondary">Einstellungen</a>
+                        <a href="{page_url id=$notificationPage}" class="flex items-center gap-3 px-4 py-3 text-secondary hover:bg-neutral-200 dark:hover:bg-neutral-900 transition-all">
+                            <svg class="size-5 stroke-primary shrink-0" fill="none" stroke-width="1.5"><use xlink:href="#icon-notification"></use></svg>
+                            Benachrichtigungen (0)
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{page_url id=$settingsPage}" class="flex items-center gap-3 px-4 py-3 text-secondary hover:bg-neutral-200 dark:hover:bg-neutral-900 transition-all">
+                            <svg class="size-5 stroke-primary shrink-0" fill="none" stroke-width="1.5"><use xlink:href="#icon-settings"></use></svg>
+                            Einstellungen
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{page_url id=$hilfesupportPage}" class="flex items-center gap-3 px-4 py-3 text-secondary hover:bg-neutral-200 dark:hover:bg-neutral-900 transition-all">
+                            <svg class="size-5 stroke-primary shrink-0" fill="none" stroke-width="1.5"><use xlink:href="#icon-frage"></use></svg>
+                            Hilfe & Support
+                        </a>
                     </li>
                 </ul>
                 {/if}
-                <div class="py-1">
-                    {if $saml && $showIdPLoginBtn==1}
-                        <a href="{logout_url id=1}" class="block px-4 py-2 text-sm text-secondary">Abmelden</a>
-                    {else}
-                        <a href="{logout_url id=1}" class="block px-4 py-2 text-sm text-secondary">Abmelden</a>
-                    {/if}
-                </div>
+                {if $saml && $showIdPLoginBtn==1}
+                    <a href="{logout_url id=1}" class="flex items-center gap-3 px-4 py-3 hover:bg-neutral-200 dark:hover:bg-neutral-900 transition-all">
+                        <svg class="size-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><use xlink:href="#icon-logout"></use></svg>
+                        Abmelden
+                    </a>
+                {else}
+                    <a href="{logout_url id=1}" class="flex items-center gap-3 px-4 py-3 hover:bg-neutral-200 dark:hover:bg-neutral-900 transition-all">
+                        <svg class="size-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><use xlink:href="#icon-logout"></use></svg>
+                        Abmelden
+                    </a>
+                {/if}
             </div>
             {else}
             <div class="flex items-center gap-4 cursor-pointer" data-modal-target="loginModal" data-modal-toggle="loginModal">
@@ -394,7 +417,7 @@
                             {if $formular->field.inactive == 0}
                             <li>
                                 <a onclick="event.preventDefault(); selectForm(this, '{$formular->field.name}')" href="{page_url page=$formular}" {if strpos($formular->field.type, "angebot") || strpos($formular->field.type, "rechnung")}class="printForm" data-print-only="true"{/if}>
-                                    <div class="group flex items-center gap-4 px-4 py-3 rounded-2xl hover:bg-neutral-100 dark:hover:bg-neutral-800 cursor-pointer transition-all border border-transparent">
+                                    <div class="group flex items-center gap-4 px-4 py-3 rounded-2xl hover:bg-neutral-200 dark:hover:bg-neutral-900 cursor-pointer transition-all border border-transparent">
                                         <svg class="size-6 fill-primary"><use xlink:href="#icon-{$formular->field.name|replace:'ü':'ue'|lower}"></use></svg>
                                         <span class="font-medium text-primary">{$formular->field.name}</span>
                                         <svg class="stroke-primary size-5 ml-auto" fill="none"><use xlink:href="#icon-right"></use></svg>
@@ -428,7 +451,7 @@
                                     {get_children page=$hilfe var="hilfechildren"}
                                 <li>
                                     {if $hilfechildren}
-                                    <button type="button" class="group w-full flex items-center gap-4 px-4 py-2 rounded-2xl hover:bg-neutral-100 dark:hover:bg-neutral-800 cursor-pointer transition-all border border-transparent" data-accordion-target="#hilfe-{$hilfe->field.id}" aria-expanded="false" aria-controls="hilfe-{$hilfe->field.id}">
+                                    <button type="button" class="group w-full flex items-center gap-4 px-4 py-2 rounded-2xl hover:bg-neutral-200 dark:hover:bg-neutral-900 cursor-pointer transition-all border border-transparent" data-accordion-target="#hilfe-{$hilfe->field.id}" aria-expanded="false" aria-controls="hilfe-{$hilfe->field.id}">
                                         <svg class="size-6 {if $hilfe->field.name == 'Auftragsstart'}stroke-primary{else}fill-primary{/if}"><use xlink:href="#icon-{$hilfe->field.name|replace:'ü':'ue'|lower}"></use></svg>
                                         <span class="font-medium text-primary">{$hilfe->field.name}</span>
                                         <svg data-accordion-icon="" stroke-width="2" class="stroke-primary rotate-180 shrink-0 size-5 ml-auto" aria-hidden="true"><use xlink:href="#icon-up"></use></svg>
@@ -437,14 +460,14 @@
                                         <ul class="space-y-1 mx-10 mt-1">
                                             {foreach from=$hilfechildren item=hilfeC}
                                             <li>
-                                                <a onclick="event.preventDefault(); selectForm(this, '{$hilfeC->field.name}')" href="{page_url page=$hilfeC}" class="block px-4 py-2 hover:bg-neutral-100 dark:hover:bg-neutral-800 rounded-lg text-primary text-sm transition-colors">{$hilfeC->field.name}</a>
+                                                <a onclick="event.preventDefault(); selectForm(this, '{$hilfeC->field.name}')" href="{page_url page=$hilfeC}" class="block px-4 py-2 hover:bg-neutral-200 dark:hover:bg-neutral-900 rounded-lg text-primary text-sm transition-colors">{$hilfeC->field.name}</a>
                                             </li>
                                             {/foreach}
                                         </ul>
                                     </div>
                                     {else}
                                     <a onclick="event.preventDefault(); selectForm(this, '{$hilfe->field.name}')" href="{page_url page=$hilfe}">
-                                        <div class="group flex items-center gap-4 px-4 py-3 rounded-2xl hover:bg-neutral-100 dark:hover:bg-neutral-800 cursor-pointer transition-all border border-transparent">
+                                        <div class="group flex items-center gap-4 px-4 py-3 rounded-2xl hover:bg-neutral-200 dark:hover:bg-neutral-900 cursor-pointer transition-all border border-transparent">
                                             <svg class="size-6 {if $hilfe->field.name == 'Auftragsstart'}stroke-primary{else}fill-primary{/if}"><use xlink:href="#icon-{$hilfe->field.name|replace:'ü':'ue'|lower}"></use></svg>
                                             <span class="font-medium text-primary">{$hilfe->field.name}</span>
                                             <svg class="stroke-primary size-5 ml-auto" fill="none"><use xlink:href="#icon-right"></use></svg>

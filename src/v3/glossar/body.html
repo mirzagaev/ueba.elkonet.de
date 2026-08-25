@@ -1,0 +1,48 @@
+{* skin/ueba/style_tailwind.css ist statisch vorkompiliert (siehe Kommentar in
+   skin/ueba/v3/lerneinheit/nav.tpl) - "group-open:rotate-180" o.ae. wirkt darin nicht,
+   deshalb hier eine kleine handgeschriebene Klasse fuers Drehen des Toggle-Icons. *}
+<style>
+{literal}
+.glossar-toggle-icon { transition: transform .15s ease; }
+details[open] > summary > .glossar-toggle-icon { transform: rotate(180deg); }
+{/literal}
+</style>
+
+<div class="page_headline">
+	<h2 class="text-2xl xl:text-3xl font-bold flex items-center title-font">{$page->field.title}</h2>
+</div>
+
+{if $page->field.content}
+<div class="content-block text-base leading-relaxed my-4 max-w-3xl">
+	{$page->field.content}
+</div>
+{/if}
+
+<div class="flex flex-wrap gap-1 my-6 max-w-2xl min-w-2xl mx-auto">
+	<a href="{page_url page=$page}" class="flex items-center justify-center h-8 px-3 rounded-md text-sm font-semibold bg-secondary text-secondary {if !$char}border-2 border-secondary-active{/if}">
+		Alle
+	</a>
+	{foreach from=$alphabet item=buchstabe}
+	<a href="{page_url page=$page char=$buchstabe|mb_strtolower}" class="flex items-center justify-center size-8 rounded-md text-sm font-semibold bg-secondary text-secondary {if $char == $buchstabe|mb_strtolower}border-2 border-secondary-active{/if}">
+		{$buchstabe}
+	</a>
+	{/foreach}
+</div>
+
+{if $terms->numRecords()}
+<div class="bg-primary rounded-2xl max-w-2xl min-w-2xl shadow-sm p-2 mx-auto">
+	{foreach from=$terms item=begriff name=terms}
+	<details class="p-3 {if !$smarty.foreach.terms.first}border-t-1 border-subnav{/if}">
+		<summary class="cursor-pointer title-font font-medium flex items-center justify-between gap-3">
+			{$begriff->field.title}
+			<svg class="size-4 stroke-secondary shrink-0 glossar-toggle-icon"><use xlink:href="#icon-down"></use></svg>
+		</summary>
+		<div class="mt-3 text-sm text-secondary leading-relaxed">
+			{$begriff->field.content}
+		</div>
+	</details>
+	{/foreach}
+</div>
+{else}
+<p class="text-secondary">Es wurden keine Glossar-Einträge gefunden.</p>
+{/if}

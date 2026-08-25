@@ -1,0 +1,1 @@
+{value var="avatare" type="editor" title="BILDER"}

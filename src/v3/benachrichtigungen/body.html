@@ -1,0 +1,91 @@
+<div class="page_headline">
+    <div class="flex items-center justify-between gap-4 flex-wrap">
+        <h2 class="text-2xl xl:text-3xl font-bold flex items-center">{$page->field.title}</h2>
+        <button type="button" id="notifMarkAllRead" class="btn-secondary rounded-full">
+            Alle als gelesen markieren
+        </button>
+    </div>
+    <p class="text-secondary text-sm mt-2">{$page->field.short}</p>
+</div>
+
+<div class="rounded-2xl shadow-md bg-primary overflow-hidden">
+    <div class="flex items-center justify-between gap-4 flex-wrap p-6 border-b border-subnav">
+        <div class="flex items-center gap-3">
+            <span class="text-lg font-bold text-primary">Alle Benachrichtigungen</span>
+            {if $notificationsUnreadCount > 0}
+            <span class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-semibold bg-neutral-200 dark:bg-neutral-700 text-primary">{$notificationsUnreadCount} ungelesen</span>
+            {/if}
+        </div>
+        <div class="inline-flex items-center gap-1 rounded-full bg-neutral-200 dark:bg-neutral-700 p-1" id="notifFilterTabs">
+            <button type="button" data-filter="all" class="notif-filter-btn is-active bg-primary shadow-sm px-3 py-1 text-sm font-medium rounded-full cursor-pointer">Alle</button>
+            <button type="button" data-filter="unread" class="notif-filter-btn px-3 py-1 text-sm font-medium rounded-full cursor-pointer">Ungelesen</button>
+            <button type="button" data-filter="read" class="notif-filter-btn px-3 py-1 text-sm font-medium rounded-full cursor-pointer">Gelesen</button>
+        </div>
+    </div>
+
+    <div class="divide-y divide-neutral-300 dark:divide-neutral-700" id="notificationsList">
+        {foreach from=$notifications item=n}
+        <div class="notification-row flex items-start gap-4 p-6 {if $n.unread}bg-neutral-50 dark:bg-neutral-700{/if}" data-unread="{if $n.unread}1{else}0{/if}">
+            <div class="shrink-0 inline-flex items-center justify-center w-10 h-10 rounded-full bg-neutral-100 dark:bg-neutral-600">
+                <svg class="size-5 stroke-primary" fill="none" stroke-width="1.5"><use xlink:href="#icon-{if $n.icon}{$n.icon}{else}notification{/if}"></use></svg>
+            </div>
+            <div class="flex-1 min-w-0">
+                <div class="flex items-center gap-2">
+                    <span class="font-semibold text-primary">{$n.title}</span>
+                    {if $n.unread}<span class="notif-dot inline-block w-2 h-2 rounded-full bg-red-600 shrink-0"></span>{/if}
+                </div>
+                <p class="text-sm text-secondary mt-1">{$n.message}</p>
+                <span class="text-xs text-secondary">{$n.time}</span>
+            </div>
+        </div>
+        {foreachelse}
+        <div class="p-6 text-center text-secondary">Keine Benachrichtigungen vorhanden.</div>
+        {/foreach}
+    </div>
+</div>
+
+<script>
+{literal}
+(function () {
+    var list = document.getElementById('notificationsList');
+    var tabs = document.getElementById('notifFilterTabs');
+    var markAllBtn = document.getElementById('notifMarkAllRead');
+
+    function applyFilter(filter) {
+        if (!list) { return; }
+        list.querySelectorAll('.notification-row').forEach(function (row) {
+            var isUnread = row.getAttribute('data-unread') === '1';
+            var show = filter === 'all' || (filter === 'unread' && isUnread) || (filter === 'read' && !isUnread);
+            row.classList.toggle('hidden', !show);
+        });
+    }
+
+    if (tabs) {
+        var tabButtons = tabs.querySelectorAll('.notif-filter-btn');
+        tabButtons.forEach(function (btn) {
+            btn.addEventListener('click', function () {
+                tabButtons.forEach(function (b) {
+                    b.classList.remove('is-active', 'bg-primary', 'shadow-sm');
+                });
+                btn.classList.add('is-active', 'bg-primary', 'shadow-sm');
+                applyFilter(btn.getAttribute('data-filter'));
+            });
+        });
+    }
+
+    // Hinweis: es gibt aktuell keine persistente Benachrichtigungs-Tabelle - "Alle als gelesen
+    // markieren" wirkt daher nur auf die aktuelle Ansicht, nicht serverseitig (siehe index.php).
+    if (markAllBtn) {
+        markAllBtn.addEventListener('click', function () {
+            if (!list) { return; }
+            list.querySelectorAll('.notification-row').forEach(function (row) {
+                row.setAttribute('data-unread', '0');
+                row.classList.remove('bg-neutral-50', 'dark:bg-neutral-700');
+                var dot = row.querySelector('.notif-dot');
+                if (dot) { dot.remove(); }
+            });
+        });
+    }
+})();
+{/literal}
+</script>
