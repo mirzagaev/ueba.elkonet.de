@@ -1,0 +1,5 @@
+{navigation page=$page var=forms query.where='type="fragebogen/form"'}
+{foreach from=$forms item=form}
+	<li><a href="{page_url page=$form}">{$form->field.name}</a></li>
+{/foreach}
+

@@ -1,5 +1,5 @@
 <!-- Elternseite der Berufe -->
-<section class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 mt-5 mb-10 gap-5 xl:gap-10">
+<section class="berufeUebersicht grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 mt-5 mb-10 gap-5 xl:gap-10">
 {navigation id=$page->field.id var=berufnavigation}
 {foreach from=$berufnavigation item=beruf name=nav1}
 {if strpos($beruf->field.type, "beruf") !== false && $beruf->extra.no_nav_item !== 1}

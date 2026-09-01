@@ -2202,6 +2202,9 @@
   .min-w-48 {
     min-width: calc(var(--spacing) * 48);
   }
+  .min-w-72 {
+    min-width: calc(var(--spacing) * 72);
+  }
   .min-w-\[200px\] {
     min-width: 200px;
   }
@@ -4630,6 +4633,11 @@
       display: block;
     }
   }
+  .md\:flex {
+    @media (width >= 48rem) {
+      display: flex;
+    }
+  }
   .md\:hidden {
     @media (width >= 48rem) {
       display: none;
@@ -5882,7 +5890,7 @@
       padding: calc(var(--spacing) * 3);
     }
   }
-  .templateLayout:not(:has(.templateLayout)) {
+  .templateLayout:not(:has(.templateLayout, .berufeUebersicht)) {
     margin: calc(var(--spacing) * 5);
     display: flex;
     flex-direction: column;

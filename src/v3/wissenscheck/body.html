@@ -1,0 +1,21 @@
+<div class="page_headline">
+    <h2 class="text-2xl xl:text-3xl font-bold flex items-center">
+        <svg class="fill-primary size-8 xl:size-10 mr-5"><use xlink:href="#icon-wissenscheck"></use></svg>
+        {$page->field.title}
+    </h2>
+    <div class="text-lg xl:text-xl mt-3">{$page->field.short}</div>
+
+    {* Migration alter swlfragebogen-Frage-/Antwortseiten auf die neuen v3-Seitentypen -
+       Button ist nur fuer Admins sichtbar (siehe site/ueba/v3/wissenscheck/index.php) *}
+    {if $isAdmin}
+        {if $migrationResult}
+            <div class="alert-info">
+                <b>Migration abgeschlossen:</b>&nbsp;{$migrationResult.entries} Frage(n) und {$migrationResult.choices} Antwort(en) migriert.
+            </div>
+        {/if}
+        <form method="post" action="{page_url page=$page}">
+            <input type="hidden" name="migrate_old_wissenscheck" value="1">
+            <button type="submit" class="btn-success">Alte WissensCheck-Seiten migrieren</button>
+        </form>
+    {/if}
+</div>

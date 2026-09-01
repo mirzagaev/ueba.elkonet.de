@@ -38,7 +38,7 @@
     {if $auth->getId()}
         {if $schulzahl > 1 OR $schulzahl == 0}
             {assign var="meine_schule" value="0"}
-            <a class="w-fit mx-3 md:mx-6 my-1 bg-opacity-25 bg-white/40 p-2 flex rounded-xl" href="{$homeLink}/?sid={$school}">
+            <a class="w-fit mx-6 my-1 bg-opacity-25 bg-white/40 flex rounded-xl" href="{$homeLink}/?sid={$school}">
                 <img id="imgbrandinglogo" class="h-12" alt="{$currHost}" src="{$url_dir}skin/{$site->skin}/img/ELKOnet_Logo_Vector.png" />
             </a>
         {else}
@@ -79,15 +79,14 @@
         {/if}
     {else} 
     <!-- ELKOnet-Logo als default einblenden -->
-    <a class="w-fit mx-3 md:mx-6 my-1 bg-opacity-25 bg-white/40 p-2 flex rounded-xl" href="{$homeLink}/?sid={$school}">
+    <a class="w-fit mx-6 my-1 bg-opacity-25 bg-white/40 p-2 flex rounded-xl" href="{$homeLink}/?sid={$school}">
         <img id="imgbrandinglogo" class="h-12" alt="{$currHost}" src="{$url_dir}skin/{$site->skin}/img/ELKOnet_Logo_Vector.png" />
     </a>
     {/if}
 
     <!-- MOBIL: Sidebar -->
     {if $auth->getId()}
-    <div id="ueba-mobilsidebar" class="w-72 absolute left-0 top-0 z-40 flex flex-col h-screen -translate-x-full transition-transform bg-primary shadow-xl" tabindex="-1" aria-labelledby="drawer-label" aria-hidden="true">
-
+    <div id="ueba-mobilsidebar" class="min-w-72 max-w-96 absolute left-0 top-0 z-40 flex flex-col h-screen -translate-x-full transition-transform bg-primary shadow-xl" tabindex="-1" aria-labelledby="drawer-label" aria-hidden="true">
         <div class="flex items-center justify-between bg-secondary gap-3 px-6 py-3">
             <div>
                 <h2 id="drawer-label" class="text-primary text-lg font-semibold"><a href="{page_url id=1}">Ausbildungsportal</a></h2>
@@ -105,12 +104,19 @@
                     {if $auth->getId() == "3d3815b595f1eefe40c0c91f674dc6d1"}
                     <li>
                         <a href="{page_url id=$dashboardPage}" class="flex items-center gap-3 rounded-2xl px-3 py-2.5 text-sm font-medium text-primary hover:bg-neutral-200 dark:hover:bg-neutral-900 transition-all {if $page->field.id == $dashboardPage}bg-secondary font-semibold{/if}">
-                            <svg class="size-5 stroke-primary shrink-0"><use xlink:href="#icon-dashboard2"></use></svg>
+                            <svg class="size-5 fill-primary"><use xlink:href="#icon-dashboard"></use></svg>
                             <span class="flex-1 truncate">Dashboard</span>
                         </a>
                     </li>
                     {/if}
-                    {if strpos($page->field.type, "modul") !== false}
+                    {* $modulPage wird oben nur zugewiesen, wenn im Breadcrumb-Pfad tatsaechlich eine
+                       Seite vom Typ "v3/modul" vorkommt (siehe skin/ueba/theme.php). Seitentypen wie
+                       v3/wissenscheck koennen aber auch AUSSERHALB dieses Baums liegen (z.B.
+                       unter einem Lerneinheit-Kapitel) - ohne die zusaetzliche "&& $modulPage"-Pruefung
+                       wuerde {navigation id=$modulPage->field.id ...} unten mit einer undefinierten
+                       Seite aufgerufen und die zugehoerige {navigation_end} liefe ins Leere
+                       (array_pop() auf einen nie befuellten Stack -> Fatal Error). *}
+                    {if $modulPage}
                     <li>
                         <a href="{page_url page=$modulPage}" class="flex items-center gap-3 rounded-2xl px-3 py-2.5 text-sm font-medium text-primary hover:bg-neutral-200 dark:hover:bg-neutral-900 transition-all {if $page->field.id == $modulPage->field.id}bg-secondary font-semibold{/if}">
                             <svg class="size-5 fill-primary shrink-0"><use xlink:href="#icon-folder"></use></svg>
@@ -174,15 +180,8 @@
             {/if}
         </nav>
 
-        <div hidden class="px-3 py-3 border-t border-subnav">
-            <a href="{logout_url id=1}" class="flex items-center gap-3 rounded-2xl px-3 py-2.5 text-sm font-medium hover:bg-neutral-200 dark:hover:bg-neutral-900 transition-all">
-                <svg class="size-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><use xlink:href="#icon-logout"></use></svg>
-                <span class="flex-1 truncate">Abmelden</span>
-            </a>
-        </div>
-
         {if $auth->getId()}
-        <div class="flex items-center py-4 px-6 gap-3 border-t border-subnav">
+        <div class="flex items-center py-4 px-6 gap-3 bg-white dark:bg-neutral-900">
             <div class="relative inline-flex items-center justify-center w-9 h-9 overflow-hidden bg-secondary rounded-full shrink-0">
                 {if $auth->user->extra.profile_picture}
                 <img src="{$currHost}/{$auth->user->extra.profile_picture}" class="w-9 h-9" />
@@ -203,83 +202,43 @@
                     {/if}
                 </div>
             </div>
-            <a href="{logout_url id=1}" class="ml-auto">
+            <a href="{logout_url id=1}" title="Abmelden" class="ml-auto">
                 <svg class="size-5 stroke-primary" fill="none" stroke-width="1.5"><use xlink:href="#icon-logout"></use></svg>
             </a>
         </div>
         {/if}
-
-        <div hidden class="p-4 bz_info w-full bg-subnav flex items-center gap-4">
-            <div>
-                {if $auth->getId()}
-                    {if $schulzahl > 1 OR $schulzahl == 0}
-                        {assign var="meine_schule" value="0"}
-                        <a class="w-fit mx-3 md:mx-6 my-1 bg-opacity-25 bg-white/40 p-2 flex rounded-xl" href="{$homeLink}/?sid={$school}">
-                            <img id="imgbrandinglogo" class="h-12" alt="{$currHost}" src="{$url_dir}skin/{$site->skin}/img/ELKOnet_Logo_Vector.png" />
-                        </a>
-                    {else}
-                        {foreach from=$schulID item=school name=schloif}
-                            {* $smarty.foreach.schloif.iteration *}
-                            {assign var="meine_schule" value=$school}
-                            <!--I>Bildungszentrum ID: ({$school})</I-->
-                        {/foreach}
-                        
-                        {get_pages var="seiten" query.where="id=$school"}
-                
-                        {foreach from=$seiten item="seite"}
-                            {if $seite->extra.brandinglogo|count_characters > 1}
-                            <a class="block" data-schulID="{$schulID}" href="{$homeLink}/?sid={$school}">
-                                <img id="imgbrandinglogo" class="w-20 h-auto" alt="{$currHost}" src="{$seite->extra.brandinglogo}" />
-                            </a>
-                            {else}
-                            <a class="block" data-schulID="{$schulID}" href="{$homeLink}/?sid={$school}">
-                                <img id="imgbrandinglogo" class="w-20 h-auto" alt="{$currHost}" src="{$url_dir}skin/{$site->skin}/img/ELKOnet_Logo_Vector.png" />
-                            </a>
-                            {/if}
-                            
-                            {if $seite->extra.colortitelberufe} 
-                                {assign var="farbetitelberufe" value=$seite->extra.colortitelberufe}
-                            {/if}
-                        {/foreach}
-                    {/if}
-
-                    {if $InteDigiKundePID!=""}
-                        {get_pages var="inteDigiKunden" query.where="id=$InteDigiKundePID"}
-                        {foreach from=$inteDigiKunden item="inteDigiKunde"}
-                            {if $inteDigiKunde->extra.brandinglogo|count_characters > 1}
-                            <a class="block" {if $meine_schule!="0" && $meine_schule!=""}href="{$homeLink}/?sid={$school}{else}href='#'{/if}">
-                                <img id="imgbrandinglogo" class="w-20 h-auto" alt="https://lernportal.elkonet.de/" src="{$inteDigiKunde->extra.brandinglogo}" />
-                            </a>
-                            {/if}
-                        {/foreach}
-                    {/if}
-                {else} 
-                <!-- ELKOnet-Logo als default einblenden -->
-                <a class="block" href="index.html">
-                    <img class="w-20 h-auto" src="{$url_dir}skin/{$site->skin}/img/ELKOnet_Logo_Vector.png" />
-                </a>
-                {/if}
-            </div>
-            <div class="leading-snug text-secondary text-xs font-medium">{$beruf->field.name}</div>
-        </div>
     </div>
     {/if}
 
     <div class="flex p-5 ml-auto gap-4 xl:pr-10">
+        <button class="flex text-secondary items-center bg-secondary p-3 rounded-full cursor-pointer" onclick="toggleDarkMode()">
+            <svg class="size-6 stroke-primary"><use xlink:href="#icon-light"></use></svg>
+        </button>
+
         <!-- DESKTOP: Profil -->
-        <div class="hidden md:block cursor-pointer">
-            {if $auth->getId()}
-            <div class="flex items-center gap-3 p-2 rounded-full hover:bg-neutral-200 dark:hover:bg-neutral-900 transition-all" id="avatarButton" data-dropdown-toggle="userDropdown" data-dropdown-placement="bottom-end">
-                <div class="relative inline-flex items-center justify-center w-10 h-10 overflow-hidden bg-secondary rounded-full shrink-0">
+        {if $auth->getId()}
+        <div class="hidden md:flex cursor-pointer items-center gap-3 rounded-full hover:bg-neutral-200 dark:hover:bg-neutral-900 transition-all" id="avatarButton" data-dropdown-toggle="userDropdown" data-dropdown-placement="bottom-end">
+            <div class="relative inline-flex items-center justify-center w-12 h-12 overflow-hidden bg-secondary rounded-full shrink-0">
+                {if $auth->user->extra.profile_picture}
+                <img src="{$currHost}/{$auth->user->extra.profile_picture}" class="w-12 h-12" />
+                {else}
+                <span class="font-medium text-primary text-lg">{$auth->user->extra.vorname|substr:0:1}{$auth->user->extra.name|substr:0:1}</span>
+                {/if}
+            </div>
+        </div>
+
+        <div id="userDropdown" class="min-w-72 max-w-96 z-10 hidden bg-white dark:bg-neutral-900 divide-y divide-neutral-300 dark:divide-neutral-700 rounded-lg shadow-xl text-primary overflow-hidden">
+            <div class="px-4 py-3 flex items-center gap-4 hover:bg-neutral-200 dark:hover:bg-neutral-700">
+                <div class="relative inline-flex items-center justify-center w-12 h-12 overflow-hidden bg-secondary rounded-full shrink-0">
                     {if $auth->user->extra.profile_picture}
-                    <img src="{$currHost}/{$auth->user->extra.profile_picture}" class="w-10 h-10" />
+                    <img src="{$currHost}/{$auth->user->extra.profile_picture}" class="w-12 h-12 rounded-full" />
                     {else}
                     <span class="font-medium text-primary text-lg">{$auth->user->extra.vorname|substr:0:1}{$auth->user->extra.name|substr:0:1}</span>
-                    {/if}
+                {/if}
                 </div>
-                <div class="font-medium min-w-0">
-                    <div class="text-sm leading-snug truncate">{$auth->user->extra.vorname} {$auth->user->extra.name}</div>
-                    <div class="text-xs text-secondary truncate">
+                <div class="font-medium">
+                    <div>{$auth->user->extra.vorname} {$auth->user->extra.name}</div>
+                    <div class="text-sm font-normal">
                     {if $schulzahl > 1 OR $schulzahl == 0}
                         {assign var="meine_schule" value="0"}
                     {else}
@@ -290,82 +249,78 @@
                     {/if}
                     </div>
                 </div>
-                <svg class="size-4 stroke-secondary shrink-0" fill="none" stroke-width="1.5"><use xlink:href="#icon-down"></use></svg>
             </div>
-
-            <div id="userDropdown" class="text-sm z-20 hidden bg-primary divide-y divide-neutral-300 dark:divide-neutral-700 rounded-2xl shadow-lg border border-subnav w-72 overflow-hidden">
-                {if $auth->getId() == "3d3815b595f1eefe40c0c91f674dc6d1"}
-                <ul aria-labelledby="avatarButton">
-                    <li>
-                        <a href="{page_url id=$dashboardPage}" class="flex items-center gap-3 px-4 py-3 text-secondary hover:bg-neutral-200 dark:hover:bg-neutral-900 transition-all">
-                            <svg class="size-5 stroke-primary shrink-0"><use xlink:href="#icon-dashboard2"></use></svg>
-                            Dashboard
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#" class="flex items-center gap-3 px-4 py-3 text-secondary hover:bg-neutral-200 dark:hover:bg-neutral-900 transition-all">
-                            <svg class="size-5 fill-primary shrink-0"><use xlink:href="#icon-ausbildungsnachweis"></use></svg>
-                            Ausbildungsnachweis
-                        </a>
-                    </li>
-                    <li>
-                        <form class="clickable" id="bearbForm" method="post" action="{page_url id=1131198 editID=$editID}">
-                            <textarea id="theContent" name="theContent" hidden></textarea>
-                            {if $hasPerm && $page->extra.is_editable == 1}
-                            <a class="flex items-center gap-3 px-4 py-3 text-secondary hover:bg-neutral-200 dark:hover:bg-neutral-900 transition-all" onclick="document.getElementById('bearbForm').submit();">
-                            {else}
-                            <a class="flex items-center gap-3 px-4 py-3 text-secondary" style="cursor: not-allowed;" disabled>
-                            {/if}
-                                <svg class="size-5 stroke-primary shrink-0" fill="none" stroke-width="1.5"><use xlink:href="#icon-pencil"></use></svg>
-                                Seite bearbeiten
-                            </a>
-                        </form>
-                    </li>
-                    <li>
-                        <a href="{page_url id=$notificationPage}" class="flex items-center gap-3 px-4 py-3 text-secondary hover:bg-neutral-200 dark:hover:bg-neutral-900 transition-all">
-                            <svg class="size-5 stroke-primary shrink-0" fill="none" stroke-width="1.5"><use xlink:href="#icon-notification"></use></svg>
-                            Benachrichtigungen (0)
-                        </a>
-                    </li>
-                    <li>
-                        <a href="{page_url id=$settingsPage}" class="flex items-center gap-3 px-4 py-3 text-secondary hover:bg-neutral-200 dark:hover:bg-neutral-900 transition-all">
-                            <svg class="size-5 stroke-primary shrink-0" fill="none" stroke-width="1.5"><use xlink:href="#icon-settings"></use></svg>
-                            Einstellungen
-                        </a>
-                    </li>
-                    <li>
-                        <a href="{page_url id=$hilfesupportPage}" class="flex items-center gap-3 px-4 py-3 text-secondary hover:bg-neutral-200 dark:hover:bg-neutral-900 transition-all">
-                            <svg class="size-5 stroke-primary shrink-0" fill="none" stroke-width="1.5"><use xlink:href="#icon-frage"></use></svg>
-                            Hilfe & Support
-                        </a>
-                    </li>
-                </ul>
-                {/if}
-                {if $saml && $showIdPLoginBtn==1}
-                    <a href="{logout_url id=1}" class="flex items-center gap-3 px-4 py-3 hover:bg-neutral-200 dark:hover:bg-neutral-900 transition-all">
-                        <svg class="size-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><use xlink:href="#icon-logout"></use></svg>
-                        Abmelden
+            {if $auth->getId() == "3d3815b595f1eefe40c0c91f674dc6d1"}
+            <ul aria-labelledby="avatarButton">
+                <li>
+                    <a href="{page_url id=$dashboardPage}" class="flex items-center gap-3 px-4 py-3 hover:bg-neutral-200 dark:hover:bg-neutral-700 transition-all">
+                        <svg class="size-5 fill-primary shrink-0"><use xlink:href="#icon-dashboard"></use></svg>
+                        Dashboard
                     </a>
-                {else}
-                    <a href="{logout_url id=1}" class="flex items-center gap-3 px-4 py-3 hover:bg-neutral-200 dark:hover:bg-neutral-900 transition-all">
-                        <svg class="size-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><use xlink:href="#icon-logout"></use></svg>
-                        Abmelden
+                </li>
+                <li>
+                    <a href="#" class="flex items-center gap-3 px-4 py-3 hover:bg-neutral-200 dark:hover:bg-neutral-700 transition-all">
+                        <svg class="size-5 fill-primary shrink-0"><use xlink:href="#icon-ausbildungsnachweis"></use></svg>
+                        Ausbildungsnachweis
                     </a>
-                {/if}
-            </div>
+                </li>
+                <li>
+                    <form class="clickable" id="bearbForm" method="post" action="{page_url id=1131198 editID=$editID}">
+                        <textarea id="theContent" name="theContent" hidden></textarea>
+                        {if $hasPerm && $page->extra.is_editable == 1}
+                        <a class="flex items-center gap-3 px-4 py-3 hover:bg-neutral-200 dark:hover:bg-neutral-700 transition-all" onclick="document.getElementById('bearbForm').submit();">
+                        {else}
+                        <a class="flex items-center gap-3 px-4 py-3 transition-all" style="cursor: not-allowed;" disabled>
+                        {/if}
+                            <svg class="size-5 stroke-primary shrink-0" fill="none" stroke-width="1.5"><use xlink:href="#icon-pencil"></use></svg>
+                            Seite bearbeiten
+                        </a>
+                    </form>
+                </li>
+                <li>
+                    <a href="{page_url id=$notificationPage}" class="flex items-center gap-3 px-4 py-3 hover:bg-neutral-200 dark:hover:bg-neutral-700 transition-all">
+                        <svg class="size-5 stroke-primary shrink-0" fill="none" stroke-width="1.5"><use xlink:href="#icon-notification"></use></svg>
+                        Benachrichtigungen (0)
+                    </a>
+                </li>
+                <li>
+                    <a href="{page_url id=$settingsPage}" class="flex items-center gap-3 px-4 py-3 hover:bg-neutral-200 dark:hover:bg-neutral-700 transition-all">
+                        <svg class="size-5 stroke-primary shrink-0" fill="none" stroke-width="1.5"><use xlink:href="#icon-settings"></use></svg>
+                        Einstellungen
+                    </a>
+                </li>
+                <li>
+                    <a href="{page_url id=$hilfesupportPage}" class="flex items-center gap-3 px-4 py-3 hover:bg-neutral-200 dark:hover:bg-neutral-700 transition-all">
+                        <svg class="size-5 stroke-primary shrink-0" fill="none" stroke-width="1.5"><use xlink:href="#icon-frage"></use></svg>
+                        Hilfe & Support
+                    </a>
+                </li>
+            </ul>
+            {/if}
+            {if $saml && $showIdPLoginBtn==1}
+            <a href="{logout_url id=1}" class="flex items-center gap-3 px-4 py-3 hover:bg-neutral-200 dark:hover:bg-neutral-700 transition-all">
+                <svg class="size-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><use xlink:href="#icon-logout"></use></svg>
+                Abmelden
+            </a>
             {else}
-            <div class="flex items-center gap-4 cursor-pointer" data-modal-target="loginModal" data-modal-toggle="loginModal">
-                <div class="relative inline-flex items-center justify-center w-12 h-12 overflow-hidden bg-secondary rounded-full">
-                    <svg class="size-full bg-transparent text-secondary" fill="none" stroke-width="3"><use xlink:href="#icon-usersymbol"></use></svg>
-                </div>
-                
-                <div class="font-medium">
-                    <span class="block">Nicht eingeloggt</span>
-                    <span class="block text-sm text-secondary">ueba.elkonet.de</span>
-                </div>
-            </div>
+            <a href="{logout_url id=1}" class="flex items-center gap-3 px-4 py-3 hover:bg-neutral-200 dark:hover:bg-neutral-700 transition-all">
+                <svg class="size-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><use xlink:href="#icon-logout"></use></svg>
+                Abmelden
+            </a>
             {/if}
         </div>
+        {else}
+        <div class="flex items-center gap-4 cursor-pointer" data-modal-target="loginModal" data-modal-toggle="loginModal">
+            <div class="relative inline-flex items-center justify-center w-12 h-12 overflow-hidden bg-secondary rounded-full">
+                <svg class="size-full bg-transparent text-secondary" fill="none" stroke-width="3"><use xlink:href="#icon-usersymbol"></use></svg>
+            </div>
+            
+            <div class="font-medium hidden lg:block">
+                <span class="block">Nicht eingeloggt</span>
+                <span class="block text-sm text-secondary">ueba.elkonet.de</span>
+            </div>
+        </div>
+        {/if}
     </div>
 {else}
     <a class="w-fit py-2 dark:p-3 mx-6 my-2 bg-opacity-25 bg-white/40 flex rounded-3xl" href="{$homeLink}/?sid={$school}">
@@ -379,7 +334,7 @@
 {if $auth->getId() && ((strpos($page->field.type, "kundenauftrag") !== false && $formularePage) || $hilfePage)}
 <!-- Drawer Container -->
 <!-- Desktop: md:w-1/3 | Mobile: w-full -->
-<div id="drawer-container" class="fixed top-0 right-0 h-full w-full sm:w-90 bg-white dark:bg-neutral-700 text-neutral-900 drop-shadow-2xl shadow-2xl z-50 translate-x-full drawer-animate flex border-l border-neutral-200 dark:border-neutral-600">
+<div id="drawer-container" class="fixed top-0 right-0 h-full w-full sm:w-90 bg-white dark:bg-neutral-700 text-neutral-900 drop-shadow-2xl shadow-2xl z-20 translate-x-full drawer-animate flex border-l border-neutral-200 dark:border-neutral-600">
     
     <!-- Toggle Buttons (Vertikale Tabs) -->
     <div class="absolute left-0 top-1/2 -translate-x-full -translate-y-1/2 flex flex-col gap-2">
@@ -797,7 +752,12 @@
 </script>
 {/if}
 
-{if $auth->getId() && strpos($page->field.type, "modul") !== false}
+{* Siehe Kommentar bei der mobilen Modul-Navigation weiter oben: $modulPage ist nur
+   gesetzt, wenn im Breadcrumb-Pfad eine Seite vom Typ "v3/modul" vorkommt - deshalb hier
+   dieselbe zusaetzliche "&& $modulPage"-Pruefung, sonst crasht {navigation_end} unten mit
+   array_pop() auf einen nie befuellten Stack, sobald ein "*modul*"-Seitentyp (z.B.
+   v3/wissenscheck) ausserhalb des v3/modul-Baums verwendet wird. *}
+{if $auth->getId() && $modulPage}
 <!-- DESKTOP: Modul nav -->
 <nav class="hidden md:block bg-subnav w-full h-auto">
 {navigation id=$modulPage->field.id var=modulnavigation}

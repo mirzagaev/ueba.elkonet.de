@@ -1,0 +1,157 @@
+{get_path page=$page var=path bottomup=1 show_self=0}
+<h2>Thema: {$path.0->field.title}</h2>
+<table border="0">
+	<tr>
+		<td colspan="3"><center>Frage: <b>{$page->field.title}</b></center></td>
+	</tr>
+{if $page->field.content}
+	<tr>
+		<td colspan="3">{$page->field.content}</td>
+	</tr>
+{/if}
+	<tr>
+		<td></td>
+		<td>
+{assign var=page_id value=$page->field.id}
+{if $smarty.request.abgeschickt}
+{*
+ * wenn schon gewählt
+ *}
+			<form>
+				<b>Auswertung</b><br/>
+		{get_children id=$page->field.id var="antworten"}
+				<table border="0" width="300">
+		{foreach from=$antworten item=antwort}
+			{assign var=farbe value="#fff"}
+			{assign var=falsch value="0"}
+			{assign var=markiert value="0"}
+			{*
+			 * erstmal pruefen ob die aktuelle Antwort
+			 * ausgewaehlt worden ist
+			 *}
+			{foreach from=$markierte_antworten item=ma}
+				{if $antwort->field.id == $ma}
+					{assign var=markiert value="1"}
+				{/if}
+			{/foreach}
+			
+			{if $antwort->extra.correct == ">>>"}
+				{*
+				 * Die Richtige Antwort wird gruen markiert
+				 *}
+				{assign var=farbe value="#0f0"}
+			{else}
+				{if $markiert==1}
+					{*
+					 * Die Falsche Antwort wird rot markiert
+					 *}
+					{assign var=farbe value="#f00"}
+					{assign var=falsch value="1"}
+				{/if}
+			{/if}
+					<tr>
+						<td>
+							<table border="0" cellpadding="0" cellspacing="0">
+								<tr style="background-color:{$farbe}">
+									<td>
+								{*
+								 * Wenn Mehrfachauswahl, dann checkbox
+								 *}
+								{if $page->extra.mehrfachauswahl === "checked"}
+									{strip}
+										<input type="checkbox" name="{$antwort->field.id}" value="{$antwort->field.id}"
+										{if $markiert==1}
+											 checked="CHECKED"
+										{/if}
+									 />
+									{/strip}
+								{else}
+									<input type="radio" name="{$page->field.id}" value="{$antwort->field.id}" {if $markiert==1}checked="CHECKED"{/if} />
+								{/if}
+									</td>
+									<td>{$antwort->field.title}</td>
+								</tr>
+					{if $antwort->field.content}
+								<tr>
+									<td></td>
+									<td>{$antwort->field.content}</td>
+								</tr>
+					{/if}
+					{*
+					 * wenn man es ausgewaehlt hat und es falsch/richtig ist,
+					 * dann zeige den Falsch/Richtig-Content
+					 *}
+					{if $markiert==1}
+						{if $falsch==1 && $antwort->extra.content_falsch!=""}
+						<tr>
+							<td></td>
+							<td>{$antwort->extra.content_falsch}</td>
+						</tr>
+						{elseif $falsch==0 && $antwort->extra.content_richtig!=""}
+						<tr>
+							<td></td>
+							<td>{$antwort->extra.content_richtig}</td>
+						</tr>
+						{/if}
+					{/if}
+							</table>
+						</td>
+					</tr>
+		{/foreach}
+				</table>
+			</form>
+{else}
+{*
+ * wenn noch nicht gewaehlt
+ *}
+			<form name="{$page->field.id}" method="post">
+				<input type="hidden" name="abgeschickt" value="1" />
+			{get_children id=$page->field.id var="antworten"}
+				<table border="0" width="300">
+			{foreach from=$antworten item=antwort}
+					<tr>
+						<td>
+							<table border="0" cellpadding="0" cellspacing="0">
+								<tr>
+									<td>
+					{if $page->extra.mehrfachauswahl === "checked"}
+										<input type="checkbox" name="{$antwort->field.id}" value="{$antwort->field.id}" />
+					{else}
+										<input type="radio" name="{$page->field.id}" value="{$antwort->field.id}" />
+					{/if}
+									</td>
+									<td>{$antwort->field.title}</td>
+								</tr>
+					{if $antwort->field.content}
+								<tr>
+									<td></td>
+									<td>{$antwort->field.content}</td>
+								</tr>
+					{/if}
+							</table>
+						</td>
+					</tr>
+			{/foreach}
+				</table>
+				<input type="submit" name="sndpoll{$page->field.id}" value="Auswerten">
+			</form>
+{/if}
+		</td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>
+{get_sibling var=frage id=$page->field.id direction="prev"}
+			{if $frage}<a href="{page_url page=$frage}">{/if}
+			Vorherige Frage
+{if $frage}</a>{/if}
+		</td>
+		<td></td>
+		<td>
+{get_sibling var=frage id=$page->field.id direction="next"}
+			{if $frage}<a href="{page_url page=$frage}">{/if}
+			N&auml;chste Frage
+{if $frage}</a>{/if}
+		</td>
+	</tr>
+</table>
