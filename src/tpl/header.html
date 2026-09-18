@@ -6,6 +6,9 @@
     {if $breadlink->field.type == "v3/modul/kundenauftrag"}
         {assign var="kundenauftragPage" value=$breadlink}
     {/if}
+    {if $breadlink->field.type == "v3/lerneinheit"}
+        {assign var="lerneinheitPage" value=$breadlink}
+    {/if}
 {/foreach}
 
 {if $kundenauftragPage}
@@ -16,6 +19,16 @@
         {/if}
         {if $formpage->field.type == "v3/modul/hilfe"}
             {assign var="hilfePage" value=$formpage}
+        {/if}
+    {/foreach}
+{navigation_end}
+{/if}
+
+{if $lerneinheitPage}
+{navigation id=$lerneinheitPage->field.id var=lerneinheitThemen}
+    {foreach from=$lerneinheitThemen item=themaPage name=lerneinheitNav}
+        {if $themaPage->field.type == "v3/glossar"}
+            {assign var="glossarPage" value=$themaPage}
         {/if}
     {/foreach}
 {navigation_end}
@@ -86,7 +99,7 @@
 
     <!-- MOBIL: Sidebar -->
     {if $auth->getId()}
-    <div id="ueba-mobilsidebar" class="min-w-72 max-w-96 absolute left-0 top-0 z-40 flex flex-col h-screen -translate-x-full transition-transform bg-primary shadow-xl" tabindex="-1" aria-labelledby="drawer-label" aria-hidden="true">
+    <div id="ueba-mobilsidebar" class="min-w-72 max-w-96 absolute left-0 top-0 z-40 flex flex-col h-dvh -translate-x-full transition-transform bg-primary shadow-xl" tabindex="-1" aria-labelledby="drawer-label" aria-hidden="true">
         <div class="flex items-center justify-between bg-secondary gap-3 px-6 py-3">
             <div>
                 <h2 id="drawer-label" class="text-primary text-lg font-semibold"><a href="{page_url id=1}">Ausbildungsportal</a></h2>
@@ -210,7 +223,7 @@
     </div>
     {/if}
 
-    <div class="flex p-5 ml-auto gap-4 xl:pr-10">
+    <div class="flex p-5 ml-auto gap-4 xl:pr-10 text-primary">
         <button class="flex text-secondary items-center bg-secondary p-3 rounded-full cursor-pointer" onclick="toggleDarkMode()">
             <svg class="size-6 stroke-primary"><use xlink:href="#icon-light"></use></svg>
         </button>
@@ -227,7 +240,7 @@
             </div>
         </div>
 
-        <div id="userDropdown" class="min-w-72 max-w-96 z-10 hidden bg-white dark:bg-neutral-900 divide-y divide-neutral-300 dark:divide-neutral-700 rounded-lg shadow-xl text-primary overflow-hidden">
+        <div id="userDropdown">
             <div class="px-4 py-3 flex items-center gap-4 hover:bg-neutral-200 dark:hover:bg-neutral-700">
                 <div class="relative inline-flex items-center justify-center w-12 h-12 overflow-hidden bg-secondary rounded-full shrink-0">
                     {if $auth->user->extra.profile_picture}
@@ -253,13 +266,13 @@
             {if $auth->getId() == "3d3815b595f1eefe40c0c91f674dc6d1"}
             <ul aria-labelledby="avatarButton">
                 <li>
-                    <a href="{page_url id=$dashboardPage}" class="flex items-center gap-3 px-4 py-3 hover:bg-neutral-200 dark:hover:bg-neutral-700 transition-all">
+                    <a href="{page_url id=$dashboardPage}">
                         <svg class="size-5 fill-primary shrink-0"><use xlink:href="#icon-dashboard"></use></svg>
                         Dashboard
                     </a>
                 </li>
                 <li>
-                    <a href="#" class="flex items-center gap-3 px-4 py-3 hover:bg-neutral-200 dark:hover:bg-neutral-700 transition-all">
+                    <a href="#">
                         <svg class="size-5 fill-primary shrink-0"><use xlink:href="#icon-ausbildungsnachweis"></use></svg>
                         Ausbildungsnachweis
                     </a>
@@ -268,7 +281,7 @@
                     <form class="clickable" id="bearbForm" method="post" action="{page_url id=1131198 editID=$editID}">
                         <textarea id="theContent" name="theContent" hidden></textarea>
                         {if $hasPerm && $page->extra.is_editable == 1}
-                        <a class="flex items-center gap-3 px-4 py-3 hover:bg-neutral-200 dark:hover:bg-neutral-700 transition-all" onclick="document.getElementById('bearbForm').submit();">
+                        <a class="cursor-pointer" onclick="document.getElementById('bearbForm').submit();">
                         {else}
                         <a class="flex items-center gap-3 px-4 py-3 transition-all" style="cursor: not-allowed;" disabled>
                         {/if}
@@ -278,19 +291,19 @@
                     </form>
                 </li>
                 <li>
-                    <a href="{page_url id=$notificationPage}" class="flex items-center gap-3 px-4 py-3 hover:bg-neutral-200 dark:hover:bg-neutral-700 transition-all">
+                    <a href="{page_url id=$notificationPage}">
                         <svg class="size-5 stroke-primary shrink-0" fill="none" stroke-width="1.5"><use xlink:href="#icon-notification"></use></svg>
                         Benachrichtigungen (0)
                     </a>
                 </li>
                 <li>
-                    <a href="{page_url id=$settingsPage}" class="flex items-center gap-3 px-4 py-3 hover:bg-neutral-200 dark:hover:bg-neutral-700 transition-all">
+                    <a href="{page_url id=$settingsPage}">
                         <svg class="size-5 stroke-primary shrink-0" fill="none" stroke-width="1.5"><use xlink:href="#icon-settings"></use></svg>
                         Einstellungen
                     </a>
                 </li>
                 <li>
-                    <a href="{page_url id=$hilfesupportPage}" class="flex items-center gap-3 px-4 py-3 hover:bg-neutral-200 dark:hover:bg-neutral-700 transition-all">
+                    <a href="{page_url id=$hilfesupportPage}">
                         <svg class="size-5 stroke-primary shrink-0" fill="none" stroke-width="1.5"><use xlink:href="#icon-frage"></use></svg>
                         Hilfe & Support
                     </a>
@@ -298,12 +311,12 @@
             </ul>
             {/if}
             {if $saml && $showIdPLoginBtn==1}
-            <a href="{logout_url id=1}" class="flex items-center gap-3 px-4 py-3 hover:bg-neutral-200 dark:hover:bg-neutral-700 transition-all">
+            <a href="{logout_url id=1}">
                 <svg class="size-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><use xlink:href="#icon-logout"></use></svg>
                 Abmelden
             </a>
             {else}
-            <a href="{logout_url id=1}" class="flex items-center gap-3 px-4 py-3 hover:bg-neutral-200 dark:hover:bg-neutral-700 transition-all">
+            <a href="{logout_url id=1}">
                 <svg class="size-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><use xlink:href="#icon-logout"></use></svg>
                 Abmelden
             </a>
@@ -331,7 +344,7 @@
     </div>
 {/if}
 </header>
-{if $auth->getId() && ((strpos($page->field.type, "kundenauftrag") !== false && $formularePage) || $hilfePage)}
+{if $auth->getId() && ((strpos($page->field.type, "kundenauftrag") !== false && $formularePage) || $hilfePage || $glossarPage)}
 <!-- Drawer Container -->
 <!-- Desktop: md:w-1/3 | Mobile: w-full -->
 <div id="drawer-container" class="fixed top-0 right-0 h-full w-full sm:w-90 bg-white dark:bg-neutral-700 text-neutral-900 drop-shadow-2xl shadow-2xl z-20 translate-x-full drawer-animate flex border-l border-neutral-200 dark:border-neutral-600">
@@ -341,13 +354,19 @@
         {if $formularePage}
         <button id="drawer-toggle-formulare" onclick="toggleDrawer('formulare')" class="drawer-btn" aria-label="Formulare öffnen/schließen">
             <svg class="fill-white dark:fill-black size-5 -rotate-90" fill="none"><use xlink:href="#icon-ausbildungsnachweis"></use></svg>
-                <span class="vertical-text">{$formularePage->field.name}</span>
+            <span class="vertical-text">{$formularePage->field.name}</span>
         </button>
         {/if}
         {if $hilfePage}
         <button id="drawer-toggle-hilfe" onclick="toggleDrawer('hilfe')" class="drawer-btn" aria-label="Hilfe öffnen/schließen">
             <svg stroke-width="2" class="size-5 -rotate-90 stroke-white dark:stroke-black" fill="none"><use xlink:href="#icon-frage"></use></svg>
-                <span class="vertical-text">{$hilfePage->field.name}</span>
+            <span class="vertical-text">{$hilfePage->field.name}</span>
+        </button>
+        {/if}
+        {if $glossarPage}
+        <button id="drawer-toggle-glossar" onclick="toggleDrawer('glossar')" class="drawer-btn" aria-label="Glossar öffnen/schließen">
+            <svg stroke-width="2" class="size-5 -rotate-90 fill-white dark:fill-black"><use xlink:href="#icon-glossar"></use></svg>
+            <span class="vertical-text">{$glossarPage->field.name}</span>
         </button>
         {/if}
     </div>
@@ -438,6 +457,42 @@
             </nav>
         </aside>
 
+        <!-- SPALTE 1: Hauptmenü Glossar -->
+        <aside id="menu-aside-glossar" class="absolute inset-0 w-full h-full flex flex-col fade-transition opacity-0 pointer-events-none z-10 hidden">
+            <div class="border-b border-subnav flex items-center justify-between p-8 py-5 xl:p-10 xl:py-6 gap-2">
+                <h2 class="text-primary text-2xl font-semibold leading-7 pr-10">{$glossarPage->field.name|default:"Glossar"}</h2>
+                <button onclick="toggleDrawer('glossar')" class="btn-secondary w-8 h-8 p-0" title="Schließen">
+                    <svg class="stroke-primary size-4 mx-auto"><use xlink:href="#icon-close"></use></svg>
+                    <span class="sr-only">Schließen</span>
+                </button>
+            </div>
+
+            <nav class="flex-1 overflow-y-scroll py-4">
+                <ul class="space-y-2 px-5" data-accordion="collapse">
+                    {if $glossarPage}
+                        {navigation id=$glossarPage->field.id var=glossarSubpages}
+                            {foreach from=$glossarSubpages item=glossar}
+                                {if $glossar->field.inactive == 0}
+                                    {get_children page=$glossar var="glossarchildren"}
+                                    <li class="glossarListenpunkt rounded-2xl hover:bg-neutral-200 dark:hover:bg-neutral-900">
+                                        <button type="button" class="group w-full flex items-center gap-4 px-4 py-3  cursor-pointer transition-all border border-transparent" data-accordion-target="#glossar-{$glossar->field.id}" aria-expanded="false" aria-controls="glossar-{$glossar->field.id}">
+                                            <span class="font-medium text-primary">{$glossar->field.name}</span>
+                                            <svg data-accordion-icon="" stroke-width="2" class="stroke-primary rotate-180 shrink-0 size-5 ml-auto" aria-hidden="true"><use xlink:href="#icon-up"></use></svg>
+                                        </button>
+                                        <div id="glossar-{$glossar->field.id}" class="hidden w-full pb-2">
+                                            <div class="mx-4 text-sm text-secondary leading-relaxed">
+                                                {$glossar->field.content}
+                                            </div>
+                                        </div>
+                                    </li>
+                                {/if}
+                            {/foreach}
+                        {navigation_end}
+                    {/if}
+                </ul>
+            </nav>
+        </aside>
+
         <!-- SPALTE 2: Inhaltsbereich (Formular) -->
         <section id="content-pane" class="absolute inset-0 w-full h-full flex flex-col fade-transition opacity-0 pointer-events-none z-20 translate-x-4 text-primary">
             <div class="p-6 pl-20 pr-8 xl:pr-8 xl:px-20 border-b border-subnav flex items-center justify-between shrink-0">
@@ -451,13 +506,17 @@
                         <p id="detail-subtitle" class="text-[10px] text-secondary uppercase font-bold tracking-widest">{$modulPage->field.name}</p>
                     </div>
                 </div>
-                <button onclick="toggleDrawer()" class="btn-secondary w-8 h-8 p-0" title="Minimieren">
+                <button id="drawer-maximize-btn" onclick="toggleDrawerMaximize()" class="btn-secondary w-8 h-8 p-0 ml-auto" title="Maximieren">
+                    <svg id="drawer-maximize-icon" class="stroke-primary size-6 mx-auto transition-transform"><use xlink:href="#icon-pointing-out"></use></svg>
+                    <span class="sr-only">Maximieren</span>
+                </button>
+                <button onclick="toggleDrawer()" class="btn-secondary w-8 h-8 p-0 ml-4" title="Minimieren">
                     <svg class="stroke-primary size-6 mx-auto"><use xlink:href="#icon-minimieren"></use></svg>
                     <span class="sr-only">Minimieren</span>
                 </button>
             </div>
 
-            <div class="flex-1 overflow-y-auto p-6 md:p-8 xl:px-12 custom-scrollbar">
+            <div class="flex-1 overflow-y-auto p-4 custom-scrollbar">
                 <div class="space-y-8" id="drawer-content"></div>
             </div>
         </section>
@@ -470,21 +529,70 @@
     const drawerContainer = document.getElementById('drawer-container');
     const drawerToggleFormulare = document.getElementById('drawer-toggle-formulare');
     const drawerToggleHilfe = document.getElementById('drawer-toggle-hilfe');
+    const drawerToggleGlossar = document.getElementById('drawer-toggle-glossar');
     const menuAsideFormulare = document.getElementById('menu-aside-formulare');
     const menuAsideHilfe = document.getElementById('menu-aside-hilfe');
+    const menuAsideGlossar = document.getElementById('menu-aside-glossar');
+    const drawerToggles = { formulare: drawerToggleFormulare, hilfe: drawerToggleHilfe, glossar: drawerToggleGlossar };
+    const menuAsides = { formulare: menuAsideFormulare, hilfe: menuAsideHilfe, glossar: menuAsideGlossar };
     const contentPane = document.getElementById('content-pane');
     const detailTitle = document.getElementById('detail-title');
     const detailSubtitle = document.getElementById('detail-subtitle');
     const originalSubtitle = detailSubtitle ? detailSubtitle.innerText : '';
+    const drawerMaximizeBtn = document.getElementById('drawer-maximize-btn');
+    const drawerMaximizeIcon = document.getElementById('drawer-maximize-icon');
 
     let isDrawerOpen = false;
     let isFormSelected = false;
     let isPrintView = false;
+    let isDrawerMaximized = false;
     let lastFormUrl = null;
     let lastFormTitle = '';
     let lastFormPrintOnly = false;
     let currentDrawerType = 'formulare';
     let selectedFormDrawerType = null;
+
+    // Verbreitert den Drawer auf die volle Fensterbreite, damit Inhalte vollständig
+    // gelesen werden können, ohne die bestehende Breiten-Logik (Menü/Formular/Druck) zu ersetzen.
+    function applyDrawerMaximized() {
+        drawerContainer.classList.toggle('drawer-maximized', isDrawerMaximized);
+        // Inline-Style statt nur Klasse: überschreibt zuverlässig die aktuell aktive
+        // Breiten-Klasse (sm:w-90 / sm:w-1/2 xl:w-1/3 / etc.), unabhängig vom Drawer-Zustand.
+        drawerContainer.style.width = isDrawerMaximized ? '100%' : '';
+        if (drawerMaximizeBtn) drawerMaximizeBtn.title = isDrawerMaximized ? 'Verkleinern' : 'Maximieren';
+        if (drawerMaximizeIcon) drawerMaximizeIcon.classList.toggle('rotate-180', isDrawerMaximized);
+    }
+
+    function toggleDrawerMaximize() {
+        isDrawerMaximized = !isDrawerMaximized;
+        applyDrawerMaximized();
+    }
+
+    function hideAside(aside) {
+        if (!aside) return;
+        aside.classList.add('hidden', 'opacity-0', 'pointer-events-none', '-translate-x-4');
+        aside.classList.remove('opacity-100');
+    }
+
+    function showAside(aside) {
+        if (!aside) return;
+        aside.classList.remove('hidden', 'opacity-0', 'pointer-events-none', '-translate-x-4');
+        aside.classList.add('opacity-100');
+    }
+
+    // Wie hideAside/showAside, aber ohne "hidden" zu setzen — damit beim Auswählen/Abwählen
+    // eines Formulars die fade-transition des Menüs sichtbar bleibt.
+    function fadeOutAside(aside) {
+        if (!aside) return;
+        aside.classList.remove('opacity-100');
+        aside.classList.add('opacity-0', 'pointer-events-none', '-translate-x-4');
+    }
+
+    function fadeInAside(aside) {
+        if (!aside) return;
+        aside.classList.remove('opacity-0', 'pointer-events-none', '-translate-x-4');
+        aside.classList.add('opacity-100');
+    }
 
     function toggleDrawer(type = currentDrawerType) {
         const isMobile = window.innerWidth < 768;
@@ -492,36 +600,28 @@
         if (isDrawerOpen && currentDrawerType === type) {
             isDrawerOpen = false;
             drawerContainer.classList.add('translate-x-full');
-            if (drawerToggleFormulare) drawerToggleFormulare.classList.remove('opacity-0', 'pointer-events-none');
-            if (drawerToggleHilfe) drawerToggleHilfe.classList.remove('opacity-0', 'pointer-events-none');
+            if (isDrawerMaximized) {
+                isDrawerMaximized = false;
+                applyDrawerMaximized();
+            }
+            Object.values(drawerToggles).forEach(btn => {
+                if (btn) btn.classList.remove('opacity-0', 'pointer-events-none');
+            });
         } else {
             isDrawerOpen = true;
             currentDrawerType = type;
             drawerContainer.classList.remove('translate-x-full');
-            
+
             if (isMobile) {
-                if (drawerToggleFormulare) drawerToggleFormulare.classList.add('opacity-0', 'pointer-events-none');
-                if (drawerToggleHilfe) drawerToggleHilfe.classList.add('opacity-0', 'pointer-events-none');
+                Object.values(drawerToggles).forEach(btn => {
+                    if (btn) btn.classList.add('opacity-0', 'pointer-events-none');
+                });
             } else {
-                if (type === 'formulare') {
-                    if (drawerToggleFormulare) {
-                        drawerToggleFormulare.classList.remove('opacity-70');
-                        drawerToggleFormulare.classList.add('opacity-100');
-                    }
-                    if (drawerToggleHilfe) {
-                        drawerToggleHilfe.classList.remove('opacity-100');
-                        drawerToggleHilfe.classList.add('opacity-50');
-                    }
-                } else if (type === 'hilfe') {
-                    if (drawerToggleFormulare) {
-                        drawerToggleFormulare.classList.remove('opacity-100');
-                        drawerToggleFormulare.classList.add('opacity-70');
-                    }
-                    if (drawerToggleHilfe) {
-                        drawerToggleHilfe.classList.remove('opacity-50');
-                        drawerToggleHilfe.classList.add('opacity-100');
-                    }
-                }
+                Object.entries(drawerToggles).forEach(([key, btn]) => {
+                    if (!btn) return;
+                    btn.classList.remove('opacity-50', 'opacity-70', 'opacity-100');
+                    btn.classList.add(key === type ? 'opacity-100' : 'opacity-70');
+                });
             }
 
             if (isFormSelected && selectedFormDrawerType !== type) {
@@ -538,20 +638,19 @@
                 // Formular/Print bereits geladen — einfach wieder einblenden ohne neu zu laden
                 contentPane.classList.remove('opacity-0', 'pointer-events-none', 'translate-x-4');
                 contentPane.classList.add('opacity-100', 'translate-x-0');
-                menuAsideFormulare.classList.add('hidden', 'opacity-0', 'pointer-events-none');
-                menuAsideFormulare.classList.remove('opacity-100');
-                if (menuAsideHilfe) menuAsideHilfe.classList.add('hidden', 'opacity-0', 'pointer-events-none');
-                if (menuAsideHilfe) menuAsideHilfe.classList.remove('opacity-100');
-            } else if (type === 'formulare') {
-                menuAsideFormulare.classList.remove('hidden', 'opacity-0', 'pointer-events-none', '-translate-x-4');
-                menuAsideFormulare.classList.add('opacity-100');
-                if (menuAsideHilfe) menuAsideHilfe.classList.add('hidden', 'opacity-0', 'pointer-events-none', '-translate-x-4');
-                if (menuAsideHilfe) menuAsideHilfe.classList.remove('opacity-100');
+                Object.values(menuAsides).forEach(hideAside);
             } else {
-                if (menuAsideHilfe) menuAsideHilfe.classList.remove('hidden', 'opacity-0', 'pointer-events-none', '-translate-x-4');
-                if (menuAsideHilfe) menuAsideHilfe.classList.add('opacity-100');
-                menuAsideFormulare.classList.add('hidden', 'opacity-0', 'pointer-events-none', '-translate-x-4');
-                menuAsideFormulare.classList.remove('opacity-100');
+                Object.entries(menuAsides).forEach(([key, aside]) => {
+                    if (key === type) showAside(aside); else hideAside(aside);
+                });
+            }
+
+            // Glossar-Einträge zeigen ihren Inhalt jetzt direkt im Accordion an (siehe
+            // Glossar-Menü oben) statt im content-pane - dafür braucht der Drawer mehr Breite.
+            if (type === 'glossar') {
+                drawerContainer.classList.add('xl:w-1/3');
+            } else if (!isFormSelected) {
+                drawerContainer.classList.remove('xl:w-1/3');
             }
         }
     }
@@ -569,14 +668,14 @@
         if (detailSubtitle) {
             if (currentDrawerType === 'hilfe') {
                 detailSubtitle.innerText = 'Hilfe';
+            } else if (currentDrawerType === 'glossar') {
+                detailSubtitle.innerText = 'Glossar';
             } else {
                 detailSubtitle.innerText = originalSubtitle;
             }
         }
 
-        let activeMenu = currentDrawerType === 'formulare' ? menuAsideFormulare : menuAsideHilfe;
-        activeMenu.classList.remove('opacity-100');
-        activeMenu.classList.add('opacity-0', 'pointer-events-none', '-translate-x-4');
+        fadeOutAside(menuAsides[currentDrawerType]);
 
         contentPane.classList.remove('opacity-0', 'pointer-events-none', 'translate-x-4');
         contentPane.classList.add('opacity-100', 'translate-x-0');
@@ -586,8 +685,9 @@
         drawerContainer.classList.add('sm:w-1/2', 'xl:w-1/3');
 
         if (window.innerWidth < 768) {
-            if (drawerToggleFormulare) drawerToggleFormulare.classList.add('opacity-0', 'pointer-events-none');
-            if (drawerToggleHilfe) drawerToggleHilfe.classList.add('opacity-0', 'pointer-events-none');
+            Object.values(drawerToggles).forEach(btn => {
+                if (btn) btn.classList.add('opacity-0', 'pointer-events-none');
+            });
         }
 
         const drawerContent = document.getElementById('drawer-content');
@@ -634,9 +734,7 @@
         contentPane.classList.remove('opacity-100', 'translate-x-0');
         contentPane.classList.add('opacity-0', 'pointer-events-none', 'translate-x-4');
         
-        let activeMenu = currentDrawerType === 'formulare' ? menuAsideFormulare : menuAsideHilfe;
-        activeMenu.classList.remove('opacity-0', 'pointer-events-none', '-translate-x-4');
-        activeMenu.classList.add('opacity-100');
+        fadeInAside(menuAsides[currentDrawerType]);
 
         if (detailSubtitle) {
             detailSubtitle.innerText = originalSubtitle;
@@ -648,8 +746,9 @@
 
         // Button wieder zeigen (falls Drawer noch offen ist)
         if (isDrawerOpen && window.innerWidth >= 768) {
-            if (drawerToggleFormulare) drawerToggleFormulare.classList.remove('opacity-0', 'pointer-events-none');
-            if (drawerToggleHilfe) drawerToggleHilfe.classList.remove('opacity-0', 'pointer-events-none');
+            Object.values(drawerToggles).forEach(btn => {
+                if (btn) btn.classList.remove('opacity-0', 'pointer-events-none');
+            });
         }
     }
 
@@ -685,13 +784,27 @@
     // Automatische Anpassung bei Resize
     window.addEventListener('resize', () => {
         if (window.innerWidth >= 768 && isDrawerOpen) {
-            if (drawerToggleFormulare) drawerToggleFormulare.classList.remove('opacity-0', 'pointer-events-none');
-            if (drawerToggleHilfe) drawerToggleHilfe.classList.remove('opacity-0', 'pointer-events-none');
+            Object.values(drawerToggles).forEach(btn => {
+                if (btn) btn.classList.remove('opacity-0', 'pointer-events-none');
+            });
         } else if (window.innerWidth < 768 && isDrawerOpen) {
-            if (drawerToggleFormulare) drawerToggleFormulare.classList.add('opacity-0', 'pointer-events-none');
-            if (drawerToggleHilfe) drawerToggleHilfe.classList.add('opacity-0', 'pointer-events-none');
+            Object.values(drawerToggles).forEach(btn => {
+                if (btn) btn.classList.add('opacity-0', 'pointer-events-none');
+            });
         }
     });
+
+    // Aktiven Glossar-Listenpunkt hervorheben, wenn dessen Accordion aufgeklappt ist.
+    // "collapse"-Accordion schließt beim Öffnen eines Punkts automatisch den vorher
+    // aktiven - daher nach jedem Klick alle Punkte anhand von aria-expanded neu abgleichen,
+    // statt nur den angeklickten umzuschalten.
+    function syncGlossarActiveState() {
+        document.querySelectorAll('.glossarListenpunkt').forEach(li => {
+            const btn = li.querySelector(':scope > button[data-accordion-target]');
+            li.classList.toggle('bg-secondary', !!btn && btn.getAttribute('aria-expanded') === 'true');
+        });
+    }
+    $(document).on('click', '.glossarListenpunkt > button[data-accordion-target]', syncGlossarActiveState);
 
     // Event-Delegation für Print-Links und Zurück-Buttons innerhalb des Drawers
     $(document).on('click', '.printForm, #drawer-content a[title="Zurück"]', function(e) {

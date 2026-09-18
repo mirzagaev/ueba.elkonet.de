@@ -137,10 +137,22 @@ window.initRTE = function initRTE(root = document) {
     // 2. Fall: Druckansicht (Read-Only)
     else if (printField) {
         try {
+            let content2 = '';
+            if (window.savedContent2 && window.savedContent2 !== '') {
+                try {
+                    // Regulärer Fall: TipTap-Inhalt ist als ProseMirror-JSON gespeichert
+                    content2 = JSON.parse(window.savedContent2);
+                } catch (e) {
+                    // Fallback für Altdaten/Migrationen: einfacher HTML-String statt JSON -
+                    // TipTap kann content auch direkt als HTML entgegennehmen und parsen
+                    content2 = window.savedContent2;
+                }
+            }
+
             window.editor = new Editor({
                 element: printField,
                 editable: false,
-                content: (window.savedContent2 && window.savedContent2 !== '') ? JSON.parse(window.savedContent2) : '',
+                content: content2,
                 extensions: [
                     StarterKit.configure({ history: false }),
                     Paragraph.configure({ HTMLAttributes: { class: 'text-inherit text-gray-800 dark:text-neutral-200' } }),

@@ -38,13 +38,13 @@
                         <span class="font-semibold">Besuch am:</span>
                     </div>
                     <div class="col-span-2 sm:col-span-1">
-                        <span>{$formular_extra.Besuchsdatum|date_format:"%d.%m.%Y"}</span>
+                        <span>{if $formular_extra.Besuchsdatum}{$formular_extra.Besuchsdatum|date_format:"%d.%m.%Y"}{else}-{/if}</span>
                     </div>
                     <div class="col-span-1">
                         <span class="font-semibold">Anfahrtszeit:</span>
                     </div>
                     <div class="col-span-2 sm:col-span-1">
-                        <span>{$formular_extra.Anfahrtszeit} Min</span>
+                        <span>{if $formular_extra.Anfahrtszeit}{$formular_extra.Anfahrtszeit} Min{else}-{/if}</span>
                     </div>
                     <div class="col-span-1">
                         <span class="font-semibold">Besuchsbeginn:</span>

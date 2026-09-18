@@ -24,9 +24,8 @@
 
 {if $lerneinheitPage->extra.glossar_link}
 <div>
-	<a href="{$lerneinheitPage->extra.glossar_link}" class="flex items-center justify-center gap-2 rounded-2xl bg-secondary text-secondary text-sm font-semibold px-4 py-3 hover:shadow-md shadow-sm">
-		<svg class="size-4 fill-secondary shrink-0"><use xlink:href="#icon-glossar"></use></svg>
-		Zum Glossar
+	<a onclick="toggleDrawer('glossar')" class="cursor-pointer flex items-center justify-center gap-2 rounded-2xl bg-secondary text-secondary font-bold uppercase px-4 py-3 hover:shadow-md shadow-sm">
+		<svg class="size-4 fill-secondary shrink-0"><use xlink:href="#icon-glossar"></use></svg> Glossar
 	</a>
 </div>
 {/if}

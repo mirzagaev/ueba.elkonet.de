@@ -47,6 +47,16 @@
                         <div class="alert-info">
                             {$f.result.migriert} von {$f.result.gefunden} Datensatz/Datensätzen übertragen.
                         </div>
+                        {if $f.result.fehlgeschlagen > 0}
+                            <div class="alert-info border border-red-600 text-red-700 mt-2">
+                                {$f.result.fehlgeschlagen} Datensatz/Datensätzen fehlgeschlagen (Details im Serverlog: var/log/formular_migration_{$smarty.now|date_format:"%Y-%m-%d"}.log).
+                                <ul class="mt-1 list-disc pl-5">
+                                    {foreach from=$f.result.fehlerListe item=fe}
+                                        <li>user_id {$fe.user_id}: {$fe.grund}</li>
+                                    {/foreach}
+                                </ul>
+                            </div>
+                        {/if}
                     {/if}
                 </td>
             </tr>

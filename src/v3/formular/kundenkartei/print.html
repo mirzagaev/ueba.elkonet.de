@@ -90,7 +90,7 @@
                         <span class="font-semibold">Termin vor Ort:</span>
                     </div>
                     <div class="col-span-2 sm:col-span-1">
-                        <span>{$formular_extra.Termin|date_format:"%d.%m.%Y"}</span>
+                        <span>{if $formular_extra.Termin}{$formular_extra.Termin|date_format:"%d.%m.%Y %H:%M"}{else}-{/if}</span>
                     </div>
                 </div>
                 <div class="py-4 xl:py-6 md:flex-grow">
@@ -116,7 +116,7 @@
                         <span class="font-semibold">Am:</span>
                     </div>
                     <div class="col-span-2 sm:col-span-1">
-                        <span>{$formular_extra.Datum|date_format:"%d.%m.%Y"}</span>
+                        <span>{if $formular_extra.Datum}{$formular_extra.Datum|date_format:"%d.%m.%Y"}{else}-{/if}</span>
                     </div>
                 </div>
             </div>

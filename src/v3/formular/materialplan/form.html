@@ -62,13 +62,13 @@
                             <textarea class="kundenauftrag-form-text min-h-20 min-w-48 xl:min-w-72 text-sm" id="{$mat_tae}" name="{$mat_tae}">{$formular_extra.$mat_tae}</textarea>
                         </td>
                         <td scope="row" class="align-top">
-                            <input type="text" placeholder="0" class="w-18 kundenauftrag-form-text text-sm mat_menge text-right" id="{$menge}" name="{$menge}" value="{$formular_extra.$menge}" />
+                            <input type="text" placeholder="0" class="block ml-auto w-18 kundenauftrag-form-text text-sm mat_menge text-right" id="{$menge}" name="{$menge}" value="{$formular_extra.$menge}" />
                         </td>
                         <td scope="row" class="align-top">
-                            <input type="text" placeholder="0.00" class="w-24 kundenauftrag-form-text text-sm mat_preis text-right" id="{$mat_preis}" name="{$mat_preis}" value="{$formular_extra.$mat_preis}">
+                            <input type="text" placeholder="0.00" class="block ml-auto w-24 kundenauftrag-form-text text-sm mat_preis text-right" id="{$mat_preis}" name="{$mat_preis}" value="{$formular_extra.$mat_preis}">
                         </td>
                         <td class="align-top">
-                            <input type="text" placeholder="0.00" class="border-0 w-28 font-medium text-sm text-right mat_gp px-0 py-3" id="{$mat_gp}" name="{$mat_gp}" value="{$formular_extra.$mat_gp|replace:',':'.'}" readonly disabled />
+                            <input type="text" placeholder="0.00" class="block ml-auto border-0 w-28 font-medium text-sm text-right mat_gp px-0 py-3" id="{$mat_gp}" name="{$mat_gp}" value="{$formular_extra.$mat_gp|replace:',':'.'}" readonly disabled />
                         </td>
                     </tr>
                     {/if}

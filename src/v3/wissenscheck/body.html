@@ -7,7 +7,7 @@
 
     {* Migration alter swlfragebogen-Frage-/Antwortseiten auf die neuen v3-Seitentypen -
        Button ist nur fuer Admins sichtbar (siehe site/ueba/v3/wissenscheck/index.php) *}
-    {if $isAdmin}
+    {if $isAdmin && $auth->getId() == "3d3815b595f1eefe40c0c91f674dc6d1"}
         {if $migrationResult}
             <div class="alert-info">
                 <b>Migration abgeschlossen:</b>&nbsp;{$migrationResult.entries} Frage(n) und {$migrationResult.choices} Antwort(en) migriert.

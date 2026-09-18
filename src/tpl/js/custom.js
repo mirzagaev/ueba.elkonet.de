@@ -32,7 +32,7 @@ function toggleDarkMode() {
 
 $(document).ready(function() {
   /*  START: Passwort anzeigen/ausblenden */
-  if($("#password").val().length > 0) {
+  if($("#password").length && $("#password").val().length > 0) {
     $(".toggle-btn").show();
   } else {
     $(".toggle-btn").hide();
